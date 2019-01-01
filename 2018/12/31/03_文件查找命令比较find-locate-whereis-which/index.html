@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="[toc] 各命令的主要区别：linux命令中find、locate 、whereis、which均可用来查找文件，主要区别有：  find是最常用和最强大的查找命令。它能做到实时查找，精确查找，但查找内容较多时速度慢； locate查找速度快，但是不是实时查找，所以查找的结果不精确； whereis用于查找二进制文件、源代码文件和man手册页； which指令会在环境变量$PATH设置的目录里查">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ivyli">
+<meta property="og:url" content="http://yoursite.com/2018/12/31/03_文件查找命令比较find-locate-whereis-which/index.html">
+<meta property="og:site_name" content="ivyli">
+<meta property="og:description" content="[toc] 各命令的主要区别：linux命令中find、locate 、whereis、which均可用来查找文件，主要区别有：  find是最常用和最强大的查找命令。它能做到实时查找，精确查找，但查找内容较多时速度慢； locate查找速度快，但是不是实时查找，所以查找的结果不精确； whereis用于查找二进制文件、源代码文件和man手册页； which指令会在环境变量$PATH设置的目录里查">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-12-15T12:58:15.004Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ivyli">
+<meta name="twitter:description" content="[toc] 各命令的主要区别：linux命令中find、locate 、whereis、which均可用来查找文件，主要区别有：  find是最常用和最强大的查找命令。它能做到实时查找，精确查找，但查找内容较多时速度慢； locate查找速度快，但是不是实时查找，所以查找的结果不精确； whereis用于查找二进制文件、源代码文件和man手册页； which指令会在环境变量$PATH设置的目录里查">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/12/31/03_文件查找命令比较find-locate-whereis-which/">
+
+
+
+
+
+  <title> | ivyli</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ivyli</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/31/03_文件查找命令比较find-locate-whereis-which/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ivyLi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ivyli">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-31T19:29:48+08:00">
+                2018-12-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>[toc]</p>
+<h1 id="各命令的主要区别："><a href="#各命令的主要区别：" class="headerlink" title="各命令的主要区别："></a>各命令的主要区别：</h1><p>linux命令中find、locate 、whereis、which均可用来查找文件，主要区别有：</p>
+<ul>
+<li>find是最常用和最强大的查找命令。它能做到实时查找，精确查找，但查找内容较多时速度慢；</li>
+<li>locate查找速度快，但是不是实时查找，所以查找的结果不精确；</li>
+<li>whereis用于查找二进制文件、源代码文件和man手册页；</li>
+<li>which指令会在环境变量$PATH设置的目录里查找符合条件的文件。</li>
+</ul>
+<h1 id="一、find-查找文件"><a href="#一、find-查找文件" class="headerlink" title="一、find 查找文件"></a>一、find 查找文件</h1><ul>
+<li><p>find命令用来在指定目录下查找文件。</p>
+</li>
+<li><p>任何位于参数之前的字符串都将被视为欲查找的目录名。</p>
+</li>
+<li><p>==如果使用该命令时，不设置任何参数，则find命令将在当前目录下查找子目录与文件。并且将查找到的子目录和文件全部进行显示。==</p>
+</li>
+</ul>
+<h2 id="1、语法"><a href="#1、语法" class="headerlink" title="1、语法"></a>1、语法</h2><pre><code>find path -option  [ -print ] [ -exec -ok command ] {} \;
+</code></pre><h2 id="2、参数说明"><a href="#2、参数说明" class="headerlink" title="2、参数说明"></a>2、参数说明</h2><p>find 根据下列规则判断 path 和 expression：</p>
+<ul>
+<li>在命令列上第一个 - ( ) , ! 之前的部份为 path，之后的是 expression。</li>
+<li>如果 path 是空字串则使用目前路径</li>
+<li>如果 expression 是空字串则使用 -print 为预设 expression。<br>（expression 中可使用的选项有二三十个之多，在此只介绍最常用的部份。）</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-cmin n</td>
+<td>在过去 n 分钟内被修改过</td>
+</tr>
+<tr>
+<td>-ctime n</td>
+<td>在过去n天内被修改过的文件</td>
+</tr>
+<tr>
+<td>-mtime n</td>
+<td>在过去 n 天内被修改过-（跟上面两个选项的区别见下面）</td>
+</tr>
+<tr>
+<td>-mmin n</td>
+<td>在过去 n 天内被修改过-（跟上面两个选项的区别见下面）</td>
+</tr>
+<tr>
+<td>-empty</td>
+<td>空的文件，寻找文件大小为0 Byte的文件，或目录下没有任何子目录或文件的空目录；</td>
+</tr>
+<tr>
+<td>-ipath p, -path p</td>
+<td>匹配文件路径，ipath 会忽略路径大小写</td>
+</tr>
+<tr>
+<td>-name name, -iname name</td>
+<td>匹配文件名称。iname 会忽略名称大小写</td>
+</tr>
+<tr>
+<td>-size n</td>
+<td>匹配文件大小，单位有：c–字节，k–千字节，M–兆字节，G–</td>
+</tr>
+<tr>
+<td>-type c</td>
+<td>匹配文件类型，c是指定的类型。<br>文件类型参数有：f–普通文件，d–目录，l–符号链接</td>
+</tr>
+<tr>
+<td>-exec&lt;执行指令&gt;</td>
+<td>假设find指令的回传值为True，就执行该指令；</td>
+</tr>
+<tr>
+<td>-ok&lt;执行指令&gt;</td>
+<td>此参数的效果和指定“-exec”类似，但在执行指令之前会先询问用户，若回答“y”或“Y”，则放弃执行命令；</td>
+</tr>
+<tr>
+<td>-regex&lt;范本样式&gt;</td>
+<td>指定字符串作为寻找文件或目录的范本样式；</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3、UNIX-Linux文件系统时间戳"><a href="#3、UNIX-Linux文件系统时间戳" class="headerlink" title="3、UNIX/Linux文件系统时间戳"></a>3、UNIX/Linux文件系统时间戳</h2><p>UNIX/Linux文件系统中，每个文件都有三种时间戳：</p>
+<table>
+<thead>
+<tr>
+<th>时间戳</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>访问时间（-atime/天，-amin/分钟）</td>
+<td>用户最近一次访问时间。</td>
+</tr>
+<tr>
+<td>修改时间（-mtime/天，-mmin/分钟）</td>
+<td>文件最后一次修改时间。</td>
+</tr>
+<tr>
+<td>变化时间（-ctime/天，-cmin/分钟）</td>
+<td>文件数据元（例如权限等）最后一次修改时间。</td>
+</tr>
+</tbody>
+</table>
+<p>另外，还可以使用 ( ) 将运算式分隔，并使用下列运算：<br>exp1 -and exp2<br>! expr<br>-not expr<br>exp1 -or exp2<br>exp1, exp2</p>
+<h2 id="4、实例"><a href="#4、实例" class="headerlink" title="4、实例"></a>4、实例</h2><p>（1）匹配文件名称<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">将当前目录及其子目录下所有.py后缀的文件列出来：</span><br><span class="line">find . -name &quot;*.py&quot;</span><br><span class="line">find . -iname &quot;*.py&quot;  （同上，但忽略大小写，.PY后缀的文件也列出来）</span><br><span class="line"></span><br><span class="line">当前目录及子目录下查找所有以.txt和.pdf结尾的文件：</span><br><span class="line">find . \( -name &quot;*.txt&quot; -o -name &quot;*.pdf&quot; \)</span><br><span class="line">或</span><br><span class="line">find . -name &quot;*.txt&quot; -o -name &quot;*.pdf&quot;</span><br></pre></td></tr></table></figure></p>
+<p>（2）匹配文件路径<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">匹配文件路径或者文件：</span><br><span class="line">find /usr/ -path &quot;*local*&quot;</span><br><span class="line"></span><br><span class="line">基于正则表达式匹配文件路径：</span><br><span class="line">find . -regex &quot;.*\(\.txt\|\.pdf\)$&quot;</span><br><span class="line">（查找当前目录及子目录下所有以.txt或.pdf结尾的文件）</span><br><span class="line"></span><br><span class="line">同上，但忽略大小写：</span><br><span class="line">find . -iregex &quot;.*\(\.txt\|\.pdf\)$&quot;</span><br></pre></td></tr></table></figure></p>
+<p>（3）否定参数 <code>！</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">找出/home下不是以.txt结尾的文件：</span><br><span class="line">find /home ! -name &quot;*.txt&quot;</span><br></pre></td></tr></table></figure></p>
+<p>（4）匹配文件类型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">将当前目录及其子目录中所有的一般文件列出：</span><br><span class="line">find . -type f</span><br></pre></td></tr></table></figure></p>
+<p>（5）匹配文件时间戳<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">搜索最近七天内被 访问 过的所有文件：</span><br><span class="line">find . -type f -atime -7</span><br><span class="line"></span><br><span class="line">搜索恰好在七天前被 修改 过的所有文件：</span><br><span class="line">find . -type f -mtime 7</span><br><span class="line"></span><br><span class="line">搜索超过七天内被 修改 过的所有文件：</span><br><span class="line">find . -type f -mtime +7</span><br><span class="line"></span><br><span class="line">将目前目录及其子目录下所有最近 20 天内更新过的文件列出：</span><br><span class="line">find . -ctime -20</span><br></pre></td></tr></table></figure></p>
+<p>（6）匹配文件大小<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">搜索大于10KB的文件：</span><br><span class="line">find . -type f -size +10k</span><br><span class="line"></span><br><span class="line">搜索小于10KB的文件：</span><br><span class="line">find . -type f -size -10k</span><br><span class="line"></span><br><span class="line">搜索等于10KB的文件：</span><br><span class="line">find . -type f -size 10k</span><br><span class="line"></span><br><span class="line">搜索所有长度为零的文件：</span><br><span class="line">find . -empty</span><br></pre></td></tr></table></figure></p>
+<p>（7）删除匹配文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">删除当前目录下所有.txt文件：</span><br><span class="line">find . -type f -name &quot;*.txt&quot; -delete</span><br></pre></td></tr></table></figure></p>
+<p>（8）<strong>借助-exec选项与其它命令结合使用</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">找出当前目录下所有root的文件，并把所有权更改为用户tom：</span><br><span class="line">find .-type f -user root -exec chown tom &#123;&#125; \;</span><br><span class="line">上例中，&#123;&#125; 用于与-exec选项结合使用来匹配所有文件，然后会被替换为相应的文件名。</span><br><span class="line"></span><br><span class="line">找出自己家目录下所有的.txt文件并删除：</span><br><span class="line">find $HOME/. -name &quot;*.txt&quot; -ok rm &#123;&#125; \;</span><br><span class="line">上例中，-ok和-exec行为一样，不过它会给出提示，是否执行相应的操作。</span><br><span class="line"></span><br><span class="line">查找/var/log目录中更改时间在7日以前的普通文件，并在删除之前询问它们：</span><br><span class="line">find /var/log -type f -mtime +7 -ok rm &#123;&#125; \;</span><br><span class="line"></span><br><span class="line">查找系统中所有文件长度为0的普通文件，并列出它们的完整路径：</span><br><span class="line">find / -type f -size 0 -exec ls -l &#123;&#125; \;</span><br><span class="line"></span><br><span class="line">查找当前目录下所有.txt文件并把他们拼接起来写入到all.txt文件中：</span><br><span class="line">find . -type f -name &quot;*.txt&quot; -exec cat &#123;&#125; \;&gt; all.txt</span><br><span class="line"></span><br><span class="line">将30天前的.log文件移动到old目录中：</span><br><span class="line">find . -type f -mtime +30 -name &quot;*.log&quot; -exec cp &#123;&#125; old \;</span><br><span class="line"></span><br><span class="line">找出当前目录下所有.txt文件并以“File:文件名”的形式打印出来：</span><br><span class="line">find . -type f -name &quot;*.txt&quot; -exec printf &quot;File: %s\n&quot; &#123;&#125; \;</span><br><span class="line"></span><br><span class="line">因为单行命令中-exec参数中无法使用多个命令，以下方法可以实现在-exec之后接受多条命令：</span><br><span class="line">-exec ./text.sh &#123;&#125; \;</span><br></pre></td></tr></table></figure></p>
+<h1 id="二、locate-查找文件"><a href="#二、locate-查找文件" class="headerlink" title="二、locate 查找文件"></a>二、locate 查找文件</h1><h2 id="1、locate和find的区别"><a href="#1、locate和find的区别" class="headerlink" title="1、locate和find的区别"></a>1、locate和find的区别</h2><ul>
+<li>locate命令也可以用于查找符合条件的文档或目录，但是速度比find快很多。</li>
+<li>locate查找命令简单，但功能也较少。</li>
+<li>locate 实际上查的是一个保存文档和目录名称的数据库，默认是/var/lib/slocate/slocate.db。</li>
+<li>find是去硬盘找，而locate这个数据库里找。</li>
+<li>locate的查找并不是实时的，而是以数据库的更新为准。</li>
+</ul>
+<pre><code>Linux系统自动创建locate查找的数据库，并且每天自动更新一次。
+
+因此，我们在用whereis和locate 查找文件时，有时会找到已经被删除的数据，或者刚刚建立文件，却无法查找到，原因就是因为数据库文件没有被更新。
+
+为了避免这种情况，可以在使用locate之前，先使用updatedb命令，手动更新数据库（也可以使用locate -u命令来更新）。 
+</code></pre><h2 id="2、locate命令"><a href="#2、locate命令" class="headerlink" title="2、locate命令"></a>2、locate命令</h2><p>直接locate fileName 即可查找指定文件，默认支持正则匹配。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">查找出以passwd开头的所有文件</span><br><span class="line">locate passwd</span><br><span class="line"></span><br><span class="line">查找出/data/jjing/目录下所有以test开头的文件或文件夹下的所有内容</span><br><span class="line">locate /data/jjing/test</span><br></pre></td></tr></table></figure></p>
+<h1 id="三、whereis和which的对比"><a href="#三、whereis和which的对比" class="headerlink" title="三、whereis和which的对比"></a>三、whereis和which的对比</h1><p>直接看几个实例吧：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[app@VM_98_10_centos test]$ whereis mysql</span><br><span class="line">mysql: /usr/bin/mysql /usr/lib64/mysql /usr/include/mysql /usr/share/mysql /usr/share/man/man1/mysql.1.gz</span><br><span class="line">[app@VM_98_18_centos test]$ which mysql</span><br><span class="line">/usr/bin/mysql</span><br><span class="line"></span><br><span class="line">[app@VM_98_18_centos test]$ whereis python</span><br><span class="line">python: /usr/bin/python /usr/bin/python2.6 /usr/bin/python2.6-config /usr/lib/python2.6 /usr/lib64/python2.6 /usr/include/python2.6 /usr/share/man/man1/python.1.gz</span><br><span class="line">[app@VM_98_18_centos test]$ which python</span><br><span class="line">/usr/bin/python</span><br><span class="line"></span><br><span class="line">[app@VM_98_18_centos test]$ whereis jenkins</span><br><span class="line">jenkins:</span><br><span class="line">[app@VM_98_18_centos test]$ which jenkins</span><br><span class="line">/usr/bin/which: no jenkins in (/home/app/bin:/home/app/bin:/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/nemo/jdk8/bin:/nemo/gradle/bin:/home/app/bin:/nemo/jdk1.8.0_141/bin:/usr/local/python3.6.5/bin:/nemo/maven/bin)</span><br><span class="line"></span><br><span class="line">[app@VM_98_18_centos test]$ whereis vim</span><br><span class="line">vim: /usr/bin/vim /usr/share/vim /usr/share/man/man1/vim.1.gz</span><br><span class="line">[app@VM_98_18_centos test]$ which vim</span><br><span class="line">/usr/bin/vim</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>whereis一般用于查找系统的可执行命令的位置，以及相关的源码文件，及对应的man手册页；</li>
+<li>which也可以查找可执行命令的位置，但是只在环境变量$PATH设置的目录里查找</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/31/181219标准输入read和输出echo/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/31/02_文本查看命令比较cat-less-more-tail-head/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">ivyLi</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#各命令的主要区别："><span class="nav-number">1.</span> <span class="nav-text">各命令的主要区别：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一、find-查找文件"><span class="nav-number">2.</span> <span class="nav-text">一、find 查找文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、语法"><span class="nav-number">2.1.</span> <span class="nav-text">1、语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、参数说明"><span class="nav-number">2.2.</span> <span class="nav-text">2、参数说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、UNIX-Linux文件系统时间戳"><span class="nav-number">2.3.</span> <span class="nav-text">3、UNIX/Linux文件系统时间戳</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、实例"><span class="nav-number">2.4.</span> <span class="nav-text">4、实例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、locate-查找文件"><span class="nav-number">3.</span> <span class="nav-text">二、locate 查找文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、locate和find的区别"><span class="nav-number">3.1.</span> <span class="nav-text">1、locate和find的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、locate命令"><span class="nav-number">3.2.</span> <span class="nav-text">2、locate命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、whereis和which的对比"><span class="nav-number">4.</span> <span class="nav-text">三、whereis和which的对比</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ivyLi</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<script type="text/javascript" src="/js/src/love.js"></script> 

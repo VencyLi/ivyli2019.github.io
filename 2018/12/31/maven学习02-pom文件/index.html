@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="[toc] 一、POM 文件是什么？Maven的中心思想即POM文件（(Project Object Model)项目对象模型）。 POM文件是以XML文件的形式，描述项目用到的资源，如源码目录、测试代码目录、依赖（用到的外部Jar包）等。 pom.xml 是整个系统的基础组件，位于项目根目录下。 二、Maven 如何使用POM文件？ 上图说明了Maven是如何使用POM文件的，当执行一条Mave">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ivyli">
+<meta property="og:url" content="http://yoursite.com/2018/12/31/maven学习02-pom文件/index.html">
+<meta property="og:site_name" content="ivyli">
+<meta property="og:description" content="[toc] 一、POM 文件是什么？Maven的中心思想即POM文件（(Project Object Model)项目对象模型）。 POM文件是以XML文件的形式，描述项目用到的资源，如源码目录、测试代码目录、依赖（用到的外部Jar包）等。 pom.xml 是整个系统的基础组件，位于项目根目录下。 二、Maven 如何使用POM文件？ 上图说明了Maven是如何使用POM文件的，当执行一条Mave">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/2018112810141164.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181128204820991.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2018-12-03T11:40:54.380Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ivyli">
+<meta name="twitter:description" content="[toc] 一、POM 文件是什么？Maven的中心思想即POM文件（(Project Object Model)项目对象模型）。 POM文件是以XML文件的形式，描述项目用到的资源，如源码目录、测试代码目录、依赖（用到的外部Jar包）等。 pom.xml 是整个系统的基础组件，位于项目根目录下。 二、Maven 如何使用POM文件？ 上图说明了Maven是如何使用POM文件的，当执行一条Mave">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/2018112810141164.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/12/31/maven学习02-pom文件/">
+
+
+
+
+
+  <title> | ivyli</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ivyli</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/31/maven学习02-pom文件/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ivyLi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ivyli">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-31T19:29:48+08:00">
+                2018-12-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>[toc]</p>
+<h2 id="一、POM-文件是什么？"><a href="#一、POM-文件是什么？" class="headerlink" title="一、POM 文件是什么？"></a>一、POM 文件是什么？</h2><p>Maven的中心思想即POM文件（<code>(Project Object Model)</code>项目对象模型）。</p>
+<p>POM文件是以XML文件的形式，描述项目用到的资源，如源码目录、测试代码目录、依赖（用到的外部Jar包）等。</p>
+<p><code>pom.xml</code> 是整个系统的基础组件，位于项目根目录下。</p>
+<h2 id="二、Maven-如何使用POM文件？"><a href="#二、Maven-如何使用POM文件？" class="headerlink" title="二、Maven 如何使用POM文件？"></a>二、Maven 如何使用POM文件？</h2><p><img src="https://img-blog.csdnimg.cn/2018112810141164.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>上图说明了Maven是如何使用POM文件的，当执行一条Maven命令的时候，会依次进行以下步骤：</p>
+<p>1、读取项目根目录下的<code>pom.xml</code>，并根据<code>pom.xml</code>中的描述来执行下一步操作。</p>
+<p>2、根据<code>pom.xml</code>中的<code>&lt;dependencies&gt;</code>，下载依赖到本地仓库中。</p>
+<p>3、构建生命周期、阶段和目标。</p>
+<p>4、构建插件。</p>
+<h2 id="三、POM文件的主要组成部分"><a href="#三、POM文件的主要组成部分" class="headerlink" title="三、POM文件的主要组成部分"></a>三、POM文件的主要组成部分</h2><p>==POM文件描述的是构建“什么”，而不是“如何”构建。==  如何构建是取决于Maven的构建阶段和目标。</p>
+<p>每一个项目都有一个POM文件，即pom.xml，位于项目的根目录下。</p>
+<p>pom.xml 主要包括以下几部分：</p>
+<h3 id="3-1-构建生命周期、阶段和目标"><a href="#3-1-构建生命周期、阶段和目标" class="headerlink" title="3.1 构建生命周期、阶段和目标"></a>3.1 构建生命周期、阶段和目标</h3><p>Maven的构建过程被分解为构建生命周期、阶段和目标。</p>
+<p>==<code>&lt;build&gt; -&gt; &lt;phase&gt; -&gt; &lt;goals&gt;</code>==</p>
+<ul>
+<li><p>一个构建周期由一系列的构建阶段组成。</p>
+</li>
+<li><p>每一个构建阶段由一系列的目标组成。</p>
+</li>
+</ul>
+<p>==当我们使用一条命令来运行Maven的时候，这条命令就是构建生命周期、阶段或目标的名字。==</p>
+<ul>
+<li><p>如果执行的是一个生命周期，该生命周期内的所有构建阶段都会被执行。</p>
+</li>
+<li><p>如果执行的是一个构建阶段，在预定义的构建阶段中，所有处于当前构建阶段之前的阶段也都会被执行。</p>
+</li>
+</ul>
+<h3 id="3-2-依赖和仓库"><a href="#3-2-依赖和仓库" class="headerlink" title="3.2 依赖和仓库"></a>3.2 依赖和仓库</h3><p>==<code>&lt;repository&gt; 仓库节点，&lt;dependencies&gt; 依赖节点</code>==</p>
+<p>Maven执行时，其中一个首要目标就是检查项目的依赖（需要的jar 包）。</p>
+<p>如果在本地仓库中不存在该依赖，则Maven会从中央仓库和远程仓库下载并放到本地仓库。（后面会单独讲解怎么修改本地仓库路径、怎么添加远程仓库）</p>
+<h3 id="3-3-构建插件"><a href="#3-3-构建插件" class="headerlink" title="3.3 构建插件"></a>3.3 构建插件</h3><p>==<code>&lt;plugins&gt; 节点</code>==</p>
+<p>构建插件可以向构建阶段中增加额外的构建目标。</p>
+<p>如果Maven标准的构建阶段和目标无法满足项目构建的需求，可以在POM文件里增加插件。</p>
+<p>Maven有一些标准的插件供选用，如果需要也可以自己实现插件。</p>
+<h3 id="3-4-配置文件"><a href="#3-4-配置文件" class="headerlink" title="3.4 配置文件"></a>3.4 配置文件</h3><p>==<code>&lt;profiles&gt; 节点</code>==</p>
+<p>配置文件用于以不同的方式构建项目。</p>
+<p>比如，你可能需要在本地环境构建，用于开发和测试，你也可能需要构建后用于开发环境。这两个构建过程是不同的。</p>
+<p>在POM文件中增加不同的构建配置，可以启用不同的构建过程。当运行Maven时，可以指定要使用的配置。</p>
+<h2 id="四、Maven-项目继承"><a href="#四、Maven-项目继承" class="headerlink" title="四、Maven 项目继承"></a>四、Maven 项目继承</h2><h3 id="1、父子工程中的POM"><a href="#1、父子工程中的POM" class="headerlink" title="1、父子工程中的POM"></a>1、父子工程中的POM</h3><p>（以下内容中<code>子项目</code> 与 <code>模块</code>的概念是类似的，所以也可以对应的理解为<code>模块</code>）</p>
+<p>一个项目如果分为多个子项目/模块，一般来讲，父项目有一个POM文件，每一个子项目也有一个POM文件。在这种结构下，既可以一步构建整个项目，也可以各个子项目分开构建。</p>
+<h3 id="2、-POM-继承的原理"><a href="#2、-POM-继承的原理" class="headerlink" title="2、 POM 继承的原理"></a>2、 POM 继承的原理</h3><p>==POM 继承的原理类似于Java中的类继承关系，可以结合理解。==</p>
+<p>当有多个子项目时，使用 POM 继承可以大大减少配置的工作量。</p>
+<ul>
+<li><p>把多个子项目之间一些共性的东西（比如说类似的配置、相同的jar包等等），定义在父项目的pom.xml文件中。</p>
+</li>
+<li><p>子项目继承父项目后，在自己的pom.xml中只放自己个性的东西，大大减少了工作量。</p>
+</li>
+<li><p>默认情况下，所有的Maven pom文件都继承自一个根pom。如果没有显式指定父pom，则该pom文件继承自根pom。</p>
+</li>
+<li><p>子pom文件的设置可以覆盖父pom文件的设置，只需要在子pom文件里指定新的设置即可。</p>
+</li>
+</ul>
+<h3 id="3、POM继承关系图"><a href="#3、POM继承关系图" class="headerlink" title="3、POM继承关系图"></a>3、POM继承关系图</h3><p><img src="https://img-blog.csdnimg.cn/20181128204820991.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>如果要继承根pom以外的pom，需要在子pom中显示地指定父pom。</p>
+<h3 id="4、-如何显示指定父pom呢？"><a href="#4、-如何显示指定父pom呢？" class="headerlink" title="4、==如何显示指定父pom呢？=="></a>4、==如何显示指定父pom呢？==</h3><ul>
+<li>在子项目的pom.xml起始处设置 <code>&lt;parent&gt;</code> 节点来指定父项目。<br>如：<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span></span></span><br><span class="line"><span class="tag"><span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag"><span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0</span></span></span><br><span class="line"><span class="tag"><span class="string">http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span> 指定父pom</span><br><span class="line"><span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.codehaus.mojo<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>my-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">relativePath</span>&gt;</span>../my-parent<span class="tag">&lt;/<span class="name">relativePath</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>my-project<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">…</span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="五、POM文件字段解析"><a href="#五、POM文件字段解析" class="headerlink" title="五、POM文件字段解析"></a>五、POM文件字段解析</h2><p>如下为一个最小化的POM文件示例：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span></span></span><br><span class="line"><span class="tag"><span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag"><span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0</span></span></span><br><span class="line"><span class="tag"><span class="string">http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.jenkov<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>java-web-crawler<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="1、各字段解析"><a href="#1、各字段解析" class="headerlink" title="1、各字段解析"></a>1、各字段解析</h3><ul>
+<li><p><code>modelVersion</code>：使用的POM模型的版本。</p>
+<ul>
+<li>一般选择正在使用的Maven版本一致的版本即可。</li>
+<li>版本4.0.0适用于Maven 2和3。</li>
+</ul>
+</li>
+<li><p><code>groupId</code>：一个组织或者项目（比如开源项目）的唯一ID。一般使用项目的java包的根名称作为group ID。类似<code>com.xxx.xxxx</code> 。</p>
+<ul>
+<li>使用带.分隔符的java包名作为groupId，这一点并不是必须的。</li>
+<li>但是，如果按照这样的规范来定义groupId，项目将会位于Maven仓库的结构化目录中，该结构化目录与group ID匹配。每一个.是一个目录分隔符，每一个词都表示一个目录。</li>
+<li>比如：group ID为com.jenkov的项目将位于目录MAVEN_REPO/com/jenkov中。目录路径中的MAVEN_REPO表示Maven仓库的路径。</li>
+</ul>
+</li>
+<li><p><code>artifactId</code>：正在构建的项目的名称。</p>
+<ul>
+<li>它也是构建完项目后生成的jar包的文件名的一部分。构建过程的输出，即构建结果，在Maven中称为构件（artifact）。通常它就是一个jar包、war包或者EAR包等等。</li>
+</ul>
+</li>
+<li><p><code>version</code>：项目的版本号。</p>
+<ul>
+<li>可以用来识别项目不同的发行版。</li>
+<li>它是artifact ID目录下的子目录名。</li>
+<li>它也用作构建结果即jar包名称的一部分。</li>
+</ul>
+</li>
+</ul>
+<p>上文中的groupId，artifactId和version属性，在项目构建后会生成一个jar文件，位于Maven仓库的如下路径中（目录和文件名）：MAVEN_REPO/com/jenkov/java-web-crawler/1.0.0/java-web-crawler-1.0.0.jar</p>
+<p>上面只是构建maven项目最基本的一些配置，实际开发中，还会增加更多的配置来辅助构建。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/31/git clone&pull，pull指定文件，批量提交/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/31/Maven学习04-构建生命周期/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">ivyLi</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、POM-文件是什么？"><span class="nav-number">1.</span> <span class="nav-text">一、POM 文件是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Maven-如何使用POM文件？"><span class="nav-number">2.</span> <span class="nav-text">二、Maven 如何使用POM文件？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、POM文件的主要组成部分"><span class="nav-number">3.</span> <span class="nav-text">三、POM文件的主要组成部分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-构建生命周期、阶段和目标"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 构建生命周期、阶段和目标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-依赖和仓库"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 依赖和仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-构建插件"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 构建插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-配置文件"><span class="nav-number">3.4.</span> <span class="nav-text">3.4 配置文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、Maven-项目继承"><span class="nav-number">4.</span> <span class="nav-text">四、Maven 项目继承</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、父子工程中的POM"><span class="nav-number">4.1.</span> <span class="nav-text">1、父子工程中的POM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、-POM-继承的原理"><span class="nav-number">4.2.</span> <span class="nav-text">2、 POM 继承的原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、POM继承关系图"><span class="nav-number">4.3.</span> <span class="nav-text">3、POM继承关系图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、-如何显示指定父pom呢？"><span class="nav-number">4.4.</span> <span class="nav-text">4、==如何显示指定父pom呢？==</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、POM文件字段解析"><span class="nav-number">5.</span> <span class="nav-text">五、POM文件字段解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、各字段解析"><span class="nav-number">5.1.</span> <span class="nav-text">1、各字段解析</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ivyLi</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<script type="text/javascript" src="/js/src/love.js"></script> 

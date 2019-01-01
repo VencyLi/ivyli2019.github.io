@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="description" content="[toc] 一、认识 Maven1、Maven 最重要的功能Apache Maven 是一个强大的项目管理工具，可以用于项目构建、依赖管理、项目信息管理。 ==Maven 更多的被用作项目构建工具==，它使项目的构建过程简单化、标准化、可复用，极大的方便了整个项目的开发和管理。 它基于工程对象模型（POM）的概念，使用 pom.xml进行核心功能配置，进而管理项目的构建、报告和文档等。 2、什么是">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2018/12/29/hello-world/index.html">
+<meta property="og:title" content="ivyli">
+<meta property="og:url" content="http://yoursite.com/2018/12/31/maven学习01 - 关键特性/index.html">
 <meta property="og:site_name" content="ivyli">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="[toc] 一、认识 Maven1、Maven 最重要的功能Apache Maven 是一个强大的项目管理工具，可以用于项目构建、依赖管理、项目信息管理。 ==Maven 更多的被用作项目构建工具==，它使项目的构建过程简单化、标准化、可复用，极大的方便了整个项目的开发和管理。 它基于工程对象模型（POM）的概念，使用 pom.xml进行核心功能配置，进而管理项目的构建、报告和文档等。 2、什么是">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-29T06:14:14.298Z">
+<meta property="og:updated_time" content="2018-12-03T11:40:53.585Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="ivyli">
+<meta name="twitter:description" content="[toc] 一、认识 Maven1、Maven 最重要的功能Apache Maven 是一个强大的项目管理工具，可以用于项目构建、依赖管理、项目信息管理。 ==Maven 更多的被用作项目构建工具==，它使项目的构建过程简单化、标准化、可复用，极大的方便了整个项目的开发和管理。 它基于工程对象模型（POM）的概念，使用 pom.xml进行核心功能配置，进而管理项目的构建、报告和文档等。 2、什么是">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/12/29/hello-world/">
+  <link rel="canonical" href="http://yoursite.com/2018/12/31/maven学习01 - 关键特性/">
 
 
 
 
 
-  <title>Hello World | ivyli</title>
+  <title> | ivyli</title>
   
 
 
@@ -272,7 +272,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/29/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/31/maven学习01 - 关键特性/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ivyLi">
@@ -289,7 +289,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World</h1>
+          <h1 class="post-title" itemprop="name headline"></h1>
         
 
         <div class="post-meta">
@@ -301,8 +301,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-29T14:14:14+08:00">
-                2018-12-29
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-31T19:29:48+08:00">
+                2018-12-31
               </time>
             
 
@@ -339,15 +339,90 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <p>[toc]</p>
+<h1 id="一、认识-Maven"><a href="#一、认识-Maven" class="headerlink" title="一、认识 Maven"></a>一、认识 Maven</h1><h2 id="1、Maven-最重要的功能"><a href="#1、Maven-最重要的功能" class="headerlink" title="1、Maven 最重要的功能"></a>1、Maven 最重要的功能</h2><p>Apache Maven 是一个强大的项目管理工具，可以用于项目构建、依赖管理、项目信息管理。</p>
+<p>==Maven 更多的被用作项目构建工具==，它使项目的构建过程简单化、标准化、可复用，极大的方便了整个项目的开发和管理。</p>
+<p>它基于工程对象模型（POM）的概念，使用 <code>pom.xml</code>进行核心功能配置，进而管理项目的构建、报告和文档等。</p>
+<h2 id="2、什么是构建工具？"><a href="#2、什么是构建工具？" class="headerlink" title="2、什么是构建工具？"></a>2、什么是构建工具？</h2><p>==构建工具是将软件项目构建相关的过程自动化的工具。==</p>
+<p><strong>构建一个软件项目通常包含以下一个或多个过程</strong>：</p>
+<ul>
+<li>生成源码（如果项目使用自动生成源码）；</li>
+<li>从源码生成项目文档；</li>
+<li>编译源码；</li>
+<li>将编译后的代码打包成JAR文件或者ZIP文件；</li>
+<li>将打包好的代码安装到服务器、仓库或者其它的地方；</li>
+</ul>
+<p>当然，有些项目可能需要更多的过程才能完成构建，同样也可以实现自动化。</p>
+<p>==<strong>自动化构建过程的好处：</strong>==</p>
+<ul>
+<li><p>将手动构建过程中犯错的风险降到最低。</p>
+</li>
+<li><p>自动构建工具通常要比手动执行同样的构建过程要快。</p>
+</li>
+</ul>
+<h1 id="二、Maven-关键特性"><a href="#二、Maven-关键特性" class="headerlink" title="二、Maven 关键特性"></a>二、Maven 关键特性</h1><h2 id="1、简化并标准化项目构建过程"><a href="#1、简化并标准化项目构建过程" class="headerlink" title="1、简化并标准化项目构建过程"></a>1、简化并标准化项目构建过程</h2><ul>
+<li>Maven 为开发者提供了一套完整的构建生命周期框架，开发人员只需要按照框架操作。</li>
+<li>Maven 使用一个标准的目录结构和一个默认的构建生命周期，开发人员只需要把代码放入相应的目录中并使用默认配置。</li>
+</ul>
+<h2 id="2、自动管理依赖"><a href="#2、自动管理依赖" class="headerlink" title="2、自动管理依赖"></a>2、自动管理依赖</h2><h3 id="2-1-以前项目开发中的问题"><a href="#2-1-以前项目开发中的问题" class="headerlink" title="2.1 以前项目开发中的问题"></a>2.1 以前项目开发中的问题</h3><p>==<strong>jar 包依赖和冲突问题：</strong>==</p>
+<p>在构建一个大型项目时，经常需要用到很多第三方的类库，需要引入大量的jar包，需要一个个去查找。</p>
+<p>一个大型项目中 jar 包的数量之多往往让我们瞠目结舌，并且jar包之间的关系错综复杂，多个jar包之间又可能会引起冲突问题，都可能导致项目编译失败。</p>
+<p>以往开发项目时，程序员往往需要花较多的精力在引用jar包搭建项目环境上，而这一项工作尤为艰难，少一个Jar包、多一个jar包往往会报一些让人摸不着头脑的异常。 </p>
+<h3 id="2-2-Maven-如何解决依赖问题？"><a href="#2-2-Maven-如何解决依赖问题？" class="headerlink" title="2.2 Maven 如何解决依赖问题？"></a>2.2 Maven 如何解决依赖问题？</h3><p>==我们只需要告诉Maven需要哪些 jar 包，它会帮助我们自动下载、并统一管理，极大提升开发效率。==</p>
+<ul>
+<li><p>自动下载依赖<code>jar</code>包</p>
+<ul>
+<li>通过在<code>pom.xml</code>文件中的<code>&lt;dependency&gt;</code>节点添加相应配置，就会自动下载相应jar包。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt; </span><br><span class="line">      &lt;groupId&gt;junit&lt;/groupId&gt;  项目名</span><br><span class="line">      &lt;artifactId&gt;junit&lt;/artifactId&gt;  项目模块  </span><br><span class="line">      &lt;version&gt;4.1.1&lt;/version&gt;  项目版本</span><br><span class="line">      &lt;scope&gt;test&lt;/scope&gt; 作用范围</span><br><span class="line">    &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>自动管理依赖</p>
+<ul>
+<li>每一个jar包也有自己的 pom.xml文件，里面也会有<code>&lt;dependency&gt;</code>配置，在这里配置的是这个jar包所依赖的其他jar包，也会被maven自动下载下来 </li>
+</ul>
+</li>
+<li><p>统一管理<code>jar</code>包</p>
+<ul>
+<li>通过仓库来实现统一管理，后面会详细讲解Maven仓库的概念。</li>
+</ul>
+</li>
+</ul>
+<h2 id="3、约定优于配置"><a href="#3、约定优于配置" class="headerlink" title="3、约定优于配置"></a>3、约定优于配置</h2><p>Maven 使用约定而不是配置。</p>
+<p>也就是说开发者不需要关心每一个配置细节，Maven 会为工程提供合理的默认行为。</p>
+<p>当创建 Maven 工程时，Maven 会创建默认的工程结构。开发者只需要合理的放置文件，不再需要定义任何配置。</p>
+<p>下表是工程源码文件、资源文件的默认配置，和其他一些配置：</p>
+<p>（假定 ${basedir} 表示工程目录）</p>
+<table>
+<thead>
+<tr>
+<th>配置项</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>source code</td>
+<td>${basedir}/src/main/java</td>
+</tr>
+<tr>
+<td>resources</td>
+<td>${basedir}/src/main/resources</td>
+</tr>
+<tr>
+<td>Tests</td>
+<td>${basedir}/src/test</td>
+</tr>
+<tr>
+<td>Complied byte code</td>
+<td>${basedir}/target</td>
+</tr>
+<tr>
+<td>distributable JAR</td>
+<td>${basedir}/target/classes</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4、热部署，热编译"><a href="#4、热部署，热编译" class="headerlink" title="4、热部署，热编译"></a>4、热部署，热编译</h2><p>在web项目已经运行的时候，修改代码能直接被web服务器所接受，不需要重启服务器或者重新部署代码，而且可以直接通过maven 打包war或者jar项目。</p>
 
       
     </div>
@@ -372,13 +447,17 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/12/31/Maven学习04-构建生命周期/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/12/31/181228-01认识 jmeter/" rel="prev" title="">
+              <a href="/2018/12/31/Maven学习05-目录结构和依赖/" rel="prev" title="">
                  <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -512,7 +591,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、认识-Maven"><span class="nav-number">1.</span> <span class="nav-text">一、认识 Maven</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、Maven-最重要的功能"><span class="nav-number">1.1.</span> <span class="nav-text">1、Maven 最重要的功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、什么是构建工具？"><span class="nav-number">1.2.</span> <span class="nav-text">2、什么是构建工具？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、Maven-关键特性"><span class="nav-number">2.</span> <span class="nav-text">二、Maven 关键特性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、简化并标准化项目构建过程"><span class="nav-number">2.1.</span> <span class="nav-text">1、简化并标准化项目构建过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、自动管理依赖"><span class="nav-number">2.2.</span> <span class="nav-text">2、自动管理依赖</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-以前项目开发中的问题"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.1 以前项目开发中的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Maven-如何解决依赖问题？"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2 Maven 如何解决依赖问题？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、约定优于配置"><span class="nav-number">2.3.</span> <span class="nav-text">3、约定优于配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、热部署，热编译"><span class="nav-number">2.4.</span> <span class="nav-text">4、热部署，热编译</span></a></li></ol></li></ol></div>
             
 
           </div>

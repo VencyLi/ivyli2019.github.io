@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="[toc] 一、grep常用命令grep的功能是分析一行信息，过滤出包含指定内容的行。 ==需要注意的是它以整行为单位进行数据的选取。== 1、语法grep [-acinv] [--color=auto]  &amp;apos;要查找的字符串&amp;apos;  filename    参数 说明     -a 将binary文件以text文件的方式查找数据   -c 计算找到查找字符串的次数   -i 忽略大">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ivyli">
+<meta property="og:url" content="http://yoursite.com/2018/12/31/08_grep命令详解/index.html">
+<meta property="og:site_name" content="ivyli">
+<meta property="og:description" content="[toc] 一、grep常用命令grep的功能是分析一行信息，过滤出包含指定内容的行。 ==需要注意的是它以整行为单位进行数据的选取。== 1、语法grep [-acinv] [--color=auto]  &amp;apos;要查找的字符串&amp;apos;  filename    参数 说明     -a 将binary文件以text文件的方式查找数据   -c 计算找到查找字符串的次数   -i 忽略大">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181201160201562.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181201160657525.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2018-12-20T01:19:37.109Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ivyli">
+<meta name="twitter:description" content="[toc] 一、grep常用命令grep的功能是分析一行信息，过滤出包含指定内容的行。 ==需要注意的是它以整行为单位进行数据的选取。== 1、语法grep [-acinv] [--color=auto]  &amp;apos;要查找的字符串&amp;apos;  filename    参数 说明     -a 将binary文件以text文件的方式查找数据   -c 计算找到查找字符串的次数   -i 忽略大">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20181201160201562.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/12/31/08_grep命令详解/">
+
+
+
+
+
+  <title> | ivyli</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ivyli</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/31/08_grep命令详解/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ivyLi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ivyli">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-31T19:29:48+08:00">
+                2018-12-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>[toc]</p>
+<h1 id="一、grep常用命令"><a href="#一、grep常用命令" class="headerlink" title="一、grep常用命令"></a>一、grep常用命令</h1><p>grep的功能是分析一行信息，过滤出包含指定内容的行。</p>
+<p>==需要注意的是它以整行为单位进行数据的选取。==</p>
+<h2 id="1、语法"><a href="#1、语法" class="headerlink" title="1、语法"></a>1、语法</h2><pre><code>grep [-acinv] [--color=auto]  &apos;要查找的字符串&apos;  filename
+</code></pre><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-a</td>
+<td>将binary文件以text文件的方式查找数据</td>
+</tr>
+<tr>
+<td>-c</td>
+<td>计算找到查找字符串的次数</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>忽略大小写的不同</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>输出行号</td>
+</tr>
+<tr>
+<td>-E</td>
+<td>同时匹配多个关键词</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>遍历匹配</td>
+</tr>
+<tr>
+<td>-w</td>
+<td>整字匹配</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>反向选择，显示出没有查找字符串的内容的行</td>
+</tr>
+<tr>
+<td>-c</td>
+<td>只输出匹配行的统计次数</td>
+</tr>
+<tr>
+<td>–color-auto</td>
+<td>将找到的字符串以特殊颜色显示</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2、范例"><a href="#2、范例" class="headerlink" title="2、范例"></a>2、范例</h2><p>先将/etc目录下的man.config文件拷贝至/tmp文件夹下，来作实验:</p>
+<pre><code>cd  /tmp
+cp  /etc/man.config  .
+</code></pre><h3 id="2-1-grep-‘字符串’"><a href="#2-1-grep-‘字符串’" class="headerlink" title="2.1  grep ‘字符串’"></a>2.1  grep ‘字符串’</h3><p>将文件中包含MANPATH的那一行取出来。</p>
+<pre><code>cat manpath.config | grep &apos;MANPATH&apos;
+</code></pre><h3 id="2-2-grep-v-‘字符串’"><a href="#2-2-grep-v-‘字符串’" class="headerlink" title="2.2 grep -v ‘字符串’"></a>2.2 grep -v ‘字符串’</h3><p>与上例子相反，只要没有包含MANPATH的那一行就取出来。</p>
+<pre><code>cat manpath.config| grep -v &apos;MANPATH&apos;
+</code></pre><h3 id="2-3-grep-E-同时匹配多个关键字–或关系"><a href="#2-3-grep-E-同时匹配多个关键字–或关系" class="headerlink" title="2.3 grep -E 同时匹配多个关键字–或关系"></a>2.3 grep -E 同时匹配多个关键字–或关系</h3><pre><code>grep -E &quot;word1|word2|word3&quot; file.txt
+匹配 file.txt 中包含 word1 或 word2 或 word3 的行。
+满足其中任意条件（word1、word2和word3之一）就会匹配。
+</code></pre><p>注意：<br>==多个关键字一定要放在双引号中，不然无法正常匹配。==</p>
+<p>不带双引号会报错，类似下面这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">grep &apos;update fail&apos;|ERROR|timeout appmonitor.log test.log* | wc -l  </span><br><span class="line">-bash: ERROR: command not found</span><br><span class="line">timeout: 无效的时间间隔&quot;appmonitor.log&quot;</span><br><span class="line">请尝试执行&quot;timeout --help&quot;来获取更多信息。</span><br></pre></td></tr></table></figure></p>
+<p>加上双引号后正常：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep &quot;&apos;update fail&apos;|ERROR|timeout&quot; appmonitor.log test.log* | wc -l</span><br></pre></td></tr></table></figure></p>
+<h3 id="2-4-管道符连接多个-grep–同时匹配多个关键字–与关系"><a href="#2-4-管道符连接多个-grep–同时匹配多个关键字–与关系" class="headerlink" title="2.4 管道符连接多个 grep–同时匹配多个关键字–与关系"></a>2.4 管道符连接多个 grep–同时匹配多个关键字–与关系</h3><pre><code>grep word1 file.txt | grep word2 |grep word3
+必须同时满足三个条件（word1、word2和word3）才匹配。
+</code></pre><p>5、整字匹配搜索</p>
+<pre><code>grep -w &quot;android&quot; logcat.txt  
+从logcat.txt文件中，搜索包含单词android的文本行
+
+grep -w &quot;android | ios&quot; logcat.txt  
+从logcat.txt文件中，搜索包含单词android或者ios的文本行
+</code></pre><p>6、统计字符出现次数</p>
+<pre><code>grep -c &quot;android&quot; .
+</code></pre><h1 id="二、grep的一些高级参数"><a href="#二、grep的一些高级参数" class="headerlink" title="二、grep的一些高级参数"></a>二、grep的一些高级参数</h1><h2 id="1、语法-1"><a href="#1、语法-1" class="headerlink" title="1、语法"></a>1、语法</h2><pre><code>grep [-A] [-B] [--color=auto]  &apos;查找字符串&apos; filename&apos;
+</code></pre><ul>
+<li>-A：后面可加数字，为after的意思，除了列出该行以外，后续的n行也列出来。</li>
+<li>-B：后面可加数字，为before的意思，除了列出该行以外，前面的n行也列出。</li>
+</ul>
+<h2 id="2、范例-1"><a href="#2、范例-1" class="headerlink" title="2、范例"></a>2、范例</h2><p>1、用dmesg列出内核信息，然后用grep找出包含eth的那行，并且显示行号。而且将关键字的前2行和后3行也列出来。</p>
+<pre><code>dmesg | grep -n -A3 -B2 --color=auto &apos;eth&apos;
+</code></pre><p>其中的 ==<code>|</code> 是管道符，用于把左边输出的内容传递给右边的命令==</p>
+<p><img src="https://img-blog.csdnimg.cn/20181201160201562.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>在关键字的显示上，grep可以用<code>—color=auto</code>来将关键字用特殊颜色显示。但是每次使用grep都得加上这个信息很麻烦，于是可以用alias进行一下处理就OK了。</p>
+<p>==可以在~/.bashrc内加上这一行：alias grep=’grep –color=auto’。==</p>
+<h1 id="三、基础正则表达式练习"><a href="#三、基础正则表达式练习" class="headerlink" title="三、基础正则表达式练习"></a>三、基础正则表达式练习</h1><h2 id="1、与中括号-结合"><a href="#1、与中括号-结合" class="headerlink" title="1、与中括号[]结合"></a>1、与中括号<code>[]</code>结合</h2><ul>
+<li>查找包含<code>[]</code>中某一个字符的内容<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">比如我要查找man或者men字符串，可以这样来查找：</span><br><span class="line">grep -n  &apos;m[ae]n&apos;  manpath.config</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20181201160657525.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">查找包含man且man前面有数字的行：</span><br><span class="line">grep -n &apos;[0-9]man&apos;  manpath.config</span><br></pre></td></tr></table></figure></p>
+<p>==Note：中括号[]里面不论有几个字符，它都只代表某一个字符。==</p>
+<h2 id="2、与反向选择-结合使用"><a href="#2、与反向选择-结合使用" class="headerlink" title="2、与反向选择^结合使用"></a>2、与反向选择^结合使用</h2><ul>
+<li>查找不包含指定字符的内容<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">查找包含man而且前面没有/的那一行：</span><br><span class="line">grep -n  &apos;[^/]man&apos;  manpath.config</span><br><span class="line"></span><br><span class="line">查找包含man但是前面不是小写字符的那一行：</span><br><span class="line">grep -n  &apos;[^a-z]man&apos;  manpath.config</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="3、与行首-和行尾-字符结合"><a href="#3、与行首-和行尾-字符结合" class="headerlink" title="3、与行首 ^ 和行尾 $ 字符结合"></a>3、与行首 <code>^</code> 和行尾 $ 字符结合</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">列出行首为MANPATH_MAP的行：</span><br><span class="line">grep -n  &apos;^MANPATH_MAP&apos; manpath.config</span><br><span class="line"></span><br><span class="line">列出开头是大写字符的那一行：</span><br><span class="line">grep -n &apos;^[A-Z]&apos; manpath.config</span><br><span class="line"></span><br><span class="line">列出开头不是英文字母的行：</span><br><span class="line">grep -n  &apos;^[^a-zA-Z]&apos;  manpath.config</span><br></pre></td></tr></table></figure>
+<p>==<code>^</code> 符号在字符集合（中括号[]）之内和外面是不同的！！！==</p>
+<p>==在<code>[]</code>里面代表反向选择，在<code>[]</code>外面代表定位在行首的意思==</p>
+<p><strong>反过来思考，使用<code>$</code>来查找行尾字符</strong>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">找出行尾结束符为点.的行：</span><br><span class="line">grep -n &apos;\.$&apos; manpath.config</span><br><span class="line">因为小数点具有特殊的意义，所以必须用转义字符加以解除其特殊意义。</span><br><span class="line"></span><br><span class="line">查找出空白行：</span><br><span class="line">grep -n  &apos;^$&apos;  manpath.config</span><br></pre></td></tr></table></figure></p>
+<h2 id="4、任意一个字符-与重复字符"><a href="#4、任意一个字符-与重复字符" class="headerlink" title="4、任意一个字符.与重复字符*"></a>4、任意一个字符<code>.</code>与重复字符<code>*</code></h2><p>==在bash当中，通配符*可以用来代表任意（0或多个）字符，但是正则表达式并不是通配符，两者之间是不相同的。==</p>
+<p><strong>在正则表达式当中：</strong></p>
+<ul>
+<li><code>.</code>代表绝对有一个字符的意思</li>
+<li><code>*</code>代表重复前一个字符0到无穷多次的意思，为组合形态</li>
+</ul>
+<p><strong>实例：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">查找包含一个o以上的行，需要oo*：</span><br><span class="line">grep -n &apos;oo*&apos; manpath.config</span><br><span class="line"></span><br><span class="line">查找以g开头与以g结尾，中间至少存在一个o的行：</span><br><span class="line">grep -n  &apos;goo*g&apos;  manpath.config</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">## 5、` &#123;&#125; `限定连续字符范围</span><br><span class="line">我们可以利用` . `与` * `来设置0到无穷多个重复字符。那如果要限制一个范围区间内的重复字符呢？</span><br><span class="line"></span><br><span class="line">比如要找出2-5个o的连续字符串，就要用到限定范围的字符&#123;&#125;了。</span><br><span class="line"></span><br><span class="line">&lt;font color=red&gt;但是&#123;&#125;的符号在shell有特殊意义，因此要用到转义字符\。&lt;/font&gt;</span><br><span class="line"></span><br><span class="line">**实例：**</span><br></pre></td></tr></table></figure></p>
+<p>找出g后面有两个到五个o，后面再接一个g的字符串：<br>grep -n ‘go{2,5}g’  manpath.config</p>
+<p>如果是2个以上呢：<br>grep -n  ‘go{2,}g’  manpath.config<br>这样就OK了。<br><code>`</code></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/31/181220使用sed实现循环操作/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/31/181216不同操作系统中的换行符/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">ivyLi</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、grep常用命令"><span class="nav-number">1.</span> <span class="nav-text">一、grep常用命令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、语法"><span class="nav-number">1.1.</span> <span class="nav-text">1、语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、范例"><span class="nav-number">1.2.</span> <span class="nav-text">2、范例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-grep-‘字符串’"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1  grep ‘字符串’</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-grep-v-‘字符串’"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 grep -v ‘字符串’</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-grep-E-同时匹配多个关键字–或关系"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3 grep -E 同时匹配多个关键字–或关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-管道符连接多个-grep–同时匹配多个关键字–与关系"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.4 管道符连接多个 grep–同时匹配多个关键字–与关系</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、grep的一些高级参数"><span class="nav-number">2.</span> <span class="nav-text">二、grep的一些高级参数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、语法-1"><span class="nav-number">2.1.</span> <span class="nav-text">1、语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、范例-1"><span class="nav-number">2.2.</span> <span class="nav-text">2、范例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、基础正则表达式练习"><span class="nav-number">3.</span> <span class="nav-text">三、基础正则表达式练习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、与中括号-结合"><span class="nav-number">3.1.</span> <span class="nav-text">1、与中括号[]结合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、与反向选择-结合使用"><span class="nav-number">3.2.</span> <span class="nav-text">2、与反向选择^结合使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、与行首-和行尾-字符结合"><span class="nav-number">3.3.</span> <span class="nav-text">3、与行首 ^ 和行尾 $ 字符结合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、任意一个字符-与重复字符"><span class="nav-number">3.4.</span> <span class="nav-text">4、任意一个字符.与重复字符*</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ivyLi</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<script type="text/javascript" src="/js/src/love.js"></script> 

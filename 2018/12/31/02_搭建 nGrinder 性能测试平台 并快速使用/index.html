@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="接上一篇的nGrinder介绍篇  一、nGrinder 组件介绍1、ngrinder包含Controller、agent 和 monitor 三部分2、Controller 提供性能测试的web接口 协调测试进程 调整和显示测试的统计结果 让用户创建和修改脚本  3、Agent 在代理服务器上加载运行测试进程和线程 可以部署多台，提升压测能力 最好是能部署在单独的服务器上，如果没有条件的话，也">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ivyli">
+<meta property="og:url" content="http://yoursite.com/2018/12/31/02_搭建 nGrinder 性能测试平台 并快速使用/index.html">
+<meta property="og:site_name" content="ivyli">
+<meta property="og:description" content="接上一篇的nGrinder介绍篇  一、nGrinder 组件介绍1、ngrinder包含Controller、agent 和 monitor 三部分2、Controller 提供性能测试的web接口 协调测试进程 调整和显示测试的统计结果 让用户创建和修改脚本  3、Agent 在代理服务器上加载运行测试进程和线程 可以部署多台，提升压测能力 最好是能部署在单独的服务器上，如果没有条件的话，也">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://image-static.segmentfault.com/172/015/1720154636-5becfa197943a_articlex">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181117162126894.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://image-static.segmentfault.com/417/336/4173360959-5bed021918a0f_articlex">
+<meta property="og:image" content="https://image-static.segmentfault.com/195/033/195033864-5bed024f5bf66_articlex">
+<meta property="og:image" content="https://image-static.segmentfault.com/103/835/1038356029-5bed0387ba945_articlex">
+<meta property="og:updated_time" content="2018-11-21T05:01:33.296Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ivyli">
+<meta name="twitter:description" content="接上一篇的nGrinder介绍篇  一、nGrinder 组件介绍1、ngrinder包含Controller、agent 和 monitor 三部分2、Controller 提供性能测试的web接口 协调测试进程 调整和显示测试的统计结果 让用户创建和修改脚本  3、Agent 在代理服务器上加载运行测试进程和线程 可以部署多台，提升压测能力 最好是能部署在单独的服务器上，如果没有条件的话，也">
+<meta name="twitter:image" content="https://image-static.segmentfault.com/172/015/1720154636-5becfa197943a_articlex">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/12/31/02_搭建 nGrinder 性能测试平台 并快速使用/">
+
+
+
+
+
+  <title> | ivyli</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ivyli</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/31/02_搭建 nGrinder 性能测试平台 并快速使用/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ivyLi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ivyli">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-31T19:29:48+08:00">
+                2018-12-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>接上一篇的nGrinder介绍篇</p>
+</blockquote>
+<h2 id="一、nGrinder-组件介绍"><a href="#一、nGrinder-组件介绍" class="headerlink" title="一、nGrinder 组件介绍"></a>一、nGrinder 组件介绍</h2><h4 id="1、ngrinder包含Controller、agent-和-monitor-三部分"><a href="#1、ngrinder包含Controller、agent-和-monitor-三部分" class="headerlink" title="1、ngrinder包含Controller、agent 和 monitor 三部分"></a>1、ngrinder包含Controller、agent 和 monitor 三部分</h4><h4 id="2、Controller"><a href="#2、Controller" class="headerlink" title="2、Controller"></a>2、Controller</h4><ul>
+<li>提供性能测试的web接口</li>
+<li>协调测试进程</li>
+<li>调整和显示测试的统计结果</li>
+<li>让用户创建和修改脚本</li>
+</ul>
+<h4 id="3、Agent"><a href="#3、Agent" class="headerlink" title="3、Agent"></a>3、Agent</h4><ul>
+<li>在代理服务器上加载运行测试进程和线程</li>
+<li>可以部署多台，提升压测能力</li>
+<li>最好是能部署在单独的服务器上，如果没有条件的话，也可以跟Controller在一台服务器</li>
+<li>但是不能部署在被测服务器上</li>
+</ul>
+<h4 id="4、Monitor"><a href="#4、Monitor" class="headerlink" title="4、Monitor"></a>4、Monitor</h4><ul>
+<li>用于监控被测服务器的系统性能（例如：CPU/MEMORY）</li>
+<li>必须部署在被测服务器上</li>
+</ul>
+<h2 id="二、nGrinder-环境搭建"><a href="#二、nGrinder-环境搭建" class="headerlink" title="二、nGrinder 环境搭建"></a>二、nGrinder 环境搭建</h2><blockquote>
+<p>$ java -XX:MaxPermSize=512m -jar ngrinder-controller-3.4.war –port 80<br>可在下载ngrinder后，直接通过上面的命令运行<br>也可以通过下面的方式，把war包放在tomcat容器中运行</p>
+</blockquote>
+<h4 id="1、安装JDK，配置环境变量"><a href="#1、安装JDK，配置环境变量" class="headerlink" title="1、安装JDK，配置环境变量"></a>1、安装JDK，配置环境变量</h4><h4 id="2、安装Tomcat"><a href="#2、安装Tomcat" class="headerlink" title="2、安装Tomcat"></a>2、安装Tomcat</h4><h4 id="3、下载nGrinder：https-github-com-naver-ngrinder-releases"><a href="#3、下载nGrinder：https-github-com-naver-ngrinder-releases" class="headerlink" title="3、下载nGrinder：https://github.com/naver/ngrinder/releases"></a>3、下载nGrinder：<a href="https://github.com/naver/ngrinder/releases" target="_blank" rel="noopener">https://github.com/naver/ngrinder/releases</a></h4><h4 id="4、把下载好的包放到Tomcat的webApps文件夹中"><a href="#4、把下载好的包放到Tomcat的webApps文件夹中" class="headerlink" title="4、把下载好的包放到Tomcat的webApps文件夹中"></a>4、把下载好的包放到Tomcat的webApps文件夹中</h4><h4 id="5、启动Tomcat，并访问nGrinder"><a href="#5、启动Tomcat，并访问nGrinder" class="headerlink" title="5、启动Tomcat，并访问nGrinder"></a>5、启动Tomcat，并访问nGrinder</h4><ul>
+<li>nGrinder主页：<a href="http://localhost:8080/ngrinder-controller-3.4/" target="_blank" rel="noopener">http://localhost:8080/ngrinder-controller-3.4/</a> 看到下图表示搭建成功。</li>
+<li>如果想直接通过<a href="http://localhost:8080/访问，把文件名改为ROOT.war即可" target="_blank" rel="noopener">http://localhost:8080/访问，把文件名改为ROOT.war即可</a></li>
+</ul>
+<p><img src="https://image-static.segmentfault.com/172/015/1720154636-5becfa197943a_articlex" alt="clipboard.png"></p>
+<hr>
+<h4 id="6、安装Agent"><a href="#6、安装Agent" class="headerlink" title="6、安装Agent"></a>6、安装Agent</h4><ul>
+<li>登录 nGrinder 管理台，默认账号和密码都是admin，点击右上角，选择 <code>Download Private Agent</code> (不同版本可能会稍有区别) ，如下图所示</li>
+<li><p>把 ngrinder-agent 压缩包解压到用作Agent的服务器上，运行 run_agent.sh 即可</p>
+<p><img src="https://img-blog.csdnimg.cn/20181117162126894.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+</li>
+</ul>
+<h4 id="7、安装Monitor（需要安装在被测服务器上）"><a href="#7、安装Monitor（需要安装在被测服务器上）" class="headerlink" title="7、安装Monitor（需要安装在被测服务器上）"></a>7、安装Monitor（需要安装在被测服务器上）</h4><ul>
+<li>下载Monitor安装包，方法类似Agent</li>
+<li>把 ngrinder-monitor 压缩包解压到被测服务器上，运行 run_monitor.sh 即可</li>
+</ul>
+<p>补充说明：</p>
+<ul>
+<li>ngrinder支持开箱即用，不需要额外配置，第一次启动时，系统配置自动生成</li>
+<li>默认使用H2数据库，且schema自动创建</li>
+<li>版本更新时，数据库schema自动更新</li>
+<li>agent 、monitor模块从controller下载，无需配置</li>
+<li>版本更新时，只需更新controller，agent和monitor会自动更新</li>
+<li>在线修改系统配置，多数据修改无需重启</li>
+<li>即使用cluster模式，配置也很简单</li>
+</ul>
+<h2 id="三、快速使用"><a href="#三、快速使用" class="headerlink" title="三、快速使用"></a>三、快速使用</h2><h4 id="1、输入测试URL，选择脚本语言，然后点击开始测试，会自动生成测试脚本并进入配置页面"><a href="#1、输入测试URL，选择脚本语言，然后点击开始测试，会自动生成测试脚本并进入配置页面" class="headerlink" title="1、输入测试URL，选择脚本语言，然后点击开始测试，会自动生成测试脚本并进入配置页面"></a>1、输入测试URL，选择脚本语言，然后点击开始测试，会自动生成测试脚本并进入配置页面</h4><p>或者通过点击管理后上方的 <code>script</code> 或 <code>脚本</code> 按钮，进入脚本管理页面，创建脚本，效果相同。</p>
+<p><img src="https://image-static.segmentfault.com/417/336/4173360959-5bed021918a0f_articlex" alt="clipboard.png"><br>在创建脚本时，可以选择使用的语言为Groovy或Jython，但是由于这两种语言执行性能上的差别，建议优先使用性能更好的Groovy来编写压测脚本（官方验证相同情况下groovy比jython支持2倍左右的并发数）</p>
+<h4 id="2、基本的压测配置"><a href="#2、基本的压测配置" class="headerlink" title="2、基本的压测配置"></a>2、基本的压测配置</h4><p><img src="https://image-static.segmentfault.com/195/033/195033864-5bed024f5bf66_articlex" alt="clipboard.png"></p>
+<p>代理：是指压测所需要的server的数量</p>
+<p>虚拟用户有两个指标：</p>
+<ul>
+<li>进程数：每个server起多少进程去跑</li>
+<li>线程数：每个进程新建的线程数量</li>
+<li><p>并发量=代理数x进程数x线程数</p>
+<p>Ramp-Up：设置增量测试，逐渐向最大的的并发量增长，只有勾选该框时，初始数、增量、初始等待时间、进程增长间隔的值才有效</p>
+</li>
+</ul>
+<p>测试时间：表示压测需要持续运行的时间<br>测试次数：脚本执行的次数，同测试时间二选一</p>
+<h4 id="3、运行测试"><a href="#3、运行测试" class="headerlink" title="3、运行测试"></a>3、运行测试</h4><p>  在配置页面右上角点击保存并运行，启动测试。</p>
+<h4 id="4、监控测试，查看结果"><a href="#4、监控测试，查看结果" class="headerlink" title="4、监控测试，查看结果"></a>4、监控测试，查看结果</h4><p>   当启动测试后，会在页面显示当前的TPS、虚拟用户、测试成功与否的数量等信息。测试完成后，会显示测试结果。</p>
+<p><img src="https://image-static.segmentfault.com/103/835/1038356029-5bed0387ba945_articlex" alt="clipboard.png"></p>
+<p>   可以点击详细测试结果查看更详细的信息，比如TPS、平均时间、首次接受数据平均时间，以及被测服务器的CPU，MEM等信息。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/31/05_在GET请求中添加参数-groovy/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/31/01_nGrinder详细介绍及性能工具对比/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">ivyLi</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、nGrinder-组件介绍"><span class="nav-number">1.</span> <span class="nav-text">一、nGrinder 组件介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、ngrinder包含Controller、agent-和-monitor-三部分"><span class="nav-number">1.0.1.</span> <span class="nav-text">1、ngrinder包含Controller、agent 和 monitor 三部分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、Controller"><span class="nav-number">1.0.2.</span> <span class="nav-text">2、Controller</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、Agent"><span class="nav-number">1.0.3.</span> <span class="nav-text">3、Agent</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、Monitor"><span class="nav-number">1.0.4.</span> <span class="nav-text">4、Monitor</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#二、nGrinder-环境搭建"><span class="nav-number">2.</span> <span class="nav-text">二、nGrinder 环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、安装JDK，配置环境变量"><span class="nav-number">2.0.1.</span> <span class="nav-text">1、安装JDK，配置环境变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、安装Tomcat"><span class="nav-number">2.0.2.</span> <span class="nav-text">2、安装Tomcat</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、下载nGrinder：https-github-com-naver-ngrinder-releases"><span class="nav-number">2.0.3.</span> <span class="nav-text">3、下载nGrinder：https://github.com/naver/ngrinder/releases</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、把下载好的包放到Tomcat的webApps文件夹中"><span class="nav-number">2.0.4.</span> <span class="nav-text">4、把下载好的包放到Tomcat的webApps文件夹中</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、启动Tomcat，并访问nGrinder"><span class="nav-number">2.0.5.</span> <span class="nav-text">5、启动Tomcat，并访问nGrinder</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6、安装Agent"><span class="nav-number">2.0.6.</span> <span class="nav-text">6、安装Agent</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7、安装Monitor（需要安装在被测服务器上）"><span class="nav-number">2.0.7.</span> <span class="nav-text">7、安装Monitor（需要安装在被测服务器上）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、快速使用"><span class="nav-number">3.</span> <span class="nav-text">三、快速使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、输入测试URL，选择脚本语言，然后点击开始测试，会自动生成测试脚本并进入配置页面"><span class="nav-number">3.0.1.</span> <span class="nav-text">1、输入测试URL，选择脚本语言，然后点击开始测试，会自动生成测试脚本并进入配置页面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、基本的压测配置"><span class="nav-number">3.0.2.</span> <span class="nav-text">2、基本的压测配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、运行测试"><span class="nav-number">3.0.3.</span> <span class="nav-text">3、运行测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、监控测试，查看结果"><span class="nav-number">3.0.4.</span> <span class="nav-text">4、监控测试，查看结果</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ivyLi</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<script type="text/javascript" src="/js/src/love.js"></script> 

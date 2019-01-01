@@ -79,14 +79,17 @@
 
 
 
+<meta name="description" content="[toc] 一、不同操作系统下换行符的显示换行符在 Windows 和 Linux 等系统中的显示符号是不一样的。    操作系统 换行符     Windows \r\n，回车加换行   类 Unix \n，换行   Mac \r，回车     \r 表示回车，即 CR （carriage return） \n 表示换行，即 LF （linefeed）  二、关于不同换行符的来历1、回车和换行计">
 <meta property="og:type" content="article">
-<meta property="og:title" content="test_my_site">
-<meta property="og:url" content="http://yoursite.com/2018/12/31/test-my-site-1/index.html">
+<meta property="og:title" content="ivyli">
+<meta property="og:url" content="http://yoursite.com/2018/12/31/181217不同操作系统中的换行符/index.html">
 <meta property="og:site_name" content="ivyli">
+<meta property="og:description" content="[toc] 一、不同操作系统下换行符的显示换行符在 Windows 和 Linux 等系统中的显示符号是不一样的。    操作系统 换行符     Windows \r\n，回车加换行   类 Unix \n，换行   Mac \r，回车     \r 表示回车，即 CR （carriage return） \n 表示换行，即 LF （linefeed）  二、关于不同换行符的来历1、回车和换行计">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-31T09:07:56.975Z">
+<meta property="og:updated_time" content="2018-12-20T01:19:36.900Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="test_my_site">
+<meta name="twitter:title" content="ivyli">
+<meta name="twitter:description" content="[toc] 一、不同操作系统下换行符的显示换行符在 Windows 和 Linux 等系统中的显示符号是不一样的。    操作系统 换行符     Windows \r\n，回车加换行   类 Unix \n，换行   Mac \r，回车     \r 表示回车，即 CR （carriage return） \n 表示换行，即 LF （linefeed）  二、关于不同换行符的来历1、回车和换行计">
 
 
 
@@ -116,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/12/31/test-my-site-1/">
+  <link rel="canonical" href="http://yoursite.com/2018/12/31/181217不同操作系统中的换行符/">
 
 
 
 
 
-  <title>test_my_site | ivyli</title>
+  <title> | ivyli</title>
   
 
 
@@ -269,7 +272,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/31/test-my-site-1/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/31/181217不同操作系统中的换行符/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ivyLi">
@@ -286,7 +289,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">test_my_site</h1>
+          <h1 class="post-title" itemprop="name headline"></h1>
         
 
         <div class="post-meta">
@@ -298,7 +301,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-31T17:07:56+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-31T19:29:48+08:00">
                 2018-12-31
               </time>
             
@@ -336,7 +339,60 @@
       
 
       
-        
+        <p>[toc]</p>
+<h1 id="一、不同操作系统下换行符的显示"><a href="#一、不同操作系统下换行符的显示" class="headerlink" title="一、不同操作系统下换行符的显示"></a>一、不同操作系统下换行符的显示</h1><p>换行符在 Windows 和 Linux 等系统中的显示符号是不一样的。</p>
+<table>
+<thead>
+<tr>
+<th>操作系统</th>
+<th>换行符</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows</td>
+<td><code>\r\n</code>，回车加换行</td>
+</tr>
+<tr>
+<td>类 Unix</td>
+<td><code>\n</code>，换行</td>
+</tr>
+<tr>
+<td>Mac</td>
+<td><code>\r</code>，回车</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>\r</code> 表示回车，即 <code>CR （carriage return）</code></li>
+<li><code>\n</code> 表示换行，即 <code>LF （linefeed）</code></li>
+</ul>
+<h1 id="二、关于不同换行符的来历"><a href="#二、关于不同换行符的来历" class="headerlink" title="二、关于不同换行符的来历"></a>二、关于不同换行符的来历</h1><h2 id="1、回车和换行"><a href="#1、回车和换行" class="headerlink" title="1、回车和换行"></a>1、回车和换行</h2><p>计算机还没有出现之前，使用的是电传打字机来打字（就是上一篇文章中提到的 Teletypewriter）。</p>
+<pre><code>电传打字机每秒钟可以打10个字符。但是它有一个问题，就是打完一行换行的时候要用掉0.2秒，正好可以打两个字符。
+如果在这0.2秒里面，又有新的字符传过来，那么这个字符将会丢失。
+
+于是科学家想了个办法解决这个问题，就是在每行后面加两个表示结束的字符，回车和换行：
+
+回车，符号 \r；是告诉打字机把打印头定位在左边界；
+
+换行，符号 \n；是告诉打字机把纸张向下方移动一行；
+</code></pre><p>这就是 回车和 换行 的来历。</p>
+<h2 id="2、不同系统下的实现方式"><a href="#2、不同系统下的实现方式" class="headerlink" title="2、不同系统下的实现方式"></a>2、不同系统下的实现方式</h2><p>后来，计算机发明了，回车和换行的概念就被用到了计算机上。当时存储器很贵，一些科学家认为在每行结尾加两个字符太浪费空间了，于是，就出现了分歧。</p>
+<pre><code>类 Unix 系统里，每行结尾只有“&lt;换行&gt;”，即“\n”；
+
+Windows系统里面，每行结尾是“&lt;回车&gt;&lt;换行&gt;”，即“ \r\n”；
+
+Mac系统里，每行结尾是“&lt;回车&gt;”，即“\r”。
+</code></pre><p>在类 Unix 系统中，遇到换行符 <code>\n</code>，就会自动加上<code>\r</code>实现 回车+换行 的操作；</p>
+<p>在  Mac 系统中，遇到回车符 <code>\r</code>，就会自动加上<code>\n</code>实现 回车+换行 的操作；</p>
+<p>所以，在打开其它系统的文件时，有可能不会正常显示换行。</p>
+<h2 id="3、可能会出现的问题"><a href="#3、可能会出现的问题" class="headerlink" title="3、可能会出现的问题"></a>3、可能会出现的问题</h2><p>因为换行符的问题，在一个系统下编辑的文件放到另一个系统下时，可能会显示不正常。</p>
+<p><strong>常见的会有以下两种情况：</strong></p>
+<ul>
+<li>在类 Unix 系统或 Mac 系统中编辑的文件，在 Windows 记事本中多行文字会变成一行（但是有些智能编辑器会自动识别不同系统的换行符，并进行转换，如 UE、Notepad++）。</li>
+<li>在 Windows 记事本中编辑的文件，在其它系统中会多显示一个控制字符 <code>^M</code>（在 Linux 中，回车符  <code>\r</code>会作为控制字符 <code>^M</code>显示）。</li>
+</ul>
+
       
     </div>
     
@@ -360,8 +416,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/29/Beanshell Sampler 常用方法/" rel="next" title="Beanshell Sampler 常用方法">
-                <i class="fa fa-chevron-left"></i> Beanshell Sampler 常用方法
+              <a href="/2018/12/31/181219 Notepad++中查找替换「换行符」/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
               </a>
             
           </div>
@@ -369,6 +425,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/31/181219标准输入read和输出echo/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -420,8 +480,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -436,12 +505,21 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
             
 
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
             
 
             
@@ -449,7 +527,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
@@ -473,6 +551,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、不同操作系统下换行符的显示"><span class="nav-number">1.</span> <span class="nav-text">一、不同操作系统下换行符的显示</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、关于不同换行符的来历"><span class="nav-number">2.</span> <span class="nav-text">二、关于不同换行符的来历</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、回车和换行"><span class="nav-number">2.1.</span> <span class="nav-text">1、回车和换行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、不同系统下的实现方式"><span class="nav-number">2.2.</span> <span class="nav-text">2、不同系统下的实现方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、可能会出现的问题"><span class="nav-number">2.3.</span> <span class="nav-text">3、可能会出现的问题</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -486,7 +580,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

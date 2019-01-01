@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="参数化,性能测试,">
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="description" content="[toc] 为什么要对测试脚本进行参数化？脚本参数化实际就是用参数来替换脚本中的一些常量，把常量替换成变量。 一、有两种目的一是为了保证请求被正常处理如注册场景必须要求用户名不重复等 二是为了模拟真实的生产场景如在登录场景中使用多用户，而不是单用户，防止出现因频率限制导致的报错，防止因命中缓存导致的TPS过高的假象。 通常很多系统出于性能优化考量，针对各业务场景都大量使用到缓存，导致压测数据相同时">
+<meta name="keywords" content="参数化,性能测试">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2018/12/29/hello-world/index.html">
+<meta property="og:title" content="脚本参数化的思考">
+<meta property="og:url" content="http://yoursite.com/2019/01/01/脚本参数化的思考/index.html">
 <meta property="og:site_name" content="ivyli">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="[toc] 为什么要对测试脚本进行参数化？脚本参数化实际就是用参数来替换脚本中的一些常量，把常量替换成变量。 一、有两种目的一是为了保证请求被正常处理如注册场景必须要求用户名不重复等 二是为了模拟真实的生产场景如在登录场景中使用多用户，而不是单用户，防止出现因频率限制导致的报错，防止因命中缓存导致的TPS过高的假象。 通常很多系统出于性能优化考量，针对各业务场景都大量使用到缓存，导致压测数据相同时">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-29T06:14:14.298Z">
+<meta property="og:updated_time" content="2019-01-01T03:21:16.348Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="脚本参数化的思考">
+<meta name="twitter:description" content="[toc] 为什么要对测试脚本进行参数化？脚本参数化实际就是用参数来替换脚本中的一些常量，把常量替换成变量。 一、有两种目的一是为了保证请求被正常处理如注册场景必须要求用户名不重复等 二是为了模拟真实的生产场景如在登录场景中使用多用户，而不是单用户，防止出现因频率限制导致的报错，防止因命中缓存导致的TPS过高的假象。 通常很多系统出于性能优化考量，针对各业务场景都大量使用到缓存，导致压测数据相同时">
 
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/12/29/hello-world/">
+  <link rel="canonical" href="http://yoursite.com/2019/01/01/脚本参数化的思考/">
 
 
 
 
 
-  <title>Hello World | ivyli</title>
+  <title>脚本参数化的思考 | ivyli</title>
   
 
 
@@ -272,7 +273,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/29/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/01/脚本参数化的思考/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ivyLi">
@@ -289,7 +290,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World</h1>
+          <h1 class="post-title" itemprop="name headline">脚本参数化的思考</h1>
         
 
         <div class="post-meta">
@@ -301,8 +302,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-29T14:14:14+08:00">
-                2018-12-29
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-01T11:20:32+08:00">
+                2019-01-01
               </time>
             
 
@@ -311,6 +312,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/工作/" itemprop="url" rel="index">
+                    <span itemprop="name">工作</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -339,15 +362,28 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <p>[toc]</p>
+<h2 id="为什么要对测试脚本进行参数化？"><a href="#为什么要对测试脚本进行参数化？" class="headerlink" title="为什么要对测试脚本进行参数化？"></a>为什么要对测试脚本进行参数化？</h2><p>脚本参数化实际就是用参数来替换脚本中的一些常量，把常量替换成变量。</p>
+<h3 id="一、有两种目的"><a href="#一、有两种目的" class="headerlink" title="一、有两种目的"></a>一、有两种目的</h3><h4 id="一是为了保证请求被正常处理"><a href="#一是为了保证请求被正常处理" class="headerlink" title="一是为了保证请求被正常处理"></a>一是为了保证请求被正常处理</h4><p>如注册场景必须要求用户名不重复等</p>
+<h4 id="二是为了模拟真实的生产场景"><a href="#二是为了模拟真实的生产场景" class="headerlink" title="二是为了模拟真实的生产场景"></a>二是为了模拟真实的生产场景</h4><p>如在登录场景中使用多用户，而不是单用户，防止出现因频率限制导致的报错，防止因命中缓存导致的TPS过高的假象。</p>
+<p>通常很多系统出于性能优化考量，针对各业务场景都大量使用到缓存，导致压测数据相同时，每次命中缓存后快速响应请求，造成站点压测性能极佳的假象（但线上真实请求参数各异）。</p>
+<p>所以在做压测时，为了满足模拟真实压测环境要求，就需要让每个压测请求都携带不同的线上请求参数。</p>
+<h4 id="二、压测时如何使用脚本模拟真实稳定的压测环境？"><a href="#二、压测时如何使用脚本模拟真实稳定的压测环境？" class="headerlink" title="二、压测时如何使用脚本模拟真实稳定的压测环境？"></a>二、压测时如何使用脚本模拟真实稳定的压测环境？</h4><p>具体在开发脚本时，怎么做到模拟真实的生产环境呢？</p>
+<p>需要做如下准备</p>
+<hr>
+<font color="red">以下内容不太理解</font>
+
+<p>1&gt; 准备线上真实环境下各种参数形式的压测数据</p>
+<p>2&gt; 让每个压测线程，每次访问目标服务器时，分别携带不同的请求参数</p>
+<p>3&gt; 控制单个压测线程的单次执行时间，保证各线程能以稳定速率向目标服务器发送请求</p>
+<p>4&gt;脚本是否能通过传参灵活控制内部逻辑</p>
+<p>上述几个要求，是我们接下来重点考虑的问题</p>
+<p>2.1  压测数据准备：我们可以利用tomcat开启的access日志来收集线上真实请求数据（nginx的线上访问日志同样满足），将打印在access日志中的正常格式请求过滤出来，整理成压测数据文件。如果压测的是单台机器，还需要将数据中的域名替换为ip+端口形式，留待压测时使用。</p>
+<hr>
+<p>2.2 各压测线程读取不同数据：由于nGrinder是分布式压测工具，在向每个agent节点下发的测试数据文件都是相同的，这就需要我们在脚本中指定不同的数据文件片段供各线程分别读取。nGrinder为了方便我们让每个线程执行不同的业务逻辑，内置了ScriptContext上下文容器对象，供我们获取当前脚本运行环境下的常用参数，如下图所示：</p>
+<p>由于脚本容器在启动时已将所有的agent、进程和线程进行了编号，从0到该类型节点在配置项中的最大值-1。例如当我们使用1个agent节点下配置10个process，每个process下配置100个线程来运行脚本，此时当前线程内获取到的grinder.processNumber值是0到9中的某一个，grinder.threadNumber线程值是0到99中的某一个，这样我们便可以先将整个数据文件按总agent、总进程和总线程数做数据切割，再根据当前线程所对应的进程、线程编号，读取对应的压测数据。如下是在进程初始化时，单个agent下对多进程、多线程压测数据文件切割示例：可先通过如下代码筛选出当前进程可读取的数据片段范围，后续线程执行时，再根据当前线程编号获取各自线程的数据片段，按顺序读取即可：</p>
+<p>2.3脚本控制稳定的TPS：由于ngrinder在执行压测任务时，所有启动线程都在循环重复执行脚本，每次请求发送响应时间都是不同的，这种情况下单位时间内单个线程的执行次数是不可控的，TPS会随平均响应时间变慢而下降，无法维持稳定的TPS压测环境。针对这种情况，我们可以在压测脚本中增加Thread.sleep方法，控制单次脚本执行耗时，当并发执行该脚本时，使执行脚本的线程以稳定的时间间隔执行，产生稳定的TPS。</p>
+<p>上图所示等待时间，即为1秒减去当前请求耗时，当压测目标站点平均响应时间很长时（如平均超过1秒占比较大），可自行调整等待总时间到2000ms甚至更高的毫秒数，通过脚本逻辑保证单个线程产生的TPS是稳定的2.4 脚本传参方式：通过前面的介绍，了解到控制压测请求TPS需要获取整个环境下的总agent数、进程数和线程数，通过写死当前压测任务下的这些数值会使得每次调整压测Tps时都要去修改脚本，而nGrinder提供了脚本输入参数配置项，我们可以自定义输入配置来传递当前压测任务的总进程、线程数，脚本中使用System.getProperty(“param”)方法即可获取到输入参数</p>
 
       
     </div>
@@ -363,6 +399,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/参数化/" rel="tag"># 参数化</a>
+          
+            <a href="/tags/性能测试/" rel="tag"># 性能测试</a>
+          
+        </div>
+      
 
       
       
@@ -372,15 +416,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2019/01/01/11_awk/" rel="next" title="awk 使用教程">
+                <i class="fa fa-chevron-left"></i> awk 使用教程
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/12/31/181228-01认识 jmeter/" rel="prev" title="">
-                 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -512,7 +556,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要对测试脚本进行参数化？"><span class="nav-number">1.</span> <span class="nav-text">为什么要对测试脚本进行参数化？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、有两种目的"><span class="nav-number">1.1.</span> <span class="nav-text">一、有两种目的</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一是为了保证请求被正常处理"><span class="nav-number">1.1.1.</span> <span class="nav-text">一是为了保证请求被正常处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二是为了模拟真实的生产场景"><span class="nav-number">1.1.2.</span> <span class="nav-text">二是为了模拟真实的生产场景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、压测时如何使用脚本模拟真实稳定的压测环境？"><span class="nav-number">1.1.3.</span> <span class="nav-text">二、压测时如何使用脚本模拟真实稳定的压测环境？</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

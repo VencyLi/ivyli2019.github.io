@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="[toc] 一、sort 排序 sort命令用于 对文本文件内容，以行为单位来排序。 sort命令以空格作为字段分隔符，将一行分割为多个关键字对文件进行排序。 需要注意的是除非你将输出重定向到文件中，否则sort命令并不对文件内容进行实际的排序(即文件内容没有修改)，只是将文件内容按有序输出。    1、语法sort [-bcdfimMnr][-o&amp;lt;输出文件&amp;gt;][-t&amp;lt;分隔字符&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ivyli">
+<meta property="og:url" content="http://yoursite.com/2018/12/31/06_sort排序、uniq去重、wc统计/index.html">
+<meta property="og:site_name" content="ivyli">
+<meta property="og:description" content="[toc] 一、sort 排序 sort命令用于 对文本文件内容，以行为单位来排序。 sort命令以空格作为字段分隔符，将一行分割为多个关键字对文件进行排序。 需要注意的是除非你将输出重定向到文件中，否则sort命令并不对文件内容进行实际的排序(即文件内容没有修改)，只是将文件内容按有序输出。    1、语法sort [-bcdfimMnr][-o&amp;lt;输出文件&amp;gt;][-t&amp;lt;分隔字符&amp;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181201161807360.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181201161837874.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181201161947222.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181201162053621.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181201162347799.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181201162547161.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181201162811424.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2018-12-15T12:58:14.823Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ivyli">
+<meta name="twitter:description" content="[toc] 一、sort 排序 sort命令用于 对文本文件内容，以行为单位来排序。 sort命令以空格作为字段分隔符，将一行分割为多个关键字对文件进行排序。 需要注意的是除非你将输出重定向到文件中，否则sort命令并不对文件内容进行实际的排序(即文件内容没有修改)，只是将文件内容按有序输出。    1、语法sort [-bcdfimMnr][-o&amp;lt;输出文件&amp;gt;][-t&amp;lt;分隔字符&amp;">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20181201161807360.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/12/31/06_sort排序、uniq去重、wc统计/">
+
+
+
+
+
+  <title> | ivyli</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ivyli</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/31/06_sort排序、uniq去重、wc统计/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ivyLi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ivyli">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-31T19:29:48+08:00">
+                2018-12-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>[toc]</p>
+<h1 id="一、sort-排序"><a href="#一、sort-排序" class="headerlink" title="一、sort 排序"></a>一、sort 排序</h1><ul>
+<li>sort命令用于 对文本文件内容，以行为单位来排序。</li>
+<li>sort命令以空格作为字段分隔符，将一行分割为多个关键字对文件进行排序。</li>
+<li><font color="red">需要注意的是除非你将输出重定向到文件中，否则sort命令并不对文件内容进行实际的排序(即文件内容没有修改)，只是将文件内容按有序输出。</font>
+
+</li>
+</ul>
+<h2 id="1、语法"><a href="#1、语法" class="headerlink" title="1、语法"></a>1、语法</h2><pre><code>sort [-bcdfimMnr][-o&lt;输出文件&gt;][-t&lt;分隔字符&gt;][+&lt;起始栏位&gt;-&lt;结束栏位&gt;][--help][--verison][文件]
+</code></pre><h2 id="2、参数说明"><a href="#2、参数说明" class="headerlink" title="2、参数说明"></a>2、参数说明</h2><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>-m |将几个排序好的文件进行合并。<br>-u |<strong>内容去重</strong><br>-n |<strong>依照数值的大小排序，升序排列。</strong><br>-o&lt;输出文件&gt; |将排序后的结果存入指定的文件。<br>-r |以相反的顺序来排序。<br>-t&lt;分隔字符&gt;| <strong>指定排序时所用的栏位分隔字符。</strong><br>-k&lt;指定排序的列数&gt; |<strong>指定要排序的列数，默认是从第一列开始比较，-k可指定某一列，也可与-t 结合使用时，代表某一栏</strong><br>+&lt;起始栏位&gt;-&lt;结束栏位&gt;| 以指定的栏位来排序，范围由起始栏位到结束栏位的前一栏位。</p>
+<h2 id="3、实例"><a href="#3、实例" class="headerlink" title="3、实例"></a>3、实例</h2><p>（1）对文件进行升序排序</p>
+<pre><code>sort testfile 
+以行为单位，相互比较，从首字符向后，依次按ASCII码值进行比较，最后将他们按升序输出。
+注意：原文件内容并未被修改！
+</code></pre><p><img src="https://img-blog.csdnimg.cn/20181201161807360.png" alt="在这里插入图片描述"></p>
+<p>（2）对文件进行升序排序，并去除重复行 sort -u</p>
+<pre><code>sort -u 1.txt
+</code></pre><p><img src="https://img-blog.csdnimg.cn/20181201161837874.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>可以看出：</p>
+<ul>
+<li>==sort -u是先对内容进行排序，然后再去重（实际也是去除了相邻的重复行）。==</li>
+<li><p>==而uniq不能实现排序，只能去除相邻的重复行，所以要跟sort合并使用，先用sort排序，再用uniq去重==</p>
+<pre><code>sort 1.txt | uniq
+</code></pre><p><img src="https://img-blog.csdnimg.cn/20181201161947222.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+</li>
+</ul>
+<p>（3）按数值大小降序排列后，把结果再输出到原文件中 -o</p>
+<font color="red">（直接用重定向做不到）</font>
+
+<pre><code>sort -nr num.txt -o num.txt
+
+如果用重定向 &gt; 的方式，只会把num.txt清空！
+sort -nr num.txt &gt; num.txt
+</code></pre><p>（4）使用sort的-t选项和-k选项，设置间隔符后再指定排序的列</p>
+<p><img src="https://img-blog.csdnimg.cn/20181201162053621.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>如上图所示，<strong>对年月日的日期进行排序，直接使用sort dat.txt时，会按列从左到右来排序；</strong></p>
+<pre><code>sort -t&apos;-&apos; -k2 dat.txt
+其中-t&apos;-&apos; 是以 ‘-’ 为分隔符对每行内容分栏，然后-k 2 表示对分栏后的第二栏内容进行默认的升序排列。
+</code></pre><p>（5）使用sort -k指定以某一列排序</p>
+<pre><code>sort -k9 a.txt
+（基于a.txt的第九列来排序）
+</code></pre><p>（6）sort命令并非仅能对文件进行排序，我们还可以通过管道将命令的输出内容重定向到sort命令中</p>
+<pre><code>ls -l /home/$USER | sort -nk5
+</code></pre><p>（7）对/etc/passwd以‘：’分隔，再以第六个域的第2个字符到第4个字符进行正向排序，再基于第一个域进行反向排序。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/passwd |  sort -t&apos;:&apos; -k 6.2,6.4 -k 1r      </span><br><span class="line">sync:x:4:65534:sync:/bin:/bin/sync</span><br><span class="line">proxy:x:13:13:proxy:/bin:/bin/sh</span><br><span class="line">bin:x:2:2:bin:/bin:/bin/sh</span><br><span class="line">sys:x:3:3:sys:/dev:/bin/sh</span><br></pre></td></tr></table></figure></p>
+<h1 id="二、uniq-去重"><a href="#二、uniq-去重" class="headerlink" title="二、uniq 去重"></a>二、uniq 去重</h1><h2 id="1、uniq使用"><a href="#1、uniq使用" class="headerlink" title="1、uniq使用"></a>1、uniq使用</h2><ul>
+<li>uniq命令用于去重文件内容中的连续重复行，通常要跟sort一起使用，先利用sort排序，然后用uniq去重。</li>
+<li>uniq命令与sort命令类似，并不对文件内容进行实际的排序(即文件内容没有修改)，只是在输出内容中去重。</li>
+<li>uniq -c ：在输出行前面加上每一行重复的次数</li>
+<li>uniq -d ：仅显示重复行</li>
+<li>uniq -u ：仅显示不重复的行</li>
+<li>uniq -n ：前n个字段与每个字段前的空白一起被忽略。一个字段是一个非空格、非制表符的字符串，彼此由制表符和空格隔开（字段从0开始编号）。</li>
+<li>uniq +n ：前n个字符被忽略，之前的字符被跳过（字符从0开始编号）。</li>
+</ul>
+<h2 id="2、sort和uniq去重结果对比"><a href="#2、sort和uniq去重结果对比" class="headerlink" title="2、sort和uniq去重结果对比"></a>2、sort和uniq去重结果对比</h2><p>1、<code>sort -u</code>使用sort对文件去重</p>
+<pre><code>sort -u 1.txt
+</code></pre><p><img src="https://img-blog.csdnimg.cn/20181201162347799.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>可以看出，==sort -u是先对内容进行排序，然后再去重（实际也是去除了相邻的重复行）。==</p>
+<p>2、使用uniq对文件去重</p>
+<p><img src="https://img-blog.csdnimg.cn/20181201162547161.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>可以看出，<font color="red">当内容中的重复行不相邻时，直接使用uniq 1.txt 并不能达到去重。</font></p>
+<font color="red">因为uniq只能去除相邻的重复行，所以要跟sort合并使用，先用sort排序，再用uniq去重<code>sort 1.txt | uniq</code>。</font>
+
+
+<h2 id="3、最常用的方式"><a href="#3、最常用的方式" class="headerlink" title="3、最常用的方式"></a>3、最常用的方式</h2><p>实际工作中，最常用的方式是sort和uniq结合：</p>
+<pre><code>sort -n 1.txt | uniq -c
+</code></pre><h2 id="4、只显示文件中不重复的行"><a href="#4、只显示文件中不重复的行" class="headerlink" title="4、只显示文件中不重复的行"></a>4、只显示文件中不重复的行</h2><pre><code>uniq -u 1.txt
+</code></pre><h2 id="5、uniq-u-n-结合使用"><a href="#5、uniq-u-n-结合使用" class="headerlink" title="5、uniq -u -n 结合使用"></a>5、uniq -u -n 结合使用</h2><p>显示文件 1.txt 中不重复的行，从第2个字段的第2个字符开始做比较。</p>
+<pre><code>uniq -u -1 +1 1.txt
+</code></pre><h1 id="三、wc-统计"><a href="#三、wc-统计" class="headerlink" title="三、wc 统计"></a>三、wc 统计</h1><p>wc命令用于统计文件里面有多少行，多少单词，多少字符。</p>
+<p>常与sort、grep等其它命令结合使用。<br>|参数|说明  |<br>|–|–|<br>-l |line，统计行数；<br>-w |word，统计单词数(英文单词)，以空格或换行为单位；<br>-m|统计字符数；</p>
+<pre><code>wc 1.txt
+默认显示所有的行数、单词数、字符数。
+</code></pre><p>如下图所示：</p>
+<p><img src="https://img-blog.csdnimg.cn/20181201162811424.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/31/02_文本查看命令比较cat-less-more-tail-head/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/31/07_使用du、df和sort命令快速找出linux系统中的大文件/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">ivyLi</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、sort-排序"><span class="nav-number">1.</span> <span class="nav-text">一、sort 排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、语法"><span class="nav-number">1.1.</span> <span class="nav-text">1、语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、参数说明"><span class="nav-number">1.2.</span> <span class="nav-text">2、参数说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、实例"><span class="nav-number">1.3.</span> <span class="nav-text">3、实例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、uniq-去重"><span class="nav-number">2.</span> <span class="nav-text">二、uniq 去重</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、uniq使用"><span class="nav-number">2.1.</span> <span class="nav-text">1、uniq使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、sort和uniq去重结果对比"><span class="nav-number">2.2.</span> <span class="nav-text">2、sort和uniq去重结果对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、最常用的方式"><span class="nav-number">2.3.</span> <span class="nav-text">3、最常用的方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、只显示文件中不重复的行"><span class="nav-number">2.4.</span> <span class="nav-text">4、只显示文件中不重复的行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5、uniq-u-n-结合使用"><span class="nav-number">2.5.</span> <span class="nav-text">5、uniq -u -n 结合使用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、wc-统计"><span class="nav-number">3.</span> <span class="nav-text">三、wc 统计</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ivyLi</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<script type="text/javascript" src="/js/src/love.js"></script> 
