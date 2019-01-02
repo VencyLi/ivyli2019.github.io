@@ -79,19 +79,17 @@
 
 
 
-<meta name="description" content="[toc] 一、sed 命令执行原理  把待处理文件按行为单位，依次读取到Pattern Space中，且会覆盖原有内容； 对Pattern Space中的内容执行 sed 命令，并输出结果（也可以用 -n 抑制输出，或重定向到文件中）； 对文件中的每一行均进行上述处理，直到最后一行。  二、Pattern SpacePattern Space 中文是模式空间（有些地方可能翻译结果不一样），用于存">
-<meta property="og:type" content="article">
-<meta property="og:title" content="ivyli&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/2018/12/31/181220使用sed实现循环操作/index.html">
+<meta name="description" content="爱折腾的测试媛一枚。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="&#39;about&#39;">
+<meta property="og:url" content="http://yoursite.com/about/index.html">
 <meta property="og:site_name" content="ivyli&#39;s blog">
-<meta property="og:description" content="[toc] 一、sed 命令执行原理  把待处理文件按行为单位，依次读取到Pattern Space中，且会覆盖原有内容； 对Pattern Space中的内容执行 sed 命令，并输出结果（也可以用 -n 抑制输出，或重定向到文件中）； 对文件中的每一行均进行上述处理，直到最后一行。  二、Pattern SpacePattern Space 中文是模式空间（有些地方可能翻译结果不一样），用于存">
+<meta property="og:description" content="爱折腾的测试媛一枚。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20181226203426692.png">
-<meta property="og:updated_time" content="2018-12-26T12:34:39.528Z">
+<meta property="og:updated_time" content="2019-01-02T07:51:38.421Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ivyli&#39;s blog">
-<meta name="twitter:description" content="[toc] 一、sed 命令执行原理  把待处理文件按行为单位，依次读取到Pattern Space中，且会覆盖原有内容； 对Pattern Space中的内容执行 sed 命令，并输出结果（也可以用 -n 抑制输出，或重定向到文件中）； 对文件中的每一行均进行上述处理，直到最后一行。  二、Pattern SpacePattern Space 中文是模式空间（有些地方可能翻译结果不一样），用于存">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20181226203426692.png">
+<meta name="twitter:title" content="&#39;about&#39;">
+<meta name="twitter:description" content="爱折腾的测试媛一枚。">
 
 
 
@@ -121,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/12/31/181220使用sed实现循环操作/">
+  <link rel="canonical" href="http://yoursite.com/about/">
 
 
 
 
 
-  <title> | ivyli's blog</title>
+  <title>'about' | ivyli's blog</title>
   
 
 
@@ -262,150 +260,33 @@
 
   <div id="posts" class="posts-expand">
     
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/31/181220使用sed实现循环操作/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ivyLi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ivyli's blog">
-    </span>
-
     
+    
+    <div class="post-block page">
       <header class="post-header">
 
-        
-        
-          <h1 class="post-title" itemprop="name headline"></h1>
-        
+	<h1 class="post-title" itemprop="name headline">'about'</h1>
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-31T19:29:48+08:00">
-                2018-12-31
-              </time>
-            
 
-            
 
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+</header>
 
       
       
-
       
-        <p>[toc]</p>
-<h1 id="一、sed-命令执行原理"><a href="#一、sed-命令执行原理" class="headerlink" title="一、sed 命令执行原理"></a>一、sed 命令执行原理</h1><p><img src="https://img-blog.csdnimg.cn/20181226203426692.png" alt="在这里插入图片描述"></p>
-<ul>
-<li>把待处理文件按行为单位，依次读取到<code>Pattern Space</code>中，且会覆盖原有内容；</li>
-<li>对<code>Pattern Space</code>中的内容执行 sed 命令，并输出结果（也可以用 -n 抑制输出，或重定向到文件中）；</li>
-<li>对文件中的每一行均进行上述处理，直到最后一行。</li>
-</ul>
-<h1 id="二、Pattern-Space"><a href="#二、Pattern-Space" class="headerlink" title="二、Pattern Space"></a>二、Pattern Space</h1><p><code>Pattern Space</code> 中文是<code>模式空间</code>（有些地方可能翻译结果不一样），用于存放待执行命令的内容。</p>
-<p>不同模式 N p P g G h H</p>
-
+      <div class="post-body">
+        
+        
+          
+        
+      </div>
+      
+      
       
     </div>
     
     
     
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/12/31/intellij idea使用手册-03 导入和创建项目/" rel="next" title="">
-                <i class="fa fa-chevron-left"></i> 
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/12/31/08_grep命令详解/" rel="prev" title="">
-                 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
   </div>
 
 
@@ -438,17 +319,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -508,22 +380,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、sed-命令执行原理"><span class="nav-number">1.</span> <span class="nav-text">一、sed 命令执行原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、Pattern-Space"><span class="nav-number">2.</span> <span class="nav-text">二、Pattern Space</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
