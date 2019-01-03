@@ -80,6 +80,7 @@
 
 
 <meta name="description" content="爱折腾的测试媛一枚。">
+<meta name="keywords" content="软件测试">
 <meta property="og:type" content="website">
 <meta property="og:title" content="ivyli&#39;s blog">
 <meta property="og:url" content="http://yoursite.com/index.html">
@@ -435,163 +436,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/01/11_awk/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="ivyLi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="ivyli's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/01/11_awk/" itemprop="url">awk 使用教程</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-01T11:19:32+08:00">
-                2019-01-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/工作/" itemprop="url" rel="index">
-                    <span itemprop="name">工作</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>[toc]</p>
-<h1 id="一、awk-介绍"><a href="#一、awk-介绍" class="headerlink" title="一、awk 介绍"></a>一、awk 介绍</h1><p>AWK是一种处理文本文件的语言，是一个强大的文本分析工具。</p>
-<p>之所以叫AWK是因为其取了三位创始人 Alfred Aho，Peter Weinberger, 和 Brian Kernighan 的Family Name的首字符。</p>
-<h1 id="二、语法格式"><a href="#二、语法格式" class="headerlink" title="二、语法格式"></a>二、语法格式</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">awk [选项参数] &apos;script&apos; var=value file(s)</span><br><span class="line">或</span><br><span class="line">awk [选项参数] -f scriptfile var=value file(s)</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">选项 | 第二种写法 | 参数说明</span><br><span class="line">---|---|--</span><br><span class="line">-F &apos;fs&apos; |-F 相当于内置变量 FS，即 field-separator|-F 指定文件的分隔符，fs是一个字符串或者正则表达式，可以加引号也可以不加（最好加上单引号）； &lt;br&gt;默认不带 -F 参数时，使用空格或制表符等空白字符做为分隔符。</span><br><span class="line">-v var=value | --asign var=value|赋值一个用户定义变量</span><br><span class="line">-f scripfile | --file scriptfile|从脚本文件中读取awk命令</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 三、基本用法</span><br><span class="line"></span><br><span class="line">log.txt文本内容如下：</span><br></pre></td></tr></table></figure>
-<p>2 this is a test<br>3 Are you like awk<br>This’s a test<br>10 There are orange,apple,mongo<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">实例：</span><br><span class="line"></span><br><span class="line">## 1、每行按空格或TAB分割，并输出文本中的第1、4项</span><br></pre></td></tr></table></figure></p>
-<h2 id="awk-‘-print-1-4-’-log-txt"><a href="#awk-‘-print-1-4-’-log-txt" class="headerlink" title=" $ awk ‘{print $1,$4}’ log.txt"></a> $ awk ‘{print $1,$4}’ log.txt</h2><p> 2 a<br> 3 like<br> This’s<br> 10 orange,apple,mongo<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">## 2、格式化输出</span><br></pre></td></tr></table></figure></p>
-<h2 id="awk-‘-printf-“-8s-10s-n”-1-4-’-log-txt"><a href="#awk-‘-printf-“-8s-10s-n”-1-4-’-log-txt" class="headerlink" title=" $ awk ‘{printf “%-8s %-10s\n”,$1,$4}’ log.txt"></a> $ awk ‘{printf “%-8s %-10s\n”,$1,$4}’ log.txt</h2><p> 2        a<br> 3        like<br> This’s<br> 10       orange,apple,mongo<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">## 3、awk -F 指定分割字符</span><br><span class="line">### 3.1 使用 ` , `分割</span><br><span class="line">- -F 和分隔符之间可以有空格也可以没有，分隔符可以加单引号或双引号，也可以不加。</span><br><span class="line">- 建议最好是 -F 和分隔符之间有一个空格，并给分隔符加单引号，不容易出错。</span><br></pre></td></tr></table></figure></p>
-<h1 id="文本中没有分隔符字符，所以-1-就是全部文本，-2-是空。"><a href="#文本中没有分隔符字符，所以-1-就是全部文本，-2-是空。" class="headerlink" title="文本中没有分隔符字符，所以 $1 就是全部文本，$2 是空。"></a>文本中没有分隔符字符，所以 $1 就是全部文本，$2 是空。</h1><h2 id="awk-F-‘-’-‘-print-1-2-’-log-txt"><a href="#awk-F-‘-’-‘-print-1-2-’-log-txt" class="headerlink" title=" $ awk -F ‘,’ ‘{print $1,$2}’   log.txt"></a> $ awk -F ‘,’ ‘{print $1,$2}’   log.txt</h2><p> 2 this is a test<br> 3 Are you like awk<br> This’s a test<br> 10 There are orange apple</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 3.2 使用 ` a `分割</span><br></pre></td></tr></table></figure>
-<h2 id="awk-F-‘a’-‘-print-1-’-log-txt"><a href="#awk-F-‘a’-‘-print-1-’-log-txt" class="headerlink" title="$ awk -F ‘a’ ‘{print $1}’ log.txt "></a>$ awk -F ‘a’ ‘{print $1}’ log.txt </h2><p>2 this is<br>3 Are you like<br>This’s<br>10 There<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 3.3 使用多个分隔符 ==todo==</span><br><span class="line">先使用空格分割，然后对分割结果再使用&quot;,&quot;分割</span><br></pre></td></tr></table></figure></p>
-<h2 id="awk-F-‘-’-‘-print-1-2-5-’-log-txt"><a href="#awk-F-‘-’-‘-print-1-2-5-’-log-txt" class="headerlink" title="$ awk -F ‘[ ,]’  ‘{print $1,$2,$5}’   log.txt"></a>$ awk -F ‘[ ,]’  ‘{print $1,$2,$5}’   log.txt</h2><p> 2 this test<br> 3 Are awk<br> This’s a<br> 10 There apple</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 4、awk -v 设置变量</span><br><span class="line"></span><br><span class="line">常用语法：</span><br><span class="line"></span><br><span class="line">    awk -v var=value &apos;&#123;print $1,$2&#125;&apos; filename</span><br><span class="line"></span><br><span class="line">### 4.1 定义一个变量，并在输出时对变量进行运算</span><br><span class="line">数字与数字运算，结果正常；</span><br><span class="line"></span><br><span class="line">数字与字符串运算，只保留数字。</span><br></pre></td></tr></table></figure>
-<h2 id="awk-va-1-‘-print-1-1-a-’-log-txt"><a href="#awk-va-1-‘-print-1-1-a-’-log-txt" class="headerlink" title="$ awk -va=1 ‘{print $1,$1+a}’ log.txt"></a>$ awk -va=1 ‘{print $1,$1+a}’ log.txt</h2><p> 2 3<br> 3 4<br> This’s 1<br> 10 11</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">### 4.2 定义多个变量，并在输出时对变量进行运算</span><br><span class="line">数字与数字运算，结果正常；</span><br><span class="line"></span><br><span class="line">数字与字符运算，只保留数字；</span><br><span class="line"></span><br><span class="line">字符或数字与字符拼接；</span><br></pre></td></tr></table></figure>
-<h2 id="awk-va-1-vb-s-‘-print-1-1-a-1b-’-log-txt"><a href="#awk-va-1-vb-s-‘-print-1-1-a-1b-’-log-txt" class="headerlink" title="$ awk -va=1 -vb=s ‘{print $1,$1+a,$1b}’ log.txt"></a>$ awk -va=1 -vb=s ‘{print $1,$1+a,$1b}’ log.txt</h2><p> 2 3 2s<br> 3 4 3s<br> This’s 1 This’ss<br> 10 11 10s<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">## 5、awk -f 指定脚本</span><br><span class="line">常用语法：</span><br><span class="line"></span><br><span class="line">    awk -f &#123;awk脚本&#125; &#123;文件名&#125;</span><br></pre></td></tr></table></figure></p>
-<p> $ awk -f cal.awk log.txt<br> <code>`</code></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/01/Beanshell Sampler 常用方法/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -848,7 +692,7 @@
         
           
             <h2 id="一、解析-JSON"><a href="#一、解析-JSON" class="headerlink" title="一、解析 JSON"></a>一、解析 JSON</h2><p><a href="https://github.com/naver/ngrinder/wiki/How-to-parse-JSON" target="_blank" rel="noopener">https://github.com/naver/ngrinder/wiki/How-to-parse-JSON</a></p>
-<h4 id="1、使用-JSONObject-解析并断言"><a href="#1、使用-JSONObject-解析并断言" class="headerlink" title="1、使用 JSONObject 解析并断言"></a>1、使用 JSONObject 解析并断言</h4><p>假设服务器返回以下内容，成功标志是 “responseCode”: “0000”：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.alibaba.fastjson.JSONObject</span><br><span class="line"></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">try</span>&#123;</span><br><span class="line">		<span class="comment">//发送请求</span></span><br><span class="line">		HTTPResponse result = request.POST(<span class="string">"http://xxxx/aa/bb/cc.html"</span>);</span><br><span class="line">		<span class="comment">//获取返回报文</span></span><br><span class="line">		String respCode = JSONObject.parseObject(result.getText()).get(<span class="string">"responseCode"</span>);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (respCode.equals(<span class="string">"0000"</span>)) &#123;</span><br><span class="line">			println <span class="string">"===返回==========成功"</span>+result.getText();</span><br><span class="line">			assertTrue(<span class="string">"成功&lt;&lt;&lt;"</span>, respCode.equals(<span class="string">"0000"</span>))</span><br><span class="line">			assertThat(result.responseCode, is(<span class="number">200</span>));</span><br><span class="line">		&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">			grinder.logger.error(<span class="string">"===失败=========="</span>+result.getText())</span><br><span class="line">			assertFalse(<span class="string">"失败&gt;&gt;&gt;"</span>, !respCode.equals(<span class="string">"0000"</span>))</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; <span class="keyword">catch</span> (Exception ex) &#123;</span><br><span class="line">		assertFalse(<span class="string">"失败&gt;&gt;&gt;"</span>+ex,<span class="keyword">false</span>)</span><br><span class="line">		grinder.logger.error(<span class="string">"===异常======"</span>+ex)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="1、使用-JSONObject-解析并断言"><a href="#1、使用-JSONObject-解析并断言" class="headerlink" title="1、使用 JSONObject 解析并断言"></a>1、使用 JSONObject 解析并断言</h4><p>假设服务器返回以下内容，成功标志是 “responseCode”: “0000”：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.alibaba.fastjson.JSONObject</span><br><span class="line"></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">true<span class="keyword">try</span>&#123;</span><br><span class="line">truetrue<span class="comment">//发送请求</span></span><br><span class="line">truetrueHTTPResponse result = request.POST(<span class="string">"http://xxxx/aa/bb/cc.html"</span>);</span><br><span class="line">truetrue<span class="comment">//获取返回报文</span></span><br><span class="line">truetrueString respCode = JSONObject.parseObject(result.getText()).get(<span class="string">"responseCode"</span>);</span><br><span class="line"></span><br><span class="line">truetrue<span class="keyword">if</span> (respCode.equals(<span class="string">"0000"</span>)) &#123;</span><br><span class="line">truetruetrueprintln <span class="string">"===返回==========成功"</span>+result.getText();</span><br><span class="line">truetruetrueassertTrue(<span class="string">"成功&lt;&lt;&lt;"</span>, respCode.equals(<span class="string">"0000"</span>))</span><br><span class="line">truetruetrueassertThat(result.responseCode, is(<span class="number">200</span>));</span><br><span class="line">truetrue&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">truetruetruegrinder.logger.error(<span class="string">"===失败=========="</span>+result.getText())</span><br><span class="line">truetruetrueassertFalse(<span class="string">"失败&gt;&gt;&gt;"</span>, !respCode.equals(<span class="string">"0000"</span>))</span><br><span class="line">truetrue&#125;</span><br><span class="line">true&#125; <span class="keyword">catch</span> (Exception ex) &#123;</span><br><span class="line">truetrueassertFalse(<span class="string">"失败&gt;&gt;&gt;"</span>+ex,<span class="keyword">false</span>)</span><br><span class="line">truetruegrinder.logger.error(<span class="string">"===异常======"</span>+ex)</span><br><span class="line">true&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h4 id="2、使用groovy的JsonSlurper解析并断言"><a href="#2、使用groovy的JsonSlurper解析并断言" class="headerlink" title="2、使用groovy的JsonSlurper解析并断言"></a>2、使用groovy的JsonSlurper解析并断言</h4><p>假设服务器返回以下内容，成功标志是 “resultCode”: 1：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"data"</span>: &#123;</span><br><span class="line">        <span class="string">"token"</span>: <span class="string">"9de6d5f2b62d4bb686de8033fd00bc65"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"resultCode"</span>: <span class="number">1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>解析方式：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> groovy.json.JsonSlurper</span><br><span class="line"></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">def jsonData = <span class="keyword">new</span> JsonSlurper().parseText(result.text)</span><br><span class="line">assertThat(jsonData.resultCode, is(<span class="number">1</span>))</span><br></pre></td></tr></table></figure></p>
 <h2 id="二、使用-JUnit-的断言"><a href="#二、使用-JUnit-的断言" class="headerlink" title="二、使用 JUnit 的断言"></a>二、使用 JUnit 的断言</h2><h4 id="1、断言HTTP状态码和响应体"><a href="#1、断言HTTP状态码和响应体" class="headerlink" title="1、断言HTTP状态码和响应体"></a>1、断言HTTP状态码和响应体</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">def result = request.GET(<span class="string">"http://www.google.com"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// HTTP 状态码</span></span><br><span class="line">assertThat(result.statusCode, is(<span class="number">200</span>))</span><br><span class="line"><span class="comment">// 响应体</span></span><br><span class="line">assertThat(result.text, containsString(<span class="string">"google"</span>))</span><br></pre></td></tr></table></figure>
@@ -1502,7 +1346,7 @@
             <blockquote>
 <p>在GET请求脚本中添加添加信息头、cookies和自定义参数，有两种方式：<br>一种是在UI界面添加后自动生成脚本，一种是直接在脚本中添加</p>
 </blockquote>
-<h2 id="一、通过UI界面添加"><a href="#一、通过UI界面添加" class="headerlink" title="一、通过UI界面添加"></a>一、通过UI界面添加</h2><p>通过 UI 设置：脚本 -&gt; 新建脚本 -&gt; 显示高级配置<br><img src="https://img-blog.csdnimg.cn/20181119102025904.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>生成代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith</span>(GrinderRunner)</span><br><span class="line"><span class="meta">@FixMethodOrder</span>(MethodSorters.NAME_ASCENDING)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestRunner</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> GTest test</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> HTTPRequest request</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> NVPair[] headers = []</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> NVPair[] params = []</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> Cookie[] cookies = []</span><br><span class="line"></span><br><span class="line">	<span class="meta">@BeforeProcess</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">beforeProcess</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		HTTPPluginControl.getConnectionDefaults().timeout = <span class="number">6000</span></span><br><span class="line">		test = <span class="keyword">new</span> GTest(<span class="number">1</span>, <span class="string">"www.baidu.com"</span>)</span><br><span class="line">		request = <span class="keyword">new</span> HTTPRequest()</span><br><span class="line">		</span><br><span class="line">		<span class="comment">// =========下面是我刚才添加的参数=========</span></span><br><span class="line">		<span class="comment">// Set header datas</span></span><br><span class="line">		List&lt;NVPair&gt; headerList = <span class="keyword">new</span> ArrayList&lt;NVPair&gt;()</span><br><span class="line">		headerList.add(<span class="keyword">new</span> NVPair(<span class="string">"Connection"</span>, <span class="string">"keep-alive"</span>))</span><br><span class="line">		headerList.add(<span class="keyword">new</span> NVPair(<span class="string">"User-Agent"</span>, <span class="string">"Mozilla/5.0 (X11; Linux x86_64; rv:12.0) Gecko/20100101 Firefox/21.0"</span>))</span><br><span class="line">		headers = headerList.toArray()</span><br><span class="line">		<span class="comment">// Set param datas</span></span><br><span class="line">		List&lt;NVPair&gt; paramList = <span class="keyword">new</span> ArrayList&lt;NVPair&gt;()</span><br><span class="line">		paramList.add(<span class="keyword">new</span> NVPair(<span class="string">"name"</span>, <span class="string">"jing"</span>))</span><br><span class="line">		paramList.add(<span class="keyword">new</span> NVPair(<span class="string">"age"</span>, <span class="string">"18"</span>))</span><br><span class="line">		paramList.add(<span class="keyword">new</span> NVPair(<span class="string">"sex"</span>, <span class="string">"beauty"</span>))</span><br><span class="line">		params = paramList.toArray()</span><br><span class="line">		<span class="comment">// Set cookie datas</span></span><br><span class="line">		List&lt;Cookie&gt; cookieList = <span class="keyword">new</span> ArrayList&lt;Cookie&gt;()</span><br><span class="line">		cookieList.add(<span class="keyword">new</span> Cookie(<span class="string">"myToken"</span>, <span class="string">"xxxxxxxx"</span>, <span class="string">"www.baidu.com"</span>, <span class="string">""</span>, <span class="keyword">new</span> Date(<span class="number">32503647599000L</span>), <span class="keyword">false</span>))</span><br><span class="line">		cookies = cookieList.toArray()</span><br><span class="line">		<span class="comment">// =========上面是我刚才添加的参数=========</span></span><br><span class="line"></span><br><span class="line">		grinder.logger.info(<span class="string">"before process."</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@BeforeThread</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">beforeThread</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		test.record(<span class="keyword">this</span>, <span class="string">"test"</span>)</span><br><span class="line">		grinder.statistics.delayReports=<span class="keyword">true</span>;</span><br><span class="line">		grinder.logger.info(<span class="string">"before thread."</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Before</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">before</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		request.setHeaders(headers)</span><br><span class="line">		cookies.each &#123; CookieModule.addCookie(it, HTTPPluginControl.getThreadHTTPClientContext()) &#125;</span><br><span class="line">		grinder.logger.info(<span class="string">"before thread. init headers and cookies"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">		HTTPResponse result = request.GET(<span class="string">"https://www.baidu.com"</span>, params)</span><br><span class="line">		assertThat(result.statusCode, is(<span class="number">200</span>))</span><br><span class="line">		<span class="comment">// 这是我通过引导页手动添加的断言</span></span><br><span class="line">		assertThat(result.getText(), containsString(<span class="string">"jing"</span>))</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="一、通过UI界面添加"><a href="#一、通过UI界面添加" class="headerlink" title="一、通过UI界面添加"></a>一、通过UI界面添加</h2><p>通过 UI 设置：脚本 -&gt; 新建脚本 -&gt; 显示高级配置<br><img src="https://img-blog.csdnimg.cn/20181119102025904.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>生成代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith</span>(GrinderRunner)</span><br><span class="line"><span class="meta">@FixMethodOrder</span>(MethodSorters.NAME_ASCENDING)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestRunner</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">true<span class="keyword">public</span> <span class="keyword">static</span> GTest test</span><br><span class="line">true<span class="keyword">public</span> <span class="keyword">static</span> HTTPRequest request</span><br><span class="line">true<span class="keyword">public</span> <span class="keyword">static</span> NVPair[] headers = []</span><br><span class="line">true<span class="keyword">public</span> <span class="keyword">static</span> NVPair[] params = []</span><br><span class="line">true<span class="keyword">public</span> <span class="keyword">static</span> Cookie[] cookies = []</span><br><span class="line"></span><br><span class="line">true<span class="meta">@BeforeProcess</span></span><br><span class="line">true<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">beforeProcess</span><span class="params">()</span> </span>&#123;</span><br><span class="line">truetrueHTTPPluginControl.getConnectionDefaults().timeout = <span class="number">6000</span></span><br><span class="line">truetruetest = <span class="keyword">new</span> GTest(<span class="number">1</span>, <span class="string">"www.baidu.com"</span>)</span><br><span class="line">truetruerequest = <span class="keyword">new</span> HTTPRequest()</span><br><span class="line">truetrue</span><br><span class="line">truetrue<span class="comment">// =========下面是我刚才添加的参数=========</span></span><br><span class="line">truetrue<span class="comment">// Set header datas</span></span><br><span class="line">truetrueList&lt;NVPair&gt; headerList = <span class="keyword">new</span> ArrayList&lt;NVPair&gt;()</span><br><span class="line">truetrueheaderList.add(<span class="keyword">new</span> NVPair(<span class="string">"Connection"</span>, <span class="string">"keep-alive"</span>))</span><br><span class="line">truetrueheaderList.add(<span class="keyword">new</span> NVPair(<span class="string">"User-Agent"</span>, <span class="string">"Mozilla/5.0 (X11; Linux x86_64; rv:12.0) Gecko/20100101 Firefox/21.0"</span>))</span><br><span class="line">truetrueheaders = headerList.toArray()</span><br><span class="line">truetrue<span class="comment">// Set param datas</span></span><br><span class="line">truetrueList&lt;NVPair&gt; paramList = <span class="keyword">new</span> ArrayList&lt;NVPair&gt;()</span><br><span class="line">truetrueparamList.add(<span class="keyword">new</span> NVPair(<span class="string">"name"</span>, <span class="string">"jing"</span>))</span><br><span class="line">truetrueparamList.add(<span class="keyword">new</span> NVPair(<span class="string">"age"</span>, <span class="string">"18"</span>))</span><br><span class="line">truetrueparamList.add(<span class="keyword">new</span> NVPair(<span class="string">"sex"</span>, <span class="string">"beauty"</span>))</span><br><span class="line">truetrueparams = paramList.toArray()</span><br><span class="line">truetrue<span class="comment">// Set cookie datas</span></span><br><span class="line">truetrueList&lt;Cookie&gt; cookieList = <span class="keyword">new</span> ArrayList&lt;Cookie&gt;()</span><br><span class="line">truetruecookieList.add(<span class="keyword">new</span> Cookie(<span class="string">"myToken"</span>, <span class="string">"xxxxxxxx"</span>, <span class="string">"www.baidu.com"</span>, <span class="string">""</span>, <span class="keyword">new</span> Date(<span class="number">32503647599000L</span>), <span class="keyword">false</span>))</span><br><span class="line">truetruecookies = cookieList.toArray()</span><br><span class="line">truetrue<span class="comment">// =========上面是我刚才添加的参数=========</span></span><br><span class="line"></span><br><span class="line">truetruegrinder.logger.info(<span class="string">"before process."</span>);</span><br><span class="line">true&#125;</span><br><span class="line"></span><br><span class="line">true<span class="meta">@BeforeThread</span></span><br><span class="line">true<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">beforeThread</span><span class="params">()</span> </span>&#123;</span><br><span class="line">truetruetest.record(<span class="keyword">this</span>, <span class="string">"test"</span>)</span><br><span class="line">truetruegrinder.statistics.delayReports=<span class="keyword">true</span>;</span><br><span class="line">truetruegrinder.logger.info(<span class="string">"before thread."</span>);</span><br><span class="line">true&#125;</span><br><span class="line"></span><br><span class="line">true<span class="meta">@Before</span></span><br><span class="line">true<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">before</span><span class="params">()</span> </span>&#123;</span><br><span class="line">truetruerequest.setHeaders(headers)</span><br><span class="line">truetruecookies.each &#123; CookieModule.addCookie(it, HTTPPluginControl.getThreadHTTPClientContext()) &#125;</span><br><span class="line">truetruegrinder.logger.info(<span class="string">"before thread. init headers and cookies"</span>);</span><br><span class="line">true&#125;</span><br><span class="line"></span><br><span class="line">true<span class="meta">@Test</span></span><br><span class="line">true<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">truetrueHTTPResponse result = request.GET(<span class="string">"https://www.baidu.com"</span>, params)</span><br><span class="line">truetrueassertThat(result.statusCode, is(<span class="number">200</span>))</span><br><span class="line">truetrue<span class="comment">// 这是我通过引导页手动添加的断言</span></span><br><span class="line">truetrueassertThat(result.getText(), containsString(<span class="string">"jing"</span>))</span><br><span class="line">true&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>可以看到这种方式是在@beforeProcess中添加heads 、params、cookies。</p>
 <h2 id="二、直接在脚本中添加"><a href="#二、直接在脚本中添加" class="headerlink" title="二、直接在脚本中添加"></a>二、直接在脚本中添加</h2><font color="red">（在此只演示添加 headers 和 params的方式，添加cookies是类似的，不再赘述）</font>
 
@@ -1634,7 +1478,7 @@
           
             <h2 id="一、自动生成GET请求脚本"><a href="#一、自动生成GET请求脚本" class="headerlink" title="一、自动生成GET请求脚本"></a>一、自动生成GET请求脚本</h2><h4 id="1、配置-Create-a-script"><a href="#1、配置-Create-a-script" class="headerlink" title="1、配置 Create a script"></a>1、配置 Create a script</h4><p>在ngrinder管理台主页，点击script–&gt;Create a script，并填写脚本名称和请求的url；</p>
 <p>点击 Create 按钮，nGrinder会自动生成对应的脚本结构，如果没有参数需要设置的话，可以直接运行了。</p>
-<h2 id="二、详细解决GET请求脚本"><a href="#二、详细解决GET请求脚本" class="headerlink" title="二、详细解决GET请求脚本"></a>二、详细解决GET请求脚本</h2><h4 id="ngrinder自动生成的脚本如下所示（groovy版本）："><a href="#ngrinder自动生成的脚本如下所示（groovy版本）：" class="headerlink" title="ngrinder自动生成的脚本如下所示（groovy版本）："></a>ngrinder自动生成的脚本如下所示（groovy版本）：</h4><p><font color="red">解析见代码中的注释</font><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> net.grinder.script.Grinder.grinder</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.junit.Assert.*</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.hamcrest.Matchers.*</span><br><span class="line"><span class="keyword">import</span> net.grinder.plugin.http.HTTPRequest</span><br><span class="line"><span class="keyword">import</span> net.grinder.plugin.http.HTTPPluginControl</span><br><span class="line"><span class="keyword">import</span> net.grinder.script.GTest</span><br><span class="line"><span class="keyword">import</span> net.grinder.script.Grinder</span><br><span class="line"><span class="keyword">import</span> net.grinder.scriptengine.groovy.junit.GrinderRunner</span><br><span class="line"><span class="keyword">import</span> net.grinder.scriptengine.groovy.junit.annotation.BeforeProcess</span><br><span class="line"><span class="keyword">import</span> net.grinder.scriptengine.groovy.junit.annotation.BeforeThread</span><br><span class="line"><span class="comment">// import static net.grinder.util.GrinderUtils.* // You can use this if you're using nGrinder after 3.2.3</span></span><br><span class="line"><span class="keyword">import</span> org.junit.Before</span><br><span class="line"><span class="keyword">import</span> org.junit.BeforeClass</span><br><span class="line"><span class="keyword">import</span> org.junit.Test</span><br><span class="line"><span class="keyword">import</span> org.junit.runner.RunWith</span><br><span class="line"><span class="keyword">import</span> org.junit.FixMethodOrder</span><br><span class="line"><span class="keyword">import</span> org.junit.runners.MethodSorters</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Date</span><br><span class="line"><span class="keyword">import</span> java.util.List</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> HTTPClient.Cookie</span><br><span class="line"><span class="keyword">import</span> HTTPClient.CookieModule</span><br><span class="line"><span class="keyword">import</span> HTTPClient.HTTPResponse</span><br><span class="line"><span class="keyword">import</span> HTTPClient.NVPair</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * A simple example using the HTTP plugin that shows the retrieval of a</span></span><br><span class="line"><span class="comment"> * single page via HTTP.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * This script is automatically generated by ngrinder.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> admin</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@RunWith</span>(GrinderRunner)</span><br><span class="line"><span class="meta">@FixMethodOrder</span>(MethodSorters.NAME_ASCENDING)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestRunner</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> GTest test</span><br><span class="line">	<span class="comment">// 定义 HTTPRequest 静态变量 request，用于发送 HTTP 请求</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> HTTPRequest request  </span><br><span class="line">	<span class="comment">// 定义 NVPair 数组 headers ，用于存放通用的请求头数据</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> NVPair[] headers = []</span><br><span class="line">	<span class="comment">// 定义 NVPair 数组 params ，用于存放请求参数数据</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> NVPair[] params = []</span><br><span class="line">	<span class="comment">// 定义 Cookie 数组 cookies ，用于存放通用的 cookie 数据</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> Cookie[] cookies = []</span><br><span class="line"></span><br><span class="line">	<span class="meta">@BeforeProcess</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">beforeProcess</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 设置请求响应超时时间（ms），超过则抛出异常</span></span><br><span class="line">		HTTPPluginControl.getConnectionDefaults().timeout = <span class="number">6000</span></span><br><span class="line">		</span><br><span class="line">		<span class="comment">// 创建GTest对象，第一个参数1代表有多个请求/事务时的执行顺序ID</span></span><br><span class="line">		<span class="comment">// 第二个参数是请求/事务的名称，会显示在summary结果中</span></span><br><span class="line">		<span class="comment">// 有多个请求/事务时，要创建多个GTest对象</span></span><br><span class="line">		test = <span class="keyword">new</span> GTest(<span class="number">1</span>, <span class="string">"www.baidu.com"</span>)  </span><br><span class="line">		<span class="comment">// 创建 HTTPRequest 对象，用于发起 HTTP 请求</span></span><br><span class="line">		request = <span class="keyword">new</span> HTTPRequest() </span><br><span class="line">		grinder.logger.info(<span class="string">"before process."</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@BeforeThread</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">beforeThread</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 注册事件，启动test，第二个参数要与@Test注解的方法名保持一致</span></span><br><span class="line">		<span class="comment">// 有多个请求/事务时，要注册多个事件</span></span><br><span class="line">		test.record(<span class="keyword">this</span>, <span class="string">"test"</span>)</span><br><span class="line">		<span class="comment">// 配置延迟报告统计结果</span></span><br><span class="line">		grinder.statistics.delayReports=<span class="keyword">true</span>;</span><br><span class="line">		grinder.logger.info(<span class="string">"before thread."</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Before</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">before</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">// 在这里可以添加headers属性和cookies</span></span><br><span class="line">		request.setHeaders(headers)</span><br><span class="line">		cookies.each &#123; CookieModule.addCookie(it, HTTPPluginControl.getThreadHTTPClientContext()) &#125;</span><br><span class="line">		grinder.logger.info(<span class="string">"before thread. init headers and cookies"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="comment">// 发送GET请求</span></span><br><span class="line">		HTTPResponse result = request.GET(<span class="string">"https://www.baidu.com"</span>, params)</span><br><span class="line">		<span class="comment">// 断言HTTP请求状态码</span></span><br><span class="line">		assertThat(result.statusCode, is(<span class="number">200</span>))</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="二、详细解决GET请求脚本"><a href="#二、详细解决GET请求脚本" class="headerlink" title="二、详细解决GET请求脚本"></a>二、详细解决GET请求脚本</h2><h4 id="ngrinder自动生成的脚本如下所示（groovy版本）："><a href="#ngrinder自动生成的脚本如下所示（groovy版本）：" class="headerlink" title="ngrinder自动生成的脚本如下所示（groovy版本）："></a>ngrinder自动生成的脚本如下所示（groovy版本）：</h4><p><font color="red">解析见代码中的注释</font><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> net.grinder.script.Grinder.grinder</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.junit.Assert.*</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.hamcrest.Matchers.*</span><br><span class="line"><span class="keyword">import</span> net.grinder.plugin.http.HTTPRequest</span><br><span class="line"><span class="keyword">import</span> net.grinder.plugin.http.HTTPPluginControl</span><br><span class="line"><span class="keyword">import</span> net.grinder.script.GTest</span><br><span class="line"><span class="keyword">import</span> net.grinder.script.Grinder</span><br><span class="line"><span class="keyword">import</span> net.grinder.scriptengine.groovy.junit.GrinderRunner</span><br><span class="line"><span class="keyword">import</span> net.grinder.scriptengine.groovy.junit.annotation.BeforeProcess</span><br><span class="line"><span class="keyword">import</span> net.grinder.scriptengine.groovy.junit.annotation.BeforeThread</span><br><span class="line"><span class="comment">// import static net.grinder.util.GrinderUtils.* // You can use this if you're using nGrinder after 3.2.3</span></span><br><span class="line"><span class="keyword">import</span> org.junit.Before</span><br><span class="line"><span class="keyword">import</span> org.junit.BeforeClass</span><br><span class="line"><span class="keyword">import</span> org.junit.Test</span><br><span class="line"><span class="keyword">import</span> org.junit.runner.RunWith</span><br><span class="line"><span class="keyword">import</span> org.junit.FixMethodOrder</span><br><span class="line"><span class="keyword">import</span> org.junit.runners.MethodSorters</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Date</span><br><span class="line"><span class="keyword">import</span> java.util.List</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> HTTPClient.Cookie</span><br><span class="line"><span class="keyword">import</span> HTTPClient.CookieModule</span><br><span class="line"><span class="keyword">import</span> HTTPClient.HTTPResponse</span><br><span class="line"><span class="keyword">import</span> HTTPClient.NVPair</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * A simple example using the HTTP plugin that shows the retrieval of a</span></span><br><span class="line"><span class="comment"> * single page via HTTP.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * This script is automatically generated by ngrinder.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> admin</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@RunWith</span>(GrinderRunner)</span><br><span class="line"><span class="meta">@FixMethodOrder</span>(MethodSorters.NAME_ASCENDING)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestRunner</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">true<span class="keyword">public</span> <span class="keyword">static</span> GTest test</span><br><span class="line">true<span class="comment">// 定义 HTTPRequest 静态变量 request，用于发送 HTTP 请求</span></span><br><span class="line">true<span class="keyword">public</span> <span class="keyword">static</span> HTTPRequest request  </span><br><span class="line">true<span class="comment">// 定义 NVPair 数组 headers ，用于存放通用的请求头数据</span></span><br><span class="line">true<span class="keyword">public</span> <span class="keyword">static</span> NVPair[] headers = []</span><br><span class="line">true<span class="comment">// 定义 NVPair 数组 params ，用于存放请求参数数据</span></span><br><span class="line">true<span class="keyword">public</span> <span class="keyword">static</span> NVPair[] params = []</span><br><span class="line">true<span class="comment">// 定义 Cookie 数组 cookies ，用于存放通用的 cookie 数据</span></span><br><span class="line">true<span class="keyword">public</span> <span class="keyword">static</span> Cookie[] cookies = []</span><br><span class="line"></span><br><span class="line">true<span class="meta">@BeforeProcess</span></span><br><span class="line">true<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">beforeProcess</span><span class="params">()</span> </span>&#123;</span><br><span class="line">truetrue<span class="comment">// 设置请求响应超时时间（ms），超过则抛出异常</span></span><br><span class="line">truetrueHTTPPluginControl.getConnectionDefaults().timeout = <span class="number">6000</span></span><br><span class="line">truetrue</span><br><span class="line">truetrue<span class="comment">// 创建GTest对象，第一个参数1代表有多个请求/事务时的执行顺序ID</span></span><br><span class="line">truetrue<span class="comment">// 第二个参数是请求/事务的名称，会显示在summary结果中</span></span><br><span class="line">truetrue<span class="comment">// 有多个请求/事务时，要创建多个GTest对象</span></span><br><span class="line">truetruetest = <span class="keyword">new</span> GTest(<span class="number">1</span>, <span class="string">"www.baidu.com"</span>)  </span><br><span class="line">truetrue<span class="comment">// 创建 HTTPRequest 对象，用于发起 HTTP 请求</span></span><br><span class="line">truetruerequest = <span class="keyword">new</span> HTTPRequest() </span><br><span class="line">truetruegrinder.logger.info(<span class="string">"before process."</span>);</span><br><span class="line">true&#125;</span><br><span class="line"></span><br><span class="line">true<span class="meta">@BeforeThread</span></span><br><span class="line">true<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">beforeThread</span><span class="params">()</span> </span>&#123;</span><br><span class="line">truetrue<span class="comment">// 注册事件，启动test，第二个参数要与@Test注解的方法名保持一致</span></span><br><span class="line">truetrue<span class="comment">// 有多个请求/事务时，要注册多个事件</span></span><br><span class="line">truetruetest.record(<span class="keyword">this</span>, <span class="string">"test"</span>)</span><br><span class="line">truetrue<span class="comment">// 配置延迟报告统计结果</span></span><br><span class="line">truetruegrinder.statistics.delayReports=<span class="keyword">true</span>;</span><br><span class="line">truetruegrinder.logger.info(<span class="string">"before thread."</span>);</span><br><span class="line">true&#125;</span><br><span class="line"></span><br><span class="line">true<span class="meta">@Before</span></span><br><span class="line">true<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">before</span><span class="params">()</span> </span>&#123;</span><br><span class="line">truetrue<span class="comment">// 在这里可以添加headers属性和cookies</span></span><br><span class="line">truetruerequest.setHeaders(headers)</span><br><span class="line">truetruecookies.each &#123; CookieModule.addCookie(it, HTTPPluginControl.getThreadHTTPClientContext()) &#125;</span><br><span class="line">truetruegrinder.logger.info(<span class="string">"before thread. init headers and cookies"</span>);</span><br><span class="line">true&#125;</span><br><span class="line"></span><br><span class="line">true<span class="meta">@Test</span></span><br><span class="line">true<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">truetrue<span class="comment">// 发送GET请求</span></span><br><span class="line">truetrueHTTPResponse result = request.GET(<span class="string">"https://www.baidu.com"</span>, params)</span><br><span class="line">truetrue<span class="comment">// 断言HTTP请求状态码</span></span><br><span class="line">truetrueassertThat(result.statusCode, is(<span class="number">200</span>))</span><br><span class="line">true&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>test.record(this, “test”)</p>
 
           
@@ -1800,6 +1644,181 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/31/有道云和csdn中markdown使用/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ivyLi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ivyli's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/31/有道云和csdn中markdown使用/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-31T19:29:48+08:00">
+                2018-12-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>[toc]</p>
+<blockquote>
+<p>此文中的方法适用于有道云和csdn的markdown编辑器，其它平台尚未验证。</p>
+</blockquote>
+<h2 id="一、字体增大"><a href="#一、字体增大" class="headerlink" title="一、字体增大"></a>一、字体增大</h2><h3 id="1、为什么要字体增大？"><a href="#1、为什么要字体增大？" class="headerlink" title="1、为什么要字体增大？"></a>1、为什么要字体增大？</h3><p>有道云的普通笔记可以设置默认字体大小，但是不支持markdown默认字体。当写完预览markdown，发会现，正文字太小了。 </p>
+<h3 id="2、字体增大的方法？"><a href="#2、字体增大的方法？" class="headerlink" title="2、字体增大的方法？"></a>2、字体增大的方法？</h3><ul>
+<li><p>用一组<font color="red"> <code>&lt;font size=4&gt; &lt;/font&gt;</code></font>将全部正文内容包含进去就可以了。</p>
+</li>
+<li><p>可以直接修改正文中的所有普通文本大小，同时不会影响标题字号。</p>
+</li>
+<li><p>可以修改size自由调整大小</p>
+</li>
+</ul>
+<h2 id="二、生成目录"><a href="#二、生成目录" class="headerlink" title="二、生成目录"></a>二、生成目录</h2><h3 id="1、为什么要生成目录？"><a href="#1、为什么要生成目录？" class="headerlink" title="1、为什么要生成目录？"></a>1、为什么要生成目录？</h3><p>方便有个对文章的大局观，一眼就知道这篇文章到底写了什么，便于定位。</p>
+<h3 id="2、生成目录的方法？"><a href="#2、生成目录的方法？" class="headerlink" title="2、生成目录的方法？"></a>2、生成目录的方法？</h3><ul>
+<li><p>非常简单，直接在第一行加上<font color="red"> <code>[toc]</code></font>即可！</p>
+</li>
+<li><p>当然，前提是你在正文中正确使用了标题格式。</p>
+</li>
+<li><p>如果在第一行设置了字体大小，那么把 <code>[toc]</code>写在第二行就行了。</p>
+</li>
+<li></li>
+</ul>
+<h2 id="三、设置锚点-页内链接"><a href="#三、设置锚点-页内链接" class="headerlink" title="三、设置锚点-页内链接"></a>三、设置锚点-页内链接</h2><h3 id="1、锚点的作用？"><a href="#1、锚点的作用？" class="headerlink" title="1、锚点的作用？"></a>1、锚点的作用？</h3><ul>
+<li>用于文章快速定位，点击目录便可直接跳转到指定位置。</li>
+<li>锚点是是网页制作中超级链接的一种，又叫命名锚记。</li>
+<li>使用命名锚记可以在文档中设置标记，这些标记通常放在文档的特定主题处或顶部。然后可以创建到这些命名锚记的链接，这些链接可快速将访问者带到指定位置。</li>
+</ul>
+<h3 id="2、如何创建锚点？"><a href="#2、如何创建锚点？" class="headerlink" title="2、如何创建锚点？"></a>2、如何创建锚点？</h3><p>锚点的添加：使用a标签，href里面填写对应的标题名字</p>
+<p>分为两步：</p>
+<ul>
+<li>创建命名锚记<ul>
+<li>格式为<font color="red"> <code>[指引到目标位置的说明文字](#目标位置的id名称)</code></font></li>
+</ul>
+</li>
+<li>创建到该命名锚记的链接<ul>
+<li>格式为<font color="red"> <code>&lt;span id = &quot;目标位置的id名称&quot;&gt;跳转到的目标位置&lt;/span&gt;</code></font></li>
+</ul>
+</li>
+</ul>
+<p>举例：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#jump"</span> <span class="attr">target</span>=<span class="string">"_self"</span>&gt;</span>说明文字<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span> =<span class="string">"jump"</span>&gt;</span><span class="tag">&lt;<span class="name">font</span> <span class="attr">color</span>=<span class="string">"red"</span>&gt;</span>跳转到这里：<span class="tag">&lt;/<span class="name">font</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>效果：</p>
+<p><a href="#jump" target="_self">说明文字</a></p>
+<p><span id="jump"><font color="red">跳转到这里：</font></span></p>
+<h2 id="四、输入空格"><a href="#四、输入空格" class="headerlink" title="四、输入空格"></a>四、输入空格</h2><p>有两种方法：</p>
+<p>1、中文模式下，Shift+空格切换为全角模式后，按空格键即可。</p>
+<p>2、\&nbsp; 或 \&#160; 需要几个空格就输入几次。</p>
+<h2 id="五、csdn-markdown中添加黄色高亮"><a href="#五、csdn-markdown中添加黄色高亮" class="headerlink" title="五、csdn markdown中添加黄色高亮"></a>五、csdn markdown中添加黄色高亮</h2><p>在有道云笔记的markdown编辑器中，工具栏有Mark按钮可以直接对文字进行黄色高亮显示，非常方便。</p>
+<p>实际在源码中是通过一对 == 包围文字即可。</p>
+<p>在csdn markdown中也可以用这种方法，实现黄色高亮！</p>
+<p>如：</p>
+<pre><code>==xxxxxxx==xxxxx
+</code></pre><p>效果：<br>==xxxxxxx==xxxxx</p>
+<h2 id="六、表格内换行"><a href="#六、表格内换行" class="headerlink" title="六、表格内换行"></a>六、表格内换行</h2><p>使用html代码\<br>实现单元格换行，变相实现合并单元格的效果。</p>
+<p>1、markdown语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">|姓名|爱好|</span><br><span class="line">--|--|</span><br><span class="line">张三|足球&lt;br&gt;篮球</span><br><span class="line">李四|羽毛球&lt;br&gt;乒乓球</span><br></pre></td></tr></table></figure></p>
+<p>2、实现效果：<br>|姓名|爱好|<br>–|–|<br>张三|足球<br>篮球<br>李四|羽毛球<br>乒乓球</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -1861,7 +1880,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
