@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="[toc] 为什么要对测试脚本进行参数化？脚本参数化实际就是用参数来替换脚本中的一些常量，把常量替换成变量。 一、有两种目的一是为了保证请求被正常处理如注册场景必须要求用户名不重复等 二是为了模拟真实的生产场景如在登录场景中使用多用户，而不是单用户，防止出现因频率限制导致的报错，防止因命中缓存导致的TPS过高的假象。 通常很多系统出于性能优化考量，针对各业务场景都大量使用到缓存，导致压测数据相同时">
+<meta name="description" content="为什么要对测试脚本参数化？">
 <meta name="keywords" content="参数化,性能测试">
 <meta property="og:type" content="article">
 <meta property="og:title" content="脚本参数化的思考">
 <meta property="og:url" content="http://yoursite.com/2019/01/01/脚本参数化的思考/index.html">
 <meta property="og:site_name" content="ivyli&#39;s blog">
-<meta property="og:description" content="[toc] 为什么要对测试脚本进行参数化？脚本参数化实际就是用参数来替换脚本中的一些常量，把常量替换成变量。 一、有两种目的一是为了保证请求被正常处理如注册场景必须要求用户名不重复等 二是为了模拟真实的生产场景如在登录场景中使用多用户，而不是单用户，防止出现因频率限制导致的报错，防止因命中缓存导致的TPS过高的假象。 通常很多系统出于性能优化考量，针对各业务场景都大量使用到缓存，导致压测数据相同时">
+<meta property="og:description" content="为什么要对测试脚本参数化？">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-01T03:21:16.348Z">
+<meta property="og:updated_time" content="2019-01-03T07:55:37.171Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="脚本参数化的思考">
-<meta name="twitter:description" content="[toc] 为什么要对测试脚本进行参数化？脚本参数化实际就是用参数来替换脚本中的一些常量，把常量替换成变量。 一、有两种目的一是为了保证请求被正常处理如注册场景必须要求用户名不重复等 二是为了模拟真实的生产场景如在登录场景中使用多用户，而不是单用户，防止出现因频率限制导致的报错，防止因命中缓存导致的TPS过高的假象。 通常很多系统出于性能优化考量，针对各业务场景都大量使用到缓存，导致压测数据相同时">
+<meta name="twitter:description" content="为什么要对测试脚本参数化？">
 
 
 
@@ -358,6 +358,10 @@
           
 
           
+              <div class="post-description">
+                  为什么要对测试脚本参数化？
+              </div>
+          
 
         </div>
       </header>
@@ -372,8 +376,7 @@
       
 
       
-        <p>[toc]</p>
-<h2 id="为什么要对测试脚本进行参数化？"><a href="#为什么要对测试脚本进行参数化？" class="headerlink" title="为什么要对测试脚本进行参数化？"></a>为什么要对测试脚本进行参数化？</h2><p>脚本参数化实际就是用参数来替换脚本中的一些常量，把常量替换成变量。</p>
+        <h2 id="为什么要对测试脚本进行参数化？"><a href="#为什么要对测试脚本进行参数化？" class="headerlink" title="为什么要对测试脚本进行参数化？"></a>为什么要对测试脚本进行参数化？</h2><p>脚本参数化实际就是用参数来替换脚本中的一些常量，把常量替换成变量。</p>
 <h3 id="一、有两种目的"><a href="#一、有两种目的" class="headerlink" title="一、有两种目的"></a>一、有两种目的</h3><h4 id="一是为了保证请求被正常处理"><a href="#一是为了保证请求被正常处理" class="headerlink" title="一是为了保证请求被正常处理"></a>一是为了保证请求被正常处理</h4><p>如注册场景必须要求用户名不重复等</p>
 <h4 id="二是为了模拟真实的生产场景"><a href="#二是为了模拟真实的生产场景" class="headerlink" title="二是为了模拟真实的生产场景"></a>二是为了模拟真实的生产场景</h4><p>如在登录场景中使用多用户，而不是单用户，防止出现因频率限制导致的报错，防止因命中缓存导致的TPS过高的假象。</p>
 <p>通常很多系统出于性能优化考量，针对各业务场景都大量使用到缓存，导致压测数据相同时，每次命中缓存后快速响应请求，造成站点压测性能极佳的假象（但线上真实请求参数各异）。</p>

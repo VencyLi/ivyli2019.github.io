@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="软件测试, 测试, 性能测试, 自动化测试">
 
 
 
@@ -354,98 +354,32 @@
       
         
           
-            <p>[toc]</p>
-<h1 id="一、Maven目录结构"><a href="#一、Maven目录结构" class="headerlink" title="一、Maven目录结构"></a>一、Maven目录结构</h1><p>Maven有一个标准的目录结构。如果在项目中遵循Maven的目录结构，就无需在pom文件中指定源代码、测试代码等目录。</p>
-<h2 id="1、常用的重要目录"><a href="#1、常用的重要目录" class="headerlink" title="1、常用的重要目录"></a>1、常用的重要目录</h2><ul>
-<li>src<ul>
-<li>main<ul>
-<li>java</li>
-<li>resources</li>
-<li>webapp</li>
-</ul>
-</li>
-<li>test<ul>
-<li>java</li>
-<li>resources</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>target</li>
-</ul>
-<h2 id="2、各目录说明"><a href="#2、各目录说明" class="headerlink" title="2、各目录说明"></a>2、各目录说明</h2><table>
-<thead>
-<tr>
-<th>目录</th>
-<th>存放内容</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>src</td>
-<td>源代码和测试代码的根目录</td>
-</tr>
-<tr>
-<td>main</td>
-<td>应用的源代码目录</td>
-</tr>
-<tr>
-<td>test</td>
-<td>测试代码的目录</td>
-</tr>
-<tr>
-<td>java目录</td>
-<td>main和test下的java目录，分别表示应用的java源代码和测试代码</td>
-</tr>
-<tr>
-<td>resources</td>
-<td>包含项目的资源文件，比如应用的国际化配置的属性文件等</td>
-</tr>
-<tr>
-<td>webapp</td>
-<td>如果是一个web项目，则webapp目录为web项目的根目录，其中包含如WEB-INF等子目录</td>
-</tr>
-<tr>
-<td>target</td>
-<td>是由Maven创建的目录，其中包含编译后的类文件、jar文件等。==当执行maven的clean目标后，target目录会被清空。==</td>
-</tr>
-</tbody>
-</table>
-<h1 id="二、依赖管理"><a href="#二、依赖管理" class="headerlink" title="二、依赖管理"></a>二、依赖管理</h1><p>Maven内嵌有依赖管理的功能，可以非常方便的下载和管理项目依赖的外部jar包。</p>
-<p>只需要在pom文件里指定依赖jar包的名称、版本号，Maven就会自动下载并放到本地仓库中（包括这些jar包依赖的其它库）。</p>
-<h2 id="1、如何设置项目依赖？"><a href="#1、如何设置项目依赖？" class="headerlink" title="1、如何设置项目依赖？"></a>1、如何设置项目依赖？</h2><p>在pom文件的<code>&lt;dependencies&gt;</code>属性中指定项目依赖。</p>
-<p>一个<code>&lt;dependency&gt;</code>节点对应一个依赖，可以指定多个。</p>
-<p>具体示例如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0</span></span></span><br><span class="line"><span class="tag"><span class="string">   http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.jenkov.crawler<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>java-web-crawler<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.jsoup<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jsoup<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.7.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.8.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<ul>
-<li><p>在上面的示例中，dependencies属性下有两个dependency子属性，每一个dependency属性描述了一个外部依赖。</p>
-</li>
-<li><p>每一个依赖由groupId, artifactId和version来描述。</p>
-</li>
-<li><p>上面的示例表明，项目的依赖为 org.jsoup组织下的1.7.1版本的jsoup，以及junit组织下的4.8.1版本的junit。</p>
-</li>
-<li><p>当Maven执行该pom文件时，将从Maven的中央仓库里下载这两个jar包并放到Maven的本地仓库。如果本地仓库中已经有了这两个依赖，Maven就不会去下载了。只有本地仓库中没有的依赖才会被下载。</p>
-</li>
-<li><p>若指定的依赖在Maven的中央仓库里没找到，可以手动下载，然后放到Maven的本地仓库。</p>
-<ul>
-<li>下载的依赖必须放到与groupId、 artifactId和version匹配的子目录中。</li>
-<li>上面示例中的两个依赖将会被放到以下子目录中：</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>MAVEN_REPOSITORY_ROOT/junit/junit/4.8.1<br>MAVEN_REPOSITORY_ROOT/org/jsoup/jsoup/1.7.1</p>
-</blockquote>
-<h1 id="三、快照依赖"><a href="#三、快照依赖" class="headerlink" title="三、快照依赖"></a>三、快照依赖</h1><p>快照依赖指的是那些还在开发中的依赖（jar包）。</p>
-<p>与其经常地更新版本号来获取最新版本，不如直接依赖项目的快照版本。</p>
-<p>快照版本的每一个build版本都会被下载到本地仓库，即使该快照版本已经在本地仓库了。</p>
-<p>总是下载快照依赖可以确保本地仓库中的每一个build版本都是最新的。</p>
-<h2 id="1、如何设置快照依赖？"><a href="#1、如何设置快照依赖？" class="headerlink" title="1、如何设置快照依赖？"></a>1、如何设置快照依赖？</h2><p>在pom文件的最开头（设置groupId和artifactId的地方），在版本号后追加-SNAPSHOT，则告诉Maven你的项目是一个快照版本。</p>
-<p>如：</p>
-<pre><code>&lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;    
-</code></pre><p>在配置依赖时，在版本号后追加-SNAPSHOT表明依赖的是一个快照版本。</p>
-<p>如：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.jenkov<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>java-web-crawler<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+          [toc]
+一、Maven目录结构Maven有一个标准的目录结构。如果在项目中遵循Maven的目录结构，就无需在pom文件中指定源代码、测试代码等目录。
+1、常用的重要目录
+src
+main
+java
+resources
+webapp
 
-          
+
+test
+java
+resources
+
+
+
+
+target
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/31/Maven学习05-目录结构和依赖/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -563,92 +497,18 @@
       
         
           
-            <p>[toc]</p>
-<h1 id="一、认识-Maven"><a href="#一、认识-Maven" class="headerlink" title="一、认识 Maven"></a>一、认识 Maven</h1><h2 id="1、Maven-最重要的功能"><a href="#1、Maven-最重要的功能" class="headerlink" title="1、Maven 最重要的功能"></a>1、Maven 最重要的功能</h2><p>Apache Maven 是一个强大的项目管理工具，可以用于项目构建、依赖管理、项目信息管理。</p>
-<p>==Maven 更多的被用作项目构建工具==，它使项目的构建过程简单化、标准化、可复用，极大的方便了整个项目的开发和管理。</p>
-<p>它基于工程对象模型（POM）的概念，使用 <code>pom.xml</code>进行核心功能配置，进而管理项目的构建、报告和文档等。</p>
-<h2 id="2、什么是构建工具？"><a href="#2、什么是构建工具？" class="headerlink" title="2、什么是构建工具？"></a>2、什么是构建工具？</h2><p>==构建工具是将软件项目构建相关的过程自动化的工具。==</p>
-<p><strong>构建一个软件项目通常包含以下一个或多个过程</strong>：</p>
-<ul>
-<li>生成源码（如果项目使用自动生成源码）；</li>
-<li>从源码生成项目文档；</li>
-<li>编译源码；</li>
-<li>将编译后的代码打包成JAR文件或者ZIP文件；</li>
-<li>将打包好的代码安装到服务器、仓库或者其它的地方；</li>
-</ul>
-<p>当然，有些项目可能需要更多的过程才能完成构建，同样也可以实现自动化。</p>
-<p>==<strong>自动化构建过程的好处：</strong>==</p>
-<ul>
-<li><p>将手动构建过程中犯错的风险降到最低。</p>
-</li>
-<li><p>自动构建工具通常要比手动执行同样的构建过程要快。</p>
-</li>
-</ul>
-<h1 id="二、Maven-关键特性"><a href="#二、Maven-关键特性" class="headerlink" title="二、Maven 关键特性"></a>二、Maven 关键特性</h1><h2 id="1、简化并标准化项目构建过程"><a href="#1、简化并标准化项目构建过程" class="headerlink" title="1、简化并标准化项目构建过程"></a>1、简化并标准化项目构建过程</h2><ul>
-<li>Maven 为开发者提供了一套完整的构建生命周期框架，开发人员只需要按照框架操作。</li>
-<li>Maven 使用一个标准的目录结构和一个默认的构建生命周期，开发人员只需要把代码放入相应的目录中并使用默认配置。</li>
-</ul>
-<h2 id="2、自动管理依赖"><a href="#2、自动管理依赖" class="headerlink" title="2、自动管理依赖"></a>2、自动管理依赖</h2><h3 id="2-1-以前项目开发中的问题"><a href="#2-1-以前项目开发中的问题" class="headerlink" title="2.1 以前项目开发中的问题"></a>2.1 以前项目开发中的问题</h3><p>==<strong>jar 包依赖和冲突问题：</strong>==</p>
-<p>在构建一个大型项目时，经常需要用到很多第三方的类库，需要引入大量的jar包，需要一个个去查找。</p>
-<p>一个大型项目中 jar 包的数量之多往往让我们瞠目结舌，并且jar包之间的关系错综复杂，多个jar包之间又可能会引起冲突问题，都可能导致项目编译失败。</p>
-<p>以往开发项目时，程序员往往需要花较多的精力在引用jar包搭建项目环境上，而这一项工作尤为艰难，少一个Jar包、多一个jar包往往会报一些让人摸不着头脑的异常。 </p>
-<h3 id="2-2-Maven-如何解决依赖问题？"><a href="#2-2-Maven-如何解决依赖问题？" class="headerlink" title="2.2 Maven 如何解决依赖问题？"></a>2.2 Maven 如何解决依赖问题？</h3><p>==我们只需要告诉Maven需要哪些 jar 包，它会帮助我们自动下载、并统一管理，极大提升开发效率。==</p>
-<ul>
-<li><p>自动下载依赖<code>jar</code>包</p>
-<ul>
-<li>通过在<code>pom.xml</code>文件中的<code>&lt;dependency&gt;</code>节点添加相应配置，就会自动下载相应jar包。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt; </span><br><span class="line">      &lt;groupId&gt;junit&lt;/groupId&gt;  项目名</span><br><span class="line">      &lt;artifactId&gt;junit&lt;/artifactId&gt;  项目模块  </span><br><span class="line">      &lt;version&gt;4.1.1&lt;/version&gt;  项目版本</span><br><span class="line">      &lt;scope&gt;test&lt;/scope&gt; 作用范围</span><br><span class="line">    &lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>自动管理依赖</p>
-<ul>
-<li>每一个jar包也有自己的 pom.xml文件，里面也会有<code>&lt;dependency&gt;</code>配置，在这里配置的是这个jar包所依赖的其他jar包，也会被maven自动下载下来 </li>
-</ul>
-</li>
-<li><p>统一管理<code>jar</code>包</p>
-<ul>
-<li>通过仓库来实现统一管理，后面会详细讲解Maven仓库的概念。</li>
-</ul>
-</li>
-</ul>
-<h2 id="3、约定优于配置"><a href="#3、约定优于配置" class="headerlink" title="3、约定优于配置"></a>3、约定优于配置</h2><p>Maven 使用约定而不是配置。</p>
-<p>也就是说开发者不需要关心每一个配置细节，Maven 会为工程提供合理的默认行为。</p>
-<p>当创建 Maven 工程时，Maven 会创建默认的工程结构。开发者只需要合理的放置文件，不再需要定义任何配置。</p>
-<p>下表是工程源码文件、资源文件的默认配置，和其他一些配置：</p>
-<p>（假定 ${basedir} 表示工程目录）</p>
-<table>
-<thead>
-<tr>
-<th>配置项</th>
-<th>默认值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>source code</td>
-<td>${basedir}/src/main/java</td>
-</tr>
-<tr>
-<td>resources</td>
-<td>${basedir}/src/main/resources</td>
-</tr>
-<tr>
-<td>Tests</td>
-<td>${basedir}/src/test</td>
-</tr>
-<tr>
-<td>Complied byte code</td>
-<td>${basedir}/target</td>
-</tr>
-<tr>
-<td>distributable JAR</td>
-<td>${basedir}/target/classes</td>
-</tr>
-</tbody>
-</table>
-<h2 id="4、热部署，热编译"><a href="#4、热部署，热编译" class="headerlink" title="4、热部署，热编译"></a>4、热部署，热编译</h2><p>在web项目已经运行的时候，修改代码能直接被web服务器所接受，不需要重启服务器或者重新部署代码，而且可以直接通过maven 打包war或者jar项目。</p>
-
-          
+          [toc]
+一、认识 Maven1、Maven 最重要的功能Apache Maven 是一个强大的项目管理工具，可以用于项目构建、依赖管理、项目信息管理。
+==Maven 更多的被用作项目构建工具==，它使项目的构建过程简单化、标准化、可复用，极大的方便了整个项目的开发和管理。
+它基于工程对象模型（
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/31/maven学习01 - 关键特性/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -766,79 +626,23 @@
       
         
           
-            <p>[toc]</p>
-<p>构建生命周期是指为一个工程进行项目构建和发布的过程，它是 Maven 中的一个核心概念。</p>
-<h2 id="1、标准生命周期"><a href="#1、标准生命周期" class="headerlink" title="1、标准生命周期"></a>1、标准生命周期</h2><p>Maven中内置了三个标准的构建生命周期：</p>
-<ul>
-<li>default（或build）：处理工程的部署</li>
-<li>clean：处理工程的清理</li>
-<li>site：负责创建工程的站点文档。</li>
-</ul>
-<p>这三个构建生命周期都是由一系列不同的构建阶段组成，每一个构建阶段代表了生命周期的一个阶段。</p>
-<h2 id="2、default-生命周期的阶段"><a href="#2、default-生命周期的阶段" class="headerlink" title="2、default 生命周期的阶段"></a>2、default 生命周期的阶段</h2><p>一个典型的 Maven  default（build）生命周期主要由以下几个阶段的序列组成（此处并完全列出）：</p>
-<p><img src="https://img-blog.csdnimg.cn/20181129085332753.png" alt="在这里插入图片描述"></p>
-<table>
-<thead>
-<tr>
-<th>阶段</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>验证 validate</td>
-<td>验证项目是否正确且所有必须信息是可用的</td>
-</tr>
-<tr>
-<td>编译 compile</td>
-<td>源代码编译在此阶段完成</td>
-</tr>
-</tbody>
-</table>
-<p>测试 Test|使用适当的单元测试框架（例如JUnit）运行测试。<br>包装 package|创建JAR/WAR包如在 pom.xml 中定义提及的包<br>检查 verify|对集成测试的结果进行检查，以保证质量达标<br>安装 install|安装打包的项目到本地仓库，以供其他项目使用<br>部署 deploy|    拷贝最终的工程包到远程仓库中，以共享给其他开发人员和工程</p>
-<p>使用默认的生命周期时，Maven将首先验证项目，然后将编译源代码，运行单元测试，再打包二进制文件（例如：jar），然后再对包文件进行集成测试（如果需要的话），再校验包文件，并将已经校验的包文件安装到本地仓库，然后在指定的环境中部署包。</p>
-<h2 id="3、生命周期阶段的执行顺序"><a href="#3、生命周期阶段的执行顺序" class="headerlink" title="3、生命周期阶段的执行顺序"></a>3、生命周期阶段的执行顺序</h2><ul>
-<li><p>各生命周期的阶段会被顺序地执行（包括那些这里没有展示的其他生命周期阶段）。</p>
-</li>
-<li><p>而且在调用一个生命周期阶段时，maven 不仅执行指定的构建阶段，也会执行指定构建阶段之前的每一个阶段</p>
-</li>
-</ul>
-<p>比如，在默认生命周期中，只需要调用最后一个<code>deploy</code>生命阶段，即可执行前面所有阶段：</p>
-<pre><code>mvn deploy  // 会先执行前面的所有阶段
+          [toc]
+构建生命周期是指为一个工程进行项目构建和发布的过程，它是 Maven 中的一个核心概念。
+1、标准生命周期Maven中内置了三个标准的构建生命周期：
 
-mvn install  // 会先执行前面的 validate ... verify 等阶段
-</code></pre><ul>
-<li><p>同样的命令可以用在多模块的情况下（即包含一个或多个子项目的工程）：</p>
-<pre><code>mvn clean install
- // 会遍历所有的子项目，并且运行clean命令，然后运行install命令（包含所有之前步骤的命令）    
-</code></pre></li>
-<li><p>构建命令中也可以加入插件目标</p>
-<ul>
-<li><p>一个插件目标代表一个特定的任务（比构建阶段更为精细）。这些目标的执行顺序取决于调用目标和构建阶段的顺序。例如下面的命令：</p>
-<pre><code>mvn clean dependency:copy-dependencies package
-// 其中clean 和 pakage 是构建阶段，dependency:copy-dependencies 是目标。
-// 执行顺序是` clean 阶段 -&gt; dependency:copy-dependencies 目标 -&gt; package 阶段 `
-</code></pre></li>
-</ul>
-</li>
-</ul>
-<h2 id="4、Clean-生命周期"><a href="#4、Clean-生命周期" class="headerlink" title="4、Clean 生命周期"></a>4、Clean 生命周期</h2><p>clean 阶段用于清除上一次编译之后在target包下生成的字节码文件。<br>|阶段|描述  |<br>|–|–|<br>|pre-clean  |执行一些清理前需要完成的工作  |<br>clean|    清理上一次构建生成的文件<br>post-clean    |执行一些清理后需要完成的工作</p>
-<h2 id="5、Site生命周期"><a href="#5、Site生命周期" class="headerlink" title="5、Site生命周期"></a>5、Site生命周期</h2><table>
-<thead>
-<tr>
-<th>阶段</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>pre-site    |执行一些在生成站点之前需要完成的工作<br>site    |生成项目的站点文档<br>post-site    |执行一些在生成站点之后需要完成的工作<br>site-deploy    |将生成的站点文件发布到远程服务器上    </p>
+default（或build）：处理工程的部署
+clean：处理工程的清理
+site：负责创建工程的站点文档。
 
-          
+这三个构建生命周期都是
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/31/Maven学习04-构建生命周期/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -956,97 +760,19 @@ mvn install  // 会先执行前面的 validate ... verify 等阶段
       
         
           
-            <p>[toc]</p>
-<h2 id="一、POM-文件是什么？"><a href="#一、POM-文件是什么？" class="headerlink" title="一、POM 文件是什么？"></a>一、POM 文件是什么？</h2><p>Maven的中心思想即POM文件（<code>(Project Object Model)</code>项目对象模型）。</p>
-<p>POM文件是以XML文件的形式，描述项目用到的资源，如源码目录、测试代码目录、依赖（用到的外部Jar包）等。</p>
-<p><code>pom.xml</code> 是整个系统的基础组件，位于项目根目录下。</p>
-<h2 id="二、Maven-如何使用POM文件？"><a href="#二、Maven-如何使用POM文件？" class="headerlink" title="二、Maven 如何使用POM文件？"></a>二、Maven 如何使用POM文件？</h2><p><img src="https://img-blog.csdnimg.cn/2018112810141164.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>上图说明了Maven是如何使用POM文件的，当执行一条Maven命令的时候，会依次进行以下步骤：</p>
-<p>1、读取项目根目录下的<code>pom.xml</code>，并根据<code>pom.xml</code>中的描述来执行下一步操作。</p>
-<p>2、根据<code>pom.xml</code>中的<code>&lt;dependencies&gt;</code>，下载依赖到本地仓库中。</p>
-<p>3、构建生命周期、阶段和目标。</p>
-<p>4、构建插件。</p>
-<h2 id="三、POM文件的主要组成部分"><a href="#三、POM文件的主要组成部分" class="headerlink" title="三、POM文件的主要组成部分"></a>三、POM文件的主要组成部分</h2><p>==POM文件描述的是构建“什么”，而不是“如何”构建。==  如何构建是取决于Maven的构建阶段和目标。</p>
-<p>每一个项目都有一个POM文件，即pom.xml，位于项目的根目录下。</p>
-<p>pom.xml 主要包括以下几部分：</p>
-<h3 id="3-1-构建生命周期、阶段和目标"><a href="#3-1-构建生命周期、阶段和目标" class="headerlink" title="3.1 构建生命周期、阶段和目标"></a>3.1 构建生命周期、阶段和目标</h3><p>Maven的构建过程被分解为构建生命周期、阶段和目标。</p>
-<p>==<code>&lt;build&gt; -&gt; &lt;phase&gt; -&gt; &lt;goals&gt;</code>==</p>
-<ul>
-<li><p>一个构建周期由一系列的构建阶段组成。</p>
-</li>
-<li><p>每一个构建阶段由一系列的目标组成。</p>
-</li>
-</ul>
-<p>==当我们使用一条命令来运行Maven的时候，这条命令就是构建生命周期、阶段或目标的名字。==</p>
-<ul>
-<li><p>如果执行的是一个生命周期，该生命周期内的所有构建阶段都会被执行。</p>
-</li>
-<li><p>如果执行的是一个构建阶段，在预定义的构建阶段中，所有处于当前构建阶段之前的阶段也都会被执行。</p>
-</li>
-</ul>
-<h3 id="3-2-依赖和仓库"><a href="#3-2-依赖和仓库" class="headerlink" title="3.2 依赖和仓库"></a>3.2 依赖和仓库</h3><p>==<code>&lt;repository&gt; 仓库节点，&lt;dependencies&gt; 依赖节点</code>==</p>
-<p>Maven执行时，其中一个首要目标就是检查项目的依赖（需要的jar 包）。</p>
-<p>如果在本地仓库中不存在该依赖，则Maven会从中央仓库和远程仓库下载并放到本地仓库。（后面会单独讲解怎么修改本地仓库路径、怎么添加远程仓库）</p>
-<h3 id="3-3-构建插件"><a href="#3-3-构建插件" class="headerlink" title="3.3 构建插件"></a>3.3 构建插件</h3><p>==<code>&lt;plugins&gt; 节点</code>==</p>
-<p>构建插件可以向构建阶段中增加额外的构建目标。</p>
-<p>如果Maven标准的构建阶段和目标无法满足项目构建的需求，可以在POM文件里增加插件。</p>
-<p>Maven有一些标准的插件供选用，如果需要也可以自己实现插件。</p>
-<h3 id="3-4-配置文件"><a href="#3-4-配置文件" class="headerlink" title="3.4 配置文件"></a>3.4 配置文件</h3><p>==<code>&lt;profiles&gt; 节点</code>==</p>
-<p>配置文件用于以不同的方式构建项目。</p>
-<p>比如，你可能需要在本地环境构建，用于开发和测试，你也可能需要构建后用于开发环境。这两个构建过程是不同的。</p>
-<p>在POM文件中增加不同的构建配置，可以启用不同的构建过程。当运行Maven时，可以指定要使用的配置。</p>
-<h2 id="四、Maven-项目继承"><a href="#四、Maven-项目继承" class="headerlink" title="四、Maven 项目继承"></a>四、Maven 项目继承</h2><h3 id="1、父子工程中的POM"><a href="#1、父子工程中的POM" class="headerlink" title="1、父子工程中的POM"></a>1、父子工程中的POM</h3><p>（以下内容中<code>子项目</code> 与 <code>模块</code>的概念是类似的，所以也可以对应的理解为<code>模块</code>）</p>
-<p>一个项目如果分为多个子项目/模块，一般来讲，父项目有一个POM文件，每一个子项目也有一个POM文件。在这种结构下，既可以一步构建整个项目，也可以各个子项目分开构建。</p>
-<h3 id="2、-POM-继承的原理"><a href="#2、-POM-继承的原理" class="headerlink" title="2、 POM 继承的原理"></a>2、 POM 继承的原理</h3><p>==POM 继承的原理类似于Java中的类继承关系，可以结合理解。==</p>
-<p>当有多个子项目时，使用 POM 继承可以大大减少配置的工作量。</p>
-<ul>
-<li><p>把多个子项目之间一些共性的东西（比如说类似的配置、相同的jar包等等），定义在父项目的pom.xml文件中。</p>
-</li>
-<li><p>子项目继承父项目后，在自己的pom.xml中只放自己个性的东西，大大减少了工作量。</p>
-</li>
-<li><p>默认情况下，所有的Maven pom文件都继承自一个根pom。如果没有显式指定父pom，则该pom文件继承自根pom。</p>
-</li>
-<li><p>子pom文件的设置可以覆盖父pom文件的设置，只需要在子pom文件里指定新的设置即可。</p>
-</li>
-</ul>
-<h3 id="3、POM继承关系图"><a href="#3、POM继承关系图" class="headerlink" title="3、POM继承关系图"></a>3、POM继承关系图</h3><p><img src="https://img-blog.csdnimg.cn/20181128204820991.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>如果要继承根pom以外的pom，需要在子pom中显示地指定父pom。</p>
-<h3 id="4、-如何显示指定父pom呢？"><a href="#4、-如何显示指定父pom呢？" class="headerlink" title="4、==如何显示指定父pom呢？=="></a>4、==如何显示指定父pom呢？==</h3><ul>
-<li>在子项目的pom.xml起始处设置 <code>&lt;parent&gt;</code> 节点来指定父项目。<br>如：<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span></span></span><br><span class="line"><span class="tag"><span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag"><span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0</span></span></span><br><span class="line"><span class="tag"><span class="string">http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span> 指定父pom</span><br><span class="line"><span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.codehaus.mojo<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>my-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">version</span>&gt;</span>2.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">relativePath</span>&gt;</span>../my-parent<span class="tag">&lt;/<span class="name">relativePath</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>my-project<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">…</span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="五、POM文件字段解析"><a href="#五、POM文件字段解析" class="headerlink" title="五、POM文件字段解析"></a>五、POM文件字段解析</h2><p>如下为一个最小化的POM文件示例：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span></span></span><br><span class="line"><span class="tag"><span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag"><span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0</span></span></span><br><span class="line"><span class="tag"><span class="string">http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.jenkov<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>java-web-crawler<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="1、各字段解析"><a href="#1、各字段解析" class="headerlink" title="1、各字段解析"></a>1、各字段解析</h3><ul>
-<li><p><code>modelVersion</code>：使用的POM模型的版本。</p>
-<ul>
-<li>一般选择正在使用的Maven版本一致的版本即可。</li>
-<li>版本4.0.0适用于Maven 2和3。</li>
-</ul>
-</li>
-<li><p><code>groupId</code>：一个组织或者项目（比如开源项目）的唯一ID。一般使用项目的java包的根名称作为group ID。类似<code>com.xxx.xxxx</code> 。</p>
-<ul>
-<li>使用带.分隔符的java包名作为groupId，这一点并不是必须的。</li>
-<li>但是，如果按照这样的规范来定义groupId，项目将会位于Maven仓库的结构化目录中，该结构化目录与group ID匹配。每一个.是一个目录分隔符，每一个词都表示一个目录。</li>
-<li>比如：group ID为com.jenkov的项目将位于目录MAVEN_REPO/com/jenkov中。目录路径中的MAVEN_REPO表示Maven仓库的路径。</li>
-</ul>
-</li>
-<li><p><code>artifactId</code>：正在构建的项目的名称。</p>
-<ul>
-<li>它也是构建完项目后生成的jar包的文件名的一部分。构建过程的输出，即构建结果，在Maven中称为构件（artifact）。通常它就是一个jar包、war包或者EAR包等等。</li>
-</ul>
-</li>
-<li><p><code>version</code>：项目的版本号。</p>
-<ul>
-<li>可以用来识别项目不同的发行版。</li>
-<li>它是artifact ID目录下的子目录名。</li>
-<li>它也用作构建结果即jar包名称的一部分。</li>
-</ul>
-</li>
-</ul>
-<p>上文中的groupId，artifactId和version属性，在项目构建后会生成一个jar文件，位于Maven仓库的如下路径中（目录和文件名）：MAVEN_REPO/com/jenkov/java-web-crawler/1.0.0/java-web-crawler-1.0.0.jar</p>
-<p>上面只是构建maven项目最基本的一些配置，实际开发中，还会增加更多的配置来辅助构建。</p>
+          [toc]
+一、POM 文件是什么？Maven的中心思想即POM文件（(Project Object Model)项目对象模型）。
+POM文件是以XML文件的形式，描述项目用到的资源，如源码目录、测试代码目录、依赖（用到的外部Jar包）等。
+pom.xml 是整个系统的基础组件，位于项目根目录下。
 
-          
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/31/maven学习02-pom文件/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1164,44 +890,17 @@ mvn install  // 会先执行前面的 validate ... verify 等阶段
       
         
           
-            <p>[toc]</p>
-<h1 id="一、git-clone-与-git-pull"><a href="#一、git-clone-与-git-pull" class="headerlink" title="一、git clone 与 git pull"></a>一、git clone 与 git pull</h1><h2 id="1、git-clone-与-git-pull-相同点"><a href="#1、git-clone-与-git-pull-相同点" class="headerlink" title="1、git clone 与 git pull 相同点"></a>1、git clone 与 git pull 相同点</h2><p>相同点：都是从远程服务器拉取代码到本地</p>
-<h2 id="2、git-clone-与-git-pull-不同点"><a href="#2、git-clone-与-git-pull-不同点" class="headerlink" title="2、git clone 与 git pull 不同点"></a>2、git clone 与 git pull 不同点</h2><h3 id="git-clone"><a href="#git-clone" class="headerlink" title="git clone"></a>git clone</h3><p>是在本地没有版本库的时候，从远程服务器克隆整个版本库到本地，是一个本地从无到有的过程。</p>
-<h3 id="git-pull"><a href="#git-pull" class="headerlink" title="git pull"></a>git pull</h3><p>在本地有版本库的情况下，从远程库获取最新commit 数据（如果有的话），并merge（合并）到本地。</p>
-<p>git pull = git fetch + git merge</p>
-<h2 id="3、使用场景"><a href="#3、使用场景" class="headerlink" title="3、使用场景"></a>3、使用场景</h2><p>通常情况下，远程操作的第一步，是使用git clone从远程主机克隆一个版本库到本地。</p>
-<p>==本地修改代码后，每次从本地仓库push到远程仓库之前都要先进行git pull操作，保证push到远程仓库时没有版本冲突。==</p>
-<h1 id="二、git-pull-指定某一个文件-夹"><a href="#二、git-pull-指定某一个文件-夹" class="headerlink" title="二、git pull 指定某一个文件/夹"></a>二、git pull 指定某一个文件/夹</h1><h2 id="1、要解决的问题"><a href="#1、要解决的问题" class="headerlink" title="1、要解决的问题"></a>1、要解决的问题</h2><p>默认情况下，git pull 操作会把远程仓库的所有最新数据更新到本地。</p>
-<p>但是，如果你只想更新指定的某一个文件或文件夹，该怎么操作呢？</p>
-<h2 id="2、git-只-pull-某一个文件-夹"><a href="#2、git-只-pull-某一个文件-夹" class="headerlink" title="2、git 只 pull 某一个文件/夹"></a>2、git 只 pull 某一个文件/夹</h2><ul>
-<li><p>设置 <code>core.sparsecheckout</code>为 true</p>
-<pre><code>$ git config core.sparsecheckout true
-</code></pre><ul>
-<li><p><code>core.sparsecheckout</code>用于控制是否允许设置pull指定文件/夹，true为允许。</p>
-</li>
-<li><p>此方法适用于 Git1.7.0 以后版本，之前的版本没有这个功能。</p>
-</li>
-</ul>
-</li>
-<li><p>在<code>.git/info/sparse-checkout</code>文件中（如果没有则创建）添加指定的文件/夹</p>
-</li>
-<li><p>最后，拉取想要的分支即可实现checkout指定文件/夹。</p>
-<pre><code>$ git pull origin master
-</code></pre></li>
-</ul>
-<h1 id="三、git-批量提交多次修改操作"><a href="#三、git-批量提交多次修改操作" class="headerlink" title="三、git 批量提交多次修改操作"></a>三、git 批量提交多次修改操作</h1><p>实现git一次性add多个文件或提交多次修改，按如下步骤操作即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git  add --all</span><br><span class="line">git commit -m &apos;add more files&apos;</span><br><span class="line">git push origin master</span><br></pre></td></tr></table></figure></p>
-<p>示例如下：</p>
-<p><img src="https://img-blog.csdnimg.cn/20181129165650845.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h1 id="四、https-和-ssh-地址"><a href="#四、https-和-ssh-地址" class="headerlink" title="四、https 和 ssh 地址"></a>四、https 和 ssh 地址</h1><h2 id="1、https地址"><a href="#1、https地址" class="headerlink" title="1、https地址"></a>1、https地址</h2><p>若使用https地址，直接git clone….git push 即可。</p>
-<h2 id="2、ssh地址"><a href="#2、ssh地址" class="headerlink" title="2、ssh地址"></a>2、ssh地址</h2><p>若使用ssh地址：</p>
-<ul>
-<li>要先配置公钥–在本地生成公钥放到远程服务器上，</li>
-<li>再删除远程库别名–git remote remove origin，</li>
-<li>add新的ssh地址的别名–git add remote origin <a href="mailto:git@xxxx.git" target="_blank" rel="noopener">git@xxxx.git</a>，</li>
-<li>再进行push（若push报错，则先pull再push）</li>
-</ul>
-
-          
+          [toc]
+一、git clone 与 git pull1、git clone 与 git pull 相同点相同点：都是从远程服务器拉取代码到本地
+2、git clone 与 git pull 不同点git clone是在本地没有版本库的时候，从远程服务器克隆整个版本库到本地，是一个本地从无到有的过
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/31/git clone&pull，pull指定文件，批量提交/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1319,8 +1018,15 @@ mvn install  // 会先执行前面的 validate ... verify 等阶段
       
         
           
-            
           
+          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/31/Notepad++高级查找替换/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1438,52 +1144,20 @@ mvn install  // 会先执行前面的 validate ... verify 等阶段
       
         
           
-            <p>[toc]</p>
-<h2 id="一、管道符"><a href="#一、管道符" class="headerlink" title="一、管道符 |"></a>一、管道符 <code>|</code></h2><ul>
-<li>把前面命令输出的结果，传递给后面的命令。</li>
-</ul>
-<h3 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">统计文件的行数</span><br><span class="line">cat 1.txt | wc -l</span><br><span class="line"></span><br><span class="line">过滤文件内容</span><br><span class="line">cat 1.txt | grep aaa</span><br><span class="line"></span><br><span class="line">查看当前目录下有多少个文件：</span><br><span class="line">find ./ -type f | wc -l</span><br></pre></td></tr></table></figure>
-<h2 id="二、作业控制"><a href="#二、作业控制" class="headerlink" title="二、作业控制"></a>二、作业控制</h2><h3 id="1、Ctrl-C停止一个任务"><a href="#1、Ctrl-C停止一个任务" class="headerlink" title="1、Ctrl C停止一个任务"></a>1、<code>Ctrl C</code>停止一个任务</h3><ul>
-<li><p>在执行一个命令的过程中，彻底停止一个任务。</p>
-</li>
-<li><p>执行之后，<code>jobs</code>查看不到该任务。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[app@centos tmp]$ sleep 10</span><br><span class="line">^C</span><br><span class="line">[app@centos tmp]$ jobs</span><br><span class="line">[1]+  Stopped                 sleep 100</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="2、Ctrl-Z-暂停一个任务"><a href="#2、Ctrl-Z-暂停一个任务" class="headerlink" title="2、Ctrl Z 暂停一个任务"></a>2、<code>Ctrl Z</code> 暂停一个任务</h3><ul>
-<li><p>在执行一个命令的过程中，暂停一个任务。</p>
-</li>
-<li><p>执行之后，<code>jobs</code>可以查看到该任务。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[app@centos tmp]$ sleep 100</span><br><span class="line">^Z</span><br><span class="line">[1]+  Stopped                 sleep 100</span><br><span class="line">[app@centos tmp]$ jobs</span><br><span class="line">[1]+  Stopped                 sleep 100</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><strong>注意：</strong></p>
-<p>执行<code>Ctrl C</code> 和 <code>Ctrl Z</code>之后，都会显示 <code>Stopped</code> 状态，但是<code>Ctrl Z</code>的任务只是被暂停了，可以通过<code>jobs</code>进行调度。</p>
-<h3 id="3、jobs-查看后台的任务"><a href="#3、jobs-查看后台的任务" class="headerlink" title="3、jobs 查看后台的任务"></a>3、<code>jobs</code> 查看后台的任务</h3><ul>
-<li>查看当前会话窗口中后台任务，包括名称和命令序号id</li>
-<li>包括被<code>ctrl z</code>暂停的任务 和 被 <code>&amp;</code>放入后台运行的任务<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[app@centos tmp]$ sleep 10</span><br><span class="line">^Z</span><br><span class="line">[1]+  Stopped                 sleep 10</span><br><span class="line">[app@centos tmp]$ sleep 20</span><br><span class="line">^Z</span><br><span class="line">[2]+  Stopped                 sleep 20</span><br><span class="line">[app@centos tmp]$ jobs</span><br><span class="line">[1]-  Stopped                 sleep 10</span><br><span class="line">[2]+  Stopped                 sleep 20</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="4、bg-id-把任务调到后台并运行"><a href="#4、bg-id-把任务调到后台并运行" class="headerlink" title="4、bg[id]把任务调到后台并运行"></a>4、<code>bg[id]</code>把任务调到后台并运行</h3><ul>
-<li><code>bg</code>即<code>background</code>，把被暂停的任务放入后台运行</li>
-<li>后面加上作业id号可以指定某一个作业，不加id时默认最近的一个作业。</li>
-</ul>
-<p><strong>示例：</strong> <font color="red">（注意下面命令中的状态变化）</font><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[app@centos tmp]$ jobs</span><br><span class="line">[2]-  Stopped                 sleep 20</span><br><span class="line">[3]+  Stopped                 sleep 50</span><br><span class="line">[app@centos tmp]$ bg 3</span><br><span class="line">[3]+ sleep 50 &amp;</span><br><span class="line">[app@centos tmp]$ jobs</span><br><span class="line">[2]+  Stopped                 sleep 20</span><br><span class="line">[3]-  Running                 sleep 50 &amp;</span><br></pre></td></tr></table></figure></p>
-<h3 id="5、fg-id-把任务调到前台"><a href="#5、fg-id-把任务调到前台" class="headerlink" title="5、fg[id]把任务调到前台"></a>5、<code>fg[id]</code>把任务调到前台</h3><ul>
-<li><code>fg</code>即<code>foreground</code>，把后台作业调到前台运行</li>
-<li>后面加上作业id号可以指定某一个作业，不加id时默认最近的一个作业。</li>
-</ul>
-<p><strong>示例：</strong></p>
-<p>把被暂停的任务调到前台继续运行：</p>
-<p><img src="https://img-blog.csdnimg.cn/20181201145243731.png" alt="在这里插入图片描述"></p>
-<h3 id="6、-amp-把任务放入后台运行"><a href="#6、-amp-把任务放入后台运行" class="headerlink" title="6、&amp;把任务放入后台运行"></a>6、<code>&amp;</code>把任务放入后台运行</h3><ul>
-<li>直接在命令后面加<code>&amp;</code>即可</li>
-<li>命令在后台是<code>Running</code>状态</li>
-<li>相当于对命令执行<code>Ctrl  Z</code> 和 <code>bg</code></li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[app@centos tmp]$ jobs</span><br><span class="line">[2]+  Stopped                 sleep 20</span><br><span class="line">[app@centos tmp]$ sleep 50 &amp;</span><br><span class="line">[3] 12580</span><br><span class="line">[app@centos tmp]$ jobs</span><br><span class="line">[2]+  Stopped                 sleep 20</span><br><span class="line">[3]-  Running                 sleep 50 &amp;</span><br></pre></td></tr></table></figure>
+          [toc]
+一、管道符 |
+把前面命令输出的结果，传递给后面的命令。
 
-          
+示例：12345678统计文件的行数cat 1.txt | wc -l过滤文件内容cat 1.txt | grep aaa查看当前目录下有多少个文件：find ./ -type f | wc -l
+二、作业控制1、Ctrl C停
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/31/shell 管道符&作业控制/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1601,52 +1275,28 @@ mvn install  // 会先执行前面的 validate ... verify 等阶段
       
         
           
-            <p>[toc]</p>
-<h2 id="一、shell-常用通配符"><a href="#一、shell-常用通配符" class="headerlink" title="一、shell 常用通配符"></a>一、shell 常用通配符</h2><h3 id="1、-匹配一个或多个任意的字符"><a href="#1、-匹配一个或多个任意的字符" class="headerlink" title="1、*   匹配一个或多个任意的字符"></a>1、<code>*</code>   匹配一个或多个任意的字符</h3><pre><code>*.txt
+          [toc]
+一、shell 常用通配符1、*   匹配一个或多个任意的字符*.txt
 
 *txt*
 
 txt*
-</code></pre><h3 id="2、-匹配一个任意的字符"><a href="#2、-匹配一个任意的字符" class="headerlink" title="2、? 匹配一个任意的字符"></a>2、<code>?</code> 匹配一个任意的字符</h3><pre><code>?.txt
-</code></pre><h3 id="3、-匹配一个范围中的一个字符"><a href="#3、-匹配一个范围中的一个字符" class="headerlink" title="3、[] 匹配一个范围中的一个字符"></a>3、<code>[]</code> 匹配一个范围中的一个字符</h3><pre><code>ls [123].txt
+2、? 匹配一个任意的字符?.txt
+3、[] 匹配一个范围中的一个字符ls [123].txt
 
 ls [1-3].txt
 
 ls [0-9a-z].txt
 
-ls [0-9a-zA-Z].txt
-</code></pre><h3 id="4、-匹配其中的一个字符，类似于"><a href="#4、-匹配其中的一个字符，类似于" class="headerlink" title="4、{} 匹配其中的一个字符，类似于[]"></a>4、<code>{}</code> 匹配其中的一个字符，类似于[]</h3><ul>
-<li><code>{}</code>和<code>[]</code>类似，都是匹配里面的其中一个字符</li>
-<li>区别是：<code>[]</code>支持范围，<code>{}</code>不支持范围<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">ls &#123;1,2,3,a,b&#125;.txt</span><br><span class="line"></span><br><span class="line">ls &#123;1,2&#125;.txt</span><br><span class="line"></span><br><span class="line">## &#123;&#125; 和 [] 的区别：</span><br><span class="line">[app@centos tmp]$ ls &#123;1-3&#125;.txt</span><br><span class="line">ls: cannot access &#123;1-3&#125;.txt: No such file or directory</span><br><span class="line"></span><br><span class="line">[app@centos tmp]$ ls [1-3].txt</span><br><span class="line">1.txt  2.txt</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="二、输入输出重定向"><a href="#二、输入输出重定向" class="headerlink" title="二、输入输出重定向"></a>二、输入输出重定向</h2><h3 id="1、-gt-正确-输出重定向（重写）"><a href="#1、-gt-正确-输出重定向（重写）" class="headerlink" title="1、&gt; (正确)输出重定向（重写）"></a>1、<code>&gt;</code> (正确)输出重定向（重写）</h3><pre><code>cat 1.txt &gt; 2.txt
-# 把1.txt中的内容写入2.txt；
-# 若2.txt在写入前非空，会先清除原有内容后再写入。
-</code></pre><h3 id="2、-gt-gt-正确-输出重定向（追加）"><a href="#2、-gt-gt-正确-输出重定向（追加）" class="headerlink" title="2、&gt;&gt; (正确)输出重定向（追加）"></a>2、<code>&gt;&gt;</code> (正确)输出重定向（追加）</h3><pre><code>cat 1.txt &gt;&gt; 2.txt
-# 把1.txt中的内容追加在2.txt原有内容之后
-</code></pre><h3 id="3、2-gt-错误输出重定向（重写）"><a href="#3、2-gt-错误输出重定向（重写）" class="headerlink" title="3、2&gt; 错误输出重定向（重写）"></a>3、<code>2&gt;</code> 错误输出重定向（重写）</h3><pre><code>lsaaa 2&gt; err.log
-# 把左边命令执行后的错误信息输出到err.log中；
-# 如果err.log在输出前非空，会先清除原有内容后再输出。
-</code></pre><h3 id="4、2-gt-gt-错误输出重定向（追加）"><a href="#4、2-gt-gt-错误输出重定向（追加）" class="headerlink" title="4、2&gt;&gt;错误输出重定向（追加）"></a>4、<code>2&gt;&gt;</code>错误输出重定向（追加）</h3><pre><code>lsaaa 2&gt;&gt; err.log
-# 把左边命令执行后的错误信息追加到err.log原有内容后面，不会清除原有内容。
-</code></pre><h3 id="5、-amp-gt-（重写）重定向正确和错误的信息"><a href="#5、-amp-gt-（重写）重定向正确和错误的信息" class="headerlink" title="5、&amp;&gt;（重写）重定向正确和错误的信息"></a>5、<code>&amp;&gt;</code>（重写）重定向正确和错误的信息</h3><ul>
-<li>把<code>&amp;&gt;</code>左边命令执行后产生的正确和错误的所有信息，输出到 <code>&amp;&gt;</code>右边的文件中（先清除文件内容）。</li>
-<li>等价于  <code>&gt;</code> 和 <code>2&gt;</code> 结合使用<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[app@centos tmp]$ ls</span><br><span class="line">1.txt</span><br><span class="line">[app@centos tmp]$ ls 1.txt 2.txt &amp;&gt; log</span><br><span class="line">[app@centos tmp]$ cat log</span><br><span class="line">ls: cannot access 2.txt: No such file or directory</span><br><span class="line">1.txt</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="6、-amp-gt-gt-（追加）重定向正确和错误的信息"><a href="#6、-amp-gt-gt-（追加）重定向正确和错误的信息" class="headerlink" title="6、&amp;&gt;&gt;（追加）重定向正确和错误的信息"></a>6、<code>&amp;&gt;&gt;</code>（追加）重定向正确和错误的信息</h3><ul>
-<li>把<code>&amp;&gt;&gt;</code>左边命令执行后产生的正确和错误的所有信息，追加输出到 <code>&amp;&gt;&gt;</code>右边的文件中。</li>
-<li>等价于  <code>&gt;&gt;</code> 和 <code>2&gt;&gt;</code> 结合使用</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[app@centos tmp]$ ls</span><br><span class="line">1.txt log</span><br><span class="line">[app@centos tmp]$ ls 1.txt 2.txt &amp;&gt;&gt; log</span><br><span class="line">[app@centos tmp]$ cat log</span><br><span class="line">ls: cannot access 2.txt: No such file or directory</span><br><span class="line">1.txt</span><br><span class="line">ls: cannot access 2.txt: No such file or directory</span><br><span class="line">1.txt</span><br></pre></td></tr></table></figure>
-<h3 id="7、-gt-和-2-gt-结合，分别输出正确和错误的信息"><a href="#7、-gt-和-2-gt-结合，分别输出正确和错误的信息" class="headerlink" title="7、&gt; 和 2&gt; 结合，分别输出正确和错误的信息"></a>7、<code>&gt;</code> 和 <code>2&gt;</code> 结合，分别输出正确和错误的信息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[app@centos tmp]$ ls</span><br><span class="line">1.txt  2.txt  log</span><br><span class="line">[app@centos tmp]$ ls [12].txt a.txt &gt; 1.txt 2&gt; err.log</span><br><span class="line"># 把命令执行后生成的正确信息重写输出到1.txt，错误信息重写输出到err.log</span><br><span class="line"></span><br><span class="line">[app@centos tmp]$ cat 1.txt</span><br><span class="line">1.txt</span><br><span class="line">2.txt</span><br><span class="line">[app@centos tmp]$ cat err.log </span><br><span class="line">ls: cannot access a.txt: No such file or directory</span><br></pre></td></tr></table></figure>
-<h3 id="8、-lt-输入重定向"><a href="#8、-lt-输入重定向" class="headerlink" title="8、&lt; 输入重定向"></a>8、<code>&lt;</code> 输入重定向</h3><ul>
-<li>把<code>&lt;</code> 右边的文件内容输入给左边的命令后，执行左边的命令</li>
-<li>==左边必须是一个命令，不能是文件==<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[app@centos tmp]$ cat 1.txt </span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">[app@centos tmp]$ wc -l &lt; 1.txt</span><br><span class="line">2</span><br><span class="line"></span><br><span class="line">[app@centos tmp]$ 2.txt &lt; 1.txt</span><br><span class="line">-bash: 2.txt: command not found</span><br><span class="line">## 左边必须是命令！</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-          
+ls [0-9a-zA-Z
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/31/shell 通配符&输入输出重定向/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1786,70 +1436,17 @@ ls [0-9a-zA-Z].txt
       
         
           
-            <h1 id="一、awk-介绍"><a href="#一、awk-介绍" class="headerlink" title="一、awk 介绍"></a>一、awk 介绍</h1><p>AWK是一种处理文本文件的语言，是一个强大的文本分析工具。</p>
-<p>之所以叫AWK是因为其取了三位创始人 Alfred Aho，Peter Weinberger, 和 Brian Kernighan 的Family Name的首字符。</p>
-<h1 id="二、语法格式"><a href="#二、语法格式" class="headerlink" title="二、语法格式"></a>二、语法格式</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">awk [选项参数] 'script' var=value file(s)</span><br><span class="line">或</span><br><span class="line">awk [选项参数] -f scriptfile var=value file(s)</span><br></pre></td></tr></table></figure>
-<style>
-table th:first-of-type{
-    width: 15%;
-}
-table th:last-of-type{
-    width: 55%;
-}
-</style>
-
-<table>
-<thead>
-<tr>
-<th>选项</th>
-<th>第二种写法</th>
-<th>参数说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>-F ‘fs’</td>
-<td>-F 相当于内置变量 FS，即 field-separator</td>
-<td>-F 指定文件的分隔符，fs是一个字符串或者正则表达式，可以加引号也可以不加（最好加上单引号）； <br>默认不带 -F 参数时，使用空格或制表符等空白字符做为分隔符。</td>
-</tr>
-<tr>
-<td>-v var=value</td>
-<td>–asign var=value</td>
-<td>赋值一个用户定义变量</td>
-</tr>
-<tr>
-<td>-f scripfile</td>
-<td>–file scriptfile</td>
-<td>从脚本文件中读取awk命令</td>
-</tr>
-</tbody>
-</table>
-<h1 id="三、基本用法"><a href="#三、基本用法" class="headerlink" title="三、基本用法"></a>三、基本用法</h1><p>log.txt文本内容如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">2 this is a test</span><br><span class="line">3 Are you like awk</span><br><span class="line">This's a test</span><br><span class="line">10 There are orange,apple,mongo</span><br></pre></td></tr></table></figure>
-<p>实例：</p>
-<h2 id="1、每行按空格或TAB分割，并输出文本中的第1、4项"><a href="#1、每行按空格或TAB分割，并输出文本中的第1、4项" class="headerlink" title="1、每行按空格或TAB分割，并输出文本中的第1、4项"></a>1、每行按空格或TAB分割，并输出文本中的第1、4项</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> awk '&#123;print $1,$4&#125;' log.txt</span><br><span class="line">---------------------------------------------</span><br><span class="line">2 a</span><br><span class="line">3 like</span><br><span class="line">This's</span><br><span class="line">10 orange,apple,mongo</span><br></pre></td></tr></table></figure>
-<h2 id="2、格式化输出"><a href="#2、格式化输出" class="headerlink" title="2、格式化输出"></a>2、格式化输出</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> awk '&#123;printf "%-8s %-10s\n",$1,$4&#125;' log.txt</span><br><span class="line">---------------------------------------------</span><br><span class="line">2        a</span><br><span class="line">3        like</span><br><span class="line">This's</span><br><span class="line">10       orange,apple,mongo</span><br></pre></td></tr></table></figure>
-<h2 id="3、awk-F-指定分割字符"><a href="#3、awk-F-指定分割字符" class="headerlink" title="3、awk -F 指定分割字符"></a>3、awk -F 指定分割字符</h2><h3 id="3-1-使用-分割"><a href="#3-1-使用-分割" class="headerlink" title="3.1 使用 ,分割"></a>3.1 使用 <code>,</code>分割</h3><ul>
-<li>-F 和分隔符之间可以有空格也可以没有，分隔符可以加单引号或双引号，也可以不加。</li>
-<li>建议最好是 -F 和分隔符之间有一个空格，并给分隔符加单引号，不容易出错。</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> 文本中没有分隔符字符，所以 $1 就是全部文本，$2 是空。</span><br><span class="line"><span class="meta">$</span> awk -F ',' '&#123;print $1,$2&#125;'   log.txt</span><br><span class="line">---------------------------------------------</span><br><span class="line">2 this is a test</span><br><span class="line">3 Are you like awk</span><br><span class="line">This's a test</span><br><span class="line">10 There are orange apple</span><br></pre></td></tr></table></figure>
-<h3 id="3-2-使用-a分割"><a href="#3-2-使用-a分割" class="headerlink" title="3.2 使用 a分割"></a>3.2 使用 <code>a</code>分割</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> awk -F 'a' '&#123;print $1&#125;' log.txt </span><br><span class="line">---------------------------------------------</span><br><span class="line">2 this is </span><br><span class="line">3 Are you like </span><br><span class="line">This's </span><br><span class="line">10 There</span><br></pre></td></tr></table></figure>
-<h3 id="3-3-使用多个分隔符-todo"><a href="#3-3-使用多个分隔符-todo" class="headerlink" title="3.3 使用多个分隔符 ==todo=="></a>3.3 使用多个分隔符 ==todo==</h3><p>先使用空格分割，然后对分割结果再使用”,”分割</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> awk -F '[ ,]'  '&#123;print $1,$2,$5&#125;'   log.txt</span><br><span class="line"> ---------------------------------------------</span><br><span class="line"> 2 this test</span><br><span class="line"> 3 Are awk</span><br><span class="line"> This's a</span><br><span class="line"> 10 There apple</span><br></pre></td></tr></table></figure>
-<h2 id="4、awk-v-设置变量"><a href="#4、awk-v-设置变量" class="headerlink" title="4、awk -v 设置变量"></a>4、awk -v 设置变量</h2><p>常用语法：</p>
-<pre><code>awk -v var=value &apos;{print $1,$2}&apos; filename
-</code></pre><h3 id="4-1-定义一个变量，并在输出时对变量进行运算"><a href="#4-1-定义一个变量，并在输出时对变量进行运算" class="headerlink" title="4.1 定义一个变量，并在输出时对变量进行运算"></a>4.1 定义一个变量，并在输出时对变量进行运算</h3><p>数字与数字运算，结果正常；</p>
-<p>数字与字符串运算，只保留数字。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> awk -va=1 '&#123;print $1,$1+a&#125;' log.txt</span><br><span class="line">---------------------------------------------</span><br><span class="line"> 2 3</span><br><span class="line"> 3 4</span><br><span class="line"> This's 1</span><br><span class="line"> 10 11</span><br></pre></td></tr></table></figure>
-<h3 id="4-2-定义多个变量，并在输出时对变量进行运算"><a href="#4-2-定义多个变量，并在输出时对变量进行运算" class="headerlink" title="4.2 定义多个变量，并在输出时对变量进行运算"></a>4.2 定义多个变量，并在输出时对变量进行运算</h3><p>数字与数字运算，结果正常；</p>
-<p>数字与字符运算，只保留数字；</p>
-<p>字符或数字与字符拼接；</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> awk -va=1 -vb=s '&#123;print $1,$1+a,$1b&#125;' log.txt</span><br><span class="line">-----------------------------------------------</span><br><span class="line"> 2 3 2s</span><br><span class="line"> 3 4 3s</span><br><span class="line"> This's 1 This'ss</span><br><span class="line"> 10 11 10s</span><br></pre></td></tr></table></figure>
-<h2 id="5、awk-f-指定脚本"><a href="#5、awk-f-指定脚本" class="headerlink" title="5、awk -f 指定脚本"></a>5、awk -f 指定脚本</h2><p>常用语法：</p>
-<pre><code>awk -f {awk脚本} {文件名}
-</code></pre><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> awk -f cal.awk log.txt</span><br></pre></td></tr></table></figure>
-          
+          一、awk 介绍AWK是一种处理文本文件的语言，是一个强大的文本分析工具。
+之所以叫AWK是因为其取了三位创始人 Alfred Aho，Peter Weinberger, 和 Brian Kernighan 的Family Name的首字符。
+二、语法格式123awk [选项参数] 'script'
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/31/11_awk/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1967,47 +1564,23 @@ table th:last-of-type{
       
         
           
-            <p>[toc]</p>
-<h1 id="一、系统变量"><a href="#一、系统变量" class="headerlink" title="一、系统变量"></a>一、系统变量</h1><h2 id="1、env"><a href="#1、env" class="headerlink" title="1、env"></a>1、<code>env</code></h2><p>显示系统环境变量，直接输入<code>env</code>即可。</p>
-<h2 id="2、set"><a href="#2、set" class="headerlink" title="2、set"></a>2、<code>set</code></h2><p>在<code>env</code>的基础上增加显示了用户自定义的变量，直接输入<code>set</code>即可。</p>
-<h1 id="二、自定义变量"><a href="#二、自定义变量" class="headerlink" title="二、自定义变量"></a>二、自定义变量</h1><h2 id="1、变量名规则："><a href="#1、变量名规则：" class="headerlink" title="1、变量名规则："></a>1、变量名规则：</h2><p>变量名只能包含<code>字母、数字、下划线</code>，且首位不能是数字。</p>
-<pre><code>a=1
+          [toc]
+一、系统变量1、env显示系统环境变量，直接输入env即可。
+2、set在env的基础上增加显示了用户自定义的变量，直接输入set即可。
+二、自定义变量1、变量名规则：变量名只能包含字母、数字、下划线，且首位不能是数字。
+a=1
 a=abc
 a=a37
-</code></pre><h2 id="2、变量值"><a href="#2、变量值" class="headerlink" title="2、变量值"></a>2、变量值</h2><ul>
-<li>变量值有特殊符号时需要用单引号括起来</li>
-<li>如果用双引号，会识别其中的特殊字符；单引号会把其中的特殊字符当作普通字符来处理。</li>
-<li>调用变量时，使用<code>$</code>加上变量名即可。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">没有特殊字符时，单引号和双引号效果相同：</span><br><span class="line">[app@centos tmp]$ a=&apos;a b c&apos;</span><br><span class="line">[app@centos tmp]$ echo $a</span><br><span class="line">a b c</span><br><span class="line">[app@centos tmp]$ a=&quot;b c&quot;</span><br><span class="line">[app@centos tmp]$ echo $a</span><br><span class="line">b c</span><br><span class="line"></span><br><span class="line">有特殊字符时，单引号和双引号效果不同：</span><br><span class="line">[app@centos tmp]$ echo $a</span><br><span class="line">a</span><br><span class="line">[app@centos tmp]$ a=&apos;a$bc&apos;</span><br><span class="line">[app@centos tmp]$ echo $a</span><br><span class="line">a$bc</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="3、连接多个变量"><a href="#3、连接多个变量" class="headerlink" title="3、连接多个变量"></a>3、连接多个变量</h2><p>也称为变量的累加。</p>
-<ul>
-<li><p>调用时直接连接多个变量即可，依次计算出变量的值后，连接在一起。</p>
-</li>
-<li><p>多个变量连接时，最好把每个变量都用双引号括起来。</p>
-</li>
-</ul>
-<p>示例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">定义变量a、b：</span><br><span class="line">[app@centos tmp]$ a=1</span><br><span class="line">[app@centos tmp]$ b=2</span><br><span class="line"></span><br><span class="line">两个变量直接相连：</span><br><span class="line">[app@centos tmp]$ echo $a$b</span><br><span class="line">12</span><br><span class="line"></span><br><span class="line">变量值中包含特殊字符时也可以直接相连：</span><br><span class="line">[app@centos tmp]$ a=&apos;a$b&apos; 修改了变量a的值</span><br><span class="line">[app@centos tmp]$ echo $a$b</span><br><span class="line">a$b2</span><br><span class="line"></span><br><span class="line">[app@centos tmp]$ c=&quot;c$b&quot;  </span><br><span class="line">[app@centos tmp]$ echo $a$c 其中$c值为c2</span><br><span class="line">a$bc2</span><br><span class="line"></span><br><span class="line">当$后跟有多个字母时，均视为一个变量名，所以需要分开写：</span><br><span class="line">[app@centos tmp]$ c=c&quot;$bc&quot;</span><br><span class="line">[app@centos tmp]$ echo $c</span><br><span class="line">c</span><br><span class="line"></span><br><span class="line">把&quot;$bc&quot;分开成&quot;$b&quot;c，不然不能识别$b</span><br><span class="line">[app@centos tmp]$ c=c&quot;$b&quot;c</span><br><span class="line">[app@centos tmp]$ echo $c</span><br><span class="line">c2c</span><br></pre></td></tr></table></figure>
-<h2 id="4、全局变量"><a href="#4、全局变量" class="headerlink" title="4、全局变量"></a>4、全局变量</h2><p>export 变量名=变量值</p>
-<pre><code>export b=123
-把变量b设置为全局变量，且值为123
-</code></pre><h2 id="5、unset取消变量"><a href="#5、unset取消变量" class="headerlink" title="5、unset取消变量"></a>5、unset取消变量</h2><p>unset 变量名</p>
-<p>注意：不加$</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[app@V]$ b=123</span><br><span class="line">[app@V]$ echo $b</span><br><span class="line">123</span><br><span class="line">[app@V]$ unset b</span><br><span class="line">[app@V]$ echo $b</span><br></pre></td></tr></table></figure>
-<h1 id="三、自定义命令行前缀-PS1"><a href="#三、自定义命令行前缀-PS1" class="headerlink" title="三、自定义命令行前缀 PS1"></a>三、自定义命令行前缀 <code>PS1</code></h1><p>默认情况下，linux中命令行前缀显示的是黑色的，内容是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">非root用户：[用户名@主机名 路径名]$</span><br><span class="line"></span><br><span class="line">root用户：[用户名@主机名 路径名]#</span><br></pre></td></tr></table></figure></p>
-<p>其实这是由环境变量 <code>PS1</code> 控制的。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">查看PS1变量的值：</span><br><span class="line">[app@xxx]$ echo $PS1</span><br><span class="line">[\u@\h \W]\$</span><br><span class="line"></span><br><span class="line">默认情况下PS1=&apos;[\u@\h \W]\$&apos;</span><br><span class="line"></span><br><span class="line">其中`\W`代表相对路径，`\w`代表绝对路径</span><br><span class="line">   </span><br><span class="line">修改PS1自定义命令前缀的颜色：</span><br><span class="line">PS1=&apos;[\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;36m\]\W\[\033[00m\]]\$ &apos;</span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/20181201174702402.png" alt="在这里插入图片描述"></p>
-<p>当然，这样直接修改，只在当前会话中生效，若要所有会话生效，设置成全局变量即可。</p>
-<h1 id="四、环境变量配置文件"><a href="#四、环境变量配置文件" class="headerlink" title="四、环境变量配置文件"></a>四、环境变量配置文件</h1><ul>
-<li><code>profile</code>需要登录才生效，同时会调用<code>bashrc</code>。</li>
-<li><code>bashrc</code>不需要用户登录，执行shell就生效。</li>
-</ul>
-<h2 id="1、系统层次的"><a href="#1、系统层次的" class="headerlink" title="1、系统层次的"></a>1、系统层次的</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/etc/profile</span><br><span class="line"></span><br><span class="line">/etc/bashrc</span><br></pre></td></tr></table></figure>
-<h2 id="2、用户层次的"><a href="#2、用户层次的" class="headerlink" title="2、用户层次的"></a>2、用户层次的</h2><p>只对当前用户生效的配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">~/.bashrc</span><br><span class="line"></span><br><span class="line">~/.bash_profile</span><br><span class="line"></span><br><span class="line">~/.bash_history</span><br><span class="line"></span><br><span class="line">~/.bash_logout 当前用户退出时执行的命令</span><br></pre></td></tr></table></figure></p>
-
-          
+2、变量值
+变量值有特殊符号时需要
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/31/linux 变量 & 环境变量配置文件/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

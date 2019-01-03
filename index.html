@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="软件测试, 测试, 性能测试, 自动化测试">
 
 
 
@@ -375,31 +375,14 @@
 
       
         
-          
-            <p>[toc]</p>
-<h2 id="为什么要对测试脚本进行参数化？"><a href="#为什么要对测试脚本进行参数化？" class="headerlink" title="为什么要对测试脚本进行参数化？"></a>为什么要对测试脚本进行参数化？</h2><p>脚本参数化实际就是用参数来替换脚本中的一些常量，把常量替换成变量。</p>
-<h3 id="一、有两种目的"><a href="#一、有两种目的" class="headerlink" title="一、有两种目的"></a>一、有两种目的</h3><h4 id="一是为了保证请求被正常处理"><a href="#一是为了保证请求被正常处理" class="headerlink" title="一是为了保证请求被正常处理"></a>一是为了保证请求被正常处理</h4><p>如注册场景必须要求用户名不重复等</p>
-<h4 id="二是为了模拟真实的生产场景"><a href="#二是为了模拟真实的生产场景" class="headerlink" title="二是为了模拟真实的生产场景"></a>二是为了模拟真实的生产场景</h4><p>如在登录场景中使用多用户，而不是单用户，防止出现因频率限制导致的报错，防止因命中缓存导致的TPS过高的假象。</p>
-<p>通常很多系统出于性能优化考量，针对各业务场景都大量使用到缓存，导致压测数据相同时，每次命中缓存后快速响应请求，造成站点压测性能极佳的假象（但线上真实请求参数各异）。</p>
-<p>所以在做压测时，为了满足模拟真实压测环境要求，就需要让每个压测请求都携带不同的线上请求参数。</p>
-<h4 id="二、压测时如何使用脚本模拟真实稳定的压测环境？"><a href="#二、压测时如何使用脚本模拟真实稳定的压测环境？" class="headerlink" title="二、压测时如何使用脚本模拟真实稳定的压测环境？"></a>二、压测时如何使用脚本模拟真实稳定的压测环境？</h4><p>具体在开发脚本时，怎么做到模拟真实的生产环境呢？</p>
-<p>需要做如下准备</p>
-<hr>
-<font color="red">以下内容不太理解</font>
-
-<p>1&gt; 准备线上真实环境下各种参数形式的压测数据</p>
-<p>2&gt; 让每个压测线程，每次访问目标服务器时，分别携带不同的请求参数</p>
-<p>3&gt; 控制单个压测线程的单次执行时间，保证各线程能以稳定速率向目标服务器发送请求</p>
-<p>4&gt;脚本是否能通过传参灵活控制内部逻辑</p>
-<p>上述几个要求，是我们接下来重点考虑的问题</p>
-<p>2.1  压测数据准备：我们可以利用tomcat开启的access日志来收集线上真实请求数据（nginx的线上访问日志同样满足），将打印在access日志中的正常格式请求过滤出来，整理成压测数据文件。如果压测的是单台机器，还需要将数据中的域名替换为ip+端口形式，留待压测时使用。</p>
-<hr>
-<p>2.2 各压测线程读取不同数据：由于nGrinder是分布式压测工具，在向每个agent节点下发的测试数据文件都是相同的，这就需要我们在脚本中指定不同的数据文件片段供各线程分别读取。nGrinder为了方便我们让每个线程执行不同的业务逻辑，内置了ScriptContext上下文容器对象，供我们获取当前脚本运行环境下的常用参数，如下图所示：</p>
-<p>由于脚本容器在启动时已将所有的agent、进程和线程进行了编号，从0到该类型节点在配置项中的最大值-1。例如当我们使用1个agent节点下配置10个process，每个process下配置100个线程来运行脚本，此时当前线程内获取到的grinder.processNumber值是0到9中的某一个，grinder.threadNumber线程值是0到99中的某一个，这样我们便可以先将整个数据文件按总agent、总进程和总线程数做数据切割，再根据当前线程所对应的进程、线程编号，读取对应的压测数据。如下是在进程初始化时，单个agent下对多进程、多线程压测数据文件切割示例：可先通过如下代码筛选出当前进程可读取的数据片段范围，后续线程执行时，再根据当前线程编号获取各自线程的数据片段，按顺序读取即可：</p>
-<p>2.3脚本控制稳定的TPS：由于ngrinder在执行压测任务时，所有启动线程都在循环重复执行脚本，每次请求发送响应时间都是不同的，这种情况下单位时间内单个线程的执行次数是不可控的，TPS会随平均响应时间变慢而下降，无法维持稳定的TPS压测环境。针对这种情况，我们可以在压测脚本中增加Thread.sleep方法，控制单次脚本执行耗时，当并发执行该脚本时，使执行脚本的线程以稳定的时间间隔执行，产生稳定的TPS。</p>
-<p>上图所示等待时间，即为1秒减去当前请求耗时，当压测目标站点平均响应时间很长时（如平均超过1秒占比较大），可自行调整等待总时间到2000ms甚至更高的毫秒数，通过脚本逻辑保证单个线程产生的TPS是稳定的2.4 脚本传参方式：通过前面的介绍，了解到控制压测请求TPS需要获取整个环境下的总agent数、进程数和线程数，通过写死当前压测任务下的这些数值会使得每次调整压测Tps时都要去修改脚本，而nGrinder提供了脚本输入参数配置项，我们可以自定义输入配置来传递当前压测任务的总进程、线程数，脚本中使用System.getProperty(“param”)方法即可获取到输入参数</p>
-
-          
+          为什么要对测试脚本参数化？
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/01/01/脚本参数化的思考/">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -539,51 +522,16 @@
       
         
           
-            <p>[toc]</p>
-<h1 id="一、Beanshell-Sampler"><a href="#一、Beanshell-Sampler" class="headerlink" title="一、Beanshell Sampler"></a>一、Beanshell Sampler</h1><h2 id="1、Beanshell"><a href="#1、Beanshell" class="headerlink" title="1、Beanshell"></a>1、Beanshell</h2><p>Beanshell 是一种轻量级的 Java 脚本，纯 Java 编写的，能够动态的执行标准 java 语法及一些扩展脚本语法，类似于 js 和 perl。</p>
-<h2 id="2、内置变量"><a href="#2、内置变量" class="headerlink" title="2、内置变量"></a>2、内置变量</h2><p>Beanshell Sampler 中除了可以使用标准 java 语法之外，还有一些定义好的变量，可以直接使用。</p>
-<ul>
-<li>SampleResult</li>
-<li>ResponseCode,</li>
-<li>ResponseMessage</li>
-<li>IsSuccess</li>
-<li>Label</li>
-<li>FileName</li>
-<li>ctx</li>
-<li>vars</li>
-<li>props</li>
-<li>log</li>
-</ul>
-<p>下面我按使用频率，分别讲一下最常用的几种变量。</p>
-<h2 id="3、log"><a href="#3、log" class="headerlink" title="3、log"></a>3、log</h2><ul>
-<li>用于打印日志，最常用，也最简单；</li>
-<li>打印在 jmeter.log 中，可以设置打印级别，可以打印字符串、变量等。</li>
-</ul>
-<p>使用方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">1、打印 info 形式的普通字符串日志：</span><br><span class="line">log.info(&quot;hello world&quot;);  输出 hello world</span><br><span class="line"></span><br><span class="line">2、拼接字符串和变量 (其中 token 是 jmeter 局部变量)：</span><br><span class="line">log.info(&quot;hello world&quot; + &quot;$&#123;token&#125;&quot;);  输出 hello world 和 token 变量的拼接结果</span><br><span class="line"></span><br><span class="line">3、打印自定义变量</span><br><span class="line">str = &quot;12345&quot;;</span><br><span class="line">log.info(str);  输出 12345</span><br><span class="line"></span><br><span class="line">4、打印 error 形式的普通字符串日志：</span><br><span class="line">log.info(&quot;hihihi&quot;);</span><br><span class="line">log.error(&quot;aaaaa&quot;);</span><br><span class="line">两种输出的区别：</span><br><span class="line">2018-12-27 19:05:13,158 INFO o.a.j.u.BeanShellTestElement: hihihi</span><br><span class="line">2018-12-27 19:05:13,158 ERROR o.a.j.u.BeanShellTestElement: aaaaa</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>print() 打印日志</li>
-</ul>
-<p>在 beanshell 中还可以使用 print() 函数来打印日志，输出字符串等信息；</p>
-<p>print() 是在 cmd 控制台中输出信息，log() 默认是在 jmeter.log 中输出信息。</p>
-<h2 id="4、vars"><a href="#4、vars" class="headerlink" title="4、vars"></a>4、vars</h2><ul>
-<li>用于存取 jmeter 局部变量，很常用，一定要掌握；</li>
-<li>通常用于存取字符串内容，也可以存取对象；</li>
-</ul>
-<h3 id="vars-get"><a href="#vars-get" class="headerlink" title="vars.get()"></a>vars.get()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String mykey = vars.get(&quot;keyname&quot;); </span><br><span class="line">获取变量名为 keyname 的值，并保存在 mykey 中。</span><br></pre></td></tr></table></figure>
-<h3 id="vars-put"><a href="#vars-put" class="headerlink" title="vars.put()"></a>vars.put()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vars.put(&quot;keyname&quot;,&quot;value&quot;);  </span><br><span class="line">把变量 keyname(值为 value)保存到 jmeter 变量中。</span><br><span class="line"></span><br><span class="line">vars.putObject(&quot;OBJname&quot;,new Object()); </span><br><span class="line">把一个对象 OBJname 保存到 jmeter 变量中</span><br></pre></td></tr></table></figure>
-<h3 id="vars-remove"><a href="#vars-remove" class="headerlink" title="vars.remove()"></a>vars.remove()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vars.remove(&quot;keyname&quot;);</span><br><span class="line">从 jmeter 变量中删除 keyname。</span><br></pre></td></tr></table></figure>
-<h2 id="5、props"><a href="#5、props" class="headerlink" title="5、props"></a>5、props</h2><ul>
-<li>用于存取 jmeter 全局的静态变量；</li>
-<li>其中的 key 和 value 均是字符串形式；<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ymd = props.get(&quot;START.YMD&quot;);</span><br><span class="line">获取属性 START.YMD 的值（脚本启动日期）。</span><br><span class="line"></span><br><span class="line">props.put(&quot;PROP1&quot;,&quot;1234&quot;);</span><br><span class="line">把 1234 存入全局属性 PROP1 中。</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="6、ctx"><a href="#6、ctx" class="headerlink" title="6、ctx"></a>6、ctx</h2><ul>
-<li>当前线程的上下文信息；</li>
-</ul>
-<p>使用举例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">ctx.getCurrentSampler(); 获取当前 sampler 请求</span><br><span class="line"></span><br><span class="line">ctx.getPreviousSampler(); 获取前一个 sampler 请求</span><br><span class="line"></span><br><span class="line">ctx.getThreadNum(); 获取当前线程的序号，从 0 开始计数</span><br><span class="line"></span><br><span class="line">ctx.getThread(); 获取当前线程</span><br><span class="line"></span><br><span class="line">ctx.getThreadGroup(); 获取当前线程组</span><br><span class="line"></span><br><span class="line">ctx.getProperties(); 获取所有属性</span><br><span class="line"></span><br><span class="line">ctx.getVariables(); 获取当前线程的所有变量</span><br></pre></td></tr></table></figure></p>
-<h2 id="7、SampleResult"><a href="#7、SampleResult" class="headerlink" title="7、SampleResult"></a>7、SampleResult</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SampleResult.setResponseData(data);</span><br><span class="line">自定义响应数据。</span><br></pre></td></tr></table></figure>
-
-          
+          一、Beanshell Sampler1、BeanshellBeanshell 是一种轻量级的 Java 脚本，纯 Java 编写的，能够动态的执行标准 java 语法及一些扩展脚本语法，类似于 js 和 perl。
+2、内置变量Beanshell Sampler 中除了可以使用标准 java 语法
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/01/01/Beanshell Sampler 常用方法/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -701,14 +649,16 @@
       
         
           
-            <h2 id="一、解析-JSON"><a href="#一、解析-JSON" class="headerlink" title="一、解析 JSON"></a>一、解析 JSON</h2><p><a href="https://github.com/naver/ngrinder/wiki/How-to-parse-JSON" target="_blank" rel="noopener">https://github.com/naver/ngrinder/wiki/How-to-parse-JSON</a></p>
-<h4 id="1、使用-JSONObject-解析并断言"><a href="#1、使用-JSONObject-解析并断言" class="headerlink" title="1、使用 JSONObject 解析并断言"></a>1、使用 JSONObject 解析并断言</h4><p>假设服务器返回以下内容，成功标志是 “responseCode”: “0000”：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.alibaba.fastjson.JSONObject</span><br><span class="line"></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">true<span class="keyword">try</span>&#123;</span><br><span class="line">truetrue<span class="comment">//发送请求</span></span><br><span class="line">truetrueHTTPResponse result = request.POST(<span class="string">"http://xxxx/aa/bb/cc.html"</span>);</span><br><span class="line">truetrue<span class="comment">//获取返回报文</span></span><br><span class="line">truetrueString respCode = JSONObject.parseObject(result.getText()).get(<span class="string">"responseCode"</span>);</span><br><span class="line"></span><br><span class="line">truetrue<span class="keyword">if</span> (respCode.equals(<span class="string">"0000"</span>)) &#123;</span><br><span class="line">truetruetrueprintln <span class="string">"===返回==========成功"</span>+result.getText();</span><br><span class="line">truetruetrueassertTrue(<span class="string">"成功&lt;&lt;&lt;"</span>, respCode.equals(<span class="string">"0000"</span>))</span><br><span class="line">truetruetrueassertThat(result.responseCode, is(<span class="number">200</span>));</span><br><span class="line">truetrue&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">truetruetruegrinder.logger.error(<span class="string">"===失败=========="</span>+result.getText())</span><br><span class="line">truetruetrueassertFalse(<span class="string">"失败&gt;&gt;&gt;"</span>, !respCode.equals(<span class="string">"0000"</span>))</span><br><span class="line">truetrue&#125;</span><br><span class="line">true&#125; <span class="keyword">catch</span> (Exception ex) &#123;</span><br><span class="line">truetrueassertFalse(<span class="string">"失败&gt;&gt;&gt;"</span>+ex,<span class="keyword">false</span>)</span><br><span class="line">truetruegrinder.logger.error(<span class="string">"===异常======"</span>+ex)</span><br><span class="line">true&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h4 id="2、使用groovy的JsonSlurper解析并断言"><a href="#2、使用groovy的JsonSlurper解析并断言" class="headerlink" title="2、使用groovy的JsonSlurper解析并断言"></a>2、使用groovy的JsonSlurper解析并断言</h4><p>假设服务器返回以下内容，成功标志是 “resultCode”: 1：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"data"</span>: &#123;</span><br><span class="line">        <span class="string">"token"</span>: <span class="string">"9de6d5f2b62d4bb686de8033fd00bc65"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">"resultCode"</span>: <span class="number">1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>解析方式：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> groovy.json.JsonSlurper</span><br><span class="line"></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">def jsonData = <span class="keyword">new</span> JsonSlurper().parseText(result.text)</span><br><span class="line">assertThat(jsonData.resultCode, is(<span class="number">1</span>))</span><br></pre></td></tr></table></figure></p>
-<h2 id="二、使用-JUnit-的断言"><a href="#二、使用-JUnit-的断言" class="headerlink" title="二、使用 JUnit 的断言"></a>二、使用 JUnit 的断言</h2><h4 id="1、断言HTTP状态码和响应体"><a href="#1、断言HTTP状态码和响应体" class="headerlink" title="1、断言HTTP状态码和响应体"></a>1、断言HTTP状态码和响应体</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">def result = request.GET(<span class="string">"http://www.google.com"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// HTTP 状态码</span></span><br><span class="line">assertThat(result.statusCode, is(<span class="number">200</span>))</span><br><span class="line"><span class="comment">// 响应体</span></span><br><span class="line">assertThat(result.text, containsString(<span class="string">"google"</span>))</span><br></pre></td></tr></table></figure>
-<h4 id="2、断言HTTP状态码，并进行逻辑判断"><a href="#2、断言HTTP状态码，并进行逻辑判断" class="headerlink" title="2、断言HTTP状态码，并进行逻辑判断"></a>2、断言HTTP状态码，并进行逻辑判断</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testGoogle</span><span class="params">()</span></span>&#123;</span><br><span class="line">    HTTPResponse result = request.GET(<span class="string">"http://www.google.com"</span>);</span><br><span class="line">    <span class="keyword">if</span> (result.statusCode == <span class="number">301</span> || result.statusCode == <span class="number">302</span>) &#123;</span><br><span class="line">        grinder.logger.warn(<span class="string">"Warning. The response may not be correct. The response code was &#123;&#125;."</span>, result.statusCode);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        assertThat(result.statusCode, is(<span class="number">200</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
+          一、解析 JSONhttps://github.com/naver/ngrinder/wiki/How-to-parse-JSON
+1、使用 JSONObject 解析并断言假设服务器返回以下内容，成功标志是 “responseCode”: “0000”：1234567891011121314151
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/31/08_解析响应结果并断言/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -826,37 +776,20 @@
       
         
           
-            <blockquote>
-<p>在前面的文章中，我们已经知道，nGrinder支持groovy和Jython脚本，今天学习一下ngrinder中的groovy脚本结构。</p>
-</blockquote>
-<p>ngrinder中的groovy脚本结构类似 junit，同时在junit的基础之上封装了自己的注解，用来控制脚本的运行。</p>
-<h3 id="一、运行逻辑图如下："><a href="#一、运行逻辑图如下：" class="headerlink" title="一、运行逻辑图如下："></a>一、运行逻辑图如下：</h3><p><img src="https://img-blog.csdnimg.cn/20181116105544539.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<font color="red">此处只列出了groovy脚本的逻辑，jython脚本是类似的，在此不再单独介绍。</font>
-
-<h3 id="二、各注解的使用比较"><a href="#二、各注解的使用比较" class="headerlink" title="二、各注解的使用比较"></a>二、各注解的使用比较</h3><table>
-<thead>
-<tr>
-<th>注解</th>
-<th>描述</th>
-<th>应用范围</th>
-<th>用例</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>@BeforeProcess    |定义在进程被调用之前应执行的行为    |static method    |加载被线程共享的资源文件，定义 GTest 等<br>@AfterProcess|    定义在进程被终止之前应执行的行为|    static method|    关闭资源文件<br><strong>@BeforeThread</strong>|    <strong>定义在每个线程被调用之前应执行的行为</strong>|    member method|    <strong>登录目标系统，建立线程内的一些值，例如，Cookie 处理</strong><br><strong>@AfterThread</strong>|    <strong>定义在每个线程被终止之前应执行的行为</strong>|    member method|    <strong>退出系统</strong><br><strong>@Before</strong>|    <strong>定义每个被 @Test 注解的方法被执行前应执行的行为</strong>|    member method|    <strong>对个被 @Test 注解的方法的共享逻辑、变量设置</strong><br>@After|    定义每个被 @Test 注解的方法被执行后应执行的行为|    member method    |很少使用<br><strong>@Test</strong>|    <strong>定义测试行为，被执行多次</strong>|    member method|    <strong>测试体</strong></p>
-<h3 id="三、关注点"><a href="#三、关注点" class="headerlink" title="三、关注点"></a>三、关注点</h3><p>在ngrinder中，通常使用单进程多线程就足够大部分测试了，所以：</p>
-<ul>
-<li>我们最需要关注的就是 <code>@Test</code> ，这个是循环体； </li>
-<li>其次是 <code>@Before</code> ，这里设置多个循环体的共享变量； </li>
-<li>再其次是 <code>@BeforeThread</code> 和 <code>@AfterThread</code> ，用于设置每个线程执行前后的行为。</li>
-</ul>
-<h3 id="四、具体代码结构"><a href="#四、具体代码结构" class="headerlink" title="四、具体代码结构"></a>四、具体代码结构</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith</span>(GrinderRunner)  <span class="comment">// 每个测试类都要加这个注解</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestRunner</span> </span>&#123;</span><br><span class="line">    <span class="meta">@BeforeProcess</span>  <span class="comment">// 在每个进程启动前执行</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">beforeProcess</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 加载资源文件、初始化 GTest 等</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@BeforeThread</span>  <span class="comment">// 在每个线程执行前执行</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">beforeThread</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 登录、设置 cookie 之类</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Before</span>  <span class="comment">// 在每个 @Test 注解的方法执行前执行</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">before</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 设置变量、多个 @Test 方法共用的逻辑等</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Test</span>  <span class="comment">// 在测试结束前不断运行。各个 @Test 注解的方法异步执行。</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">foo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">bar</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@After</span>  <span class="comment">// 在每个 @Test 注解的方法执行后执行</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">after</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 很少用到</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@AfterThread</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">afterThread</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 登出之类</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@AfterProcess</span>  <span class="comment">// 在每个进程结束后执行</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">afterProcess</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 关闭资源</span></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
           
+在前面的文章中，我们已经知道，nGrinder支持groovy和Jython脚本，今天学习一下ngrinder中的groovy脚本结构。
+
+ngrinder中的groovy脚本结构类似 junit，同时在junit的基础之上封装了自己的注解，用来控制脚本的运行。
+一、运行逻辑图如下：
+此处只列出了
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/31/03_脚本结构-groovy/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -974,84 +907,19 @@
       
         
           
-            <blockquote>
-<p>目前主流的性能测试工具，除了LR、JMeter之外，还有很多公司在用B/S架构的nGrinder 。<br>最近公司搭建了一个基于nGrinder的二次开发平台，在此写一波nGrinder相关的文章。</p>
-</blockquote>
-<p><em>在介绍nGrinder之前，有必要先说一下 The Grinder 抛砖引玉。</em></p>
-<h2 id="一、The-Grinder"><a href="#一、The-Grinder" class="headerlink" title="一、The Grinder"></a>一、The Grinder</h2><h4 id="1、The-Grinder是一个基于Java的开源性能测试框架，通过多个agent负载机很方便的进行分布式测试。"><a href="#1、The-Grinder是一个基于Java的开源性能测试框架，通过多个agent负载机很方便的进行分布式测试。" class="headerlink" title="1、The Grinder是一个基于Java的开源性能测试框架，通过多个agent负载机很方便的进行分布式测试。"></a>1、The Grinder是一个基于Java的开源性能测试框架，通过多个agent负载机很方便的进行分布式测试。</h4><p><img src="https://image-static.segmentfault.com/249/673/2496730578-5bed0fa60cf0b_articlex" alt="xxx"></p>
-<h4 id="2、主要特性："><a href="#2、主要特性：" class="headerlink" title="2、主要特性："></a>2、主要特性：</h4><ul>
-<li>可以测试任何java代码，包括各种常用的接口<ul>
-<li>如HTTP web servers, SOAP和REST web services，还有客户端服务器RMI、JMS、EJBs等，还支持自定义协议。</li>
-</ul>
-</li>
-<li>测试脚本使用python和Clojure语言</li>
-<li>成熟的HTTP协议支持：<ul>
-<li>自动管理客户端连接和cookies，SSL代理；</li>
-<li>支持录制脚本，能够记录并回放浏览器和网站之间的复杂交互。</li>
-</ul>
-</li>
-<li>包括console和agent端</li>
-</ul>
-<h4 id="3、不足"><a href="#3、不足" class="headerlink" title="3、不足"></a>3、不足</h4><ul>
-<li>一次只能运行一个测试</li>
-<li>没有测试历史记录</li>
-<li>没有图形化的测试报告</li>
-</ul>
-<h2 id="二、nGrinder"><a href="#二、nGrinder" class="headerlink" title="二、nGrinder"></a>二、nGrinder</h2><blockquote>
-<p>nGrinder是基于Grinder的开源的web性能测试平台，由韩国最大互联网公司NHN公司的开发团队进行了重新设计和完善。</p>
-</blockquote>
-<blockquote>
-<p>特性：开源、易用、高可用、可扩展</p>
-</blockquote>
-<p><img src="https://image-static.segmentfault.com/136/642/1366420622-5bed0ff0a5e72_articlex" alt="在这里插入图片描述"></p>
-<h4 id="1、nGrinder-在-Grinder-的基础上："><a href="#1、nGrinder-在-Grinder-的基础上：" class="headerlink" title="1、nGrinder 在 Grinder 的基础上："></a>1、nGrinder 在 Grinder 的基础上：</h4><ul>
-<li>实现多测试并行</li>
-<li>基于web的管理</li>
-<li>实现cluster</li>
-<li>内置svn，方便的脚本编辑、管理</li>
-<li>支持Groovy脚本，相对于Jython，可以启动更多的虚拟用户</li>
-<li>实现对目标服务器的监控</li>
-<li>插件系统扩展</li>
-</ul>
-<h4 id="2、工作原理"><a href="#2、工作原理" class="headerlink" title="2、工作原理"></a>2、工作原理</h4><ul>
-<li>由一个控制端controller和多个代理端agent组成，通过控制端(浏览器访问)建立测试场景，然后分发到代理端进行压力测试。</li>
-<li>用户按照一定规范编写测试脚本，controller会将脚本以及需要的资源分发到agent，用jython执行。</li>
-<li>在脚本执行的过程中收集运行情况、相应时间、测试目标服务器的运行情况等。并且保存这些数据生成测试报告，通过动态图和数据表的形式展示出来。用户可以方便的看到TPS、被测服务器的CPU和内存等情况。</li>
-</ul>
-<h2 id="三、LoadRunner-JMeter-与-nGrinder对比"><a href="#三、LoadRunner-JMeter-与-nGrinder对比" class="headerlink" title="三、LoadRunner JMeter 与 nGrinder对比"></a>三、LoadRunner JMeter 与 nGrinder对比</h2><h4 id="1、Loadrunner"><a href="#1、Loadrunner" class="headerlink" title="1、Loadrunner"></a>1、Loadrunner</h4><ul>
-<li>基于UI操作，容易上手。早期很流行，功能强大，但是太笨重，安装很麻烦。</li>
-<li>不开源，扩展性不高，收费贵。往后的方向肯定是客户端工具逐步向平台化发展，所以已经慢慢被替代了。</li>
-</ul>
-<h4 id="2、JMeter"><a href="#2、JMeter" class="headerlink" title="2、JMeter"></a>2、JMeter</h4><ul>
-<li>基于UI操作，容易上手，但是编程能力较弱（使用beanshell脚本语言）。</li>
-<li>其次JMeter基于线程，模拟数千用户几乎不可能。</li>
-</ul>
-<h4 id="3、nGrinder"><a href="#3、nGrinder" class="headerlink" title="3、nGrinder"></a>3、nGrinder</h4><ul>
-<li>单节点可支持4000~6000并发、支持分布式、可监控被测服务器、可录制脚本、开源、平台化。</li>
-<li>参数化功能较弱</li>
-<li>对测试人员的代码要求较高</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>比较点</th>
-<th>JMeter</th>
-<th>Ngrinder</th>
-<th>LoadRunner</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>实现语言    | Java | java/python | java/VB/C/.NET<br>使用方式    | C/S或Command    | B/S | B/S<br>支持分布式 | master/slave | controller/agent    | master/slave<br>资源监控    | monitor/plugin，如果二开，需要查找plugin的源码    | monitor方式，有直接可用的源码    | 自带资源监控功能<br>社区活跃度 | 文档完善    | 有中文社区    | 网上资料和相关培训很多，购买正版还可以得到技术支持<br>是否需要编码    | 基本不需要    | 需要，Jython/Groovy | 需要<br>脚本的维护    | 本地    | 内置SVN | 本地<br>脚本录制    | 可使用BadBoy进行录制 | 可通过PTS插件进行录制    | 自带录制功能<br>可扩展性    | 可增加plugin，输出结果可以再加工 | 可增加plugin    | 通过扩展函数库实现<br>安装 | 简单，解压即可    | 简单，可以下载安装包或绿色包解压    | 安装包比较大，安装繁琐</p>
-<blockquote>
-<p>nGrinder 安装配置及使用 见下篇。</p>
-</blockquote>
-
           
+目前主流的性能测试工具，除了LR、JMeter之外，还有很多公司在用B/S架构的nGrinder 。最近公司搭建了一个基于nGrinder的二次开发平台，在此写一波nGrinder相关的文章。
+
+在介绍nGrinder之前，有必要先说一下 The Grinder 抛砖引玉。
+一、The Grind
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/31/01_nGrinder详细介绍及性能工具对比/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1169,73 +1037,25 @@
       
         
           
-            <blockquote>
-<p>接上一篇的nGrinder介绍篇</p>
-</blockquote>
-<h2 id="一、nGrinder-组件介绍"><a href="#一、nGrinder-组件介绍" class="headerlink" title="一、nGrinder 组件介绍"></a>一、nGrinder 组件介绍</h2><h4 id="1、ngrinder包含Controller、agent-和-monitor-三部分"><a href="#1、ngrinder包含Controller、agent-和-monitor-三部分" class="headerlink" title="1、ngrinder包含Controller、agent 和 monitor 三部分"></a>1、ngrinder包含Controller、agent 和 monitor 三部分</h4><h4 id="2、Controller"><a href="#2、Controller" class="headerlink" title="2、Controller"></a>2、Controller</h4><ul>
-<li>提供性能测试的web接口</li>
-<li>协调测试进程</li>
-<li>调整和显示测试的统计结果</li>
-<li>让用户创建和修改脚本</li>
-</ul>
-<h4 id="3、Agent"><a href="#3、Agent" class="headerlink" title="3、Agent"></a>3、Agent</h4><ul>
-<li>在代理服务器上加载运行测试进程和线程</li>
-<li>可以部署多台，提升压测能力</li>
-<li>最好是能部署在单独的服务器上，如果没有条件的话，也可以跟Controller在一台服务器</li>
-<li>但是不能部署在被测服务器上</li>
-</ul>
-<h4 id="4、Monitor"><a href="#4、Monitor" class="headerlink" title="4、Monitor"></a>4、Monitor</h4><ul>
-<li>用于监控被测服务器的系统性能（例如：CPU/MEMORY）</li>
-<li>必须部署在被测服务器上</li>
-</ul>
-<h2 id="二、nGrinder-环境搭建"><a href="#二、nGrinder-环境搭建" class="headerlink" title="二、nGrinder 环境搭建"></a>二、nGrinder 环境搭建</h2><blockquote>
-<p>$ java -XX:MaxPermSize=512m -jar ngrinder-controller-3.4.war –port 80<br>可在下载ngrinder后，直接通过上面的命令运行<br>也可以通过下面的方式，把war包放在tomcat容器中运行</p>
-</blockquote>
-<h4 id="1、安装JDK，配置环境变量"><a href="#1、安装JDK，配置环境变量" class="headerlink" title="1、安装JDK，配置环境变量"></a>1、安装JDK，配置环境变量</h4><h4 id="2、安装Tomcat"><a href="#2、安装Tomcat" class="headerlink" title="2、安装Tomcat"></a>2、安装Tomcat</h4><h4 id="3、下载nGrinder：https-github-com-naver-ngrinder-releases"><a href="#3、下载nGrinder：https-github-com-naver-ngrinder-releases" class="headerlink" title="3、下载nGrinder：https://github.com/naver/ngrinder/releases"></a>3、下载nGrinder：<a href="https://github.com/naver/ngrinder/releases" target="_blank" rel="noopener">https://github.com/naver/ngrinder/releases</a></h4><h4 id="4、把下载好的包放到Tomcat的webApps文件夹中"><a href="#4、把下载好的包放到Tomcat的webApps文件夹中" class="headerlink" title="4、把下载好的包放到Tomcat的webApps文件夹中"></a>4、把下载好的包放到Tomcat的webApps文件夹中</h4><h4 id="5、启动Tomcat，并访问nGrinder"><a href="#5、启动Tomcat，并访问nGrinder" class="headerlink" title="5、启动Tomcat，并访问nGrinder"></a>5、启动Tomcat，并访问nGrinder</h4><ul>
-<li>nGrinder主页：<a href="http://localhost:8080/ngrinder-controller-3.4/" target="_blank" rel="noopener">http://localhost:8080/ngrinder-controller-3.4/</a> 看到下图表示搭建成功。</li>
-<li>如果想直接通过<a href="http://localhost:8080/访问，把文件名改为ROOT.war即可" target="_blank" rel="noopener">http://localhost:8080/访问，把文件名改为ROOT.war即可</a></li>
-</ul>
-<p><img src="https://image-static.segmentfault.com/172/015/1720154636-5becfa197943a_articlex" alt="clipboard.png"></p>
-<hr>
-<h4 id="6、安装Agent"><a href="#6、安装Agent" class="headerlink" title="6、安装Agent"></a>6、安装Agent</h4><ul>
-<li>登录 nGrinder 管理台，默认账号和密码都是admin，点击右上角，选择 <code>Download Private Agent</code> (不同版本可能会稍有区别) ，如下图所示</li>
-<li><p>把 ngrinder-agent 压缩包解压到用作Agent的服务器上，运行 run_agent.sh 即可</p>
-<p><img src="https://img-blog.csdnimg.cn/20181117162126894.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-</li>
-</ul>
-<h4 id="7、安装Monitor（需要安装在被测服务器上）"><a href="#7、安装Monitor（需要安装在被测服务器上）" class="headerlink" title="7、安装Monitor（需要安装在被测服务器上）"></a>7、安装Monitor（需要安装在被测服务器上）</h4><ul>
-<li>下载Monitor安装包，方法类似Agent</li>
-<li>把 ngrinder-monitor 压缩包解压到被测服务器上，运行 run_monitor.sh 即可</li>
-</ul>
-<p>补充说明：</p>
-<ul>
-<li>ngrinder支持开箱即用，不需要额外配置，第一次启动时，系统配置自动生成</li>
-<li>默认使用H2数据库，且schema自动创建</li>
-<li>版本更新时，数据库schema自动更新</li>
-<li>agent 、monitor模块从controller下载，无需配置</li>
-<li>版本更新时，只需更新controller，agent和monitor会自动更新</li>
-<li>在线修改系统配置，多数据修改无需重启</li>
-<li>即使用cluster模式，配置也很简单</li>
-</ul>
-<h2 id="三、快速使用"><a href="#三、快速使用" class="headerlink" title="三、快速使用"></a>三、快速使用</h2><h4 id="1、输入测试URL，选择脚本语言，然后点击开始测试，会自动生成测试脚本并进入配置页面"><a href="#1、输入测试URL，选择脚本语言，然后点击开始测试，会自动生成测试脚本并进入配置页面" class="headerlink" title="1、输入测试URL，选择脚本语言，然后点击开始测试，会自动生成测试脚本并进入配置页面"></a>1、输入测试URL，选择脚本语言，然后点击开始测试，会自动生成测试脚本并进入配置页面</h4><p>或者通过点击管理后上方的 <code>script</code> 或 <code>脚本</code> 按钮，进入脚本管理页面，创建脚本，效果相同。</p>
-<p><img src="https://image-static.segmentfault.com/417/336/4173360959-5bed021918a0f_articlex" alt="clipboard.png"><br>在创建脚本时，可以选择使用的语言为Groovy或Jython，但是由于这两种语言执行性能上的差别，建议优先使用性能更好的Groovy来编写压测脚本（官方验证相同情况下groovy比jython支持2倍左右的并发数）</p>
-<h4 id="2、基本的压测配置"><a href="#2、基本的压测配置" class="headerlink" title="2、基本的压测配置"></a>2、基本的压测配置</h4><p><img src="https://image-static.segmentfault.com/195/033/195033864-5bed024f5bf66_articlex" alt="clipboard.png"></p>
-<p>代理：是指压测所需要的server的数量</p>
-<p>虚拟用户有两个指标：</p>
-<ul>
-<li>进程数：每个server起多少进程去跑</li>
-<li>线程数：每个进程新建的线程数量</li>
-<li><p>并发量=代理数x进程数x线程数</p>
-<p>Ramp-Up：设置增量测试，逐渐向最大的的并发量增长，只有勾选该框时，初始数、增量、初始等待时间、进程增长间隔的值才有效</p>
-</li>
-</ul>
-<p>测试时间：表示压测需要持续运行的时间<br>测试次数：脚本执行的次数，同测试时间二选一</p>
-<h4 id="3、运行测试"><a href="#3、运行测试" class="headerlink" title="3、运行测试"></a>3、运行测试</h4><p>  在配置页面右上角点击保存并运行，启动测试。</p>
-<h4 id="4、监控测试，查看结果"><a href="#4、监控测试，查看结果" class="headerlink" title="4、监控测试，查看结果"></a>4、监控测试，查看结果</h4><p>   当启动测试后，会在页面显示当前的TPS、虚拟用户、测试成功与否的数量等信息。测试完成后，会显示测试结果。</p>
-<p><img src="https://image-static.segmentfault.com/103/835/1038356029-5bed0387ba945_articlex" alt="clipboard.png"></p>
-<p>   可以点击详细测试结果查看更详细的信息，比如TPS、平均时间、首次接受数据平均时间，以及被测服务器的CPU，MEM等信息。</p>
-
           
+接上一篇的nGrinder介绍篇
+
+一、nGrinder 组件介绍1、ngrinder包含Controller、agent 和 monitor 三部分2、Controller
+提供性能测试的web接口
+协调测试进程
+调整和显示测试的统计结果
+让用户创建和修改脚本
+
+3、Agent
+在代理服务器上加
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/31/02_搭建 nGrinder 性能测试平台 并快速使用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1353,22 +1173,18 @@
       
         
           
-            <blockquote>
-<p>在GET请求脚本中添加添加信息头、cookies和自定义参数，有两种方式：<br>一种是在UI界面添加后自动生成脚本，一种是直接在脚本中添加</p>
-</blockquote>
-<h2 id="一、通过UI界面添加"><a href="#一、通过UI界面添加" class="headerlink" title="一、通过UI界面添加"></a>一、通过UI界面添加</h2><p>通过 UI 设置：脚本 -&gt; 新建脚本 -&gt; 显示高级配置<br><img src="https://img-blog.csdnimg.cn/20181119102025904.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>生成代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith</span>(GrinderRunner)</span><br><span class="line"><span class="meta">@FixMethodOrder</span>(MethodSorters.NAME_ASCENDING)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestRunner</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">true<span class="keyword">public</span> <span class="keyword">static</span> GTest test</span><br><span class="line">true<span class="keyword">public</span> <span class="keyword">static</span> HTTPRequest request</span><br><span class="line">true<span class="keyword">public</span> <span class="keyword">static</span> NVPair[] headers = []</span><br><span class="line">true<span class="keyword">public</span> <span class="keyword">static</span> NVPair[] params = []</span><br><span class="line">true<span class="keyword">public</span> <span class="keyword">static</span> Cookie[] cookies = []</span><br><span class="line"></span><br><span class="line">true<span class="meta">@BeforeProcess</span></span><br><span class="line">true<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">beforeProcess</span><span class="params">()</span> </span>&#123;</span><br><span class="line">truetrueHTTPPluginControl.getConnectionDefaults().timeout = <span class="number">6000</span></span><br><span class="line">truetruetest = <span class="keyword">new</span> GTest(<span class="number">1</span>, <span class="string">"www.baidu.com"</span>)</span><br><span class="line">truetruerequest = <span class="keyword">new</span> HTTPRequest()</span><br><span class="line">truetrue</span><br><span class="line">truetrue<span class="comment">// =========下面是我刚才添加的参数=========</span></span><br><span class="line">truetrue<span class="comment">// Set header datas</span></span><br><span class="line">truetrueList&lt;NVPair&gt; headerList = <span class="keyword">new</span> ArrayList&lt;NVPair&gt;()</span><br><span class="line">truetrueheaderList.add(<span class="keyword">new</span> NVPair(<span class="string">"Connection"</span>, <span class="string">"keep-alive"</span>))</span><br><span class="line">truetrueheaderList.add(<span class="keyword">new</span> NVPair(<span class="string">"User-Agent"</span>, <span class="string">"Mozilla/5.0 (X11; Linux x86_64; rv:12.0) Gecko/20100101 Firefox/21.0"</span>))</span><br><span class="line">truetrueheaders = headerList.toArray()</span><br><span class="line">truetrue<span class="comment">// Set param datas</span></span><br><span class="line">truetrueList&lt;NVPair&gt; paramList = <span class="keyword">new</span> ArrayList&lt;NVPair&gt;()</span><br><span class="line">truetrueparamList.add(<span class="keyword">new</span> NVPair(<span class="string">"name"</span>, <span class="string">"jing"</span>))</span><br><span class="line">truetrueparamList.add(<span class="keyword">new</span> NVPair(<span class="string">"age"</span>, <span class="string">"18"</span>))</span><br><span class="line">truetrueparamList.add(<span class="keyword">new</span> NVPair(<span class="string">"sex"</span>, <span class="string">"beauty"</span>))</span><br><span class="line">truetrueparams = paramList.toArray()</span><br><span class="line">truetrue<span class="comment">// Set cookie datas</span></span><br><span class="line">truetrueList&lt;Cookie&gt; cookieList = <span class="keyword">new</span> ArrayList&lt;Cookie&gt;()</span><br><span class="line">truetruecookieList.add(<span class="keyword">new</span> Cookie(<span class="string">"myToken"</span>, <span class="string">"xxxxxxxx"</span>, <span class="string">"www.baidu.com"</span>, <span class="string">""</span>, <span class="keyword">new</span> Date(<span class="number">32503647599000L</span>), <span class="keyword">false</span>))</span><br><span class="line">truetruecookies = cookieList.toArray()</span><br><span class="line">truetrue<span class="comment">// =========上面是我刚才添加的参数=========</span></span><br><span class="line"></span><br><span class="line">truetruegrinder.logger.info(<span class="string">"before process."</span>);</span><br><span class="line">true&#125;</span><br><span class="line"></span><br><span class="line">true<span class="meta">@BeforeThread</span></span><br><span class="line">true<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">beforeThread</span><span class="params">()</span> </span>&#123;</span><br><span class="line">truetruetest.record(<span class="keyword">this</span>, <span class="string">"test"</span>)</span><br><span class="line">truetruegrinder.statistics.delayReports=<span class="keyword">true</span>;</span><br><span class="line">truetruegrinder.logger.info(<span class="string">"before thread."</span>);</span><br><span class="line">true&#125;</span><br><span class="line"></span><br><span class="line">true<span class="meta">@Before</span></span><br><span class="line">true<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">before</span><span class="params">()</span> </span>&#123;</span><br><span class="line">truetruerequest.setHeaders(headers)</span><br><span class="line">truetruecookies.each &#123; CookieModule.addCookie(it, HTTPPluginControl.getThreadHTTPClientContext()) &#125;</span><br><span class="line">truetruegrinder.logger.info(<span class="string">"before thread. init headers and cookies"</span>);</span><br><span class="line">true&#125;</span><br><span class="line"></span><br><span class="line">true<span class="meta">@Test</span></span><br><span class="line">true<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">truetrueHTTPResponse result = request.GET(<span class="string">"https://www.baidu.com"</span>, params)</span><br><span class="line">truetrueassertThat(result.statusCode, is(<span class="number">200</span>))</span><br><span class="line">truetrue<span class="comment">// 这是我通过引导页手动添加的断言</span></span><br><span class="line">truetrueassertThat(result.getText(), containsString(<span class="string">"jing"</span>))</span><br><span class="line">true&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>可以看到这种方式是在@beforeProcess中添加heads 、params、cookies。</p>
-<h2 id="二、直接在脚本中添加"><a href="#二、直接在脚本中添加" class="headerlink" title="二、直接在脚本中添加"></a>二、直接在脚本中添加</h2><font color="red">（在此只演示添加 headers 和 params的方式，添加cookies是类似的，不再赘述）</font>
-
-<p>根据在脚本中添加的位置不同，可以分为以下几种方式：</p>
-<h4 id="1、在-BeforeProcess-注解的方法里添加-headers-和-params"><a href="#1、在-BeforeProcess-注解的方法里添加-headers-和-params" class="headerlink" title="1、在 @BeforeProcess 注解的方法里添加 headers 和 params"></a>1、在 @BeforeProcess 注解的方法里添加 headers 和 params</h4><p>这种方法跟第一种方法的效果是一样的<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加headers</span></span><br><span class="line">List&lt;NVPair&gt; headerList = <span class="keyword">new</span> ArrayList&lt;NVPair&gt;()</span><br><span class="line">headerList.add(<span class="keyword">new</span> NVPair(<span class="string">"Accept-Language"</span>, <span class="string">"en-US,zh-CN;"</span>))</span><br><span class="line"><span class="comment">// ...可以添加多个header</span></span><br><span class="line">headers = headerList.toArray()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加params</span></span><br><span class="line">List&lt;NVPair&gt; paramList = <span class="keyword">new</span> ArrayList&lt;NVPair&gt;()</span><br><span class="line">paramList.add(<span class="keyword">new</span> NVPair(<span class="string">"accessToken"</span>, <span class="string">"xxxxxxxxx"</span>))</span><br><span class="line"><span class="comment">// ...可以添加多个param</span></span><br><span class="line">params = paramList.toArray()</span><br></pre></td></tr></table></figure></p>
-<h4 id="2、直接在TestRunner类的静态变量中添加-headers-和-params"><a href="#2、直接在TestRunner类的静态变量中添加-headers-和-params" class="headerlink" title="2、直接在TestRunner类的静态变量中添加 headers 和 params"></a>2、直接在TestRunner类的静态变量中添加 headers 和 params</h4><p>在整个类最前面定义静态变量的地方，直接给变量赋值：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加headers</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> NVPair[] headers = [</span><br><span class="line">    <span class="keyword">new</span> NVPair(<span class="string">"Accept-Language"</span>, <span class="string">"en-US,zh-CN;"</span>)</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加params</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> NVPair[] params = [</span><br><span class="line">    <span class="keyword">new</span> NVPair(<span class="string">"accessToken"</span>, <span class="string">"xxxxxxxxxx"</span>)</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
-<h4 id="3、在-Test-注解的方法中添加-headers-和-params"><a href="#3、在-Test-注解的方法中添加-headers-和-params" class="headerlink" title="3、在 @Test 注解的方法中添加 headers 和 params"></a>3、在 @Test 注解的方法中添加 headers 和 params</h4><p>在发送request请求的方法里添加参数：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">// HTTPResponse result = request.GET("https://www.baidu.com", params)</span></span><br><span class="line">   </span><br><span class="line"><span class="comment">// 添加headers</span></span><br><span class="line">HTTPResponse result = request1.GET(<span class="string">"https://www.baidu.com"</span>, [<span class="keyword">new</span> NVPair(<span class="string">"Accept-Language"</span>, <span class="string">"en-US,zh-CN;"</span>)] as NVPair[])	</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加params</span></span><br><span class="line">   HTTPResponse result = request.GET(<span class="string">"https://www.baidu.com"</span>, [<span class="keyword">new</span> NVPair(<span class="string">"accessToken"</span>, <span class="string">"xxxxxx"</span>)] as NVPair[])</span><br></pre></td></tr></table></figure></p>
-<p>  到底选择哪种方式，要根据具体的参数类型和业务场景来决定。</p>
-<h2 id="三、两种方式的比较"><a href="#三、两种方式的比较" class="headerlink" title="三、两种方式的比较 ?"></a>三、两种方式的比较 ?</h2>  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">  限制很多，只能传<span class="number">1</span>个参数（保存到名为 param 的属性），值只能由<span class="number">1</span>-<span class="number">50</span>个数字字母、_、,、.、| 组成，不能有空格。</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取 UI 传入的字符串</span></span><br><span class="line">def foo = System.getProperty(<span class="string">"param"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 带默认值</span></span><br><span class="line">def foo = System.getProperty(<span class="string">"param"</span>, <span class="string">"XXX"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3.2.3+ 可以放开自动生成的脚本里 import static net.grinder.util.GrinderUtils.* 的注释</span></span><br><span class="line"><span class="comment">/* GrinderUtils 类有以下静态方法：</span></span><br><span class="line"><span class="comment">getParam()</span></span><br><span class="line"><span class="comment">getParam(String)</span></span><br><span class="line"><span class="comment">getParamInt()</span></span><br><span class="line"><span class="comment">getParamLong()</span></span><br><span class="line"><span class="comment">getParamFloat()</span></span><br><span class="line"><span class="comment">getParamDouble()</span></span><br><span class="line"><span class="comment">getParamBoolean()</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
-<p><a href="https://github.com/naver/ngrinder/wiki/How-to-pass-a-parameter-to-the-script" target="_blank" rel="noopener">https://github.com/naver/ngrinder/wiki/How-to-pass-a-parameter-to-the-script</a></p>
-
           
+在GET请求脚本中添加添加信息头、cookies和自定义参数，有两种方式：一种是在UI界面添加后自动生成脚本，一种是直接在脚本中添加
+
+一、通过UI界面添加通过 UI 设置：脚本 -&gt; 新建脚本 -&gt; 显示高级配置生成代码如下：12345678910111213141516171819
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/31/05_在GET请求中添加参数-groovy/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1486,12 +1302,17 @@
       
         
           
-            <h2 id="一、自动生成GET请求脚本"><a href="#一、自动生成GET请求脚本" class="headerlink" title="一、自动生成GET请求脚本"></a>一、自动生成GET请求脚本</h2><h4 id="1、配置-Create-a-script"><a href="#1、配置-Create-a-script" class="headerlink" title="1、配置 Create a script"></a>1、配置 Create a script</h4><p>在ngrinder管理台主页，点击script–&gt;Create a script，并填写脚本名称和请求的url；</p>
-<p>点击 Create 按钮，nGrinder会自动生成对应的脚本结构，如果没有参数需要设置的话，可以直接运行了。</p>
-<h2 id="二、详细解决GET请求脚本"><a href="#二、详细解决GET请求脚本" class="headerlink" title="二、详细解决GET请求脚本"></a>二、详细解决GET请求脚本</h2><h4 id="ngrinder自动生成的脚本如下所示（groovy版本）："><a href="#ngrinder自动生成的脚本如下所示（groovy版本）：" class="headerlink" title="ngrinder自动生成的脚本如下所示（groovy版本）："></a>ngrinder自动生成的脚本如下所示（groovy版本）：</h4><p><font color="red">解析见代码中的注释</font><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> net.grinder.script.Grinder.grinder</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.junit.Assert.*</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.hamcrest.Matchers.*</span><br><span class="line"><span class="keyword">import</span> net.grinder.plugin.http.HTTPRequest</span><br><span class="line"><span class="keyword">import</span> net.grinder.plugin.http.HTTPPluginControl</span><br><span class="line"><span class="keyword">import</span> net.grinder.script.GTest</span><br><span class="line"><span class="keyword">import</span> net.grinder.script.Grinder</span><br><span class="line"><span class="keyword">import</span> net.grinder.scriptengine.groovy.junit.GrinderRunner</span><br><span class="line"><span class="keyword">import</span> net.grinder.scriptengine.groovy.junit.annotation.BeforeProcess</span><br><span class="line"><span class="keyword">import</span> net.grinder.scriptengine.groovy.junit.annotation.BeforeThread</span><br><span class="line"><span class="comment">// import static net.grinder.util.GrinderUtils.* // You can use this if you're using nGrinder after 3.2.3</span></span><br><span class="line"><span class="keyword">import</span> org.junit.Before</span><br><span class="line"><span class="keyword">import</span> org.junit.BeforeClass</span><br><span class="line"><span class="keyword">import</span> org.junit.Test</span><br><span class="line"><span class="keyword">import</span> org.junit.runner.RunWith</span><br><span class="line"><span class="keyword">import</span> org.junit.FixMethodOrder</span><br><span class="line"><span class="keyword">import</span> org.junit.runners.MethodSorters</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Date</span><br><span class="line"><span class="keyword">import</span> java.util.List</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> HTTPClient.Cookie</span><br><span class="line"><span class="keyword">import</span> HTTPClient.CookieModule</span><br><span class="line"><span class="keyword">import</span> HTTPClient.HTTPResponse</span><br><span class="line"><span class="keyword">import</span> HTTPClient.NVPair</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * A simple example using the HTTP plugin that shows the retrieval of a</span></span><br><span class="line"><span class="comment"> * single page via HTTP.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * This script is automatically generated by ngrinder.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> admin</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@RunWith</span>(GrinderRunner)</span><br><span class="line"><span class="meta">@FixMethodOrder</span>(MethodSorters.NAME_ASCENDING)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestRunner</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">true<span class="keyword">public</span> <span class="keyword">static</span> GTest test</span><br><span class="line">true<span class="comment">// 定义 HTTPRequest 静态变量 request，用于发送 HTTP 请求</span></span><br><span class="line">true<span class="keyword">public</span> <span class="keyword">static</span> HTTPRequest request  </span><br><span class="line">true<span class="comment">// 定义 NVPair 数组 headers ，用于存放通用的请求头数据</span></span><br><span class="line">true<span class="keyword">public</span> <span class="keyword">static</span> NVPair[] headers = []</span><br><span class="line">true<span class="comment">// 定义 NVPair 数组 params ，用于存放请求参数数据</span></span><br><span class="line">true<span class="keyword">public</span> <span class="keyword">static</span> NVPair[] params = []</span><br><span class="line">true<span class="comment">// 定义 Cookie 数组 cookies ，用于存放通用的 cookie 数据</span></span><br><span class="line">true<span class="keyword">public</span> <span class="keyword">static</span> Cookie[] cookies = []</span><br><span class="line"></span><br><span class="line">true<span class="meta">@BeforeProcess</span></span><br><span class="line">true<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">beforeProcess</span><span class="params">()</span> </span>&#123;</span><br><span class="line">truetrue<span class="comment">// 设置请求响应超时时间（ms），超过则抛出异常</span></span><br><span class="line">truetrueHTTPPluginControl.getConnectionDefaults().timeout = <span class="number">6000</span></span><br><span class="line">truetrue</span><br><span class="line">truetrue<span class="comment">// 创建GTest对象，第一个参数1代表有多个请求/事务时的执行顺序ID</span></span><br><span class="line">truetrue<span class="comment">// 第二个参数是请求/事务的名称，会显示在summary结果中</span></span><br><span class="line">truetrue<span class="comment">// 有多个请求/事务时，要创建多个GTest对象</span></span><br><span class="line">truetruetest = <span class="keyword">new</span> GTest(<span class="number">1</span>, <span class="string">"www.baidu.com"</span>)  </span><br><span class="line">truetrue<span class="comment">// 创建 HTTPRequest 对象，用于发起 HTTP 请求</span></span><br><span class="line">truetruerequest = <span class="keyword">new</span> HTTPRequest() </span><br><span class="line">truetruegrinder.logger.info(<span class="string">"before process."</span>);</span><br><span class="line">true&#125;</span><br><span class="line"></span><br><span class="line">true<span class="meta">@BeforeThread</span></span><br><span class="line">true<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">beforeThread</span><span class="params">()</span> </span>&#123;</span><br><span class="line">truetrue<span class="comment">// 注册事件，启动test，第二个参数要与@Test注解的方法名保持一致</span></span><br><span class="line">truetrue<span class="comment">// 有多个请求/事务时，要注册多个事件</span></span><br><span class="line">truetruetest.record(<span class="keyword">this</span>, <span class="string">"test"</span>)</span><br><span class="line">truetrue<span class="comment">// 配置延迟报告统计结果</span></span><br><span class="line">truetruegrinder.statistics.delayReports=<span class="keyword">true</span>;</span><br><span class="line">truetruegrinder.logger.info(<span class="string">"before thread."</span>);</span><br><span class="line">true&#125;</span><br><span class="line"></span><br><span class="line">true<span class="meta">@Before</span></span><br><span class="line">true<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">before</span><span class="params">()</span> </span>&#123;</span><br><span class="line">truetrue<span class="comment">// 在这里可以添加headers属性和cookies</span></span><br><span class="line">truetruerequest.setHeaders(headers)</span><br><span class="line">truetruecookies.each &#123; CookieModule.addCookie(it, HTTPPluginControl.getThreadHTTPClientContext()) &#125;</span><br><span class="line">truetruegrinder.logger.info(<span class="string">"before thread. init headers and cookies"</span>);</span><br><span class="line">true&#125;</span><br><span class="line"></span><br><span class="line">true<span class="meta">@Test</span></span><br><span class="line">true<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">truetrue<span class="comment">// 发送GET请求</span></span><br><span class="line">truetrueHTTPResponse result = request.GET(<span class="string">"https://www.baidu.com"</span>, params)</span><br><span class="line">truetrue<span class="comment">// 断言HTTP请求状态码</span></span><br><span class="line">truetrueassertThat(result.statusCode, is(<span class="number">200</span>))</span><br><span class="line">true&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>test.record(this, “test”)</p>
-
-          
+          一、自动生成GET请求脚本1、配置 Create a script在ngrinder管理台主页，点击script–&gt;Create a script，并填写脚本名称和请求的url；
+点击 Create 按钮，nGrinder会自动生成对应的脚本结构，如果没有参数需要设置的话，可以直接运行了。
+二
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/31/04_解析最基本的GET请求脚本-groovy/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1609,18 +1430,21 @@
       
         
           
-            <p>[toc]</p>
-<blockquote>
-<p>之前在学习 git 的过程中，经常被各种命令和概念搞晕，所以我总结了一个个图表，方便记忆，希望对正在学习git 的朋友有帮助。</p>
-</blockquote>
-<h1 id="一、常用命令图解"><a href="#一、常用命令图解" class="headerlink" title="一、常用命令图解"></a>一、常用命令图解</h1><p>单纯用文字表达不容易理解，所以我把关键内容转化成图表，方便理解。</p>
-<h2 id="1、add-commit-push"><a href="#1、add-commit-push" class="headerlink" title="1、add - commit - push"></a>1、add - commit - push</h2><p><img src="https://img-blog.csdnimg.cn/20181129162500440.png" alt="在这里插入图片描述"></p>
-<h2 id="2、暂存区-本地仓库-远程仓库"><a href="#2、暂存区-本地仓库-远程仓库" class="headerlink" title="2、暂存区-本地仓库-远程仓库"></a>2、暂存区-本地仓库-远程仓库</h2><p>可以结合上面的图一起理解。(这张图是借鉴其它网友的，不记得在哪里看的了)<br><img src="https://img-blog.csdnimg.cn/20181129162709574.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h1 id="二、主要功能图解"><a href="#二、主要功能图解" class="headerlink" title="二、主要功能图解"></a>二、主要功能图解</h1><p>我把 git 的主要功能全部体现在这张图里了，一图在手，git 无忧~<br><img src="https://img-blog.csdnimg.cn/20181129163123915.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>如果还觉得不够详细，再放出我之前总结的思维导图吧：</p>
-<p><img src="https://img-blog.csdnimg.cn/20181129163349695.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+          [toc]
 
-          
+之前在学习 git 的过程中，经常被各种命令和概念搞晕，所以我总结了一个个图表，方便记忆，希望对正在学习git 的朋友有帮助。
+
+一、常用命令图解单纯用文字表达不容易理解，所以我把关键内容转化成图表，方便理解。
+1、add - commit - push
+2、暂存区-本地仓库-远程仓库
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/31/Git 01-看图学 Git !/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1738,64 +1562,21 @@
       
         
           
-            <p>[toc]</p>
-<blockquote>
-<p>此文中的方法适用于有道云和csdn的markdown编辑器，其它平台尚未验证。</p>
-</blockquote>
-<h2 id="一、字体增大"><a href="#一、字体增大" class="headerlink" title="一、字体增大"></a>一、字体增大</h2><h3 id="1、为什么要字体增大？"><a href="#1、为什么要字体增大？" class="headerlink" title="1、为什么要字体增大？"></a>1、为什么要字体增大？</h3><p>有道云的普通笔记可以设置默认字体大小，但是不支持markdown默认字体。当写完预览markdown，发会现，正文字太小了。 </p>
-<h3 id="2、字体增大的方法？"><a href="#2、字体增大的方法？" class="headerlink" title="2、字体增大的方法？"></a>2、字体增大的方法？</h3><ul>
-<li><p>用一组<font color="red"> <code>&lt;font size=4&gt; &lt;/font&gt;</code></font>将全部正文内容包含进去就可以了。</p>
-</li>
-<li><p>可以直接修改正文中的所有普通文本大小，同时不会影响标题字号。</p>
-</li>
-<li><p>可以修改size自由调整大小</p>
-</li>
-</ul>
-<h2 id="二、生成目录"><a href="#二、生成目录" class="headerlink" title="二、生成目录"></a>二、生成目录</h2><h3 id="1、为什么要生成目录？"><a href="#1、为什么要生成目录？" class="headerlink" title="1、为什么要生成目录？"></a>1、为什么要生成目录？</h3><p>方便有个对文章的大局观，一眼就知道这篇文章到底写了什么，便于定位。</p>
-<h3 id="2、生成目录的方法？"><a href="#2、生成目录的方法？" class="headerlink" title="2、生成目录的方法？"></a>2、生成目录的方法？</h3><ul>
-<li><p>非常简单，直接在第一行加上<font color="red"> <code>[toc]</code></font>即可！</p>
-</li>
-<li><p>当然，前提是你在正文中正确使用了标题格式。</p>
-</li>
-<li><p>如果在第一行设置了字体大小，那么把 <code>[toc]</code>写在第二行就行了。</p>
-</li>
-<li></li>
-</ul>
-<h2 id="三、设置锚点-页内链接"><a href="#三、设置锚点-页内链接" class="headerlink" title="三、设置锚点-页内链接"></a>三、设置锚点-页内链接</h2><h3 id="1、锚点的作用？"><a href="#1、锚点的作用？" class="headerlink" title="1、锚点的作用？"></a>1、锚点的作用？</h3><ul>
-<li>用于文章快速定位，点击目录便可直接跳转到指定位置。</li>
-<li>锚点是是网页制作中超级链接的一种，又叫命名锚记。</li>
-<li>使用命名锚记可以在文档中设置标记，这些标记通常放在文档的特定主题处或顶部。然后可以创建到这些命名锚记的链接，这些链接可快速将访问者带到指定位置。</li>
-</ul>
-<h3 id="2、如何创建锚点？"><a href="#2、如何创建锚点？" class="headerlink" title="2、如何创建锚点？"></a>2、如何创建锚点？</h3><p>锚点的添加：使用a标签，href里面填写对应的标题名字</p>
-<p>分为两步：</p>
-<ul>
-<li>创建命名锚记<ul>
-<li>格式为<font color="red"> <code>[指引到目标位置的说明文字](#目标位置的id名称)</code></font></li>
-</ul>
-</li>
-<li>创建到该命名锚记的链接<ul>
-<li>格式为<font color="red"> <code>&lt;span id = &quot;目标位置的id名称&quot;&gt;跳转到的目标位置&lt;/span&gt;</code></font></li>
-</ul>
-</li>
-</ul>
-<p>举例：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#jump"</span> <span class="attr">target</span>=<span class="string">"_self"</span>&gt;</span>说明文字<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span> =<span class="string">"jump"</span>&gt;</span><span class="tag">&lt;<span class="name">font</span> <span class="attr">color</span>=<span class="string">"red"</span>&gt;</span>跳转到这里：<span class="tag">&lt;/<span class="name">font</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>效果：</p>
-<p><a href="#jump" target="_self">说明文字</a></p>
-<p><span id="jump"><font color="red">跳转到这里：</font></span></p>
-<h2 id="四、输入空格"><a href="#四、输入空格" class="headerlink" title="四、输入空格"></a>四、输入空格</h2><p>有两种方法：</p>
-<p>1、中文模式下，Shift+空格切换为全角模式后，按空格键即可。</p>
-<p>2、\&nbsp; 或 \&#160; 需要几个空格就输入几次。</p>
-<h2 id="五、csdn-markdown中添加黄色高亮"><a href="#五、csdn-markdown中添加黄色高亮" class="headerlink" title="五、csdn markdown中添加黄色高亮"></a>五、csdn markdown中添加黄色高亮</h2><p>在有道云笔记的markdown编辑器中，工具栏有Mark按钮可以直接对文字进行黄色高亮显示，非常方便。</p>
-<p>实际在源码中是通过一对 == 包围文字即可。</p>
-<p>在csdn markdown中也可以用这种方法，实现黄色高亮！</p>
-<p>如：</p>
-<pre><code>==xxxxxxx==xxxxx
-</code></pre><p>效果：<br>==xxxxxxx==xxxxx</p>
-<h2 id="六、表格内换行"><a href="#六、表格内换行" class="headerlink" title="六、表格内换行"></a>六、表格内换行</h2><p>使用html代码\<br>实现单元格换行，变相实现合并单元格的效果。</p>
-<p>1、markdown语法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">|姓名|爱好|</span><br><span class="line">--|--|</span><br><span class="line">张三|足球&lt;br&gt;篮球</span><br><span class="line">李四|羽毛球&lt;br&gt;乒乓球</span><br></pre></td></tr></table></figure></p>
-<p>2、实现效果：<br>|姓名|爱好|<br>–|–|<br>张三|足球<br>篮球<br>李四|羽毛球<br>乒乓球</p>
+          [toc]
 
-          
+此文中的方法适用于有道云和csdn的markdown编辑器，其它平台尚未验证。
+
+一、字体增大1、为什么要字体增大？有道云的普通笔记可以设置默认字体大小，但是不支持markdown默认字体。当写完预览markdown，发会现，正文字太小了。 
+2、字体增大的方法？
+用一组 &lt;fo
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/31/有道云和csdn中markdown使用/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

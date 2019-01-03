@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="软件测试, 测试, 性能测试, 自动化测试">
 
 
 
@@ -354,24 +354,17 @@
       
         
           
-            <p>[toc]</p>
-<h2 id="一、查看操作系统信息"><a href="#一、查看操作系统信息" class="headerlink" title="一、查看操作系统信息"></a>一、查看操作系统信息</h2><h3 id="1、uname-a-查看操作系统信息"><a href="#1、uname-a-查看操作系统信息" class="headerlink" title="1、uname -a 查看操作系统信息"></a>1、uname -a 查看操作系统信息</h3><pre><code>$ uname -a
-Linux VM_101_50_centos 2.6.32-642.6.2.el6.x86_64 #1 SMP Wed Oct 26 06:52:09 UTC 2016 x86_64 x86_64 x86_64 GNU/Linux
-</code></pre><h3 id="2、cat-etc-issue-查看内核"><a href="#2、cat-etc-issue-查看内核" class="headerlink" title="2、cat /etc/issue 查看内核"></a>2、cat /etc/issue 查看内核</h3><pre><code>$ cat /etc/issue
-CentOS release 6.3 (Final)
-Kernel \r on an \m
-</code></pre><h3 id="3、cat-etc-redhat-release-查看内核"><a href="#3、cat-etc-redhat-release-查看内核" class="headerlink" title="3、cat /etc/redhat-release # 查看内核"></a>3、cat /etc/redhat-release # 查看内核</h3><pre><code>$ cat /etc/redhat-release 
-CentOS release 6.3 (Final)
-</code></pre><h3 id="4、其它"><a href="#4、其它" class="headerlink" title="4、其它"></a>4、其它</h3><pre><code>hostname   # 查看计算机名 
-env    # 查看环境变量 
-</code></pre><h2 id="二、查看CPU、内存、网络等资源信息"><a href="#二、查看CPU、内存、网络等资源信息" class="headerlink" title="二、查看CPU、内存、网络等资源信息"></a>二、查看CPU、内存、网络等资源信息</h2><h3 id="1、常用命令"><a href="#1、常用命令" class="headerlink" title="1、常用命令"></a>1、常用命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">top  # 实时显示进程状态</span><br><span class="line"></span><br><span class="line">free -m  # 查看内存使用量和交换区使用量</span><br><span class="line"></span><br><span class="line">df -h    # 查看各分区使用情况</span><br><span class="line"></span><br><span class="line">du -sh &lt;目录名&gt;  # 查看指定目录的大小</span><br></pre></td></tr></table></figure>
-<h3 id="2、查看网络"><a href="#2、查看网络" class="headerlink" title="2、查看网络"></a>2、查看网络</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ifconfig   # 查看所有网络接口的属性</span><br><span class="line"></span><br><span class="line">netstat -lntp   # 查看所有监听端口</span><br><span class="line">netstat -antp   # 查看所有已经建立的连接</span><br><span class="line">netstat -s   # 查看网络统计信息</span><br></pre></td></tr></table></figure>
-<h3 id="3、查看进程和程序"><a href="#3、查看进程和程序" class="headerlink" title="3、查看进程和程序"></a>3、查看进程和程序</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ps -ef   # 查看所有进程 </span><br><span class="line"></span><br><span class="line">程序： </span><br><span class="line">rpm -qa   # 查看所有安装的软件包</span><br></pre></td></tr></table></figure>
-<h3 id="4、查看详细CPU信息-proc-cpuinfo"><a href="#4、查看详细CPU信息-proc-cpuinfo" class="headerlink" title="4、查看详细CPU信息/proc/cpuinfo"></a>4、查看详细CPU信息/proc/cpuinfo</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">$ cat /proc/cpuinfo </span><br><span class="line">processor	: 0</span><br><span class="line">vendor_id	: GenuineIntel</span><br><span class="line">cpu family	: 6</span><br><span class="line">model		: 63</span><br><span class="line">model name	: Intel(R) Xeon(R) CPU E5-26xx v3</span><br><span class="line">stepping	: 2</span><br><span class="line">microcode	: 1</span><br><span class="line">cpu MHz		: 2397.222</span><br><span class="line">cache size	: 4096 KB</span><br><span class="line">physical id	: 0</span><br><span class="line">siblings	: 1</span><br><span class="line">core id		: 0</span><br><span class="line">cpu cores	: 1</span><br><span class="line">apicid		: 0</span><br><span class="line">initial apicid	: 0</span><br><span class="line">fpu		: yes</span><br><span class="line">fpu_exception	: yes</span><br><span class="line">cpuid level	: 13</span><br><span class="line">wp		: yes</span><br><span class="line">flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx lm constant_tsc rep_good unfair_spinlock pni pclmulqdq ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm abm xsaveopt</span><br><span class="line">bogomips	: 4794.44</span><br><span class="line">clflush size	: 64</span><br><span class="line">cache_alignment	: 64</span><br><span class="line">address sizes	: 40 bits physical, 48 bits virtual</span><br><span class="line">power management:</span><br><span class="line"></span><br><span class="line">....有几核就会显示几块信息....</span><br></pre></td></tr></table></figure>
-<h3 id="5、查看详细内存信息-proc-meminfo"><a href="#5、查看详细内存信息-proc-meminfo" class="headerlink" title="5、查看详细内存信息/proc/meminfo"></a>5、查看详细内存信息/proc/meminfo</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">$ cat /proc/meminfo </span><br><span class="line">MemTotal:       16332028 kB</span><br><span class="line">MemFree:          192596 kB</span><br><span class="line">Buffers:            9028 kB</span><br><span class="line">Cached:          1082200 kB</span><br><span class="line">SwapCached:       220488 kB</span><br><span class="line">Active:         13422780 kB</span><br><span class="line">Inactive:        2244716 kB</span><br><span class="line">Active(anon):   12885068 kB</span><br><span class="line">Inactive(anon):  1706192 kB</span><br><span class="line">Active(file):     537712 kB</span><br><span class="line">Inactive(file):   538524 kB</span><br><span class="line">Unevictable:           0 kB</span><br><span class="line">Mlocked:               0 kB</span><br><span class="line">SwapTotal:       8191996 kB</span><br><span class="line">SwapFree:        1180728 kB</span><br><span class="line">Dirty:               684 kB</span><br><span class="line">Writeback:             0 kB</span><br><span class="line">AnonPages:      14356000 kB</span><br><span class="line">Mapped:            40076 kB</span><br><span class="line">Shmem:             14992 kB</span><br><span class="line">Slab:             235844 kB</span><br><span class="line">SReclaimable:     183452 kB</span><br><span class="line">SUnreclaim:        52392 kB</span><br><span class="line">KernelStack:       39776 kB</span><br><span class="line">PageTables:        68364 kB</span><br><span class="line">NFS_Unstable:          0 kB</span><br><span class="line">Bounce:                0 kB</span><br><span class="line">WritebackTmp:          0 kB</span><br><span class="line">CommitLimit:    16358008 kB</span><br><span class="line">Committed_AS:   26461844 kB</span><br><span class="line">VmallocTotal:   34359738367 kB</span><br><span class="line">VmallocUsed:       42328 kB</span><br><span class="line">VmallocChunk:   34359687928 kB</span><br><span class="line">HardwareCorrupted:     0 kB</span><br><span class="line">AnonHugePages:  12441600 kB</span><br><span class="line">HugePages_Total:       0</span><br><span class="line">HugePages_Free:        0</span><br><span class="line">HugePages_Rsvd:        0</span><br><span class="line">HugePages_Surp:        0</span><br><span class="line">Hugepagesize:       2048 kB</span><br><span class="line">DirectMap4k:        8184 kB</span><br><span class="line">DirectMap2M:    16769024 kB</span><br></pre></td></tr></table></figure>
-<h2 id="三、系统日志文件"><a href="#三、系统日志文件" class="headerlink" title="三、系统日志文件"></a>三、系统日志文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/var/log/message 系统启动后的信息和错误日志，是Red Hat Linux中最常用的日志之一 </span><br><span class="line">/var/log/secure 与安全相关的日志信息 </span><br><span class="line">/var/log/maillog 与邮件相关的日志信息 </span><br><span class="line">/var/log/cron 与定时任务相关的日志信息 </span><br><span class="line">/var/log/spooler 与UUCP和news设备相关的日志信息 </span><br><span class="line">/var/log/boot.log 守护进程启动和停止相关的日志消息</span><br></pre></td></tr></table></figure>
-
-          
+          [toc]
+一、查看操作系统信息1、uname -a 查看操作系统信息$ uname -a
+Linux VM_101_50_centos 2.6.32-642.6.2.el6.x86_64 #1 SMP Wed Oct 26 06:52:09 UTC 2016 x86_64 x86_64 x86_6
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/31/linux系统查看各种信息/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -489,149 +482,16 @@ env    # 查看环境变量
       
         
           
-            <h5 id="在Linux或类Unix系统中，通常使用-crontab-命令在指定的时间执行一个shell脚本或者一系列Linux命令，也就是通常所说的定时任务。"><a href="#在Linux或类Unix系统中，通常使用-crontab-命令在指定的时间执行一个shell脚本或者一系列Linux命令，也就是通常所说的定时任务。" class="headerlink" title="在Linux或类Unix系统中，通常使用 crontab 命令在指定的时间执行一个shell脚本或者一系列Linux命令，也就是通常所说的定时任务。"></a>在Linux或类Unix系统中，通常使用 <code>crontab</code> 命令在指定的时间执行一个shell脚本或者一系列Linux命令，也就是通常所说的定时任务。</h5><h3 id="一、cron-进程"><a href="#一、cron-进程" class="headerlink" title="一、cron 进程"></a>一、cron 进程</h3><p>在详细介绍crontab之前，必须要说一下 <code>cron 进程</code>。</p>
-<p>1、cron进程是linux中的守护进程，在系统后台运行，它会（默认每分钟）持续地检查<code>/etc/crontab</code>文件、<code>/etc/cron.*/</code>目录、<code>/var/spool/cron/</code> 目录，读取调度任务并执行。</p>
-<p>2、所有用户创建的crontab文件都保存在<code>/var/spool/cron/</code> 目录，被cron服务定时检查。</p>
-<h3 id="二、crontab命令："><a href="#二、crontab命令：" class="headerlink" title="二、crontab命令："></a>二、crontab命令：</h3><p><code>crontab</code> 命令可以用来创建、编辑、查询、删除定时任务。</p>
-<p>通过 <code>crontab</code> 命令，每个用户都可以编辑或者配置自己的定时任务，并拥有自己的 crontab 文件。</p>
-<h4 id="1、创建-编辑-crontab-文件"><a href="#1、创建-编辑-crontab-文件" class="headerlink" title="1、创建/编辑 crontab 文件"></a>1、创建/编辑 crontab 文件</h4><p>在 linux 命令行中输入crontab -e, 即可创建或编辑用户自己的crontab文件：</p>
-<pre><code>crontab -e
-</code></pre><p>当crontab文件不存在时，即为创建；已存在时即为编辑；</p>
-<p>此时，可以输入具体的crontab命令，用来增加、修改或删除当前用户的某一项任务。</p>
-<font color="red">在crontab文件中，每一行命令代表一个定时任务！</font>
-
-<h4 id="2、crontab-语法（字段介绍）"><a href="#2、crontab-语法（字段介绍）" class="headerlink" title="2、crontab 语法（字段介绍）"></a>2、crontab 语法（字段介绍）</h4><p>此时，即可输入crontab命令，具体语法如下：</p>
-<pre><code>1 2 3 4 5 /path/to/command arg1 arg2
-或者：
-1 2 3 4 5 /root/ntp_sync.sh
-</code></pre><p>各字段的格式：</p>
-<table>
-<thead>
-<tr>
-<th>{minute}</th>
-<th>{hour}</th>
-<th>{day-of-month}</th>
-<th>{month}</th>
-<th>{day-of-week}</th>
-<th>{full-path-to-shell-script}</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>分钟 (0-59)</td>
-<td>小时 (0-23)</td>
-<td>日期 (1-31)</td>
-<td>月份 (1-12)</td>
-<td>一周当中的某天 (0-7 [7 或 0 代表星期天])</td>
-<td>计划执行的脚本或命令的完整路径</td>
-</tr>
-</tbody>
-</table>
-<h4 id="3、crontab-命令示例"><a href="#3、crontab-命令示例" class="headerlink" title="3、crontab 命令示例"></a>3、crontab 命令示例</h4>   <font color="red">（结合下一部分的操作符使用方法一起学习）</font>
-
-<pre><code>### 每隔 5 分钟运行一次 backupscript 脚本 ##
-*/5 * * * * /root/backupscript.sh
-
-### 每天的凌晨 1 点运行 backupscript 脚本 ##
-0 1 * * * /root/backupscript.sh
-
-### 每月的第一个凌晨 3:15 运行 backupscript 脚本 ##
-15 3 1 * * /root/backupscript.sh
-
-### 每个工作日(Mon – Fri) 11:59 p.m 都进行备份作业。
-59 23 * * 1,2,3,4,5 /root/bin/backup.sh
-或者：
-59 23 * * 1-5 /root/bin/backup.sh
-
-### 每周六、周日的3点10分执行hello.sh
-10 3 * * 0,6 hello.sh
-
-### 晚上11点到早上8点之间每两个小时，及每天早上八点，输出信息到文件中
-0 23-7/2,8 * * * echo &quot;have a good dream：）&quot; &gt;&gt; /tmp/test.txt
-
-### 每个月的4号与每个礼拜的礼拜一到礼拜三的早上11点执行命令
-0 11 4 * 1-3 command
-
-可以把经常要做的一些事放到其中，简化工作量，如每周一检查服务器的运行状态，查看报告，杀掉一些进程等等……
-</code></pre><h4 id="4、crontab-命令辅操作符"><a href="#4、crontab-命令辅操作符" class="headerlink" title="4、crontab 命令辅操作符"></a>4、crontab 命令辅操作符</h4><p>操作符允许为一个字段指定多个值，这里有三个操作符可供使用：</p>
-<ul>
-<li><p><font color="red">星号 (<code>*</code>) </font>: 代表任何时刻</p>
-<ul>
-<li>举个例子，在小时字段中，一个星号等同于每个小时；在月份字段中，一个星号则等同于每月。</li>
-</ul>
-</li>
-<li><p><font color="red">逗号 (<code>,</code>) </font>: 在一个字段上指定多个值，例如：1,5,10,15,20,25</p>
-</li>
-<li><p><font color="red">横杠 (<code>-</code>) </font>: 指定了一个值的范围</p>
-<ul>
-<li>例如：5-15 ，等同于使用逗号操作符键入的 5,6,7,8,9,…,13,14,15。</li>
-</ul>
-</li>
-<li><p><font color="red">分隔符 (<code>/</code>) </font>: 代表‘每’，/n表示每隔n单位间隔</p>
-<ul>
-<li>例如：小时字段为*/5 表示每5小时，也可以写成0-23/5，意思一样。其它字段也是类似的。 </li>
-</ul>
-</li>
-</ul>
-<h4 id="5、crontab-查看和删除某用户所有的定时任务"><a href="#5、crontab-查看和删除某用户所有的定时任务" class="headerlink" title="5、crontab 查看和删除某用户所有的定时任务"></a>5、crontab 查看和删除某用户所有的定时任务</h4><pre><code>crontab -l  # 默认查看当前用户的所有定时任务
-
-# 使用-u 参数查看指定用户的定时任务，需要以root用户身份执行
-crontab -u username -l  
-
-crontab -r  # 删除当前用户的crontab的所有任务内容，慎用!
-
-### 删除指定用户名下的定时任务，需要以 root 用户身份执行，慎用！
-crontab -r -u username
-</code></pre><h4 id="6、禁用邮件输出"><a href="#6、禁用邮件输出" class="headerlink" title="6、禁用邮件输出"></a>6、禁用邮件输出</h4><p>   默认情况下，某个命令或者脚本的输出内容（如果有的话）会发送到你的本地邮箱账户中。若想停止接收 crontab 发送的邮件，需要添加 &gt;/dev/null 2&gt;&amp;1 这段内容到执行的命令的后面，例如:</p>
-<pre><code>0 3 * * * /root/backup.sh &gt;/dev/null 2&gt;&amp;1
-</code></pre><h4 id="7、使用特殊字符串"><a href="#7、使用特殊字符串" class="headerlink" title="7、使用特殊字符串"></a>7、使用特殊字符串</h4><p>linux中提供了以下 8 个特殊字符串，可以用来替代crontab命令的前五个字段，这样不但可以节省时间，还可以提高可读性。</p>
-<table>
-<thead>
-<tr>
-<th>特殊字符</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>@reboot</td>
-<td>在每次启动时运行一次</td>
-</tr>
-<tr>
-<td>@yearly</td>
-<td>每年运行一次, 等同于 “0 0 1 1 *”</td>
-</tr>
-<tr>
-<td>@annually</td>
-<td>(同 @yearly)</td>
-</tr>
-<tr>
-<td>@monthly</td>
-<td>每月运行一次, 等同于 “0 0 1 <em> </em>”</td>
-</tr>
-<tr>
-<td>@weekly</td>
-<td>每周运行一次, 等同于 “0 0 <em> </em> 0”</td>
-</tr>
-<tr>
-<td>@daily</td>
-<td>每天运行一次, 等同于 “0 0 <em> </em> *”</td>
-</tr>
-<tr>
-<td>@midnight</td>
-<td>(同 @daily)</td>
-</tr>
-<tr>
-<td>@hourly</td>
-<td>每小时运行一次, 等同于 “0 <em> </em> <em> </em>”</td>
-</tr>
-</tbody>
-</table>
-<p>示例：</p>
-<pre><code>## 每小时运行一次 ntpdate 命令
-@hourly /path/to/ntpdate
-</code></pre>
-          
+          在Linux或类Unix系统中，通常使用 crontab 命令在指定的时间执行一个shell脚本或者一系列Linux命令，也就是通常所说的定时任务。一、cron 进程在详细介绍crontab之前，必须要说一下 cron 进程。
+1、cron进程是linux中的守护进程，在系统后台运行，它会（默认每分
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/31/05_定时任务crontab/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -749,55 +609,21 @@ crontab -r -u username
       
         
           
-            <blockquote>
-<p>在性能测试中，我们经常要关注系统磁盘空间，防止因磁盘空间占满而导致的报错，那么具体怎么查看磁盘空间的大小呢？怎么找到占用空间最大的文件呢？</p>
-</blockquote>
-<font color="blue">使用df、du并结合sort，可以快速找到系统中的大文件！</font>
-
-<h2 id="一、df-和-du-两者区别"><a href="#一、df-和-du-两者区别" class="headerlink" title="一、df 和 du 两者区别"></a>一、df 和 du 两者区别</h2><h4 id="1、df—disk-free"><a href="#1、df—disk-free" class="headerlink" title="1、df—disk free"></a>1、df—disk free</h4><ul>
-<li>可以快速获取 <code>磁盘</code> 被占用了多少空间，目前还剩下多少空间等信息。</li>
-</ul>
-<h4 id="2、du—disk-usage"><a href="#2、du—disk-usage" class="headerlink" title="2、du—disk usage"></a>2、du—disk usage</h4><ul>
-<li>显示磁盘空间的使用情况，统计 <code>目录（或文件）</code>所占磁盘空间的大小。</li>
-</ul>
-<p>是不是感觉字面看起来没啥区别呀？哈哈，实际有很多不同哦</p>
-<h4 id="3、df-和-du-的不同点："><a href="#3、df-和-du-的不同点：" class="headerlink" title="3、df 和 du 的不同点："></a>3、df 和 du 的不同点：</h4><p>（1）统计的范围不同</p>
-<pre><code>df 是从总体上统计系统各磁盘的占用情况，不能统计具体的文件夹或文件的大小。
-
-du 既可以从总体上统计，又可以统计具体的某个文件夹或文件的大小。
-</code></pre><p>（2）计算方式不同，计算速度不同</p>
-<pre><code>df 通过文件系统来快速获取空间大小的信息，速度快，效率高
-
-du 通过逐级进入指定目录的每一个子目录，逐个计算每个文件大小并相加，最终显示出来。所以计算速度慢，当文件目录较多文件较大时要等很久很久！！
-而且因为要进入每个子目录计算文件大小，如果当前用户对某些文件/夹没有访问权限时，无法进行计算。
-</code></pre><p>（3）计算结果的差异</p>
-<pre><code>df  可以获取已经删除的文件。
-由于df是通过文件系统来获取空间大小的，当我们删除一个文件的时候，这个文件不是马上就在文件系统当中消失了，而是暂时消失了，当所有程序都不用时，才会根据OS的规则释放掉已经删除的文件。所以当一个文件刚删除清空没完全释放时，df 仍会把它计算在内。（当你删除一个大文件前后可以分别用df 命令查看一下，刚删除时还在占用磁盘空间）
-
-du 只能看到当前存在的、没有被删除的文件。他计算的大小就是当前他认为存在的所有文件大小的累加和。
-
-当文件系统也确定删除了该文件后，这时候du与df 的结果就一致了。
-所以在这一点上，可以说du 计算更精确，也可以说df 计算有延迟，根据个人情况使用就行。
-</code></pre><h2 id="二、df-命令"><a href="#二、df-命令" class="headerlink" title="二、df 命令"></a>二、df 命令</h2><h4 id="1、df-h"><a href="#1、df-h" class="headerlink" title="1、df -h"></a>1、df -h</h4><pre><code>(-h参数使结果以K，M，G为单位，提高信息的可读性)  
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[app@VM_18_18_centos jjingli]$ df -h</span><br><span class="line">Filesystem            Size  Used Avail Use% Mounted on</span><br><span class="line">/dev/vda1              20G   15G  4.3G  78% /</span><br><span class="line">/dev/vdb              118G  100G   13G  89% /data</span><br></pre></td></tr></table></figure>
-<p>默认显示系统所有的磁盘情况，此图中显示当前一共有两个硬盘分区，及各自的占用情况。</p>
-<h4 id="2、df-h-分区名"><a href="#2、df-h-分区名" class="headerlink" title="2、df -h  分区名"></a>2、df -h  分区名</h4><pre><code>该命令可以指定显示某个分区的占用情况，用的比较少
-</code></pre><font color="red">当使用 <code>df -h</code> 命令看到磁盘占用较高时，需要使用 <code>du</code> 命令进一步查看哪些文件较大，进而删除。</font> 
-
-<h2 id="三、du-命令"><a href="#三、du-命令" class="headerlink" title="三、du 命令"></a>三、du 命令</h2><h4 id="1、du-sh"><a href="#1、du-sh" class="headerlink" title="1、du -sh"></a>1、du -sh</h4><pre><code>(-h 参数同样是为了提高可读性，-s 代表summary，只显示总大小)
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[app@VM_18_18_centos jjingli]$ du -sh</span><br><span class="line">6.4G</span><br></pre></td></tr></table></figure>
-<p>默认显示当前目录下所有文件和文件夹的总大小。</p>
-<p>当目录下文件夹特别多时，记得不要去掉-s参数，不然会把所有文件夹下的所有文件分别列出来。</p>
-<h4 id="2、du-sh-目录名"><a href="#2、du-sh-目录名" class="headerlink" title="2、du -sh 目录名"></a>2、du -sh 目录名</h4><p>du -sh 在不指定目录的情况下，默认会显示当前目录下的所有子目录的总大小。</p>
-<p><code>du -sh 目录名</code> 在指定目录的情况下，会显示指定目录下的所有文件或文件夹的大小。</p>
-<pre><code>du -sh *  # 显示当前目录下的所有文件和文件夹大小
-
-du -sh /  # 显示根目录下所有的文件和文件夹大小
-
-du -sh /data  # 显示/data目录下所有的文件和文件夹大小
-</code></pre><h4 id="3、du-和-sort-结合对文件排序"><a href="#3、du-和-sort-结合对文件排序" class="headerlink" title="3、du 和 sort 结合对文件排序"></a>3、du 和 sort 结合对文件排序</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看/data目录下的所有文件和文件夹大小，并从大到小排序</span></span><br><span class="line">du -sh /data | sort -nr</span><br><span class="line"></span><br><span class="line">这个命令对吗？</span><br><span class="line">不对！因为du -sh展示的结果单位不同，但是sort排序只能针对数字，导致<span class="number">980</span>KB的文件排在<span class="number">1</span>GB文件的前面。</span><br><span class="line"> </span><br><span class="line">    </span><br><span class="line"><span class="comment"># 查看/data目录下的所有文件和文件夹大小，找出所有GB大小的文件，并从大到小排序</span></span><br><span class="line">du -sh /data | grep G | sort -nr</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 这样就可以达到目的了~, 但是如果文件夹较多的话，还要一个一个的进入去找</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 去掉 -s 参数，可以直接查看包括所有文件夹下的所有文件</span></span><br><span class="line">du -h /data | grep G | sort -nr</span><br></pre></td></tr></table></figure>
-
           
+在性能测试中，我们经常要关注系统磁盘空间，防止因磁盘空间占满而导致的报错，那么具体怎么查看磁盘空间的大小呢？怎么找到占用空间最大的文件呢？
+
+使用df、du并结合sort，可以快速找到系统中的大文件！
+
+一、df 和 du 两者区别1、df—disk free
+可以快速获取 磁盘 被占用了多少空间
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/31/07_使用du、df和sort命令快速找出linux系统中的大文件/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -915,95 +741,22 @@ du -sh /data  # 显示/data目录下所有的文件和文件夹大小
       
         
           
-            <p>[toc]</p>
-<h1 id="一、sort-排序"><a href="#一、sort-排序" class="headerlink" title="一、sort 排序"></a>一、sort 排序</h1><ul>
-<li>sort命令用于 对文本文件内容，以行为单位来排序。</li>
-<li>sort命令以空格作为字段分隔符，将一行分割为多个关键字对文件进行排序。</li>
-<li><font color="red">需要注意的是除非你将输出重定向到文件中，否则sort命令并不对文件内容进行实际的排序(即文件内容没有修改)，只是将文件内容按有序输出。</font>
-
-</li>
-</ul>
-<h2 id="1、语法"><a href="#1、语法" class="headerlink" title="1、语法"></a>1、语法</h2><pre><code>sort [-bcdfimMnr][-o&lt;输出文件&gt;][-t&lt;分隔字符&gt;][+&lt;起始栏位&gt;-&lt;结束栏位&gt;][--help][--verison][文件]
-</code></pre><h2 id="2、参数说明"><a href="#2、参数说明" class="headerlink" title="2、参数说明"></a>2、参数说明</h2><table>
-<thead>
-<tr>
-<th>参数</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>-m |将几个排序好的文件进行合并。<br>-u |<strong>内容去重</strong><br>-n |<strong>依照数值的大小排序，升序排列。</strong><br>-o&lt;输出文件&gt; |将排序后的结果存入指定的文件。<br>-r |以相反的顺序来排序。<br>-t&lt;分隔字符&gt;| <strong>指定排序时所用的栏位分隔字符。</strong><br>-k&lt;指定排序的列数&gt; |<strong>指定要排序的列数，默认是从第一列开始比较，-k可指定某一列，也可与-t 结合使用时，代表某一栏</strong><br>+&lt;起始栏位&gt;-&lt;结束栏位&gt;| 以指定的栏位来排序，范围由起始栏位到结束栏位的前一栏位。</p>
-<h2 id="3、实例"><a href="#3、实例" class="headerlink" title="3、实例"></a>3、实例</h2><p>（1）对文件进行升序排序</p>
-<pre><code>sort testfile 
-以行为单位，相互比较，从首字符向后，依次按ASCII码值进行比较，最后将他们按升序输出。
-注意：原文件内容并未被修改！
-</code></pre><p><img src="https://img-blog.csdnimg.cn/20181201161807360.png" alt="在这里插入图片描述"></p>
-<p>（2）对文件进行升序排序，并去除重复行 sort -u</p>
-<pre><code>sort -u 1.txt
-</code></pre><p><img src="https://img-blog.csdnimg.cn/20181201161837874.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>可以看出：</p>
-<ul>
-<li>==sort -u是先对内容进行排序，然后再去重（实际也是去除了相邻的重复行）。==</li>
-<li><p>==而uniq不能实现排序，只能去除相邻的重复行，所以要跟sort合并使用，先用sort排序，再用uniq去重==</p>
-<pre><code>sort 1.txt | uniq
-</code></pre><p><img src="https://img-blog.csdnimg.cn/20181201161947222.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-</li>
-</ul>
-<p>（3）按数值大小降序排列后，把结果再输出到原文件中 -o</p>
-<font color="red">（直接用重定向做不到）</font>
-
-<pre><code>sort -nr num.txt -o num.txt
-
-如果用重定向 &gt; 的方式，只会把num.txt清空！
-sort -nr num.txt &gt; num.txt
-</code></pre><p>（4）使用sort的-t选项和-k选项，设置间隔符后再指定排序的列</p>
-<p><img src="https://img-blog.csdnimg.cn/20181201162053621.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>如上图所示，<strong>对年月日的日期进行排序，直接使用sort dat.txt时，会按列从左到右来排序；</strong></p>
-<pre><code>sort -t&apos;-&apos; -k2 dat.txt
-其中-t&apos;-&apos; 是以 ‘-’ 为分隔符对每行内容分栏，然后-k 2 表示对分栏后的第二栏内容进行默认的升序排列。
-</code></pre><p>（5）使用sort -k指定以某一列排序</p>
-<pre><code>sort -k9 a.txt
-（基于a.txt的第九列来排序）
-</code></pre><p>（6）sort命令并非仅能对文件进行排序，我们还可以通过管道将命令的输出内容重定向到sort命令中</p>
-<pre><code>ls -l /home/$USER | sort -nk5
-</code></pre><p>（7）对/etc/passwd以‘：’分隔，再以第六个域的第2个字符到第4个字符进行正向排序，再基于第一个域进行反向排序。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/passwd |  sort -t&apos;:&apos; -k 6.2,6.4 -k 1r      </span><br><span class="line">sync:x:4:65534:sync:/bin:/bin/sync</span><br><span class="line">proxy:x:13:13:proxy:/bin:/bin/sh</span><br><span class="line">bin:x:2:2:bin:/bin:/bin/sh</span><br><span class="line">sys:x:3:3:sys:/dev:/bin/sh</span><br></pre></td></tr></table></figure></p>
-<h1 id="二、uniq-去重"><a href="#二、uniq-去重" class="headerlink" title="二、uniq 去重"></a>二、uniq 去重</h1><h2 id="1、uniq使用"><a href="#1、uniq使用" class="headerlink" title="1、uniq使用"></a>1、uniq使用</h2><ul>
-<li>uniq命令用于去重文件内容中的连续重复行，通常要跟sort一起使用，先利用sort排序，然后用uniq去重。</li>
-<li>uniq命令与sort命令类似，并不对文件内容进行实际的排序(即文件内容没有修改)，只是在输出内容中去重。</li>
-<li>uniq -c ：在输出行前面加上每一行重复的次数</li>
-<li>uniq -d ：仅显示重复行</li>
-<li>uniq -u ：仅显示不重复的行</li>
-<li>uniq -n ：前n个字段与每个字段前的空白一起被忽略。一个字段是一个非空格、非制表符的字符串，彼此由制表符和空格隔开（字段从0开始编号）。</li>
-<li>uniq +n ：前n个字符被忽略，之前的字符被跳过（字符从0开始编号）。</li>
-</ul>
-<h2 id="2、sort和uniq去重结果对比"><a href="#2、sort和uniq去重结果对比" class="headerlink" title="2、sort和uniq去重结果对比"></a>2、sort和uniq去重结果对比</h2><p>1、<code>sort -u</code>使用sort对文件去重</p>
-<pre><code>sort -u 1.txt
-</code></pre><p><img src="https://img-blog.csdnimg.cn/20181201162347799.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>可以看出，==sort -u是先对内容进行排序，然后再去重（实际也是去除了相邻的重复行）。==</p>
-<p>2、使用uniq对文件去重</p>
-<p><img src="https://img-blog.csdnimg.cn/20181201162547161.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>可以看出，<font color="red">当内容中的重复行不相邻时，直接使用uniq 1.txt 并不能达到去重。</font></p>
-<font color="red">因为uniq只能去除相邻的重复行，所以要跟sort合并使用，先用sort排序，再用uniq去重<code>sort 1.txt | uniq</code>。</font>
+          [toc]
+一、sort 排序
+sort命令用于 对文本文件内容，以行为单位来排序。
+sort命令以空格作为字段分隔符，将一行分割为多个关键字对文件进行排序。
+需要注意的是除非你将输出重定向到文件中，否则sort命令并不对文件内容进行实际的排序(即文件内容没有修改)，只是将文件内容按有序输出。
 
 
-<h2 id="3、最常用的方式"><a href="#3、最常用的方式" class="headerlink" title="3、最常用的方式"></a>3、最常用的方式</h2><p>实际工作中，最常用的方式是sort和uniq结合：</p>
-<pre><code>sort -n 1.txt | uniq -c
-</code></pre><h2 id="4、只显示文件中不重复的行"><a href="#4、只显示文件中不重复的行" class="headerlink" title="4、只显示文件中不重复的行"></a>4、只显示文件中不重复的行</h2><pre><code>uniq -u 1.txt
-</code></pre><h2 id="5、uniq-u-n-结合使用"><a href="#5、uniq-u-n-结合使用" class="headerlink" title="5、uniq -u -n 结合使用"></a>5、uniq -u -n 结合使用</h2><p>显示文件 1.txt 中不重复的行，从第2个字段的第2个字符开始做比较。</p>
-<pre><code>uniq -u -1 +1 1.txt
-</code></pre><h1 id="三、wc-统计"><a href="#三、wc-统计" class="headerlink" title="三、wc 统计"></a>三、wc 统计</h1><p>wc命令用于统计文件里面有多少行，多少单词，多少字符。</p>
-<p>常与sort、grep等其它命令结合使用。<br>|参数|说明  |<br>|–|–|<br>-l |line，统计行数；<br>-w |word，统计单词数(英文单词)，以空格或换行为单位；<br>-m|统计字符数；</p>
-<pre><code>wc 1.txt
-默认显示所有的行数、单词数、字符数。
-</code></pre><p>如下图所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/20181201162811424.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 
-          
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/31/06_sort排序、uniq去重、wc统计/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1121,242 +874,20 @@ sort -nr num.txt &gt; num.txt
       
         
           
-            <p>[toc]</p>
-<h1 id="各命令的主要区别："><a href="#各命令的主要区别：" class="headerlink" title="各命令的主要区别："></a>各命令的主要区别：</h1><p>linux命令中cat、more、less、tail、head均可用来查看文件内容，主要区别有：</p>
-<ul>
-<li>cat是一次性显示整个文件的内容，适用于文件内容少的情况；</li>
-<li>more和less一般用于显示文件内容超过一屏的内容，并且提供翻页的功能。</li>
-<li>tail 和 head分别显示文件的后几行和前几行内容。常用于大文件的截取。</li>
-</ul>
-<h1 id="一、cat"><a href="#一、cat" class="headerlink" title="一、cat"></a>一、cat</h1><p>cat 命令常用于显示整个文件的内容，或者合并多个文件。</p>
-<pre><code>cat [options] fileName
-</code></pre><h2 id="1、常用参数："><a href="#1、常用参数：" class="headerlink" title="1、常用参数："></a>1、常用参数：</h2><ul>
-<li><code>-n 或 --number</code>：由 1 开始对所有输出的行数编号。</li>
-<li><code>-b 或 --number-nonblank</code>：和 -n 相似，只不过对于空白行不编号。</li>
-</ul>
-<h2 id="2、实例："><a href="#2、实例：" class="headerlink" title="2、实例："></a>2、实例：</h2><p>（1）把 file1 的文档内容全部显示在屏幕上：</p>
-<pre><code>cat  file1
-</code></pre><p>（2）把 file1 的文档内容加上行号后输入 file2 这个文档里：</p>
-<pre><code>cat -n file1 &gt; file2
-</code></pre><font color="red">（注意：如果file2中原本有内容，此命令会覆盖file2中原有内容）</font>
+          [toc]
+各命令的主要区别：linux命令中cat、more、less、tail、head均可用来查看文件内容，主要区别有：
 
-<p>（3）把file1和file2的内容合并到file3，同样会覆盖原file3.txt中的内容：</p>
-<pre><code>cat file1 file2 &gt; file3
-</code></pre><p>（4）把 file1 和 file2 的文档内容加上行号（空白行不加）之后将内容追加到 file3 文档里：</p>
-<pre><code>cat -b file1 file2 &gt;&gt; file3
-</code></pre><p>（5）清空 /etc/test.txt 文档内容：</p>
-<pre><code>cat /dev/null &gt; /etc/test.txt
-</code></pre><p>==当使用&gt;时，cat会覆盖右边的文件；当使用&gt;&gt;时，cat会追加到右边的文件中。==</p>
-<h2 id="3、cat-的反命令–tac-命令"><a href="#3、cat-的反命令–tac-命令" class="headerlink" title="3、cat 的反命令–tac 命令"></a>3、cat 的反命令–tac 命令</h2><p>把cat 单词反过来就是 tac, 该命令同样是显示整个文件的内容，但是倒序显示。</p>
-<h1 id="二、more"><a href="#二、more" class="headerlink" title="二、more"></a>二、more</h1><p>more 比 cat 功能更强大，会让日志分页显示，同时显示内容的百分比，更方便阅读。</p>
-<p>最基本的指令就是按空白键（space）就往下一页显示，按 b 键就会往回（back）一页显示，而且还有搜寻字串的功能（只能用/向下搜索）。</p>
-<h2 id="1、语法："><a href="#1、语法：" class="headerlink" title="1、语法："></a>1、语法：</h2><pre><code>more [-dlfpcsu] [-num] [+/pattern] [+linenum] [fileNames..]
-</code></pre><h2 id="2、常用参数："><a href="#2、常用参数：" class="headerlink" title="2、常用参数："></a>2、常用参数：</h2><ul>
-<li>-num 一次显示的行数</li>
-<li>+/pattern 在每个文档显示前搜寻该字串（pattern），然后从该字串前两行开始显示</li>
-<li>/字符串：向下搜索”字符串”的功能</li>
-<li>+num 从第 num 行开始显示</li>
-<li>fileNames 欲显示内容的文档，可以是多个文件</li>
-</ul>
-<h2 id="3、实例："><a href="#3、实例：" class="headerlink" title="3、实例："></a>3、实例：</h2><p>（1）逐页显示file1内容：</p>
-<pre><code>more file1
-</code></pre><p>（2）设定每屏显示的行数：</p>
-<pre><code>more -10 file1
-以10行为单位翻页
-</code></pre><p>（3）从第 20 行开始显示 file1 内容：</p>
-<pre><code>more +20 file1
-</code></pre><p>（4）同时显示多个文件内容：</p>
-<pre><code>more file1 file2
-依次显示出file1和file2的全部内容。
-</code></pre><p><strong>（5）从文件中查找第一个出现”liu”字符串的行，并从该处前两行开始显示输出：</strong></p>
-<pre><code>more +/liu test.log
-</code></pre><h2 id="4、常用操作命令"><a href="#4、常用操作命令" class="headerlink" title="4、常用操作命令"></a>4、常用操作命令</h2><table>
-<thead>
-<tr>
-<th>命令</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>Enter</code></td>
-<td>向下n行，需要定义，默认为1行</td>
-</tr>
-<tr>
-<td><code>空格键</code></td>
-<td>向下滚动一屏</td>
-</tr>
-<tr>
-<td><code>b</code></td>
-<td>向上滚动一屏</td>
-</tr>
-<tr>
-<td>=</td>
-<td>输出当前行的行号</td>
-</tr>
-<tr>
-<td>:f</td>
-<td>输出文件名和当前行的行号</td>
-</tr>
-<tr>
-<td>V</td>
-<td>调用vi编辑器</td>
-</tr>
-<tr>
-<td>!</td>
-<td>调用Shell，并执行命令</td>
-</tr>
-</tbody>
-</table>
-<h1 id="三、less"><a href="#三、less" class="headerlink" title="三、less"></a>三、less</h1><p>less 与 more 类似，less 的用法比起 more 更加的有弹性。</p>
-<p>而且拥有更多的搜索功能，不止可以向下搜，也可以向上搜，跟vi中的搜索功能更相似。</p>
-<h2 id="1、语法：-1"><a href="#1、语法：-1" class="headerlink" title="1、语法："></a>1、语法：</h2><pre><code>less [参数]  [fileNames...]
-</code></pre><h2 id="2、常用参数：-1"><a href="#2、常用参数：-1" class="headerlink" title="2、常用参数："></a>2、常用参数：</h2><table>
-<thead>
-<tr>
-<th>命令</th>
-<th>作用</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>-f</td>
-<td>强迫打开特殊文件，例如外围设备代号、目录和二进制文件</td>
-</tr>
-<tr>
-<td>-i</td>
-<td>忽略搜索时的大小写</td>
-</tr>
-<tr>
-<td>-m</td>
-<td>显示类似more命令的百分比</td>
-</tr>
-<tr>
-<td>-M</td>
-<td><strong>显示读取文件的百分比、行号及总行数</strong></td>
-</tr>
-<tr>
-<td>-N</td>
-<td><strong>在每行前显示行号</strong></td>
-</tr>
-<tr>
-<td>/字符串</td>
-<td><strong>向下搜索”字符串”的功能</strong></td>
-</tr>
-<tr>
-<td>?字符串</td>
-<td><strong>向上搜索”字符串”的功能</strong></td>
-</tr>
-<tr>
-<td>n</td>
-<td><strong>重复前一个搜索（与 / 或 ? 有关）</strong></td>
-</tr>
-<tr>
-<td>N</td>
-<td><strong>反向重复前一个搜索（与 / 或 ? 有关）</strong></td>
-</tr>
-<tr>
-<td>&amp;pattern</td>
-<td>仅显示匹配模式的行，而不是整个文件</td>
-</tr>
-<tr>
-<td>空格键</td>
-<td><strong>滚动一页</strong></td>
-</tr>
-<tr>
-<td>回车键</td>
-<td><strong>滚动一行</strong></td>
-</tr>
-<tr>
-<td>[pagedown]</td>
-<td>向下翻动一页</td>
-</tr>
-<tr>
-<td>[pageup]</td>
-<td>向上翻动一页</td>
-</tr>
-<tr>
-<td>G</td>
-<td><strong>移动到最后一行</strong></td>
-</tr>
-<tr>
-<td>g</td>
-<td><strong> 移动到第一行</strong></td>
-</tr>
-<tr>
-<td>v</td>
-<td>使用配置的编辑器编辑当前文件</td>
-</tr>
-<tr>
-<td>h</td>
-<td>显示 less 的帮助文档</td>
-</tr>
-</tbody>
-</table>
-<h2 id="3、less-版-tail-f"><a href="#3、less-版-tail-f" class="headerlink" title="3、less 版 tail -f"></a>3、less 版 tail -f</h2><p>在 Linux 动态查看日志文件常用的命令非 tail -f 莫属。</p>
-<p>其实 less 也能完成这项工作，使用 F 命令即可。</p>
-<p>在 less 查看日志文件时：</p>
-<ol>
-<li><strong>可以按大写 F，就会有类似 tail -f 的效果，读取写入文件的最新内容， 按 ctrl+C 停止</strong>。</li>
-<li>可以按 v 进入编辑模型， shift+ZZ 保存退出到 less 查看模式。</li>
-<li>可以按 :e 查看下一个文件， 用 :n 和 :p 来回切换。</li>
-</ol>
-<h2 id="4、实例"><a href="#4、实例" class="headerlink" title="4、实例"></a>4、实例</h2><p>1、分页查看文件，与more类似：</p>
-<pre><code>less log1.log
-</code></pre><p>2、ps查看进程信息并通过less分页显示同时显示行号：</p>
-<pre><code>ps -ef  | less -N
-</code></pre><p>3、查看命令历史使用记录并通过less分页显示：</p>
-<p><img src="https://img-blog.csdnimg.cn/20181026091802492.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_27,color_FFFFFF,t_70" alt=""></p>
-<p>4、浏览多个文件</p>
-<pre><code>less log2.log log2.log
-</code></pre><p>说明：</p>
-<ul>
-<li>输入 ：n后，切换到 log2.log</li>
-<li>输入 ：p 后，切换到log1.log</li>
-</ul>
-<h1 id="总结：less-和-more-对比"><a href="#总结：less-和-more-对比" class="headerlink" title="总结：less 和 more 对比"></a>总结：less 和 more 对比</h1><ul>
-<li>1、more命令从前向后读取文件，因此在启动时就加载整个文件，如果文件较大时，加载速度慢。</li>
-<li>2、 less 并未在一开始就读入整个文件，因此在遇上查看大文件时，会比more、vi等工具的速度更快。同时，less的查找功能更强大。</li>
-<li>3、more和less都支持：用空格显示下一页，按键b显示上一页。。</li>
-</ul>
-<h1 id="四、tail"><a href="#四、tail" class="headerlink" title="四、tail"></a>四、tail</h1><p>tail 用来显示文件的最后几行内容。</p>
-<p>当文件内容有更新时，tail会自己主动刷新，确保一直显示最新的文件内容。</p>
-<h2 id="1、命令语法"><a href="#1、命令语法" class="headerlink" title="1、命令语法"></a>1、命令语法</h2><pre><code>tail [ -f ] [ -c Number | -n Number | -m Number | -b Number | -k Number ] [ File ]
-</code></pre><h2 id="2、常用参数：-2"><a href="#2、常用参数：-2" class="headerlink" title="2、常用参数："></a>2、常用参数：</h2><ul>
-<li>-f  监视File文件增长，动态刷新文件</li>
-<li>-n Number 从倒数Number行位置读取指定文件</li>
-<li>-c Number 从倒数Number字节数位置读取指定文件</li>
-</ul>
-<h2 id="3、实例"><a href="#3、实例" class="headerlink" title="3、实例"></a>3、实例</h2><p>（1）显示文件最后几行内容：</p>
-<pre><code>tail  filename
-默认只显示文件最后10行内容，并退出文件，不会自动刷新。
-</code></pre><p>（2）显示文件最后50行内容：</p>
-<pre><code>tail -n 50 filename
-显示文件最后50行内容，并退出文件，不会自动刷新。
-</code></pre><p>（3）显示文件最后内容，并动态刷新：</p>
-<pre><code>tail -f filename
-或 tailf  filename
-监视filename文件的尾部内容（默认10行，相当于增加参数 -n 10），并动态刷新显示在屏幕上。按下CTRL+C可退出。
-</code></pre><p>（4）指定文件动态刷新的行数：<br>tail  -50f  filename<br>显示最后50行文件内容，并动态刷新，每次刷新50行。<br>（5）截取文件的后1000行，并保存到新文件中</p>
-<pre><code>tail -n 1000 file1.txt &gt; file2.txt
-</code></pre><h1 id="五、head"><a href="#五、head" class="headerlink" title="五、head"></a>五、head</h1><p>head 用来显示文件的前面几行内容，可以指定行数和字节数。</p>
-<h2 id="1、命令语法-1"><a href="#1、命令语法-1" class="headerlink" title="1、命令语法"></a>1、命令语法</h2><pre><code>tail  [-v | -c Number | -n Number] [ File ]
-</code></pre><h2 id="2、常用参数：-3"><a href="#2、常用参数：-3" class="headerlink" title="2、常用参数："></a>2、常用参数：</h2><ul>
-<li>-v  在输出内容前面显示文件名</li>
-<li>-n Number 显示文件的前面Number行内容</li>
-<li>-c Number 显示文件的前面Number字节内容</li>
-</ul>
-<h2 id="3、实例-1"><a href="#3、实例-1" class="headerlink" title="3、实例"></a>3、实例</h2><p>（1）显示前5行，并显示文件名</p>
-<pre><code>head -vn  5 head.txt
-</code></pre><p>（2）显示前5个字节</p>
-<pre><code>head -c 5 head.txt
-</code></pre><p>（3）截取文件的前100行，并保存到新文件中</p>
-<pre><code>head -n 1000 file1.txt &gt; file2.txt
-</code></pre><h1 id="总结：tail-和-head-对比"><a href="#总结：tail-和-head-对比" class="headerlink" title="总结：tail 和 head 对比"></a>总结：tail 和 head 对比</h1><p>1、tail 可显示文件最后几行的内容，并动态刷新。</p>
-<p>2、head 可显示文件前面几行的内容。</p>
-<p>3、二者也常用于大文件的截取。</p>
-
-          
+cat是一次性显示整个文件的内容，适用于文件内容少的情况；
+more和less一般用于显示文件内容超过一屏的内容，并且提供翻页的功能。
+tail 和 head分别显示文件
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/31/02_文本查看命令比较cat-less-more-tail-head/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1474,139 +1005,20 @@ sort -nr num.txt &gt; num.txt
       
         
           
-            <p>[toc]</p>
-<h1 id="各命令的主要区别："><a href="#各命令的主要区别：" class="headerlink" title="各命令的主要区别："></a>各命令的主要区别：</h1><p>linux命令中find、locate 、whereis、which均可用来查找文件，主要区别有：</p>
-<ul>
-<li>find是最常用和最强大的查找命令。它能做到实时查找，精确查找，但查找内容较多时速度慢；</li>
-<li>locate查找速度快，但是不是实时查找，所以查找的结果不精确；</li>
-<li>whereis用于查找二进制文件、源代码文件和man手册页；</li>
-<li>which指令会在环境变量$PATH设置的目录里查找符合条件的文件。</li>
-</ul>
-<h1 id="一、find-查找文件"><a href="#一、find-查找文件" class="headerlink" title="一、find 查找文件"></a>一、find 查找文件</h1><ul>
-<li><p>find命令用来在指定目录下查找文件。</p>
-</li>
-<li><p>任何位于参数之前的字符串都将被视为欲查找的目录名。</p>
-</li>
-<li><p>==如果使用该命令时，不设置任何参数，则find命令将在当前目录下查找子目录与文件。并且将查找到的子目录和文件全部进行显示。==</p>
-</li>
-</ul>
-<h2 id="1、语法"><a href="#1、语法" class="headerlink" title="1、语法"></a>1、语法</h2><pre><code>find path -option  [ -print ] [ -exec -ok command ] {} \;
-</code></pre><h2 id="2、参数说明"><a href="#2、参数说明" class="headerlink" title="2、参数说明"></a>2、参数说明</h2><p>find 根据下列规则判断 path 和 expression：</p>
-<ul>
-<li>在命令列上第一个 - ( ) , ! 之前的部份为 path，之后的是 expression。</li>
-<li>如果 path 是空字串则使用目前路径</li>
-<li>如果 expression 是空字串则使用 -print 为预设 expression。<br>（expression 中可使用的选项有二三十个之多，在此只介绍最常用的部份。）</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>-cmin n</td>
-<td>在过去 n 分钟内被修改过</td>
-</tr>
-<tr>
-<td>-ctime n</td>
-<td>在过去n天内被修改过的文件</td>
-</tr>
-<tr>
-<td>-mtime n</td>
-<td>在过去 n 天内被修改过-（跟上面两个选项的区别见下面）</td>
-</tr>
-<tr>
-<td>-mmin n</td>
-<td>在过去 n 天内被修改过-（跟上面两个选项的区别见下面）</td>
-</tr>
-<tr>
-<td>-empty</td>
-<td>空的文件，寻找文件大小为0 Byte的文件，或目录下没有任何子目录或文件的空目录；</td>
-</tr>
-<tr>
-<td>-ipath p, -path p</td>
-<td>匹配文件路径，ipath 会忽略路径大小写</td>
-</tr>
-<tr>
-<td>-name name, -iname name</td>
-<td>匹配文件名称。iname 会忽略名称大小写</td>
-</tr>
-<tr>
-<td>-size n</td>
-<td>匹配文件大小，单位有：c–字节，k–千字节，M–兆字节，G–</td>
-</tr>
-<tr>
-<td>-type c</td>
-<td>匹配文件类型，c是指定的类型。<br>文件类型参数有：f–普通文件，d–目录，l–符号链接</td>
-</tr>
-<tr>
-<td>-exec&lt;执行指令&gt;</td>
-<td>假设find指令的回传值为True，就执行该指令；</td>
-</tr>
-<tr>
-<td>-ok&lt;执行指令&gt;</td>
-<td>此参数的效果和指定“-exec”类似，但在执行指令之前会先询问用户，若回答“y”或“Y”，则放弃执行命令；</td>
-</tr>
-<tr>
-<td>-regex&lt;范本样式&gt;</td>
-<td>指定字符串作为寻找文件或目录的范本样式；</td>
-</tr>
-</tbody>
-</table>
-<h2 id="3、UNIX-Linux文件系统时间戳"><a href="#3、UNIX-Linux文件系统时间戳" class="headerlink" title="3、UNIX/Linux文件系统时间戳"></a>3、UNIX/Linux文件系统时间戳</h2><p>UNIX/Linux文件系统中，每个文件都有三种时间戳：</p>
-<table>
-<thead>
-<tr>
-<th>时间戳</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>访问时间（-atime/天，-amin/分钟）</td>
-<td>用户最近一次访问时间。</td>
-</tr>
-<tr>
-<td>修改时间（-mtime/天，-mmin/分钟）</td>
-<td>文件最后一次修改时间。</td>
-</tr>
-<tr>
-<td>变化时间（-ctime/天，-cmin/分钟）</td>
-<td>文件数据元（例如权限等）最后一次修改时间。</td>
-</tr>
-</tbody>
-</table>
-<p>另外，还可以使用 ( ) 将运算式分隔，并使用下列运算：<br>exp1 -and exp2<br>! expr<br>-not expr<br>exp1 -or exp2<br>exp1, exp2</p>
-<h2 id="4、实例"><a href="#4、实例" class="headerlink" title="4、实例"></a>4、实例</h2><p>（1）匹配文件名称<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">将当前目录及其子目录下所有.py后缀的文件列出来：</span><br><span class="line">find . -name &quot;*.py&quot;</span><br><span class="line">find . -iname &quot;*.py&quot;  （同上，但忽略大小写，.PY后缀的文件也列出来）</span><br><span class="line"></span><br><span class="line">当前目录及子目录下查找所有以.txt和.pdf结尾的文件：</span><br><span class="line">find . \( -name &quot;*.txt&quot; -o -name &quot;*.pdf&quot; \)</span><br><span class="line">或</span><br><span class="line">find . -name &quot;*.txt&quot; -o -name &quot;*.pdf&quot;</span><br></pre></td></tr></table></figure></p>
-<p>（2）匹配文件路径<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">匹配文件路径或者文件：</span><br><span class="line">find /usr/ -path &quot;*local*&quot;</span><br><span class="line"></span><br><span class="line">基于正则表达式匹配文件路径：</span><br><span class="line">find . -regex &quot;.*\(\.txt\|\.pdf\)$&quot;</span><br><span class="line">（查找当前目录及子目录下所有以.txt或.pdf结尾的文件）</span><br><span class="line"></span><br><span class="line">同上，但忽略大小写：</span><br><span class="line">find . -iregex &quot;.*\(\.txt\|\.pdf\)$&quot;</span><br></pre></td></tr></table></figure></p>
-<p>（3）否定参数 <code>！</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">找出/home下不是以.txt结尾的文件：</span><br><span class="line">find /home ! -name &quot;*.txt&quot;</span><br></pre></td></tr></table></figure></p>
-<p>（4）匹配文件类型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">将当前目录及其子目录中所有的一般文件列出：</span><br><span class="line">find . -type f</span><br></pre></td></tr></table></figure></p>
-<p>（5）匹配文件时间戳<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">搜索最近七天内被 访问 过的所有文件：</span><br><span class="line">find . -type f -atime -7</span><br><span class="line"></span><br><span class="line">搜索恰好在七天前被 修改 过的所有文件：</span><br><span class="line">find . -type f -mtime 7</span><br><span class="line"></span><br><span class="line">搜索超过七天内被 修改 过的所有文件：</span><br><span class="line">find . -type f -mtime +7</span><br><span class="line"></span><br><span class="line">将目前目录及其子目录下所有最近 20 天内更新过的文件列出：</span><br><span class="line">find . -ctime -20</span><br></pre></td></tr></table></figure></p>
-<p>（6）匹配文件大小<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">搜索大于10KB的文件：</span><br><span class="line">find . -type f -size +10k</span><br><span class="line"></span><br><span class="line">搜索小于10KB的文件：</span><br><span class="line">find . -type f -size -10k</span><br><span class="line"></span><br><span class="line">搜索等于10KB的文件：</span><br><span class="line">find . -type f -size 10k</span><br><span class="line"></span><br><span class="line">搜索所有长度为零的文件：</span><br><span class="line">find . -empty</span><br></pre></td></tr></table></figure></p>
-<p>（7）删除匹配文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">删除当前目录下所有.txt文件：</span><br><span class="line">find . -type f -name &quot;*.txt&quot; -delete</span><br></pre></td></tr></table></figure></p>
-<p>（8）<strong>借助-exec选项与其它命令结合使用</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">找出当前目录下所有root的文件，并把所有权更改为用户tom：</span><br><span class="line">find .-type f -user root -exec chown tom &#123;&#125; \;</span><br><span class="line">上例中，&#123;&#125; 用于与-exec选项结合使用来匹配所有文件，然后会被替换为相应的文件名。</span><br><span class="line"></span><br><span class="line">找出自己家目录下所有的.txt文件并删除：</span><br><span class="line">find $HOME/. -name &quot;*.txt&quot; -ok rm &#123;&#125; \;</span><br><span class="line">上例中，-ok和-exec行为一样，不过它会给出提示，是否执行相应的操作。</span><br><span class="line"></span><br><span class="line">查找/var/log目录中更改时间在7日以前的普通文件，并在删除之前询问它们：</span><br><span class="line">find /var/log -type f -mtime +7 -ok rm &#123;&#125; \;</span><br><span class="line"></span><br><span class="line">查找系统中所有文件长度为0的普通文件，并列出它们的完整路径：</span><br><span class="line">find / -type f -size 0 -exec ls -l &#123;&#125; \;</span><br><span class="line"></span><br><span class="line">查找当前目录下所有.txt文件并把他们拼接起来写入到all.txt文件中：</span><br><span class="line">find . -type f -name &quot;*.txt&quot; -exec cat &#123;&#125; \;&gt; all.txt</span><br><span class="line"></span><br><span class="line">将30天前的.log文件移动到old目录中：</span><br><span class="line">find . -type f -mtime +30 -name &quot;*.log&quot; -exec cp &#123;&#125; old \;</span><br><span class="line"></span><br><span class="line">找出当前目录下所有.txt文件并以“File:文件名”的形式打印出来：</span><br><span class="line">find . -type f -name &quot;*.txt&quot; -exec printf &quot;File: %s\n&quot; &#123;&#125; \;</span><br><span class="line"></span><br><span class="line">因为单行命令中-exec参数中无法使用多个命令，以下方法可以实现在-exec之后接受多条命令：</span><br><span class="line">-exec ./text.sh &#123;&#125; \;</span><br></pre></td></tr></table></figure></p>
-<h1 id="二、locate-查找文件"><a href="#二、locate-查找文件" class="headerlink" title="二、locate 查找文件"></a>二、locate 查找文件</h1><h2 id="1、locate和find的区别"><a href="#1、locate和find的区别" class="headerlink" title="1、locate和find的区别"></a>1、locate和find的区别</h2><ul>
-<li>locate命令也可以用于查找符合条件的文档或目录，但是速度比find快很多。</li>
-<li>locate查找命令简单，但功能也较少。</li>
-<li>locate 实际上查的是一个保存文档和目录名称的数据库，默认是/var/lib/slocate/slocate.db。</li>
-<li>find是去硬盘找，而locate这个数据库里找。</li>
-<li>locate的查找并不是实时的，而是以数据库的更新为准。</li>
-</ul>
-<pre><code>Linux系统自动创建locate查找的数据库，并且每天自动更新一次。
+          [toc]
+各命令的主要区别：linux命令中find、locate 、whereis、which均可用来查找文件，主要区别有：
 
-因此，我们在用whereis和locate 查找文件时，有时会找到已经被删除的数据，或者刚刚建立文件，却无法查找到，原因就是因为数据库文件没有被更新。
-
-为了避免这种情况，可以在使用locate之前，先使用updatedb命令，手动更新数据库（也可以使用locate -u命令来更新）。 
-</code></pre><h2 id="2、locate命令"><a href="#2、locate命令" class="headerlink" title="2、locate命令"></a>2、locate命令</h2><p>直接locate fileName 即可查找指定文件，默认支持正则匹配。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">查找出以passwd开头的所有文件</span><br><span class="line">locate passwd</span><br><span class="line"></span><br><span class="line">查找出/data/jjing/目录下所有以test开头的文件或文件夹下的所有内容</span><br><span class="line">locate /data/jjing/test</span><br></pre></td></tr></table></figure></p>
-<h1 id="三、whereis和which的对比"><a href="#三、whereis和which的对比" class="headerlink" title="三、whereis和which的对比"></a>三、whereis和which的对比</h1><p>直接看几个实例吧：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[app@VM_98_10_centos test]$ whereis mysql</span><br><span class="line">mysql: /usr/bin/mysql /usr/lib64/mysql /usr/include/mysql /usr/share/mysql /usr/share/man/man1/mysql.1.gz</span><br><span class="line">[app@VM_98_18_centos test]$ which mysql</span><br><span class="line">/usr/bin/mysql</span><br><span class="line"></span><br><span class="line">[app@VM_98_18_centos test]$ whereis python</span><br><span class="line">python: /usr/bin/python /usr/bin/python2.6 /usr/bin/python2.6-config /usr/lib/python2.6 /usr/lib64/python2.6 /usr/include/python2.6 /usr/share/man/man1/python.1.gz</span><br><span class="line">[app@VM_98_18_centos test]$ which python</span><br><span class="line">/usr/bin/python</span><br><span class="line"></span><br><span class="line">[app@VM_98_18_centos test]$ whereis jenkins</span><br><span class="line">jenkins:</span><br><span class="line">[app@VM_98_18_centos test]$ which jenkins</span><br><span class="line">/usr/bin/which: no jenkins in (/home/app/bin:/home/app/bin:/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/nemo/jdk8/bin:/nemo/gradle/bin:/home/app/bin:/nemo/jdk1.8.0_141/bin:/usr/local/python3.6.5/bin:/nemo/maven/bin)</span><br><span class="line"></span><br><span class="line">[app@VM_98_18_centos test]$ whereis vim</span><br><span class="line">vim: /usr/bin/vim /usr/share/vim /usr/share/man/man1/vim.1.gz</span><br><span class="line">[app@VM_98_18_centos test]$ which vim</span><br><span class="line">/usr/bin/vim</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>whereis一般用于查找系统的可执行命令的位置，以及相关的源码文件，及对应的man手册页；</li>
-<li>which也可以查找可执行命令的位置，但是只在环境变量$PATH设置的目录里查找</li>
-</ul>
-
-          
+find是最常用和最强大的查找命令。它能做到实时查找，精确查找，但查找内容较多时速度慢；
+locate查找速度快，但是不是实时查找，所以查找的结果不精确；
+wherei
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/31/03_文件查找命令比较find-locate-whereis-which/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1724,73 +1136,21 @@ sort -nr num.txt &gt; num.txt
       
         
           
-            <p>[toc]</p>
-<h1 id="一、标准输入-read"><a href="#一、标准输入-read" class="headerlink" title="一、标准输入 read"></a>一、标准输入 read</h1><p>shell 中通过 read 语句从键盘或文件的某一行文本中读入信息，并将内容赋给变量，多个变量之间用空格分隔。</p>
-<pre><code>read 变量1 变量2 ...
-</code></pre><p>==read 每次只能读取一行数据。==</p>
-<ul>
-<li><p>把一行内容全部赋值给一个变量，并直接通过 echo 输出。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ read name</span><br><span class="line"> jjing</span><br><span class="line">$ echo $name</span><br><span class="line"> jjing</span><br><span class="line"> </span><br><span class="line">$ read name</span><br><span class="line"> jjing jj</span><br><span class="line">$ echo $name</span><br><span class="line"> jjing jj</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>一次赋值多个变量，多个值用空格分隔。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ read name1 name2</span><br><span class="line"> jjing tao</span><br><span class="line">$ echo $name1</span><br><span class="line"> jjing</span><br><span class="line">$ echo $name2</span><br><span class="line"> tao</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>赋值多个变量时，当值多于变量名时，最后多余的内容全部赋值给最后一个变量。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ read name1 name2</span><br><span class="line"> jjing tao yayaa</span><br><span class="line">$ echo $name1</span><br><span class="line"> jjing</span><br><span class="line">$ echo $name2</span><br><span class="line"> tao yayaa</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h1 id="二、标准输出-echo"><a href="#二、标准输出-echo" class="headerlink" title="二、标准输出 echo"></a>二、标准输出 echo</h1><p>使用 <code>echo</code> 命令可以输出文本字符串、变量、表达式、命令等。</p>
-<p>直接在 echo 后面加上要输出的内容即可。</p>
-<table>
-<thead>
-<tr>
-<th>命令</th>
-<th>输出内容</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>echo “abcd1234”</td>
-<td>abcd1234</td>
-<td>输出一个普通字符串，默认在结尾包含换行符，光标定位在下一行开头。</td>
-</tr>
-<tr>
-<td>echo -e “my name is :\c”</td>
-<td>my name is :</td>
-<td><code>\c</code>表示不换行，输出字符串后光标定位在字符串末尾。(在 Linux 中要加上 <code>-e</code> 参数才能生效)</td>
-</tr>
-<tr>
-<td>echo -e “1\n2\n3\n4\n”</td>
-<td>输出多行，每个数字为一行</td>
-<td><code>\n</code>表示换行，实现一次性输出多行内容。(在 Linux 中要加上 <code>-e</code> 参数才能生效)</td>
-</tr>
-<tr>
-<td>a=1 echo “$a”</td>
-<td>输出变量，使用 $ 引用变量名即可</td>
-<td>引用变量时，可以不加双引号，但是不能用单引号。</td>
-</tr>
-<tr>
-<td>echo “\“13242\“”<br>echo ‘“13242”‘</td>
-<td>“13242”</td>
-<td>输出特殊字符时要转义，也可以在最外层使用单引号则不用转义。</td>
-</tr>
-<tr>
-<td>echo “`date`“</td>
-<td>2018年 12月 20日 星期四 09:08:25 CST</td>
-<td>输出命令 <code>date</code>的返回值。</td>
-</tr>
-</tbody>
-</table>
-<h3 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h3><ul>
-<li>输出内容可以带引号，也可以不带，但是为了书写规范及减少错误，最好统一带双引号。</li>
-<li><code>\c</code>–不换行，<code>\n</code>–换行，使用时前面要加上 <code>-e</code>参数。</li>
-<li>输出变量时，直接用 $ 加上变量名即可。</li>
-<li>输出特殊字符时，要使用 <code>\</code>转义，或者在最外层加上单引号，可以原文输出为字符串。</li>
-<li>输出命令时，注意命令外面的特殊引号。</li>
-</ul>
+          [toc]
+一、标准输入 readshell 中通过 read 语句从键盘或文件的某一行文本中读入信息，并将内容赋给变量，多个变量之间用空格分隔。
+read 变量1 变量2 ...
+==read 每次只能读取一行数据。==
 
-          
+把一行内容全部赋值给一个变量，并直接通过 echo 输出。
+1234567
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/31/181219标准输入read和输出echo/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1908,61 +1268,40 @@ sort -nr num.txt &gt; num.txt
       
         
           
-            <p>[toc]</p>
-<h1 id="一、不同操作系统下换行符的显示"><a href="#一、不同操作系统下换行符的显示" class="headerlink" title="一、不同操作系统下换行符的显示"></a>一、不同操作系统下换行符的显示</h1><p>换行符在 Windows 和 Linux 等系统中的显示符号是不一样的。</p>
-<table>
-<thead>
-<tr>
-<th>操作系统</th>
-<th>换行符</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Windows</td>
-<td><code>\r\n</code>，回车加换行</td>
-</tr>
-<tr>
-<td>类 Unix</td>
-<td><code>\n</code>，换行</td>
-</tr>
-<tr>
-<td>Mac</td>
-<td><code>\r</code>，回车</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li><code>\r</code> 表示回车，即 <code>CR （carriage return）</code></li>
-<li><code>\n</code> 表示换行，即 <code>LF （linefeed）</code></li>
-</ul>
-<h1 id="二、关于不同换行符的来历"><a href="#二、关于不同换行符的来历" class="headerlink" title="二、关于不同换行符的来历"></a>二、关于不同换行符的来历</h1><h2 id="1、回车和换行"><a href="#1、回车和换行" class="headerlink" title="1、回车和换行"></a>1、回车和换行</h2><p>计算机还没有出现之前，使用的是电传打字机来打字（就是上一篇文章中提到的 Teletypewriter）。</p>
-<pre><code>电传打字机每秒钟可以打10个字符。但是它有一个问题，就是打完一行换行的时候要用掉0.2秒，正好可以打两个字符。
-如果在这0.2秒里面，又有新的字符传过来，那么这个字符将会丢失。
+          [toc]
+一、不同操作系统下换行符的显示换行符在 Windows 和 Linux 等系统中的显示符号是不一样的。
 
-于是科学家想了个办法解决这个问题，就是在每行后面加两个表示结束的字符，回车和换行：
 
-回车，符号 \r；是告诉打字机把打印头定位在左边界；
 
-换行，符号 \n；是告诉打字机把纸张向下方移动一行；
-</code></pre><p>这就是 回车和 换行 的来历。</p>
-<h2 id="2、不同系统下的实现方式"><a href="#2、不同系统下的实现方式" class="headerlink" title="2、不同系统下的实现方式"></a>2、不同系统下的实现方式</h2><p>后来，计算机发明了，回车和换行的概念就被用到了计算机上。当时存储器很贵，一些科学家认为在每行结尾加两个字符太浪费空间了，于是，就出现了分歧。</p>
-<pre><code>类 Unix 系统里，每行结尾只有“&lt;换行&gt;”，即“\n”；
+操作系统
+换行符
 
-Windows系统里面，每行结尾是“&lt;回车&gt;&lt;换行&gt;”，即“ \r\n”；
 
-Mac系统里，每行结尾是“&lt;回车&gt;”，即“\r”。
-</code></pre><p>在类 Unix 系统中，遇到换行符 <code>\n</code>，就会自动加上<code>\r</code>实现 回车+换行 的操作；</p>
-<p>在  Mac 系统中，遇到回车符 <code>\r</code>，就会自动加上<code>\n</code>实现 回车+换行 的操作；</p>
-<p>所以，在打开其它系统的文件时，有可能不会正常显示换行。</p>
-<h2 id="3、可能会出现的问题"><a href="#3、可能会出现的问题" class="headerlink" title="3、可能会出现的问题"></a>3、可能会出现的问题</h2><p>因为换行符的问题，在一个系统下编辑的文件放到另一个系统下时，可能会显示不正常。</p>
-<p><strong>常见的会有以下两种情况：</strong></p>
-<ul>
-<li>在类 Unix 系统或 Mac 系统中编辑的文件，在 Windows 记事本中多行文字会变成一行（但是有些智能编辑器会自动识别不同系统的换行符，并进行转换，如 UE、Notepad++）。</li>
-<li>在 Windows 记事本中编辑的文件，在其它系统中会多显示一个控制字符 <code>^M</code>（在 Linux 中，回车符  <code>\r</code>会作为控制字符 <code>^M</code>显示）。</li>
-</ul>
 
-          
+
+Windows
+\r\n，回车加换行
+
+
+类 Unix
+\n，换行
+
+
+Mac
+\r，回车
+
+
+
+
+\r 表示回车，即 CR （carriage ret
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/31/181217不同操作系统中的换行符/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2080,80 +1419,21 @@ Mac系统里，每行结尾是“&lt;回车&gt;”，即“\r”。
       
         
           
-            <p>[toc]</p>
-<blockquote>
-<p>Notepad++ 是 Windows 中一款优秀的文本编辑软件，功能非常强大。</p>
-</blockquote>
-<p><strong>重要说明：</strong></p>
-<p>1、为更好的理解本文，建议先阅读相关文章 – <a href="https://blog.csdn.net/lijing742180/article/details/85018164" target="_blank" rel="noopener">不同操作系统中的换行符</a>。</p>
-<p>2、本文内容基于 Notepad++ 7.5.1 版本，为方便书写，若无特殊说明，下文中内容均指在该软件版本下的操作。</p>
-<h1 id="一、查找替换「换行符」"><a href="#一、查找替换「换行符」" class="headerlink" title="一、查找替换「换行符」"></a>一、查找替换「换行符」</h1><h2 id="1、设置「显示行尾符」"><a href="#1、设置「显示行尾符」" class="headerlink" title="1、设置「显示行尾符」"></a>1、设置「显示行尾符」</h2><p>为了更清楚的看到换行符的变化，首先进行下面设置：<br><code>视图 -&gt; 显示符号 -&gt; 显示行尾符</code><br><img src="https://img-blog.csdnimg.cn/20181219093239448.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>然后新建一个文本，在其中随意输入内容，会看到显示「换行符」为 <code>CRLF</code>，即 <code>\r\n</code>。</p>
-<h2 id="2、查找并替换「换行符」"><a href="#2、查找并替换「换行符」" class="headerlink" title="2、查找并替换「换行符」"></a>2、查找并替换「换行符」</h2><ul>
-<li><code>Ctrl + H</code>，打开替换对话框，<code>查找模式</code> 选中 <code>扩展</code> 或者 <code>正则表达式</code>，使<code>查找目标</code> 和 <code>替换为</code> 中同时支持字符串和特殊字符的匹配；</li>
-<li>然后在 <code>查找目标</code> 中输入 <code>\r\n</code> ，即可匹配到文本中的回车换行符；</li>
-<li>在 <code>替换为</code> 中输入要替换成的字符即可；</li>
-</ul>
-<p><img src="https://img-blog.csdnimg.cn/201812191503534.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h1 id="二、扩展：查找替换「空行」、空白符"><a href="#二、扩展：查找替换「空行」、空白符" class="headerlink" title="二、扩展：查找替换「空行」、空白符"></a>二、扩展：查找替换「空行」、空白符</h1><p>下面列举常用的几种查找替换情况：<br>（前提是要选中 <code>正则表达式</code>模式）</p>
-<table>
-<thead>
-<tr>
-<th>查找目标</th>
-<th>替换为</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>\r\n</code></td>
-<td><code>,\r\n</code></td>
-<td>在行尾加上逗号</td>
-</tr>
-<tr>
-<td><code>\r\n</code></td>
-<td></td>
-<td>替换为空，即合并多行内容为一行</td>
-</tr>
-<tr>
-<td><code>\r\n</code></td>
-<td><code>\n</code></td>
-<td>把 windows 下的换行符替换为 linux 下的换行符</td>
-</tr>
-<tr>
-<td><code>\n</code></td>
-<td></td>
-<td>把 \n 替换为空，即把 windows 下的换行符替换为 Mac 下的换行符</td>
-</tr>
-<tr>
-<td><code>,</code></td>
-<td><code>\r\n</code></td>
-<td>把逗号全部替换成换行</td>
-</tr>
-<tr>
-<td><code>\r\n\r\n</code></td>
-<td><code>\r\n</code></td>
-<td>去掉空行</td>
-</tr>
-<tr>
-<td><code>1\s\s</code></td>
-<td><code>1</code></td>
-<td>去掉 1 后的两个空格，其中一个 \s 表示一个空格</td>
-</tr>
-<tr>
-<td><code>1两个半角空格</code></td>
-<td><code>1</code></td>
-<td>可以直接在 1 后跟两个半角空格来匹配，跟上面 \s 是一样的效果</td>
-</tr>
-<tr>
-<td><code>\r\n</code></td>
-<td><code>\r\n\t</code></td>
-<td>在每行行首添加制表符，即四个半角空格的效果</td>
-</tr>
-</tbody>
-</table>
+          [toc]
 
-          
+Notepad++ 是 Windows 中一款优秀的文本编辑软件，功能非常强大。
+
+重要说明：
+1、为更好的理解本文，建议先阅读相关文章 – 不同操作系统中的换行符。
+2、本文内容基于 Notepad++ 7.5.1 版本，为方便书写，若无特殊说明，下文中内容均指在该软件版本下的操作。
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/31/181219 Notepad++中查找替换「换行符」/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2271,28 +1551,18 @@ Mac系统里，每行结尾是“&lt;回车&gt;”，即“\r”。
       
         
           
-            <p>linux sed命令，如何替换换行符“\n”</p>
-<p>在一次sed使用中，执行命令：</p>
-<p>sed “s/\n//g” file<br>1<br>发现，没起到任何效果。</p>
-<p>后来，经查sed官方用户手册，才得知，sed是按行处理文本数据的，每次处理一行数据后，都会在行尾自动添加trailing newline，其实就是行的分隔符即换行符。</p>
-<p>如果非要使用sed命令，实现替换file文本内容的换行符为空的话，那么就要了解sed的分支条件命令，以及了解sed的pattern space模式空间和hold space保持空间。即，连续两行执行一次sed命令，这样就可以把前一行的\n替换完成。</p>
-<p>这个基础内容，可以百度，也可以参考下文连接：</p>
-<p>Sed and awk 笔记之 sed 篇：高级命令（一）<br><a href="http://kodango.com/sed-and-awk-notes-part-4" target="_blank" rel="noopener">http://kodango.com/sed-and-awk-notes-part-4</a><br>Sed and awk 笔记之 sed 篇：高级命令（二）<br><a href="http://kodango.com/sed-and-awk-notes-part-5" target="_blank" rel="noopener">http://kodango.com/sed-and-awk-notes-part-5</a></p>
-<p>最终程序和执行结果如下例所示：</p>
-<p>qilei@AFAAW-704030720:~$ cat a.txt<br>a11111<br>a22222<br>a33333<br>qilei@AFAAW-704030720:~$ sed “s/\n//g” a.txt<br>a11111<br>a22222<br>a33333<br>qilei@AFAAW-704030720:~$ sed “:a;N;s/\n//g;ta” a.txt<br>a11111a22222a33333<br>qilei@AFAAW-704030720:~$<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>实现方法</p>
-<p>第一种方法：使用test跳转命令，实现替换换行符</p>
-<p>sed “:a;N;s/\n//g;ta” a.txt<br>1<br>N是把下一行加入到当前的hold space模式空间里，使之进行后续处理，最后sed会默认打印hold space模式空间里的内容。也就是说，sed是可以处理多行数据的。</p>
-<p>:a和ta是配套使用，实现跳转功能。t是test测试的意思。<br>另外，还有:a和ba的配套使用方式，也可以实现跳转功能。b是branch分支的意思。</p>
-<p>branch和test区别</p>
-<p>branch循环到文本结束。比如sed “:a;N;s/\n//g;ba” a.txt，转换成自然语言的描述，就是</p>
-<p>while(1) {<br> N;<br> s/\n//g;<br>}<br>1<br>2<br>3<br>4<br>test可以根据替换命令的完成是否成功，决定是否跳转。比如sed “:a;N;s/\n//g;ta” a.txt，转换成自然语言的描述，就是</p>
-<p>while(state == 1) { #注释：默认state就当是1好了。<br> N;<br> s/\n//g;#注释：成功，返回state为1；否则返回state=0。此state用于跳转判断。<br>}<br>else {<br> last; #注释：即退出循环语句。<br>}<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>第二种方法：使用branch跳转命令，实现替换换行符</p>
-<p>qilei@AFAAW-704030720:~$ sed “:a;N;s/\n//g;$!ba” a.txt<br>a11111a22222a33333<br>qilei@AFAAW-704030720:~$<br>1<br>2<br>3<br>增加$!ba语句，$的意思是最后一行，不跳转到标记a处，即退出命令循环。</p>
-<p>同理，也可以用下述命令。</p>
-<p>qilei@AFAAW-704030720:~$ sed “:a;$!N;s/\n//g;ba” a.txt<br>a11111a22222a33333</p>
-<h2 id="qilei-AFAAW-704030720"><a href="#qilei-AFAAW-704030720" class="headerlink" title="qilei@AFAAW-704030720:~$"></a>qilei@AFAAW-704030720:~$</h2><p>作者：亓磊<br>来源：CSDN<br>原文：<a href="https://blog.csdn.net/u011729865/article/details/71773840" target="_blank" rel="noopener">https://blog.csdn.net/u011729865/article/details/71773840</a><br>版权声明：本文为博主原创文章，转载请附上博文链接！</p>
-
-          
+          linux sed命令，如何替换换行符“\n”
+在一次sed使用中，执行命令：
+sed “s/\n//g” file1发现，没起到任何效果。
+后来，经查sed官方用户手册，才得知，sed是按行处理文本数据的，每次处理一行数据后，都会在行尾自动添加trailing newline，其实就是行的分隔符即
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/31/linux sed命令，如何替换换行符/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="软件测试, 测试, 性能测试, 自动化测试">
 
 
 
@@ -354,74 +354,40 @@
       
         
           
-            <p>[toc]</p>
-<h1 id="一、不同操作系统下换行符的显示"><a href="#一、不同操作系统下换行符的显示" class="headerlink" title="一、不同操作系统下换行符的显示"></a>一、不同操作系统下换行符的显示</h1><p>换行符在 Windows 和 Linux 等系统中的显示符号是不一样的。</p>
-<table>
-<thead>
-<tr>
-<th>操作系统</th>
-<th>换行符</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Windows</td>
-<td><code>\r\n</code>，回车加换行</td>
-</tr>
-<tr>
-<td>类 Unix</td>
-<td><code>\n</code>，换行</td>
-</tr>
-<tr>
-<td>Mac</td>
-<td><code>\r</code>，回车</td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li><code>\r</code> 表示回车，即 <code>CR （carriage return）</code></li>
-<li><code>\n</code> 表示换行，即 <code>LF （linefeed）</code></li>
-</ul>
-<h1 id="二、关于不同换行符的来历"><a href="#二、关于不同换行符的来历" class="headerlink" title="二、关于不同换行符的来历"></a>二、关于不同换行符的来历</h1><h2 id="1、回车和换行"><a href="#1、回车和换行" class="headerlink" title="1、回车和换行"></a>1、回车和换行</h2><p>计算机还没有出现之前，使用的是电传打字机来打字（就是上一篇文章中提到的 Teletypewriter）。</p>
-<pre><code>电传打字机每秒钟可以打10个字符。但是它有一个问题，就是打完一行换行的时候要用掉0.2秒，正好可以打两个字符。
-如果在这0.2秒里面，又有新的字符传过来，那么这个字符将会丢失。
+          [toc]
+一、不同操作系统下换行符的显示换行符在 Windows 和 Linux 等系统中的显示符号是不一样的。
 
-于是科学家想了个办法解决这个问题，就是在每行后面加两个表示结束的字符，回车和换行：
 
-回车，符号 \r；是告诉打字机把打印头定位在左边界；
 
-换行，符号 \n；是告诉打字机把纸张向下方移动一行；
-</code></pre><p>这就是 回车和 换行 的来历。</p>
-<h2 id="2、不同系统下的实现方式"><a href="#2、不同系统下的实现方式" class="headerlink" title="2、不同系统下的实现方式"></a>2、不同系统下的实现方式</h2><p>后来，计算机发明了，回车和换行的概念就被用到了计算机上。当时存储器很贵，一些科学家认为在每行结尾加两个字符太浪费空间了，于是，就出现了分歧。</p>
-<pre><code>类 Unix 系统里，每行结尾只有“&lt;换行&gt;”，即“\n”；
+操作系统
+换行符
 
-Windows系统里面，每行结尾是“&lt;回车&gt;&lt;换行&gt;”，即“ \r\n”；
 
-Mac系统里，每行结尾是“&lt;回车&gt;”，即“\r”。
-</code></pre><p>在类 Unix 系统中，遇到换行符 <code>\n</code>，就会自动加上<code>\r</code>实现 回车+换行 的操作；若只有 回车符  <code>\r</code>，则只会作为控制字符 <code>^M</code>显示，不会进行换行；</p>
-<p>在  Mac 系统中，遇到回车符 <code>\r</code>，就会自动加上<code>\n</code>实现 回车+换行 的操作；</p>
-<p>所以，在打开其它系统的文件时，有可能不会正常显示换行。</p>
-<h2 id="3、不同系统下的文件编辑问题"><a href="#3、不同系统下的文件编辑问题" class="headerlink" title="3、不同系统下的文件编辑问题"></a>3、不同系统下的文件编辑问题</h2><p>因为换行符的问题，在一个系统下编辑的文件放到另一个系统下时，可能会显示不正常。</p>
-<p>常见的会有以下几种情况：</p>
-<p>1、在类 Unix 系统或 Mac 系统中编辑的文件，在 Windows 记事本中不能正常显示换行（有的智能编辑器会自动识别并转换）。<br>2、在 Windows 记事本中编辑的文件，在其它系统中会多显示一个控制字符 <code>^M</code>。<br>3、若是在 Windows<br>（在不同平台间使用FTP软件传送文件时, 在ascii文本模式传输模式下, 一些FTP客户端程序会自动对换行格式进行转换. 经过这种传输的文件字节数可能会发生变化. 如果你不想ftp修改原文件, 可以使用bin模式(二进制模式)传输文本）</p>
-<p>三、问题</p>
-<pre><code>所以，
 
-因此，Unix/Mac系统下的文件在Windows里打开的话，所有文字会变成一行；而Windows里的文件在Unix/Mac下打开的话，在每行的结尾可能会多出一个^M符号
-</code></pre><p>Linux doc<br>WINDOWS下记事本编写的文档和LINUX下VIM或者GEDIT等编写的文档的不同！<br>例如WINDOWS下编写的SH脚本，放到LINUX下执行可能会出错。<br>解决方法：<br>    原因是：Windows下换行符号是“\r\n”，而linux下是“\n”没有”\r”，当shell文件是在Windows下编写的时候，所有的换行符都是“\r\n”，shell下是没办法执行这个文件的，会提示以上错误。请在ultraedit下将该文件执行“File-&gt;conversions-&gt;Dos to Unix”，执行这个转化后的sh文件能够直接在linux下执行。这步操作能够就是取消”\r”符号。</p>
-<p>在 client 端選 ascii 即可。<br>若已經用 binary 完成 transfer ，那就試試：<br>cat ms.txt | col -b &gt; linux.txt</p>
-<p>Linux下新建的文档在Windows下用记事本打开会挤在一起（没有了换行符），原因是记事本不支持\n换行（它只支持\r\n形式的换行），<br>解决方法：<br>保存成doc格式用Word打开就可以了，这样在Linux下用Vim或者gedit新建doc文档（属于纯文本doc文档）(或者新建成.c文档，在Windows中可以用VC6.0来浏览！)。要打开也可以直接输入命令： (注意，如果文件名是中文，那有可能找不到，须要ls一下，然后复制文件名，然后再gedit 粘贴文件名)<br>gedit xx.doc<br>或者vim xx.doc（不推荐，vim可能不支持繁体字）<br>或者直接找到文件，点击，用Open Office来打开，选择字符集（系统），字符（SYSong18030）,语言（中文简体），换段落：</p>
-<ol>
-<li>CR&amp;LF，即\r\n，这是Windows下记事本的格式，Linux是完全支持的；（推荐）</li>
-<li>CR，即\r，记事本不支持，没有换行效果，也没有\r效果；Word下有换行效果，也有\r，其\r效果是：在每一行的末尾，默认的光标定位是下一行的行首，也就是说在行尾输入的内容实际上是下一行的行首，\r才是真正的换行。而\n是回车，原意是打字机的纸张往下移动一位，后来在linux/unix系统下，\n成为了实际上的换行符。</li>
-<li>LF，即\n，linux/unix系统下的换行符。</li>
-</ol>
-<p>如果是Windows下编写的doc文档，在Linux下查看（用Open Office）一般都会乱码，<br>解决方法:<br>先用Open Office打开，然后再全选，把字体设置为SYSong18030，OK中文简体和繁体都显示正常了。</p>
-<p>\r是回车符,\n是换行符，各个系统的换行标志：<br>win                   用   \r\n<br>linux/unix            用   \n<br>Mac   OS              用   \r<br>CR用符号’\r’表示, 十进制ASCII代码是13, 十六进制代码为OxOD<br>LF使用’\n’符号表示, ASCII代码是10, 十六制为0x0A<br>所以Windows下用的是OAOD，即CR&amp;LF，<br>linux/unix用的是OA，即LF<br>MacOS用的是OD，即CR</p>
-<p>\n和\r在C语言中的用法：</p>
-<p>#include &lt;stdio.h&gt;<br>int main()<br>{<br>    printf(“938517\r10086\n”);<br>    return 0;<br>}<br>无论是Linux系统还是Windows平台，输入均是<br>10086<br>因为\r已经换行了，所以938517就不再显示了。而\n并不是真正意义上的换行，它实际上是把纸张（或屏幕）向下移动一位（以便显示下一行的内容）。</p>
 
-          
+Windows
+\r\n，回车加换行
+
+
+类 Unix
+\n，换行
+
+
+Mac
+\r，回车
+
+
+
+
+\r 表示回车，即 CR （carriage ret
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/31/181216不同操作系统中的换行符/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -539,119 +505,29 @@ Mac系统里，每行结尾是“&lt;回车&gt;”，即“\r”。
       
         
           
-            <p>[toc]</p>
-<h1 id="一、grep常用命令"><a href="#一、grep常用命令" class="headerlink" title="一、grep常用命令"></a>一、grep常用命令</h1><p>grep的功能是分析一行信息，过滤出包含指定内容的行。</p>
-<p>==需要注意的是它以整行为单位进行数据的选取。==</p>
-<h2 id="1、语法"><a href="#1、语法" class="headerlink" title="1、语法"></a>1、语法</h2><pre><code>grep [-acinv] [--color=auto]  &apos;要查找的字符串&apos;  filename
-</code></pre><table>
-<thead>
-<tr>
-<th>参数</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>-a</td>
-<td>将binary文件以text文件的方式查找数据</td>
-</tr>
-<tr>
-<td>-c</td>
-<td>计算找到查找字符串的次数</td>
-</tr>
-<tr>
-<td>-i</td>
-<td>忽略大小写的不同</td>
-</tr>
-<tr>
-<td>-n</td>
-<td>输出行号</td>
-</tr>
-<tr>
-<td>-E</td>
-<td>同时匹配多个关键词</td>
-</tr>
-<tr>
-<td>-r</td>
-<td>遍历匹配</td>
-</tr>
-<tr>
-<td>-w</td>
-<td>整字匹配</td>
-</tr>
-<tr>
-<td>-v</td>
-<td>反向选择，显示出没有查找字符串的内容的行</td>
-</tr>
-<tr>
-<td>-c</td>
-<td>只输出匹配行的统计次数</td>
-</tr>
-<tr>
-<td>–color-auto</td>
-<td>将找到的字符串以特殊颜色显示</td>
-</tr>
-</tbody>
-</table>
-<h2 id="2、范例"><a href="#2、范例" class="headerlink" title="2、范例"></a>2、范例</h2><p>先将/etc目录下的man.config文件拷贝至/tmp文件夹下，来作实验:</p>
-<pre><code>cd  /tmp
-cp  /etc/man.config  .
-</code></pre><h3 id="2-1-grep-‘字符串’"><a href="#2-1-grep-‘字符串’" class="headerlink" title="2.1  grep ‘字符串’"></a>2.1  grep ‘字符串’</h3><p>将文件中包含MANPATH的那一行取出来。</p>
-<pre><code>cat manpath.config | grep &apos;MANPATH&apos;
-</code></pre><h3 id="2-2-grep-v-‘字符串’"><a href="#2-2-grep-v-‘字符串’" class="headerlink" title="2.2 grep -v ‘字符串’"></a>2.2 grep -v ‘字符串’</h3><p>与上例子相反，只要没有包含MANPATH的那一行就取出来。</p>
-<pre><code>cat manpath.config| grep -v &apos;MANPATH&apos;
-</code></pre><h3 id="2-3-grep-E-同时匹配多个关键字–或关系"><a href="#2-3-grep-E-同时匹配多个关键字–或关系" class="headerlink" title="2.3 grep -E 同时匹配多个关键字–或关系"></a>2.3 grep -E 同时匹配多个关键字–或关系</h3><pre><code>grep -E &quot;word1|word2|word3&quot; file.txt
-匹配 file.txt 中包含 word1 或 word2 或 word3 的行。
-满足其中任意条件（word1、word2和word3之一）就会匹配。
-</code></pre><p>注意：<br>==多个关键字一定要放在双引号中，不然无法正常匹配。==</p>
-<p>不带双引号会报错，类似下面这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">grep &apos;update fail&apos;|ERROR|timeout appmonitor.log test.log* | wc -l  </span><br><span class="line">-bash: ERROR: command not found</span><br><span class="line">timeout: 无效的时间间隔&quot;appmonitor.log&quot;</span><br><span class="line">请尝试执行&quot;timeout --help&quot;来获取更多信息。</span><br></pre></td></tr></table></figure></p>
-<p>加上双引号后正常：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep &quot;&apos;update fail&apos;|ERROR|timeout&quot; appmonitor.log test.log* | wc -l</span><br></pre></td></tr></table></figure></p>
-<h3 id="2-4-管道符连接多个-grep–同时匹配多个关键字–与关系"><a href="#2-4-管道符连接多个-grep–同时匹配多个关键字–与关系" class="headerlink" title="2.4 管道符连接多个 grep–同时匹配多个关键字–与关系"></a>2.4 管道符连接多个 grep–同时匹配多个关键字–与关系</h3><pre><code>grep word1 file.txt | grep word2 |grep word3
-必须同时满足三个条件（word1、word2和word3）才匹配。
-</code></pre><p>5、整字匹配搜索</p>
-<pre><code>grep -w &quot;android&quot; logcat.txt  
-从logcat.txt文件中，搜索包含单词android的文本行
+          [toc]
+一、grep常用命令grep的功能是分析一行信息，过滤出包含指定内容的行。
+==需要注意的是它以整行为单位进行数据的选取。==
+1、语法grep [-acinv] [--color=auto]  &apos;要查找的字符串&apos;  filename
 
-grep -w &quot;android | ios&quot; logcat.txt  
-从logcat.txt文件中，搜索包含单词android或者ios的文本行
-</code></pre><p>6、统计字符出现次数</p>
-<pre><code>grep -c &quot;android&quot; .
-</code></pre><h1 id="二、grep的一些高级参数"><a href="#二、grep的一些高级参数" class="headerlink" title="二、grep的一些高级参数"></a>二、grep的一些高级参数</h1><h2 id="1、语法-1"><a href="#1、语法-1" class="headerlink" title="1、语法"></a>1、语法</h2><pre><code>grep [-A] [-B] [--color=auto]  &apos;查找字符串&apos; filename&apos;
-</code></pre><ul>
-<li>-A：后面可加数字，为after的意思，除了列出该行以外，后续的n行也列出来。</li>
-<li>-B：后面可加数字，为before的意思，除了列出该行以外，前面的n行也列出。</li>
-</ul>
-<h2 id="2、范例-1"><a href="#2、范例-1" class="headerlink" title="2、范例"></a>2、范例</h2><p>1、用dmesg列出内核信息，然后用grep找出包含eth的那行，并且显示行号。而且将关键字的前2行和后3行也列出来。</p>
-<pre><code>dmesg | grep -n -A3 -B2 --color=auto &apos;eth&apos;
-</code></pre><p>其中的 ==<code>|</code> 是管道符，用于把左边输出的内容传递给右边的命令==</p>
-<p><img src="https://img-blog.csdnimg.cn/20181201160201562.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>在关键字的显示上，grep可以用<code>—color=auto</code>来将关键字用特殊颜色显示。但是每次使用grep都得加上这个信息很麻烦，于是可以用alias进行一下处理就OK了。</p>
-<p>==可以在~/.bashrc内加上这一行：alias grep=’grep –color=auto’。==</p>
-<h1 id="三、基础正则表达式练习"><a href="#三、基础正则表达式练习" class="headerlink" title="三、基础正则表达式练习"></a>三、基础正则表达式练习</h1><h2 id="1、与中括号-结合"><a href="#1、与中括号-结合" class="headerlink" title="1、与中括号[]结合"></a>1、与中括号<code>[]</code>结合</h2><ul>
-<li>查找包含<code>[]</code>中某一个字符的内容<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">比如我要查找man或者men字符串，可以这样来查找：</span><br><span class="line">grep -n  &apos;m[ae]n&apos;  manpath.config</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p><img src="https://img-blog.csdnimg.cn/20181201160657525.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">查找包含man且man前面有数字的行：</span><br><span class="line">grep -n &apos;[0-9]man&apos;  manpath.config</span><br></pre></td></tr></table></figure></p>
-<p>==Note：中括号[]里面不论有几个字符，它都只代表某一个字符。==</p>
-<h2 id="2、与反向选择-结合使用"><a href="#2、与反向选择-结合使用" class="headerlink" title="2、与反向选择^结合使用"></a>2、与反向选择^结合使用</h2><ul>
-<li>查找不包含指定字符的内容<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">查找包含man而且前面没有/的那一行：</span><br><span class="line">grep -n  &apos;[^/]man&apos;  manpath.config</span><br><span class="line"></span><br><span class="line">查找包含man但是前面不是小写字符的那一行：</span><br><span class="line">grep -n  &apos;[^a-z]man&apos;  manpath.config</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="3、与行首-和行尾-字符结合"><a href="#3、与行首-和行尾-字符结合" class="headerlink" title="3、与行首 ^ 和行尾 $ 字符结合"></a>3、与行首 <code>^</code> 和行尾 $ 字符结合</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">列出行首为MANPATH_MAP的行：</span><br><span class="line">grep -n  &apos;^MANPATH_MAP&apos; manpath.config</span><br><span class="line"></span><br><span class="line">列出开头是大写字符的那一行：</span><br><span class="line">grep -n &apos;^[A-Z]&apos; manpath.config</span><br><span class="line"></span><br><span class="line">列出开头不是英文字母的行：</span><br><span class="line">grep -n  &apos;^[^a-zA-Z]&apos;  manpath.config</span><br></pre></td></tr></table></figure>
-<p>==<code>^</code> 符号在字符集合（中括号[]）之内和外面是不同的！！！==</p>
-<p>==在<code>[]</code>里面代表反向选择，在<code>[]</code>外面代表定位在行首的意思==</p>
-<p><strong>反过来思考，使用<code>$</code>来查找行尾字符</strong>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">找出行尾结束符为点.的行：</span><br><span class="line">grep -n &apos;\.$&apos; manpath.config</span><br><span class="line">因为小数点具有特殊的意义，所以必须用转义字符加以解除其特殊意义。</span><br><span class="line"></span><br><span class="line">查找出空白行：</span><br><span class="line">grep -n  &apos;^$&apos;  manpath.config</span><br></pre></td></tr></table></figure></p>
-<h2 id="4、任意一个字符-与重复字符"><a href="#4、任意一个字符-与重复字符" class="headerlink" title="4、任意一个字符.与重复字符*"></a>4、任意一个字符<code>.</code>与重复字符<code>*</code></h2><p>==在bash当中，通配符*可以用来代表任意（0或多个）字符，但是正则表达式并不是通配符，两者之间是不相同的。==</p>
-<p><strong>在正则表达式当中：</strong></p>
-<ul>
-<li><code>.</code>代表绝对有一个字符的意思</li>
-<li><code>*</code>代表重复前一个字符0到无穷多次的意思，为组合形态</li>
-</ul>
-<p><strong>实例：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">查找包含一个o以上的行，需要oo*：</span><br><span class="line">grep -n &apos;oo*&apos; manpath.config</span><br><span class="line"></span><br><span class="line">查找以g开头与以g结尾，中间至少存在一个o的行：</span><br><span class="line">grep -n  &apos;goo*g&apos;  manpath.config</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">## 5、` &#123;&#125; `限定连续字符范围</span><br><span class="line">我们可以利用` . `与` * `来设置0到无穷多个重复字符。那如果要限制一个范围区间内的重复字符呢？</span><br><span class="line"></span><br><span class="line">比如要找出2-5个o的连续字符串，就要用到限定范围的字符&#123;&#125;了。</span><br><span class="line"></span><br><span class="line">&lt;font color=red&gt;但是&#123;&#125;的符号在shell有特殊意义，因此要用到转义字符\。&lt;/font&gt;</span><br><span class="line"></span><br><span class="line">**实例：**</span><br></pre></td></tr></table></figure></p>
-<p>找出g后面有两个到五个o，后面再接一个g的字符串：<br>grep -n ‘go{2,5}g’  manpath.config</p>
-<p>如果是2个以上呢：<br>grep -n  ‘go{2,}g’  manpath.config<br>这样就OK了。<br><code>`</code></p>
 
-          
+
+参数
+说明
+
+
+
+
+-a
+
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/31/08_grep命令详解/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -769,17 +645,22 @@ grep -w &quot;android | ios&quot; logcat.txt
       
         
           
-            <p>[toc]</p>
-<h1 id="一、sed-命令执行原理"><a href="#一、sed-命令执行原理" class="headerlink" title="一、sed 命令执行原理"></a>一、sed 命令执行原理</h1><p><img src="https://img-blog.csdnimg.cn/20181226203426692.png" alt="在这里插入图片描述"></p>
-<ul>
-<li>把待处理文件按行为单位，依次读取到<code>Pattern Space</code>中，且会覆盖原有内容；</li>
-<li>对<code>Pattern Space</code>中的内容执行 sed 命令，并输出结果（也可以用 -n 抑制输出，或重定向到文件中）；</li>
-<li>对文件中的每一行均进行上述处理，直到最后一行。</li>
-</ul>
-<h1 id="二、Pattern-Space"><a href="#二、Pattern-Space" class="headerlink" title="二、Pattern Space"></a>二、Pattern Space</h1><p><code>Pattern Space</code> 中文是<code>模式空间</code>（有些地方可能翻译结果不一样），用于存放待执行命令的内容。</p>
-<p>不同模式 N p P g G h H</p>
+          [toc]
+一、sed 命令执行原理
 
-          
+把待处理文件按行为单位，依次读取到Pattern Space中，且会覆盖原有内容；
+对Pattern Space中的内容执行 sed 命令，并输出结果（也可以用 -n 抑制输出，或重定向到文件中）；
+对文件中的每一行均进行上述处理，直到最后一行。
+
+二、Pat
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/31/181220使用sed实现循环操作/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -897,29 +778,18 @@ grep -w &quot;android | ios&quot; logcat.txt
       
         
           
-            <p>[toc]</p>
-<h2 id="idea导入maven项目"><a href="#idea导入maven项目" class="headerlink" title="idea导入maven项目"></a>idea导入maven项目</h2><ul>
-<li>import project -&gt; 选择本地的maven项目文件夹(包含pom.xml的文件夹) -&gt; import project from external model + Maven -&gt; 选择下图中的选项<br><img src="https://img-blog.csdnimg.cn/2018120309253284.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li>
-<li>设置maven环境为本地自己下载的maven路径，及自己的仓库地址，override</li>
-<li>select profiles -&gt; 选中public-snapshots -&gt; 配置sdk -&gt; 其它默认即可。</li>
-</ul>
-<h2 id="idea导入maven模块"><a href="#idea导入maven模块" class="headerlink" title="idea导入maven模块"></a>idea导入maven模块</h2><ul>
-<li>打开一个现有的idea工程</li>
-<li>File –&gt;new–&gt; module from existing sources –&gt; Select File or Directory to Import<br>根据不同的项目类型选择不同的文件，如Maven项目选中pom.xml，<br><img src="https://img-blog.csdnimg.cn/20181203090722441.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>点击finish即可导入完成<br>在terminal命令行中测试导入的项目是否可以正常运行。如：mvn test, mvn package, mvn install。</li>
-</ul>
-<h2 id="idea本地创建maven项目"><a href="#idea本地创建maven项目" class="headerlink" title="idea本地创建maven项目"></a>idea本地创建maven项目</h2><p>1、本地搭建maven环境</p>
-<ul>
-<li>下载解压maven，修改配置文件settings.xml（最好用sublime Text3编辑，避免改错），设置本地仓库。<br>2、idea创建一个maven管理的web项目</li>
-<li>Create New Project -&gt; Maven -&gt; maven-archetype-webapp -&gt; 填写项目名称 -&gt; 选择maven home 路径为自己下载的maven路径(不用idea自带的bundled版本) -&gt; User settings file 选中Override。</li>
-<li>第一次创建项目非常慢(尤其是没网的状态下)，要等右下角进度条完成后再操作。</li>
-<li>创建成功后，检查目录结构是否正确，src -&gt; main -&gt; webapp -&gt; web-inf，若目录结构不正确，说明操作有误，删除重新创建。</li>
-</ul>
-<h2 id="idea导入-import-项目和打开-open-项目的区别"><a href="#idea导入-import-项目和打开-open-项目的区别" class="headerlink" title="idea导入(import)项目和打开(open)项目的区别"></a>idea导入(import)项目和打开(open)项目的区别</h2><p>前言：<br>每次接手老项目，都得从git或svn下载下来，但是如果之前的项目不是用idea写的怎么办，可是你又习惯啦idea,那你必须把项目在idea上跑起来，那是用import还是用open呢,如何抉择，这篇文章就是针对这种情况分析的</p>
-<p>正文：<br>1.首先如果你没有把svn或git集成idea,直接下来的项目，那这种情况，他并不属于idea模型的项目，所以这时候要选择导入项目–import。</p>
-<p>2.如果本身就是idea项目，那么直接打开–open就行啦。</p>
-<p>用open也能直接打开git下来的项目,也没有集成idea。如果原来是eclipse文件，就没有impl，你点击open打开会出现很多问题。</p>
-
-          
+          [toc]
+idea导入maven项目
+import project -&gt; 选择本地的maven项目文件夹(包含pom.xml的文件夹) -&gt; import project from external model + Maven -&gt; 选择下图中的选项
+设置maven环境为本地自己
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/31/intellij idea使用手册-03 导入和创建项目/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1037,118 +907,33 @@ grep -w &quot;android | ios&quot; logcat.txt
       
         
           
-            <p>[toc]</p>
-<h3 id="一、IDEA-和-eclipse-对比"><a href="#一、IDEA-和-eclipse-对比" class="headerlink" title="一、IDEA 和 eclipse 对比"></a>一、IDEA 和 eclipse 对比</h3><table>
-<thead>
-<tr>
-<th>IDEA</th>
-<th>Eclipse</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>new Project</td>
-<td>workspace</td>
-<td>创建 项目/工作空间，是最顶级的结构单元</td>
-</tr>
-<tr>
-<td>new Module</td>
-<td>new Project</td>
-<td>创建一个模块/工程，一个 Project/工作空间 下可以有多个 模块/工程</td>
-</tr>
-<tr>
-<td>文件自动保存，不能设置为手动保存</td>
-<td>需要手动保存</td>
-<td></td>
-</tr>
-<tr>
-<td>智能提示重构代码,告诉你更好的实现方式</td>
-<td></td>
-</tr>
-<tr>
-<td>更友好、更聪明的代码提示功能</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h3 id="二、IntelliJ-IDEA-中的-Project-和-Module"><a href="#二、IntelliJ-IDEA-中的-Project-和-Module" class="headerlink" title="二、IntelliJ IDEA 中的 Project 和 Module"></a>二、IntelliJ IDEA 中的 Project 和 Module</h3><p>在 IntelliJ IDEA 中，没有类似于 Eclipse 工作空间（Workspace）的概念，而是提出了Project和Module这两个概念。</p>
-<h4 id="2-1-Project-Module-1-n"><a href="#2-1-Project-Module-1-n" class="headerlink" title="2.1 Project : Module = 1 : n"></a>2.1 Project : Module = 1 : n</h4><p>在 IntelliJ IDEA 中Project是最顶级的结构单元，下面是一个或多个Module，是一对多的关系。</p>
-<h4 id="2-2-多个-Module-的划分"><a href="#2-2-多个-Module-的划分" class="headerlink" title="2.2 多个 Module 的划分"></a>2.2 多个 Module 的划分</h4><p>在大型项目中，都是使用多 Module 结构，按功能不同划分为多个模块，模块之间可以相互依赖。</p>
-<h4 id="2-3-Project-对-Module-的意义"><a href="#2-3-Project-对-Module-的意义" class="headerlink" title="2.3 Project 对 Module 的意义"></a>2.3 Project 对 Module 的意义</h4><ul>
-<li>IDEA 的 Project 可以简单地理解为是一个单纯的目录，下面存放不同模块的文件夹。</li>
-<li>Project 主要起到一个项目定义、范围约束、规范类型的效果，本身不具备任何编码设置、构建等开发功能。</li>
-</ul>
-<h4 id="2-4-Project-和-Module-的默认配置"><a href="#2-4-Project-和-Module-的默认配置" class="headerlink" title="2.4 Project 和 Module 的默认配置"></a>2.4 Project 和 Module 的默认配置</h4><ul>
-<li>IDEA 默认是单 Project 单 Module 结构，且默认名字相同，这时二者合二为一； </li>
-<li>当一个 Project 下有多个 Module 时，最好是使用不同的名字。</li>
-</ul>
-<h3 id="三、安装目录"><a href="#三、安装目录" class="headerlink" title="三、安装目录"></a>三、安装目录</h3><p>进入IntelliJ IDEA 安装目录的bin目录下</p>
-<p>（bin是 binary 的缩写，代表的意思是二进制，因此bin目录就是用来存放二进制文件）</p>
-<p>在这里，我们主要了解下面五个文件：</p>
-<ul>
-<li><code>idea.exe</code>：IntelliJ IDEA 32 位的可行执行文件，IntelliJ IDEA 安装完默认发送到桌面的就是这个执行文件的快捷方式；</li>
-<li><code>idea.exe.vmoptions</code>：IntelliJ IDEA 32 位的可执行文件的 VM 配置文件；</li>
-<li><code>idea.properties</code>：IntelliJ IDEA 的一些属性配置文件；</li>
-<li><code>idea64.exe</code>：IntelliJ IDEA 64 位的可行执行文件，要求电脑上必须装有 JDK 64 位版本，64 位的系统也是建议使用该文件；</li>
-<li><code>idea64.exe.vmoptions</code>：IntelliJ IDEA 64 位的可执行文件的 VM 配置文件。</li>
-</ul>
-<h3 id="四、新建项目"><a href="#四、新建项目" class="headerlink" title="四、新建项目"></a>四、新建项目</h3><p>通过Create New Project，选择需要的项目类型，然后设置项目和模块的名称和存储路径。</p>
-<ul>
-<li>默认是一个Project下创建一个Module，因此创建时项目名称与模块名称默认是相同的。一般情况下，我们是不需要在More Settings中进行修改的。</li>
-<li>默认界面是隐藏Toolbar和Tool Buttons的，可以通过<code>view--&gt;Toolbar和Tool Buttons</code> 来开启。</li>
-<li>在创建 <code>java project</code> 时，默认使用的是自带的JRE，在 <code>Project SDK</code> 中选择自己下载的jdk目录。</li>
-<li>创建完成后，会在IDEA左侧显示项目结构图和外部库<ul>
-<li>在项目结构图中，src目录为默认的Source root，我们一般在该目录下创建包和类；</li>
-<li>在外部库中，显示了我们导入的 JDK 1.8 版本</li>
-</ul>
-</li>
-</ul>
-<h3 id="五、创建包和类"><a href="#五、创建包和类" class="headerlink" title="五、创建包和类"></a>五、创建包和类</h3><h4 id="5-1-创建包"><a href="#5-1-创建包" class="headerlink" title="5.1 创建包"></a>5.1 创建包</h4><ul>
-<li>在 <code>src</code> 中创建包时，可以一次创建多个包，如：输入包名为 <code>com.hit.demo</code>，同时创建了三个空包。</li>
-<li>创建的多个空包默认是重叠在一起的，如果其中某个包非空，则自动拆开包。</li>
-<li>如果感觉空包叠在一起不爽的话，可以点击旁边的齿轮按钮，再点击 <code>Hide Empty Middle Packages</code> 把对勾去掉，变为 <code>Compact Empty Middle Packages</code>，就会把空包都按树状展示。</li>
-</ul>
-<h4 id="5-2-创建类"><a href="#5-2-创建类" class="headerlink" title="5.2 创建类"></a>5.2 创建类</h4><ul>
-<li>在一个包上点击鼠标右键，选择 <code>Create Java Class</code> ,创建 <code>HelloWorld</code> 类。</li>
-<li>编写完成代码后，直接在编辑区右键–<code>Run HelloWorld</code> 运行类。</li>
-<li>然后会在左侧目录中生成一个与 <code>src</code> 同级的目录 <code>out</code> ，用于存放项目中所有Module的编译文件。</li>
-</ul>
-<h3 id="六、项目中的配置文件"><a href="#六、项目中的配置文件" class="headerlink" title="六、项目中的配置文件"></a>六、项目中的配置文件</h3><h4 id="6-1-idea-目录"><a href="#6-1-idea-目录" class="headerlink" title="6.1  .idea 目录"></a>6.1  <code>.idea</code> 目录</h4><p>这是整个 <code>Project</code>的配置文件目录。</p>
-<p>IntelliJ IDEA 的配置文件都存在.idea目录下，以 XML 文件的形式存在，因此我们也可以通过了解这些 XML 文件来了解 IntelliJ IDEA 的相关配置。</p>
-<h4 id="6-2-iml-文件"><a href="#6-2-iml-文件" class="headerlink" title="6.2  .iml 文件"></a>6.2  <code>.iml</code> 文件</h4><p>这个文件是Module的配置文件。</p>
-<p>这是 IntelliJ IDEA 为每个 Module 自动生成的配置文件，一般情况下不需要动。</p>
-<h3 id="七、设置主题和字体"><a href="#七、设置主题和字体" class="headerlink" title="七、设置主题和字体"></a>七、设置主题和字体</h3><h4 id="7-1-界面主题修改"><a href="#7-1-界面主题修改" class="headerlink" title="7.1 界面主题修改"></a>7.1 界面主题修改</h4><p><code>Files -&gt; Settings -&gt; Appearance &amp; Behavior -&gt; Appearance</code></p>
-<p>在 Windows 系统上 IntelliJ IDEA 默认提供三个主题，分别为：Darcula、IntelliJ和Windows。其中，除了Darcula是黑色背景的主题，其余两个都是白色背景的主题。</p>
-<h4 id="7-2-界面字体修改"><a href="#7-2-界面字体修改" class="headerlink" title="7.2 界面字体修改"></a>7.2 界面字体修改</h4><p><code>Appearance &amp; Behavior &gt; Appearance</code></p>
-<p>选中 <code>Override default fonts by XXX</code> ，并设置具体字体大小的数值。</p>
-<font color="red">这里的修改不会应用于代码编辑区！</font>
+          [toc]
+一、IDEA 和 eclipse 对比
 
-<pre><code>有一点需要注意，那就是：有的字体是包含中文的，有的字体则是不包含中文的。
-一般情况下，使用英文的国家是不需要额外担心乱码问题的，但是我们需要啊！
-如果我们选择的字体不包含中文的话，很多位置上可能会出现类似于 口口口口口 这样的乱码问题。
-例如，Courier New和Monaco就是纯英文字体，而Microsoft YaHei就是包含中文的字体。
-</code></pre><h4 id="7-3-代码编辑区主题修改"><a href="#7-3-代码编辑区主题修改" class="headerlink" title="7.3 代码编辑区主题修改"></a>7.3 代码编辑区主题修改</h4><p><code>Files -&gt; Settings -&gt; Appearance &amp; Behavior -&gt; Editor &gt; Color Scheme</code></p>
-<p>在 Windows 系统上 IntelliJ IDEA 默认提供两个编辑区主题，分别为：Default和Darcula。其中，Default为默认主题；Darcula为黑色主题。</p>
-<h4 id="7-4-代码编辑区和控制台的字体修改"><a href="#7-4-代码编辑区和控制台的字体修改" class="headerlink" title="7.4 代码编辑区和控制台的字体修改"></a>7.4 代码编辑区和控制台的字体修改</h4><p><code>Editor &gt; Font</code> </p>
-<p>这里的设置可以同时应用于代码编辑区和控制台</p>
-<ul>
-<li><code>Font</code> ：设置第一字体</li>
-<li><code>Show only monospaced fonts</code>：仅显示等宽字体，默认是勾选状态，可选的字体较少，可去掉勾选。</li>
-<li><code>Fallback font</code>：备选字体，如果首选字体中无法显示文字，系统就会自动调用备选字体来显示。例如首选字体我们可以设置为英文字体，备选字体设置为中文字体，这样即可优美的显示代码，而中文也不会变为‘口口’字</li>
-<li><code>Enable font ligatures</code>：是否启用字体连写，一般不启用。</li>
-</ul>
-<h4 id="7-5-设置-Sublime-代码颜色的方法"><a href="#7-5-设置-Sublime-代码颜色的方法" class="headerlink" title="7.5 设置 Sublime 代码颜色的方法"></a>7.5 设置 Sublime 代码颜色的方法</h4><p>在使用 Sublime 时，五颜六色的代码看起来非常美观，怎么让 IDEA 也设置成类似的格式呢？</p>
-<ul>
-<li><p>下载「SublimeMonoKaiTrue」jar 包 <a href="https://github.com/guobinhit/intellij-idea-tutorial/tree/master/resources/idea-theme/SublimeMonokaiTrue.jar；" target="_blank" rel="noopener">https://github.com/guobinhit/intellij-idea-tutorial/tree/master/resources/idea-theme/SublimeMonokaiTrue.jar；</a></p>
-</li>
-<li><p><code>File -&gt; Import Settings</code>，导入已经下载完的「SublimeMonoKai.jar」包，按提示重启 IDEA ；</p>
-</li>
-<li><p>重启后，默认就会使用新的 sublime 主题效果了，具体可以在 <code>File -&gt; Settings  -&gt; Editor -&gt; Color Scheme</code> 中修改。</p>
-</li>
-</ul>
 
-          
+IDEA
+Eclipse
+说明
+
+
+
+
+new Project
+workspace
+创建 项目/工作空间，是最顶级的结构单元
+
+
+new Module
+new Project
+创建一个模块/工程，一个 Project/工作空间 下可以有多个 模
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/31/intellij idea 和 eclipse 区别/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1266,8 +1051,15 @@ grep -w &quot;android | ios&quot; logcat.txt
       
         
           
-            
           
+          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/31/jmeter常见问题及解决方法/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1385,21 +1177,19 @@ grep -w &quot;android | ios&quot; logcat.txt
       
         
           
-            <p>[toc]</p>
-<h2 id="1、获取当前线程的名称"><a href="#1、获取当前线程的名称" class="headerlink" title="1、获取当前线程的名称"></a>1、获取当前线程的名称</h2><p><code>ctx.getThread().getThreadName()</code></p>
-<p>有两种方法，可以直接用一个函数：</p>
-<pre><code>${__BeanShell(ctx.getThread().getThreadName().toString(),)}
-</code></pre><p>也可以在beanshell里写脚本：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.jmeter.util.JMeterUtils; </span><br><span class="line"> </span><br><span class="line">String threadinfo = ctx.getThread().getThreadName().toString();</span><br><span class="line">log.info(&quot;threadinfo---&quot;+threadinfo);</span><br></pre></td></tr></table></figure></p>
-<h2 id="2、保存变量到文件中"><a href="#2、保存变量到文件中" class="headerlink" title="2、保存变量到文件中"></a>2、保存变量到文件中</h2><p>下面以保存 cookies 为例，其它变量是类似的.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import java.lang.String;</span><br><span class="line">import java.io.*;</span><br><span class="line"> </span><br><span class="line">String str = &quot;$&#123;COOKIE_xxx&#125;,$&#123;COOKIE_xxx&#125;\r\n&quot;;  //拼接cookie字符串</span><br><span class="line">log.info(&quot;cookieStr: &quot; + str);</span><br><span class="line"></span><br><span class="line">FileWriter writer = null;</span><br><span class="line">writer = new FileWriter(&quot;cookies.csv&quot;, true);  //若文件不存在则创建，若文件存在则追加</span><br><span class="line">writer.write(str);</span><br><span class="line">writer.close();</span><br><span class="line">//log.info(&quot;save cookie in file success!&quot;);</span><br></pre></td></tr></table></figure></p>
-<h2 id="3、保存变量到全局属性中"><a href="#3、保存变量到全局属性中" class="headerlink" title="3、保存变量到全局属性中"></a>3、保存变量到全局属性中</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># props.put() 保存变量到属性中,如:</span><br><span class="line">props.put(&quot;access_token&quot;,&quot;$&#123;access_token&#125;&quot;);</span><br></pre></td></tr></table></figure>
-<h2 id="4、获取属性值"><a href="#4、获取属性值" class="headerlink" title="4、获取属性值"></a>4、获取属性值</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># props.get() 从属性中取出变量值:</span><br><span class="line">String access_token = props.get(&quot;access_token&quot;);</span><br><span class="line"></span><br><span class="line"># &quot;$&#123;__P()&#125;&quot; 从属性中取出变量值:</span><br><span class="line">$&#123;__P(access_token,)&#125;</span><br><span class="line">``` </span><br><span class="line">以上两种方式都可以从属性中取出 access_token 的值。</span><br><span class="line"></span><br><span class="line">## 5、使用 CookieManager 自定义 cookie 信息</span><br><span class="line"></span><br><span class="line">jmeter 中可以用 cookie 管理器来添加 cookie 信息；</span><br><span class="line"></span><br><span class="line">也可以通过 beanshell 脚本，使用 CookieManager 自定义 cookie 信息。</span><br><span class="line"></span><br><span class="line">示例如下：</span><br></pre></td></tr></table></figure>
-<p>import org.apache.jmeter.protocol.http.control.CookieManager;<br>import org.apache.jmeter.protocol.http.control.Cookie;</p>
-<p>CookieManager manager = sampler.getCookieManager();</p>
-<p>String s=”\””+”${COOKIE_user_id}”+”\””;<br>log.info(“s—“+s);</p>
-<p>Cookie cookie = new Cookie(“user_id”,s,”${ip}”,”/“,false,0);<br>manager.add(cookie);</p>
-<p>Cookie cookie = new Cookie(“app_id”,”${app_id}”,”${ip}”,”/“,false,0);<br>manager.add(cookie);<br><code>`</code></p>
-
-          
+          [toc]
+1、获取当前线程的名称ctx.getThread().getThreadName()
+有两种方法，可以直接用一个函数：
+${__BeanShell(ctx.getThread().getThreadName().toString(),)}
+也可以在beanshell里写脚本：1234im
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/31/181227 一些有用的函数和方法/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1517,128 +1307,19 @@ grep -w &quot;android | ios&quot; logcat.txt
       
         
           
-            <p>[toc]</p>
-<h1 id="一、JMeter-介绍及环境准备"><a href="#一、JMeter-介绍及环境准备" class="headerlink" title="一、JMeter 介绍及环境准备"></a>一、JMeter 介绍及环境准备</h1><h2 id="1、JMeter-介绍"><a href="#1、JMeter-介绍" class="headerlink" title="1、JMeter 介绍"></a>1、JMeter 介绍</h2><ul>
-<li><p>JMeter 是 Apache 组织开发的开源、100% 纯 JAVA 应用，设计之初是用于做 Web 测试，后来扩展到很多其它的测试功能。目前，主要用于 <strong>接口测试 和 性能测试</strong> 。</p>
-</li>
-<li><p>JMeter 能够很好的支持各种常见接口的测试，如 HTTP(S)、WebService、JDBC、JAVA、FTP 等，并有很多插件支持。</p>
-</li>
-</ul>
-<h2 id="2、JMeter-工作原理"><a href="#2、JMeter-工作原理" class="headerlink" title="2、JMeter 工作原理"></a>2、JMeter 工作原理</h2><ul>
-<li>JMeter 通过 <strong>多线程机制</strong> 来模拟真实用户，驱动测试脚本，从而模拟真实客户端对服务器产生压力，同时监听客户端和服务器的交互过程。</li>
-</ul>
-<h2 id="3、JMeter、LR-比较"><a href="#3、JMeter、LR-比较" class="headerlink" title="3、JMeter、LR 比较"></a>3、JMeter、LR 比较</h2><h3 id="JMeter"><a href="#JMeter" class="headerlink" title="JMeter"></a>JMeter</h3><ul>
-<li>开源免费，轻量级免安装，有很多第三方插件，扩展性好，容易进行二次开发；</li>
-<li>报表分析、脚本录制、场景控制等方面，相对 LR 功能稍弱；</li>
-</ul>
-<h3 id="LR"><a href="#LR" class="headerlink" title="LR"></a>LR</h3><ul>
-<li>商业收费，体积较大、安装麻烦，不能进行二次开发；</li>
-<li>功能很强大，场景设置灵活，报表分析功能强大，支持协议很全面；</li>
-</ul>
-<h2 id="4、JMeter-下载-解压-配置"><a href="#4、JMeter-下载-解压-配置" class="headerlink" title="4、JMeter 下载-解压-配置"></a>4、JMeter 下载-解压-配置</h2><h3 id="官网下载"><a href="#官网下载" class="headerlink" title="官网下载"></a>官网下载</h3><ul>
-<li>下载最新 5.0 版本：<a href="http://jmeter.apache.org/download_jmeter.cgi" target="_blank" rel="noopener">http://jmeter.apache.org/download_jmeter.cgi</a></li>
-<li>下载 4.0 版本：<a href="https://archive.apache.org/dist/jmeter/binaries/" target="_blank" rel="noopener">https://archive.apache.org/dist/jmeter/binaries/</a></li>
-</ul>
-<p><img src="https://img-blog.csdnimg.cn/20181228130710747.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="本地解压"><a href="#本地解压" class="headerlink" title="本地解压"></a>本地解压</h3><ul>
-<li>解压在本地非中文目录下，我的解压目录是 <code>E:\apache-jmeter-4.0</code></li>
-</ul>
-<h3 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h3><p>依赖jdk1.8或以上版本，JDK 的配置自行完成。</p>
-<p>配置 jmeter 环境变量：</p>
-<ul>
-<li><p>新建系统变量 JMETER_HOME，值为 <code>E:\apache-jmeter-4.0</code>（根据你实际的jmeter解压路径填写）</p>
-</li>
-<li><p>编辑原有的 Path 变量，在后面加上 <code>;%JMETER _HOME%\bin</code> （若没有该变量则需要新建，且值为 <code>.;%JMETER _HOME%\bin</code>）</p>
-</li>
-<li><p>编辑原有的 CLASSPATH 变量，在后面加上如下内容：</p>
-</li>
-</ul>
-<pre><code>;%JMETER_HOME\lib\ext\ApacheJMeter_core.jar;%JMETER_HOME%\lib\jorphan.jar;%JMETER_HOME%\lib\logkit-2.0.jar
-</code></pre><p><img src="https://img-blog.csdnimg.cn/20181228151315492.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<ul>
-<li>cmd 中 输入 jmeter -v 验证是否配置成功</li>
-</ul>
-<p><img src="https://img-blog.csdnimg.cn/20181228131812119.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h2 id="5、关键目录介绍"><a href="#5、关键目录介绍" class="headerlink" title="5、关键目录介绍"></a>5、关键目录介绍</h2><p><img src="https://img-blog.csdnimg.cn/2018122814583042.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<ul>
-<li><p><strong>bin</strong>： 可执行文件目录，jmeter.bat、jmeter.sh、jmeter.properties、jmeter.log；</p>
-<ul>
-<li>jmeter.bat：修改内存参数，防止内存溢出set HEAP=-Xms1g -Xmx1g（4.0默认1G，3.0默认512M，最大为物理内存一半）</li>
-<li>jmeter.properties：配置文件</li>
-<li>jmeter.log：日志文件</li>
-</ul>
-</li>
-<li><p>lib：存放一些自定义的通用 jar 包；</p>
-</li>
-<li><p>lib\ext：其中包含 JMeter 自带的核心 jar 包，也用于存放扩展插件；</p>
-</li>
-<li><p>docs：API 帮助文档</p>
-</li>
-<li><p>extras：提供对 Ant 的支持，用来实现测试自动化，如批量执行脚本、生成html报告；</p>
-</li>
-<li><p>printable_docs：用户帮助文档</p>
-</li>
-</ul>
-<h1 id="二、-JMeter-脚本实战-（重点！）"><a href="#二、-JMeter-脚本实战-（重点！）" class="headerlink" title="二、==JMeter 脚本实战 （重点！）=="></a>二、==JMeter 脚本实战 （重点！）==</h1><h2 id="1、测试计划、线程组、Sampler"><a href="#1、测试计划、线程组、Sampler" class="headerlink" title="1、测试计划、线程组、Sampler"></a>1、测试计划、线程组、Sampler</h2><p><img src="https://img-blog.csdnimg.cn/20181228133239819.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="测试计划"><a href="#测试计划" class="headerlink" title="测试计划"></a>测试计划</h3><p>用来描述 JMeter 执行测试的一系列步骤，包含与本次测试相关的所有功能。</p>
-<h3 id="线程组"><a href="#线程组" class="headerlink" title="线程组"></a>线程组</h3><ul>
-<li><p>是任何一个测试计划的起点，所有的控制器和 sampler 必须在某个线程组之下。</p>
-</li>
-<li><p>线程组，即虚拟用户组，模拟多用户并发或顺序的去执行任务。</p>
-</li>
-<li><p>一个线程代表一个虚拟用户，多个线程之间互不影响。</p>
-</li>
-</ul>
-<h3 id="线程组配置"><a href="#线程组配置" class="headerlink" title="线程组配置"></a>线程组配置</h3><p><img src="https://img-blog.csdnimg.cn/20181228160724427.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<ul>
-<li><p><strong>线程数</strong>：虚拟用户数</p>
-</li>
-<li><p><strong>Ramp-Up Period (in seconds)</strong>：在多长时间内启动所有线程，单位为秒。</p>
-<ul>
-<li>按上图中的配置，5s 启动 10 个线程，那么每秒启动的线程数 = 线程数/时间 = 10/5 = 2，即 1 秒启动 2 个线程。</li>
-<li>如果设置为 0，会立即启动所有线程。</li>
-<li>总请求数 = 线程数 * 循环次数</li>
-</ul>
-</li>
-<li><p><strong>循环次数</strong>：每个线程循环的次数；如果勾选 <code>永远</code>，则线程会一直循环。</p>
-</li>
-<li><p><strong>调度器</strong>：勾选此选项后，才可修改下面的调度器配置，设置持续运行时间和启动延迟时间。</p>
-<ul>
-<li>可结合 <code>永远</code> 循环选项来做稳定性测试。</li>
-</ul>
-</li>
-</ul>
-<h3 id="Sampler"><a href="#Sampler" class="headerlink" title="Sampler"></a>Sampler</h3><ul>
-<li><p>取样器，请求模拟器，向服务器发送请求并获取响应结果 – 真正干活的家伙!</p>
-</li>
-<li><p>一个脚本中必须有至少一个 sampler，其它的各种元件都是围绕 sampler 进行的。</p>
-</li>
-</ul>
-<h2 id="2、HTTP-Sampler"><a href="#2、HTTP-Sampler" class="headerlink" title="2、HTTP Sampler"></a>2、HTTP Sampler</h2><p>==todo===</p>
-<p>Get 请求：key value<br>Post 请求：json<br>察看结果树、信息头管理器、cookie 管理器<br>常用函数：加密函数、随机函数<br>参数化常用的两种方式：用户定义的变量、CSV Data Set Config<br>Boundary Extractor、正则表达式提取器<br>聚合报告</p>
-<p>3、其它的常用 Sampler<br>JDBC<br>SOAP<br>Beanshell</p>
-<h2 id="3、各元件作用域及执行顺序"><a href="#3、各元件作用域及执行顺序" class="headerlink" title="3、各元件作用域及执行顺序"></a>3、各元件作用域及执行顺序</h2><h3 id="元件作用域"><a href="#元件作用域" class="headerlink" title="元件作用域"></a>元件作用域</h3><ul>
-<li><p>元件的作用域是靠测试计划的的树型结构中元件的父子关系来确定的</p>
-</li>
-<li><p>其中取样器不和其它元件相互作用，因此没有作用域的概念</p>
-</li>
-</ul>
-<h3 id="元件执行顺序"><a href="#元件执行顺序" class="headerlink" title="元件执行顺序"></a>元件执行顺序</h3><p><img src="https://img-blog.csdnimg.cn/20181228164144689.png" alt="在这里插入图片描述"></p>
-<ul>
-<li><p>在同一作用域范围内，测试计划中的元件按照如上从左到右的顺序执行</p>
-</li>
-<li><p>在取样器左侧，配置元件、控制器均对其作用域内的所有元件起作用；前置处理器和定时器均在其作用域内的所有sampler之前执行</p>
-</li>
-<li><p>在取样器右侧，三个元件均在其作用域内的所有sampler之后执行</p>
-</li>
-<li><p>除配置元件和控制器之外，其它元件仅对取样器作用，因此，如果在它们的作用域内没有任何取样器，则不会被执行。</p>
-</li>
-<li><p>如果在同一作用域范围内有多个同一类型的元件，则这些元件按照它们在测试计划中的上下顺序依次执行</p>
-</li>
-</ul>
-<p>三、jmeter 扩展插件<br>插件下载<br>结果图表插件：TPS、RT、Active Threads<br>监控插件：监控服务器资源<br>四、多场景实战 &lt;重点！&gt;<br>目的：在实战过程中，综合运用知识点，分析结果图表。<br>实战前增加 三种线程组、定时器、逻辑控制器、事务控制器 等内容。<br>1、单接口压测：测出 TPS 拐点<br>2、多接口混合压测：不同比例压测<br>3、稳定性压测<br>五、非 GUI 模式下执行 JMeter 脚本<br>1、windows<br>2、Linux<br>六、JMeter 分布式测试<br>七、Grafana+Telegraf+Influxdb 搭建性能监控平台<br>八、JMeter+Ant+Jenkins 搭建接口自动化框架</p>
+          [toc]
+一、JMeter 介绍及环境准备1、JMeter 介绍
+JMeter 是 Apache 组织开发的开源、100% 纯 JAVA 应用，设计之初是用于做 Web 测试，后来扩展到很多其它的测试功能。目前，主要用于 接口测试 和 性能测试 。
 
-          
+JMeter 能够很好的支持各种常见接口的测试
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/31/181228-01认识 jmeter/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1756,17 +1437,15 @@ grep -w &quot;android | ios&quot; logcat.txt
       
         
           
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
+          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/29/hello-world/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
