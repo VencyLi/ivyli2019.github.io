@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ivyli&#39;s blog">
 <meta property="og:description" content="0、各命令的主要区别：linux命令中find、locate 、whereis、which均可用来查找文件，主要区别有：  find是最常用和最强大的查找命令。它能做到实时查找，精确查找，但查找内容较多时速度慢； locate查找速度快，但是不是实时查找，所以查找的结果不精确； whereis用于查找二进制文件、源代码文件和man手册页； which指令会在环境变量$PATH设置的目录里查找符合条">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-26T05:28:11.875Z">
+<meta property="og:updated_time" content="2019-02-26T11:41:15.767Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="总结linux中文件查找命令find-locate-whereis-which">
 <meta name="twitter:description" content="0、各命令的主要区别：linux命令中find、locate 、whereis、which均可用来查找文件，主要区别有：  find是最常用和最强大的查找命令。它能做到实时查找，精确查找，但查找内容较多时速度慢； locate查找速度快，但是不是实时查找，所以查找的结果不精确； whereis用于查找二进制文件、源代码文件和man手册页； which指令会在环境变量$PATH设置的目录里查找符合条">
@@ -360,7 +360,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-02-26T13:28:11+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-02-26T19:41:15+08:00">
                 2019-02-26
               </time>
             
@@ -561,7 +561,7 @@
 </tr>
 </tbody>
 </table>
-<p>另外，还可以使用 ( ) 将运算式分隔，并使用下列运算：<br>exp1 -and exp2<br>! expr<br>-not expr<br>exp1 -or exp2<br>exp1, exp2</p>
+<p>另外，还可以使用 ( ) 将运算式分隔，并使用下列运算：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">exp1 -and exp2</span><br><span class="line">! expr</span><br><span class="line">-not expr</span><br><span class="line">exp1 -or exp2</span><br><span class="line">exp1, exp2</span><br></pre></td></tr></table></figure></p>
 <h2 id="4、实例"><a href="#4、实例" class="headerlink" title="4、实例"></a>4、实例</h2><p>（1）匹配文件名称<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">将当前目录及其子目录下所有.py后缀的文件列出来：</span><br><span class="line">find . -name &quot;*.py&quot;</span><br><span class="line">find . -iname &quot;*.py&quot;  （同上，但忽略大小写，.PY后缀的文件也列出来）</span><br><span class="line"></span><br><span class="line">当前目录及子目录下查找所有以.txt和.pdf结尾的文件：</span><br><span class="line">find . \( -name &quot;*.txt&quot; -o -name &quot;*.pdf&quot; \)</span><br><span class="line">或</span><br><span class="line">find . -name &quot;*.txt&quot; -o -name &quot;*.pdf&quot;</span><br></pre></td></tr></table></figure></p>
 <p>（2）匹配文件路径<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">匹配文件路径或者文件：</span><br><span class="line">find /usr/ -path &quot;*local*&quot;</span><br><span class="line"></span><br><span class="line">基于正则表达式匹配文件路径：</span><br><span class="line">find . -regex &quot;.*\(\.txt\|\.pdf\)$&quot;</span><br><span class="line">（查找当前目录及子目录下所有以.txt或.pdf结尾的文件）</span><br><span class="line"></span><br><span class="line">同上，但忽略大小写：</span><br><span class="line">find . -iregex &quot;.*\(\.txt\|\.pdf\)$&quot;</span><br></pre></td></tr></table></figure></p>
 <p>（3）否定参数 <code>！</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">找出/home下不是以.txt结尾的文件：</span><br><span class="line">find /home ! -name &quot;*.txt&quot;</span><br></pre></td></tr></table></figure></p>
@@ -644,8 +644,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/26/01_nGrinder详细介绍及性能工具对比/" rel="next" title="nGrinder详细介绍及性能测试工具对比">
-                <i class="fa fa-chevron-left"></i> nGrinder详细介绍及性能测试工具对比
+              <a href="/2019/02/26/shell 通配符&输入输出重定向/" rel="next" title="shell通配符和输入输出重定向">
+                <i class="fa fa-chevron-left"></i> shell通配符和输入输出重定向
               </a>
             
           </div>
@@ -654,8 +654,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/02/26/08_解析响应结果并断言/" rel="prev" title="nGrinder解析响应结果并断言">
-                nGrinder解析响应结果并断言 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/02/26/脚本参数化的思考/" rel="prev" title="性能测试脚本参数化的思考">
+                性能测试脚本参数化的思考 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

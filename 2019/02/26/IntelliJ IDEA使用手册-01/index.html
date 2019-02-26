@@ -87,14 +87,14 @@
 <meta property="og:site_name" content="ivyli&#39;s blog">
 <meta property="og:description" content="添加/修改代码模板，缓存和索引，四种编译方式，中文乱码，Debug，代码回退...">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20181123092502878.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20181123204620827.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20181123210016208.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-02-26T04:59:48.525Z">
+<meta property="og:image" content="https://res.cloudinary.com/ivyli/image/upload/v1551181569/20181123092502878.png">
+<meta property="og:image" content="https://res.cloudinary.com/ivyli/image/upload/v1551181627/20181123204620827.png.png">
+<meta property="og:image" content="https://res.cloudinary.com/ivyli/image/upload/v1551181660/20181123210016208.png.png">
+<meta property="og:updated_time" content="2019-02-26T11:48:16.404Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="IntelliJ IDEA使用手册-02">
 <meta name="twitter:description" content="添加/修改代码模板，缓存和索引，四种编译方式，中文乱码，Debug，代码回退...">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20181123092502878.png">
+<meta name="twitter:image" content="https://res.cloudinary.com/ivyli/image/upload/v1551181569/20181123092502878.png">
 
 
 
@@ -364,7 +364,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-02-26T12:59:48+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-02-26T19:48:16+08:00">
                 2019-02-26
               </time>
             
@@ -493,7 +493,7 @@
 <font color="red">在遇到一些突发情况时（如突然断电、蓝屏引起的强制关机等等），可能会造成缓存和索引的损坏，这种情况下重启 IDEA 后，会出现一些莫名其妙的问题，这时需要清除被损坏的缓存和索引文件。</font>
 </blockquote>
 <ul>
-<li><code>File &gt; Invalidate Caches / Restart</code> 打开清理缓存和索引的对话框<br><img src="https://img-blog.csdnimg.cn/20181123092502878.png" alt="在这里插入图片描述"><br>一般选择第一项 <code>Invalidate and Restart</code> <ul>
+<li><code>File &gt; Invalidate Caches / Restart</code> 打开清理缓存和索引的对话框<br><img src="https://res.cloudinary.com/ivyli/image/upload/v1551181569/20181123092502878.png" alt="在这里插入图片描述"><br>一般选择第一项 <code>Invalidate and Restart</code> <ul>
 <li>这种清除方式的本质结果是删除了本地保存的 IDEA 的缓存文件和索引文件，一般是位于目录 <code>C:\Users\当前系统的用户名\.IdeaIC版本号\system\caches、index、LocalHistory</code> 。</li>
 <li>所以如果因为突发情况导致项目都打不开的时候，可以直接把本地的 <code>system</code> 目录备份后删除，再重启后 IDEA 会重新创建新的缓存和索引文件。</li>
 </ul>
@@ -540,8 +540,8 @@
 </li>
 </ul>
 <h1 id="五、添加-jar-包"><a href="#五、添加-jar-包" class="headerlink" title="五、添加 jar 包"></a>五、添加 jar 包</h1><p><code>File -&gt; Project Structure -&gt; Module -&gt; Dependencies -&gt; +JARs or directories</code></p>
-<p><img src="https://img-blog.csdnimg.cn/20181123204620827.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h1 id="六、-Debug-菜单"><a href="#六、-Debug-菜单" class="headerlink" title="六、 Debug 菜单"></a>六、 Debug 菜单</h1><p><img src="https://img-blog.csdnimg.cn/20181123210016208.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="https://res.cloudinary.com/ivyli/image/upload/v1551181627/20181123204620827.png.png" alt="在这里插入图片描述"></p>
+<h1 id="六、-Debug-菜单"><a href="#六、-Debug-菜单" class="headerlink" title="六、 Debug 菜单"></a>六、 Debug 菜单</h1><p><img src="https://res.cloudinary.com/ivyli/image/upload/v1551181660/20181123210016208.png.png" alt="在这里插入图片描述"></p>
 <p>以上图为例，上面从 <code>Console</code> 开始，往后图标依次为：</p>
 <ul>
 <li><code>Show Execution Point</code>：显示执行断点（Alt + F10）</li>
@@ -628,8 +628,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/26/JMeter源码导入IntelliJ IDEA/" rel="next" title="JMeter源码导入IntelliJ IDEA">
-                <i class="fa fa-chevron-left"></i> JMeter源码导入IntelliJ IDEA
+              <a href="/2019/02/26/IDEA 中的版本控制机制/" rel="next" title="IDEA 中的版本控制机制">
+                <i class="fa fa-chevron-left"></i> IDEA 中的版本控制机制
               </a>
             
           </div>
@@ -638,8 +638,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/02/26/IDEA 中的版本控制机制/" rel="prev" title="IDEA 中的版本控制机制">
-                IDEA 中的版本控制机制 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/02/26/Beanshell Sampler 常用方法/" rel="prev" title="Beanshell Sampler 常用方法">
+                Beanshell Sampler 常用方法 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

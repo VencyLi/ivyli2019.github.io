@@ -87,12 +87,12 @@
 <meta property="og:site_name" content="ivyli&#39;s blog">
 <meta property="og:description" content="构建生命周期是指为一个工程进行项目构建和发布的过程，它是 Maven 中的一个核心概念。 1、标准生命周期Maven中内置了三个标准的构建生命周期：  default（或build）：处理工程的部署 clean：处理工程的清理 site：负责创建工程的站点文档。  这三个构建生命周期都是由一系列不同的构建阶段组成，每一个构建阶段代表了生命周期的一个阶段。 2、default 生命周期的阶段一个典型">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20181129085332753.png">
-<meta property="og:updated_time" content="2019-02-26T06:08:17.491Z">
+<meta property="og:image" content="https://res.cloudinary.com/ivyli/image/upload/v1551179838/20181129085332753.png">
+<meta property="og:updated_time" content="2019-02-26T11:18:36.013Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Maven学习04-构建生命周期">
 <meta name="twitter:description" content="构建生命周期是指为一个工程进行项目构建和发布的过程，它是 Maven 中的一个核心概念。 1、标准生命周期Maven中内置了三个标准的构建生命周期：  default（或build）：处理工程的部署 clean：处理工程的清理 site：负责创建工程的站点文档。  这三个构建生命周期都是由一系列不同的构建阶段组成，每一个构建阶段代表了生命周期的一个阶段。 2、default 生命周期的阶段一个典型">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20181129085332753.png">
+<meta name="twitter:image" content="https://res.cloudinary.com/ivyli/image/upload/v1551179838/20181129085332753.png">
 
 
 
@@ -362,7 +362,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-02-26T14:08:17+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-02-26T19:18:36+08:00">
                 2019-02-26
               </time>
             
@@ -469,7 +469,7 @@
 </ul>
 <p>这三个构建生命周期都是由一系列不同的构建阶段组成，每一个构建阶段代表了生命周期的一个阶段。</p>
 <h2 id="2、default-生命周期的阶段"><a href="#2、default-生命周期的阶段" class="headerlink" title="2、default 生命周期的阶段"></a>2、default 生命周期的阶段</h2><p>一个典型的 Maven  default（build）生命周期主要由以下几个阶段的序列组成（此处并完全列出）：</p>
-<p><img src="https://img-blog.csdnimg.cn/20181129085332753.png" alt="在这里插入图片描述"></p>
+<p><img src="https://res.cloudinary.com/ivyli/image/upload/v1551179838/20181129085332753.png" alt="在这里插入图片描述"></p>
 <table>
 <thead>
 <tr>
@@ -486,9 +486,28 @@
 <td>编译 compile</td>
 <td>源代码编译在此阶段完成</td>
 </tr>
+<tr>
+<td>测试 Test</td>
+<td>使用适当的单元测试框架（例如JUnit）运行测试。</td>
+</tr>
+<tr>
+<td>包装 package</td>
+<td>创建JAR/WAR包如在 pom.xml 中定义提及的包</td>
+</tr>
+<tr>
+<td>检查 verify</td>
+<td>对集成测试的结果进行检查，以保证质量达标</td>
+</tr>
+<tr>
+<td>安装 install</td>
+<td>安装打包的项目到本地仓库，以供其他项目使用</td>
+</tr>
+<tr>
+<td>部署 deploy</td>
+<td>拷贝最终的工程包到远程仓库中，以共享给其他开发人员和工程</td>
+</tr>
 </tbody>
 </table>
-<p>测试 Test|使用适当的单元测试框架（例如JUnit）运行测试。<br>包装 package|创建JAR/WAR包如在 pom.xml 中定义提及的包<br>检查 verify|对集成测试的结果进行检查，以保证质量达标<br>安装 install|安装打包的项目到本地仓库，以供其他项目使用<br>部署 deploy|    拷贝最终的工程包到远程仓库中，以共享给其他开发人员和工程</p>
 <p>使用默认的生命周期时，Maven将首先验证项目，然后将编译源代码，运行单元测试，再打包二进制文件（例如：jar），然后再对包文件进行集成测试（如果需要的话），再校验包文件，并将已经校验的包文件安装到本地仓库，然后在指定的环境中部署包。</p>
 <h2 id="3、生命周期阶段的执行顺序"><a href="#3、生命周期阶段的执行顺序" class="headerlink" title="3、生命周期阶段的执行顺序"></a>3、生命周期阶段的执行顺序</h2><ul>
 <li><p>各生命周期的阶段会被顺序地执行（包括那些这里没有展示的其他生命周期阶段）。</p>
@@ -510,9 +529,16 @@
 <td>pre-clean</td>
 <td>执行一些清理前需要完成的工作</td>
 </tr>
+<tr>
+<td>clean</td>
+<td>清理上一次构建生成的文件</td>
+</tr>
+<tr>
+<td>post-clean</td>
+<td>执行一些清理后需要完成的工作</td>
+</tr>
 </tbody>
 </table>
-<p>clean|    清理上一次构建生成的文件<br>post-clean    |执行一些清理后需要完成的工作</p>
 <h2 id="5、Site生命周期"><a href="#5、Site生命周期" class="headerlink" title="5、Site生命周期"></a>5、Site生命周期</h2><table>
 <thead>
 <tr>
@@ -522,12 +548,23 @@
 </thead>
 <tbody>
 <tr>
-<td></td>
+<td>pre-site</td>
+<td>执行一些在生成站点之前需要完成的工作</td>
+</tr>
+<tr>
+<td>site</td>
+<td>生成项目的站点文档</td>
+</tr>
+<tr>
+<td>post-site</td>
+<td>执行一些在生成站点之后需要完成的工作</td>
+</tr>
+<tr>
+<td>site-deploy</td>
+<td>将生成的站点文件发布到远程服务器上</td>
 </tr>
 </tbody>
 </table>
-<p>pre-site    |执行一些在生成站点之前需要完成的工作<br>site    |生成项目的站点文档<br>post-site    |执行一些在生成站点之后需要完成的工作<br>site-deploy    |将生成的站点文件发布到远程服务器上    </p>
-<p>​        </p>
 
       
     </div>
@@ -588,8 +625,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/02/26/JMeter源码导入IntelliJ IDEA/" rel="prev" title="JMeter源码导入IntelliJ IDEA">
-                JMeter源码导入IntelliJ IDEA <i class="fa fa-chevron-right"></i>
+              <a href="/2019/02/26/Maven学习03-安装配置和maven仓库/" rel="prev" title="Maven学习03-安装配置和maven仓库">
+                Maven学习03-安装配置和maven仓库 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

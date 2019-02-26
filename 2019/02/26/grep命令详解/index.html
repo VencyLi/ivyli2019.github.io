@@ -87,13 +87,13 @@
 <meta property="og:site_name" content="ivyli&#39;s blog">
 <meta property="og:description" content="一、grep常用命令grep的功能是分析一行信息，过滤出包含指定内容的行。 ==需要注意的是它以整行为单位进行数据的选取==。 1、语法grep [-acinv] [--color=auto]  &amp;apos;要查找的字符串&amp;apos;  filename    参数 说明     -a 将binary文件以text文件的方式查找数据   -c 计算找到查找字符串的次数   -i 忽略大小写的不同">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20181201160201562.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20181201160657525.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-02-26T05:15:48.836Z">
+<meta property="og:image" content="https://res.cloudinary.com/ivyli/image/upload/v1551181431/20181201160201562.png.png">
+<meta property="og:image" content="https://res.cloudinary.com/ivyli/image/upload/v1551181458/20181201160657525.png.png">
+<meta property="og:updated_time" content="2019-02-26T11:44:55.784Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="grep命令详解">
 <meta name="twitter:description" content="一、grep常用命令grep的功能是分析一行信息，过滤出包含指定内容的行。 ==需要注意的是它以整行为单位进行数据的选取==。 1、语法grep [-acinv] [--color=auto]  &amp;apos;要查找的字符串&amp;apos;  filename    参数 说明     -a 将binary文件以text文件的方式查找数据   -c 计算找到查找字符串的次数   -i 忽略大小写的不同">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20181201160201562.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70">
+<meta name="twitter:image" content="https://res.cloudinary.com/ivyli/image/upload/v1551181431/20181201160201562.png.png">
 
 
 
@@ -363,7 +363,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-02-26T13:15:48+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-02-26T19:44:55+08:00">
                 2019-02-26
               </time>
             
@@ -524,17 +524,13 @@ cp  /etc/man.config  .
 </code></pre><h3 id="2-3-grep-E-同时匹配多个关键字–或关系"><a href="#2-3-grep-E-同时匹配多个关键字–或关系" class="headerlink" title="2.3 grep -E 同时匹配多个关键字–或关系"></a>2.3 grep -E 同时匹配多个关键字–或关系</h3><pre><code>grep -E &quot;word1|word2|word3&quot; file.txt
 匹配 file.txt 中包含 word1 或 word2 或 word3 的行。
 满足其中任意条件（word1、word2和word3之一）就会匹配。
-</code></pre><p>注意：<br>==多个关键字一定要放在双引号中，不然无法正常匹配。==</p>
+</code></pre><p>注意：<br><strong>多个关键字一定要放在双引号中，不然无法正常匹配。</strong></p>
 <p>不带双引号会报错，类似下面这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">grep &apos;update fail&apos;|ERROR|timeout appmonitor.log test.log* | wc -l  </span><br><span class="line">-bash: ERROR: command not found</span><br><span class="line">timeout: 无效的时间间隔&quot;appmonitor.log&quot;</span><br><span class="line">请尝试执行&quot;timeout --help&quot;来获取更多信息。</span><br></pre></td></tr></table></figure></p>
 <p>加上双引号后正常：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep &quot;&apos;update fail&apos;|ERROR|timeout&quot; appmonitor.log test.log* | wc -l</span><br></pre></td></tr></table></figure></p>
 <h3 id="2-4-管道符连接多个-grep–同时匹配多个关键字–与关系"><a href="#2-4-管道符连接多个-grep–同时匹配多个关键字–与关系" class="headerlink" title="2.4 管道符连接多个 grep–同时匹配多个关键字–与关系"></a>2.4 管道符连接多个 grep–同时匹配多个关键字–与关系</h3><pre><code>grep word1 file.txt | grep word2 |grep word3
 必须同时满足三个条件（word1、word2和word3）才匹配。
-</code></pre><h3 id="2-5-整字匹配搜索"><a href="#2-5-整字匹配搜索" class="headerlink" title="2.5 整字匹配搜索"></a>2.5 整字匹配搜索</h3><pre><code>grep -w &quot;android&quot; logcat.txt  
-从logcat.txt文件中，搜索包含单词android的文本行
-
-grep -w &quot;android | ios&quot; logcat.txt  
-从logcat.txt文件中，搜索包含单词android或者ios的文本行
-</code></pre><h3 id="2-6-统计字符出现次数"><a href="#2-6-统计字符出现次数" class="headerlink" title="2.6 统计字符出现次数"></a>2.6 统计字符出现次数</h3><pre><code>grep -c &quot;android&quot; .
+</code></pre><h3 id="2-5-整字匹配搜索"><a href="#2-5-整字匹配搜索" class="headerlink" title="2.5 整字匹配搜索"></a>2.5 整字匹配搜索</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">grep -w &quot;android&quot; logcat.txt  </span><br><span class="line">从logcat.txt文件中，搜索包含单词android的文本行</span><br><span class="line"></span><br><span class="line">grep -w &quot;android | ios&quot; logcat.txt  </span><br><span class="line">从logcat.txt文件中，搜索包含单词android或者ios的文本行</span><br></pre></td></tr></table></figure>
+<h3 id="2-6-统计字符出现次数"><a href="#2-6-统计字符出现次数" class="headerlink" title="2.6 统计字符出现次数"></a>2.6 统计字符出现次数</h3><pre><code>grep -c &quot;android&quot; .
 </code></pre><h1 id="二、grep的一些高级参数"><a href="#二、grep的一些高级参数" class="headerlink" title="二、grep的一些高级参数"></a>二、grep的一些高级参数</h1><h2 id="1、语法-1"><a href="#1、语法-1" class="headerlink" title="1、语法"></a>1、语法</h2><pre><code>grep [-A] [-B] [--color=auto]  &apos;查找字符串&apos; filename&apos;
 </code></pre><ul>
 <li>-A：后面可加数字，为after的意思，除了列出该行以外，后续的n行也列出来。</li>
@@ -542,26 +538,26 @@ grep -w &quot;android | ios&quot; logcat.txt
 </ul>
 <h2 id="2、范例-1"><a href="#2、范例-1" class="headerlink" title="2、范例"></a>2、范例</h2><p>1、用dmesg列出内核信息，然后用grep找出包含eth的那行，并且显示行号。而且将关键字的前2行和后3行也列出来。</p>
 <pre><code>dmesg | grep -n -A3 -B2 --color=auto &apos;eth&apos;
-</code></pre><p>其中的 ==<code>|</code> 是管道符，用于把左边输出的内容传递给右边的命令==</p>
-<p><img src="https://img-blog.csdnimg.cn/20181201160201562.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+</code></pre><p>其中的  <strong><code>|</code> 是管道符，用于把左边输出的内容传递给右边的命令</strong></p>
+<p><img src="https://res.cloudinary.com/ivyli/image/upload/v1551181431/20181201160201562.png.png" alt="在这里插入图片描述"></p>
 <p>在关键字的显示上，grep可以用<code>—color=auto</code>来将关键字用特殊颜色显示。但是每次使用grep都得加上这个信息很麻烦，于是可以用alias进行一下处理就OK了。</p>
-<p>==可以在~/.bashrc内加上这一行：alias grep=’grep –color=auto’。==</p>
+<p><strong>可以在~/.bashrc内加上这一行：alias grep=’grep –color=auto’。</strong></p>
 <h1 id="三、基础正则表达式练习"><a href="#三、基础正则表达式练习" class="headerlink" title="三、基础正则表达式练习"></a>三、基础正则表达式练习</h1><h2 id="1、与中括号-结合"><a href="#1、与中括号-结合" class="headerlink" title="1、与中括号[]结合"></a>1、与中括号<code>[]</code>结合</h2><ul>
 <li>查找包含<code>[]</code>中某一个字符的内容<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">比如我要查找man或者men字符串，可以这样来查找：</span><br><span class="line">grep -n  &apos;m[ae]n&apos;  manpath.config</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p><img src="https://img-blog.csdnimg.cn/20181201160657525.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="https://res.cloudinary.com/ivyli/image/upload/v1551181458/20181201160657525.png.png" alt="在这里插入图片描述"></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">查找包含man且man前面有数字的行：</span><br><span class="line">grep -n &apos;[0-9]man&apos;  manpath.config</span><br></pre></td></tr></table></figure>
-<p>==Note：中括号[]里面不论有几个字符，它都只代表某一个字符。==</p>
+<p><strong>Note：中括号[]里面不论有几个字符，它都只代表某一个字符。</strong></p>
 <h2 id="2、与反向选择-结合使用"><a href="#2、与反向选择-结合使用" class="headerlink" title="2、与反向选择^结合使用"></a>2、与反向选择^结合使用</h2><ul>
 <li>查找不包含指定字符的内容</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">查找包含man而且前面没有/的那一行：</span><br><span class="line">grep -n  &apos;[^/]man&apos;  manpath.config</span><br><span class="line"></span><br><span class="line">查找包含man但是前面不是小写字符的那一行：</span><br><span class="line">grep -n  &apos;[^a-z]man&apos;  manpath.config</span><br></pre></td></tr></table></figure>
 <h2 id="3、与行首-和行尾-字符结合"><a href="#3、与行首-和行尾-字符结合" class="headerlink" title="3、与行首 ^ 和行尾 $ 字符结合"></a>3、与行首 <code>^</code> 和行尾 $ 字符结合</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">列出行首为MANPATH_MAP的行：</span><br><span class="line">grep -n  &apos;^MANPATH_MAP&apos; manpath.config</span><br><span class="line"></span><br><span class="line">列出开头是大写字符的那一行：</span><br><span class="line">grep -n &apos;^[A-Z]&apos; manpath.config</span><br><span class="line"></span><br><span class="line">列出开头不是英文字母的行：</span><br><span class="line">grep -n  &apos;^[^a-zA-Z]&apos;  manpath.config</span><br></pre></td></tr></table></figure>
-<p>==<code>^</code> 符号在字符集合（中括号[]）之内和外面是不同的！！！==</p>
-<p>==在<code>[]</code>里面代表反向选择，在<code>[]</code>外面代表定位在行首的意思==</p>
+<p><strong><code>^</code> 符号在字符集合（中括号[]）之内和外面是不同的！！！</strong></p>
+<p><strong>在<code>[]</code>里面代表反向选择，在<code>[]</code>外面代表定位在行首的意思</strong></p>
 <p><strong>反过来思考，使用<code>$</code>来查找行尾字符</strong>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">找出行尾结束符为点.的行：</span><br><span class="line">grep -n &apos;\.$&apos; manpath.config</span><br><span class="line">因为小数点具有特殊的意义，所以必须用转义字符加以解除其特殊意义。</span><br><span class="line"></span><br><span class="line">查找出空白行：</span><br><span class="line">grep -n  &apos;^$&apos;  manpath.config</span><br></pre></td></tr></table></figure></p>
-<h2 id="4、任意一个字符-与重复字符"><a href="#4、任意一个字符-与重复字符" class="headerlink" title="4、任意一个字符.与重复字符*"></a>4、任意一个字符<code>.</code>与重复字符<code>*</code></h2><p>==在bash当中，通配符*可以用来代表任意（0或多个）字符，但是正则表达式并不是通配符，两者之间是不相同的。==</p>
+<h2 id="4、任意一个字符-与重复字符"><a href="#4、任意一个字符-与重复字符" class="headerlink" title="4、任意一个字符.与重复字符*"></a>4、任意一个字符<code>.</code>与重复字符<code>*</code></h2><p><strong>在bash当中，通配符*可以用来代表任意（0或多个）字符，但是正则表达式并不是通配符，两者之间是不相同的。</strong></p>
 <p><strong>在正则表达式当中：</strong></p>
 <ul>
 <li><code>.</code>代表绝对有一个字符的意思</li>
@@ -625,8 +621,8 @@ grep -w &quot;android | ios&quot; logcat.txt
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/26/intellij idea 和 eclipse 区别/" rel="next" title="intellij idea 和 eclipse 区别（IDEA使用手册01）">
-                <i class="fa fa-chevron-left"></i> intellij idea 和 eclipse 区别（IDEA使用手册01）
+              <a href="/2019/02/26/03_脚本结构-groovy/" rel="next" title="nGrinder脚本结构-groovy">
+                <i class="fa fa-chevron-left"></i> nGrinder脚本结构-groovy
               </a>
             
           </div>
@@ -635,8 +631,8 @@ grep -w &quot;android | ios&quot; logcat.txt
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/02/26/git pull 指定某一个文件或文件夹/" rel="prev" title="git pull 指定某一个文件或文件夹">
-                git pull 指定某一个文件或文件夹 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/02/26/git一次性 add多个文件或提交多次修改/" rel="prev" title="git一次性add多个文件或提交多次修改">
+                git一次性add多个文件或提交多次修改 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

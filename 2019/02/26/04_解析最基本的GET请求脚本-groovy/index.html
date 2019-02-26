@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ivyli&#39;s blog">
 <meta property="og:description" content="一、自动生成GET请求脚本1、配置 Create a script在ngrinder管理台主页，点击script–&amp;gt;Create a script，并填写脚本名称和请求的url； 点击 Create 按钮，nGrinder会自动生成对应的脚本结构，如果没有参数需要设置的话，可以直接运行了。 二、详细解析GET请求脚本脚本说明ngrinder自动生成的脚本如下所示（groovy版本）： 解析见">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-26T09:27:38.805Z">
+<meta property="og:updated_time" content="2019-02-26T11:15:25.937Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="nGrinder解析最基本的GET请求脚本">
 <meta name="twitter:description" content="一、自动生成GET请求脚本1、配置 Create a script在ngrinder管理台主页，点击script–&amp;gt;Create a script，并填写脚本名称和请求的url； 点击 Create 按钮，nGrinder会自动生成对应的脚本结构，如果没有参数需要设置的话，可以直接运行了。 二、详细解析GET请求脚本脚本说明ngrinder自动生成的脚本如下所示（groovy版本）： 解析见">
@@ -360,7 +360,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-02-26T17:27:38+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-02-26T19:15:25+08:00">
                 2019-02-26
               </time>
             
@@ -465,7 +465,7 @@
 <h2 id="GTest"><a href="#GTest" class="headerlink" title="GTest"></a>GTest</h2><ul>
 <li>GTest是对测试记录进行统计的单元;</li>
 <li>使用 GTest 的构造方法 GTest(int number, String description) 创建，在脚本内每个GTest对象都使用唯一的编号定义。</li>
-<li>==如果创建了多个编号一样的对象，最后只会选用第一个==。</li>
+<li><strong>如果创建了多个编号一样的对象，最后只会选用第一个。</strong></li>
 </ul>
 <h2 id="test-record"><a href="#test-record" class="headerlink" title="test.record()"></a>test.record()</h2><p>在@BeforeThread注解下会执行 <code>test.record(this, &quot;test&quot;)</code></p>
 <ul>
@@ -473,7 +473,7 @@
 <li>这里使用 GTest的record方法给 GTest 配置需要进行统计的方法；</li>
 <li>target 指脚本对象，这里是this； </li>
 <li>methodName 是需要统计的方法名，通常都是被 @Test 注释的方法。如果未配置，方法会正常执行，但是没有统计结果数据；</li>
-<li>==每一个被 @Test 注释的方法都是一个整体事务，在运行测试时，即便里面有 多次 HTTP 请求也只做一次统计！！==</li>
+<li><strong>每一个被 @Test 注释的方法都是一个整体事务，在运行测试时，即便里面有 多次 HTTP 请求也只做一次统计！！</strong></li>
 </ul>
 <h2 id="Cookies"><a href="#Cookies" class="headerlink" title="Cookies"></a>Cookies</h2><p>可以通过 Cookie(String name, String value, String domain, String path, Date expires, boolean secure) 构造 cookie 对象，然后存放到相应的数组中，传递到请求中。</p>
 
@@ -526,8 +526,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/26/Beanshell Sampler 常用方法/" rel="next" title="Beanshell Sampler 常用方法">
-                <i class="fa fa-chevron-left"></i> Beanshell Sampler 常用方法
+              <a href="/2019/02/26/05_在GET请求中添加参数-groovy/" rel="next" title="nGrinder在GET请求中添加参数">
+                <i class="fa fa-chevron-left"></i> nGrinder在GET请求中添加参数
               </a>
             
           </div>

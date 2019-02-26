@@ -87,18 +87,18 @@
 <meta property="og:site_name" content="ivyli&#39;s blog">
 <meta property="og:description" content="一、sort 排序 sort命令用于 对文本文件内容，以行为单位来排序。 sort命令以空格作为字段分隔符，将一行分割为多个关键字对文件进行排序。 需要注意的是除非你将输出重定向到文件中，否则sort命令并不对文件内容进行实际的排序(即文件内容没有修改)，只是将文件内容按有序输出。    1、语法sort [-bcdfimMnr][-o&amp;lt;输出文件&amp;gt;][-t&amp;lt;分隔字符&amp;gt;][+">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20181201161807360.png">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20181201161837874.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20181201161947222.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20181201162053621.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20181201162347799.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20181201162547161.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20181201162811424.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-02-26T05:34:26.986Z">
+<meta property="og:image" content="https://res.cloudinary.com/ivyli/image/upload/v1551180822/20181201161807360.png">
+<meta property="og:image" content="https://res.cloudinary.com/ivyli/image/upload/v1551180842/20181201161837874.png.png">
+<meta property="og:image" content="https://res.cloudinary.com/ivyli/image/upload/v1551180864/20181201161947222.png.png">
+<meta property="og:image" content="https://res.cloudinary.com/ivyli/image/upload/v1551180950/20181201162053621.png.png">
+<meta property="og:image" content="https://res.cloudinary.com/ivyli/image/upload/v1551181157/20181201162347799.png.png">
+<meta property="og:image" content="https://res.cloudinary.com/ivyli/image/upload/v1551181181/20181201162547161.png.png">
+<meta property="og:image" content="https://res.cloudinary.com/ivyli/image/upload/v1551181241/20181201162811424.png.png">
+<meta property="og:updated_time" content="2019-02-26T11:41:23.734Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sort排序、uniq去重、wc统计">
 <meta name="twitter:description" content="一、sort 排序 sort命令用于 对文本文件内容，以行为单位来排序。 sort命令以空格作为字段分隔符，将一行分割为多个关键字对文件进行排序。 需要注意的是除非你将输出重定向到文件中，否则sort命令并不对文件内容进行实际的排序(即文件内容没有修改)，只是将文件内容按有序输出。    1、语法sort [-bcdfimMnr][-o&amp;lt;输出文件&amp;gt;][-t&amp;lt;分隔字符&amp;gt;][+">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20181201161807360.png">
+<meta name="twitter:image" content="https://res.cloudinary.com/ivyli/image/upload/v1551180822/20181201161807360.png">
 
 
 
@@ -368,7 +368,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-02-26T13:34:26+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-02-26T19:41:23+08:00">
                 2019-02-26
               </time>
             
@@ -483,29 +483,58 @@
 </thead>
 <tbody>
 <tr>
-<td></td>
+<td>-m</td>
+<td>将几个排序好的文件进行合并。</td>
+</tr>
+<tr>
+<td>-u</td>
+<td><strong>内容去重</strong></td>
+</tr>
+<tr>
+<td>-n</td>
+<td><strong>依照数值的大小排序，升序排列。</strong></td>
+</tr>
+<tr>
+<td>-o&lt;输出文件&gt;</td>
+<td>将排序后的结果存入指定的文件。</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>以相反的顺序来排序。</td>
+</tr>
+<tr>
+<td>-t&lt;分隔字符&gt;</td>
+<td><strong>指定排序时所用的栏位分隔字符。</strong></td>
+</tr>
+<tr>
+<td>-k&lt;指定排序的列数&gt;</td>
+<td><strong>指定要排序的列数，默认是从第一列开始比较，-k可指定某一列，也可与-t 结合使用时，代表某一栏</strong></td>
+</tr>
+<tr>
+<td>+&lt;起始栏位&gt;-&lt;结束栏位&gt;</td>
+<td>以指定的栏位来排序，范围由起始栏位到结束栏位的前一栏位。</td>
 </tr>
 </tbody>
 </table>
-<p>-m |将几个排序好的文件进行合并。<br>-u |<strong>内容去重</strong><br>-n |<strong>依照数值的大小排序，升序排列。</strong><br>-o&lt;输出文件&gt; |将排序后的结果存入指定的文件。<br>-r |以相反的顺序来排序。<br>-t&lt;分隔字符&gt;| <strong>指定排序时所用的栏位分隔字符。</strong><br>-k&lt;指定排序的列数&gt; |<strong>指定要排序的列数，默认是从第一列开始比较，-k可指定某一列，也可与-t 结合使用时，代表某一栏</strong><br>+&lt;起始栏位&gt;-&lt;结束栏位&gt;| 以指定的栏位来排序，范围由起始栏位到结束栏位的前一栏位。</p>
 <h2 id="3、实例"><a href="#3、实例" class="headerlink" title="3、实例"></a>3、实例</h2><p>（1）对文件进行升序排序</p>
 <pre><code>sort testfile 
 以行为单位，相互比较，从首字符向后，依次按ASCII码值进行比较，最后将他们按升序输出。
 注意：原文件内容并未被修改！
-</code></pre><p><img src="https://img-blog.csdnimg.cn/20181201161807360.png" alt="在这里插入图片描述"></p>
+</code></pre><p><img src="https://res.cloudinary.com/ivyli/image/upload/v1551180822/20181201161807360.png" alt="在这里插入图片描述"></p>
 <p>（2）对文件进行升序排序，并去除重复行 sort -u</p>
 <pre><code>sort -u 1.txt
-</code></pre><p><img src="https://img-blog.csdnimg.cn/20181201161837874.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+</code></pre><p><img src="https://res.cloudinary.com/ivyli/image/upload/v1551180842/20181201161837874.png.png" alt="在这里插入图片描述"></p>
 <p>可以看出：</p>
 <ul>
-<li>==sort -u是先对内容进行排序，然后再去重（实际也是去除了相邻的重复行）。==</li>
-<li><p>==而uniq不能实现排序，只能去除相邻的重复行，所以要跟sort合并使用，先用sort排序，再用uniq去重==</p>
-<pre><code>sort 1.txt | uniq
-</code></pre></li>
+<li><p><strong>sort -u是先对内容进行排序，然后再去重（实际也是去除了相邻的重复行）。</strong></p>
+</li>
+<li><p><strong>而uniq不能实现排序，只能去除相邻的重复行，所以要跟sort合并使用，先用sort排序，再用uniq去重</strong></p>
+</li>
 </ul>
-<p><img src="https://img-blog.csdnimg.cn/20181201161947222.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<pre><code>sort 1.txt | uniq
+</code></pre><p><img src="https://res.cloudinary.com/ivyli/image/upload/v1551180864/20181201161947222.png.png" alt="在这里插入图片描述"></p>
 <p>（3）按数值大小降序排列后，把结果再输出到原文件中 -o</p>
-<font color="red">（直接用重定向做不到）</font><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sort -nr num.txt -o num.txt</span><br><span class="line"></span><br><span class="line">如果用重定向 &gt; 的方式，只会把num.txt清空！</span><br><span class="line">sort -nr num.txt &gt; num.txt</span><br></pre></td></tr></table></figure><br><br>（4）使用sort的-t选项和-k选项，设置间隔符后再指定排序的列<br><br><img src="https://img-blog.csdnimg.cn/20181201162053621.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><br>如上图所示，<strong>对年月日的日期进行排序，直接使用sort dat.txt时，会按列从左到右来排序；</strong><br><br>    sort -t’-‘ -k2 dat.txt<br>    其中-t’-‘ 是以 ‘-’ 为分隔符对每行内容分栏，然后-k 2 表示对分栏后的第二栏内容进行默认的升序排列。<br>（5）使用sort -k指定以某一列排序<br><br>    sort -k9 a.txt<br>    （基于a.txt的第九列来排序）<br>（6）sort命令并非仅能对文件进行排序，我们还可以通过管道将命令的输出内容重定向到sort命令中<br><br>    ls -l /home/$USER | sort -nk5<br>（7）对/etc/passwd以‘：’分隔，再以第六个域的第2个字符到第4个字符进行正向排序，再基于第一个域进行反向排序。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/passwd |  sort -t&apos;:&apos; -k 6.2,6.4 -k 1r      </span><br><span class="line">sync:x:4:65534:sync:/bin:/bin/sync</span><br><span class="line">proxy:x:13:13:proxy:/bin:/bin/sh</span><br><span class="line">bin:x:2:2:bin:/bin:/bin/sh</span><br><span class="line">sys:x:3:3:sys:/dev:/bin/sh</span><br></pre></td></tr></table></figure><br><br># 二、uniq 去重<br><br>## 1、uniq使用<br>- uniq命令用于去重文件内容中的连续重复行，通常要跟sort一起使用，先利用sort排序，然后用uniq去重。<br>- uniq命令与sort命令类似，并不对文件内容进行实际的排序(即文件内容没有修改)，只是在输出内容中去重。<br>- uniq -c ：在输出行前面加上每一行重复的次数<br>- uniq -d ：仅显示重复行<br>- uniq -u ：仅显示不重复的行<br>- uniq -n ：前n个字段与每个字段前的空白一起被忽略。一个字段是一个非空格、非制表符的字符串，彼此由制表符和空格隔开（字段从0开始编号）。<br>- uniq +n ：前n个字符被忽略，之前的字符被跳过（字符从0开始编号）。<br><br>## 2、sort和uniq去重结果对比<br><br>1、<code>sort -u</code>使用sort对文件去重<br><br>    sort -u 1.txt<br><br><img src="https://img-blog.csdnimg.cn/20181201162347799.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><br>可以看出，==sort -u是先对内容进行排序，然后再去重（实际也是去除了相邻的重复行）。==<br><br>2、使用uniq对文件去重<br><br><img src="https://img-blog.csdnimg.cn/20181201162547161.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><br>可以看出，<font color="red">当内容中的重复行不相邻时，直接使用uniq 1.txt 并不能达到去重。</font>
+<font color="red">（直接用重定向做不到）</font><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sort -nr num.txt -o num.txt</span><br><span class="line"></span><br><span class="line">如果用重定向 &gt; 的方式，只会把num.txt清空！</span><br><span class="line">sort -nr num.txt &gt; num.txt</span><br></pre></td></tr></table></figure><br><br>（4）使用sort的-t选项和-k选项，设置间隔符后再指定排序的列<br><br><img src="https://res.cloudinary.com/ivyli/image/upload/v1551180950/20181201162053621.png.png" alt="在这里插入图片描述"><br><br>如上图所示，<strong>对年月日的日期进行排序，直接使用sort dat.txt时，会按列从左到右来排序；</strong><br><br>    sort -t’-‘ -k2 dat.txt<br>    其中-t’-‘ 是以 ‘-’ 为分隔符对每行内容分栏，然后-k 2 表示对分栏后的第二栏内容进行默认的升序排列。<br>（5）使用sort -k指定以某一列排序<br><br>    sort -k9 a.txt<br>    （基于a.txt的第九列来排序）<br>（6）sort命令并非仅能对文件进行排序，我们还可以通过管道将命令的输出内容重定向到sort命令中<br><br>    ls -l /home/$USER | sort -nk5<br>（7）对/etc/passwd以‘：’分隔，再以第六个域的第2个字符到第4个字符进行正向排序，再基于第一个域进行反向排序。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/passwd |  sort -t&apos;:&apos; -k 6.2,6.4 -k 1r      </span><br><span class="line">sync:x:4:65534:sync:/bin:/bin/sync</span><br><span class="line">proxy:x:13:13:proxy:/bin:/bin/sh</span><br><span class="line">bin:x:2:2:bin:/bin:/bin/sh</span><br><span class="line">sys:x:3:3:sys:/dev:/bin/sh</span><br></pre></td></tr></table></figure><br><br># 二、uniq 去重<br><br>## 1、uniq使用<br>- uniq命令用于去重文件内容中的连续重复行，通常要跟sort一起使用，先利用sort排序，然后用uniq去重。<br>- uniq命令与sort命令类似，并不对文件内容进行实际的排序(即文件内容没有修改)，只是在输出内容中去重。<br>- uniq -c ：在输出行前面加上每一行重复的次数<br>- uniq -d ：仅显示重复行<br>- uniq -u ：仅显示不重复的行<br>- uniq -n ：前n个字段与每个字段前的空白一起被忽略。一个字段是一个非空格、非制表符的字符串，彼此由制表符和空格隔开（字段从0开始编号）。<br>- uniq +n ：前n个字符被忽略，之前的字符被跳过（字符从0开始编号）。<br><br>## 2、sort和uniq去重结果对比<br><br>1、<code>sort -u</code>使用sort对文件去重<br><br>    sort -u 1.txt<br><br><img src="https://res.cloudinary.com/ivyli/image/upload/v1551181157/20181201162347799.png.png" alt="在这里插入图片描述"><br><br>可以看出，<strong>sort -u是先对内容进行排序，然后再去重（实际也是去除了相邻的重复行）。</strong><br><br>2、使用uniq对文件去重<br><br><img src="https://res.cloudinary.com/ivyli/image/upload/v1551181181/20181201162547161.png.png" alt="在这里插入图片描述"><br><br>可以看出，<font color="red">当内容中的重复行不相邻时，直接使用uniq 1.txt 并不能达到去重。</font>
 
 <font color="red">因为uniq只能去除相邻的重复行，所以要跟sort合并使用，先用sort排序，再用uniq去重<code>sort 1.txt | uniq</code>。</font>
 
@@ -526,15 +555,23 @@
 </thead>
 <tbody>
 <tr>
-<td></td>
+<td>-l</td>
+<td>line，统计行数；</td>
+</tr>
+<tr>
+<td>-w</td>
+<td>word，统计单词数(英文单词)，以空格或换行为单位；</td>
+</tr>
+<tr>
+<td>-m</td>
+<td>统计字符数；</td>
 </tr>
 </tbody>
 </table>
-<p>-l |line，统计行数；<br>-w |word，统计单词数(英文单词)，以空格或换行为单位；<br>-m|统计字符数；</p>
 <pre><code>wc 1.txt
 默认显示所有的行数、单词数、字符数。
 </code></pre><p>如下图所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/20181201162811424.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="https://res.cloudinary.com/ivyli/image/upload/v1551181241/20181201162811424.png.png" alt="在这里插入图片描述"></p>
 
       
     </div>
@@ -599,8 +636,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/02/26/shell标准输入read和输出echo/" rel="prev" title="shell标准输入read和输出echo">
-                shell标准输入read和输出echo <i class="fa fa-chevron-right"></i>
+              <a href="/2019/02/26/shell 管道符&作业控制/" rel="prev" title="linux管道符和作业控制">
+                linux管道符和作业控制 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

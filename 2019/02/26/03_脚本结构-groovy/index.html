@@ -79,20 +79,20 @@
 
 
 
-<meta name="description" content="在前面的文章中，我们已经知道，nGrinder支持groovy和Jython脚本，今天学习一下ngrinder中的groovy脚本结构。  ngrinder中的groovy脚本结构类似 junit，同时在junit的基础之上封装了自己的注解，用来控制脚本的运行。 一、运行逻辑图如下： 此处只列出了groovy脚本的逻辑，jython脚本是类似的，在此不再单独介绍。  二、各注解的使用比较   注">
+<meta name="description" content="在前面的文章中，我们已经知道，nGrinder支持groovy和Jython脚本，今天学习一下ngrinder中的groovy脚本结构。  ngrinder中的groovy脚本结构类似 junit，同时在junit的基础之上封装了自己的注解，用来控制脚本的运行。 一、运行逻辑图如下： 此处只列出了groovy脚本的逻辑，jython脚本是类似的，在此不再单独介绍.  二、各注解的使用比较   注">
 <meta name="keywords" content="nGrinder,groovy,ngrinder脚本">
 <meta property="og:type" content="article">
 <meta property="og:title" content="nGrinder脚本结构-groovy">
 <meta property="og:url" content="http://yoursite.com/2019/02/26/03_脚本结构-groovy/index.html">
 <meta property="og:site_name" content="ivyli&#39;s blog">
-<meta property="og:description" content="在前面的文章中，我们已经知道，nGrinder支持groovy和Jython脚本，今天学习一下ngrinder中的groovy脚本结构。  ngrinder中的groovy脚本结构类似 junit，同时在junit的基础之上封装了自己的注解，用来控制脚本的运行。 一、运行逻辑图如下： 此处只列出了groovy脚本的逻辑，jython脚本是类似的，在此不再单独介绍。  二、各注解的使用比较   注">
+<meta property="og:description" content="在前面的文章中，我们已经知道，nGrinder支持groovy和Jython脚本，今天学习一下ngrinder中的groovy脚本结构。  ngrinder中的groovy脚本结构类似 junit，同时在junit的基础之上封装了自己的注解，用来控制脚本的运行。 一、运行逻辑图如下： 此处只列出了groovy脚本的逻辑，jython脚本是类似的，在此不再单独介绍.  二、各注解的使用比较   注">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20181116105544539.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-02-26T09:25:15.607Z">
+<meta property="og:image" content="https://res.cloudinary.com/ivyli/image/upload/v1551179588/20181116105544539.png.png">
+<meta property="og:updated_time" content="2019-02-26T11:14:27.433Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="nGrinder脚本结构-groovy">
-<meta name="twitter:description" content="在前面的文章中，我们已经知道，nGrinder支持groovy和Jython脚本，今天学习一下ngrinder中的groovy脚本结构。  ngrinder中的groovy脚本结构类似 junit，同时在junit的基础之上封装了自己的注解，用来控制脚本的运行。 一、运行逻辑图如下： 此处只列出了groovy脚本的逻辑，jython脚本是类似的，在此不再单独介绍。  二、各注解的使用比较   注">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20181116105544539.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70">
+<meta name="twitter:description" content="在前面的文章中，我们已经知道，nGrinder支持groovy和Jython脚本，今天学习一下ngrinder中的groovy脚本结构。  ngrinder中的groovy脚本结构类似 junit，同时在junit的基础之上封装了自己的注解，用来控制脚本的运行。 一、运行逻辑图如下： 此处只列出了groovy脚本的逻辑，jython脚本是类似的，在此不再单独介绍.  二、各注解的使用比较   注">
+<meta name="twitter:image" content="https://res.cloudinary.com/ivyli/image/upload/v1551179588/20181116105544539.png.png">
 
 
 
@@ -362,7 +362,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-02-26T17:25:15+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-02-26T19:14:27+08:00">
                 2019-02-26
               </time>
             
@@ -464,8 +464,8 @@
 <p>在前面的文章中，我们已经知道，nGrinder支持groovy和Jython脚本，今天学习一下ngrinder中的groovy脚本结构。</p>
 </blockquote>
 <p>ngrinder中的groovy脚本结构类似 junit，同时在junit的基础之上封装了自己的注解，用来控制脚本的运行。</p>
-<h2 id="一、运行逻辑图如下："><a href="#一、运行逻辑图如下：" class="headerlink" title="一、运行逻辑图如下："></a>一、运行逻辑图如下：</h2><p><img src="https://img-blog.csdnimg.cn/20181116105544539.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<font color="red">此处只列出了groovy脚本的逻辑，jython脚本是类似的，在此不再单独介绍。</font>
+<h2 id="一、运行逻辑图如下："><a href="#一、运行逻辑图如下：" class="headerlink" title="一、运行逻辑图如下："></a>一、运行逻辑图如下：</h2><p><img src="https://res.cloudinary.com/ivyli/image/upload/v1551179588/20181116105544539.png.png" alt="在这里插入图片描述"></p>
+<font color="red">此处只列出了groovy脚本的逻辑，jython脚本是类似的，在此不再单独介绍.</font>
 
 <h2 id="二、各注解的使用比较"><a href="#二、各注解的使用比较" class="headerlink" title="二、各注解的使用比较"></a>二、各注解的使用比较</h2><table>
 <thead>
@@ -478,11 +478,49 @@
 </thead>
 <tbody>
 <tr>
-<td></td>
+<td>@BeforeProcess</td>
+<td>定义在进程被调用之前应执行的行为</td>
+<td>static method</td>
+<td>加载被线程共享的资源文件，定义 GTest 等</td>
+</tr>
+<tr>
+<td>@AfterProcess</td>
+<td>定义在进程被终止之前应执行的行为</td>
+<td>static method</td>
+<td>关闭资源文件</td>
+</tr>
+<tr>
+<td><strong>@BeforeThread</strong></td>
+<td><strong>定义在每个线程被调用之前应执行的行为</strong></td>
+<td>member method</td>
+<td><strong>登录目标系统，建立线程内的一些值，例如，Cookie 处理</strong></td>
+</tr>
+<tr>
+<td><strong>@AfterThread</strong></td>
+<td><strong>定义在每个线程被终止之前应执行的行为</strong></td>
+<td>member method</td>
+<td><strong>退出系统</strong></td>
+</tr>
+<tr>
+<td><strong>@Before</strong></td>
+<td><strong>定义每个被 @Test 注解的方法被执行前应执行的行为</strong></td>
+<td>member method</td>
+<td><strong>对个被 @Test 注解的方法的共享逻辑、变量设置</strong></td>
+</tr>
+<tr>
+<td>@After</td>
+<td>定义每个被 @Test 注解的方法被执行后应执行的行为</td>
+<td>member method</td>
+<td>很少使用</td>
+</tr>
+<tr>
+<td><strong>@Test</strong></td>
+<td><strong>定义测试行为，被执行多次</strong></td>
+<td>member method</td>
+<td><strong>测试体</strong></td>
 </tr>
 </tbody>
 </table>
-<p>@BeforeProcess    |定义在进程被调用之前应执行的行为    |static method    |加载被线程共享的资源文件，定义 GTest 等<br>@AfterProcess|    定义在进程被终止之前应执行的行为|    static method|    关闭资源文件<br><strong>@BeforeThread</strong>|    <strong>定义在每个线程被调用之前应执行的行为</strong>|    member method|    <strong>登录目标系统，建立线程内的一些值，例如，Cookie 处理</strong><br><strong>@AfterThread</strong>|    <strong>定义在每个线程被终止之前应执行的行为</strong>|    member method|    <strong>退出系统</strong><br><strong>@Before</strong>|    <strong>定义每个被 @Test 注解的方法被执行前应执行的行为</strong>|    member method|    <strong>对个被 @Test 注解的方法的共享逻辑、变量设置</strong><br>@After|    定义每个被 @Test 注解的方法被执行后应执行的行为|    member method    |很少使用<br><strong>@Test</strong>|    <strong>定义测试行为，被执行多次</strong>|    member method|    <strong>测试体</strong></p>
 <h2 id="三、关注点"><a href="#三、关注点" class="headerlink" title="三、关注点"></a>三、关注点</h2><p>在ngrinder中，通常使用单进程多线程就足够大部分测试了，所以：</p>
 <ul>
 <li>我们最需要关注的就是 <code>@Test</code> ，这个是循环体； </li>
@@ -541,8 +579,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/26/maven学习01 - 关键特性/" rel="next" title="Maven入门学习01-关键特性">
-                <i class="fa fa-chevron-left"></i> Maven入门学习01-关键特性
+              <a href="/2019/02/26/intellij idea 和 eclipse 区别/" rel="next" title="intellij idea 和 eclipse 区别（IDEA使用手册01）">
+                <i class="fa fa-chevron-left"></i> intellij idea 和 eclipse 区别（IDEA使用手册01）
               </a>
             
           </div>
@@ -551,8 +589,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/02/26/linux 变量 & 环境变量配置文件/" rel="prev" title="linux 中配置用户变量和环境变量">
-                linux 中配置用户变量和环境变量 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/02/26/grep命令详解/" rel="prev" title="grep命令详解">
+                grep命令详解 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

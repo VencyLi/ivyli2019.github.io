@@ -87,13 +87,13 @@
 <meta property="og:site_name" content="ivyli&#39;s blog">
 <meta property="og:description" content="Notepad++ 是 Windows 中一款优秀的文本编辑软件，功能非常强大。  重要说明： 1、为更好的理解本文，建议先阅读相关文章 – 不同操作系统中的换行符。 2、本文内容基于 Notepad++ 7.5.1 版本，为方便书写，若无特殊说明，下文中内容均指在该软件版本下的操作。 一、查找替换「换行符」1、设置「显示行尾符」为了更清楚的看到换行符的变化，首先进行下面设置：视图 -&amp;gt;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20181219093239448.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/201812191503534.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-02-26T05:51:12.519Z">
+<meta property="og:image" content="https://res.cloudinary.com/ivyli/image/upload/v1551180491/20181219093239448.png.png">
+<meta property="og:image" content="https://res.cloudinary.com/ivyli/image/upload/v1551180569/201812191503534.png.png">
+<meta property="og:updated_time" content="2019-02-26T11:29:34.671Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Notepad++中查找替换「换行符」">
 <meta name="twitter:description" content="Notepad++ 是 Windows 中一款优秀的文本编辑软件，功能非常强大。  重要说明： 1、为更好的理解本文，建议先阅读相关文章 – 不同操作系统中的换行符。 2、本文内容基于 Notepad++ 7.5.1 版本，为方便书写，若无特殊说明，下文中内容均指在该软件版本下的操作。 一、查找替换「换行符」1、设置「显示行尾符」为了更清楚的看到换行符的变化，首先进行下面设置：视图 -&amp;gt;">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20181219093239448.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70">
+<meta name="twitter:image" content="https://res.cloudinary.com/ivyli/image/upload/v1551180491/20181219093239448.png.png">
 
 
 
@@ -363,7 +363,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-02-26T13:51:12+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-02-26T19:29:34+08:00">
                 2019-02-26
               </time>
             
@@ -468,14 +468,14 @@
 <p>1、为更好的理解本文，建议先阅读相关文章 – <a href="https://blog.csdn.net/lijing742180/article/details/85018164" target="_blank" rel="noopener">不同操作系统中的换行符</a>。</p>
 <p>2、本文内容基于 Notepad++ 7.5.1 版本，为方便书写，若无特殊说明，下文中内容均指在该软件版本下的操作。</p>
 <h1 id="一、查找替换「换行符」"><a href="#一、查找替换「换行符」" class="headerlink" title="一、查找替换「换行符」"></a>一、查找替换「换行符」</h1><h2 id="1、设置「显示行尾符」"><a href="#1、设置「显示行尾符」" class="headerlink" title="1、设置「显示行尾符」"></a>1、设置「显示行尾符」</h2><p>为了更清楚的看到换行符的变化，首先进行下面设置：<br><code>视图 -&gt; 显示符号 -&gt; 显示行尾符</code></p>
-<p><img src="https://img-blog.csdnimg.cn/20181219093239448.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="https://res.cloudinary.com/ivyli/image/upload/v1551180491/20181219093239448.png.png" alt="在这里插入图片描述"></p>
 <p>然后新建一个文本，在其中随意输入内容，会看到显示「换行符」为 <code>CRLF</code>，即 <code>\r\n</code>。</p>
 <h2 id="2、查找并替换「换行符」"><a href="#2、查找并替换「换行符」" class="headerlink" title="2、查找并替换「换行符」"></a>2、查找并替换「换行符」</h2><ul>
 <li><code>Ctrl + H</code>，打开替换对话框，<code>查找模式</code> 选中 <code>扩展</code> 或者 <code>正则表达式</code>，使<code>查找目标</code> 和 <code>替换为</code> 中同时支持字符串和特殊字符的匹配；</li>
 <li>然后在 <code>查找目标</code> 中输入 <code>\r\n</code> ，即可匹配到文本中的回车换行符；</li>
 <li>在 <code>替换为</code> 中输入要替换成的字符即可；</li>
 </ul>
-<p><img src="https://img-blog.csdnimg.cn/201812191503534.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="https://res.cloudinary.com/ivyli/image/upload/v1551180569/201812191503534.png.png" alt="在这里插入图片描述"></p>
 <h1 id="二、扩展：查找替换「空行」、空白符"><a href="#二、扩展：查找替换「空行」、空白符" class="headerlink" title="二、扩展：查找替换「空行」、空白符"></a>二、扩展：查找替换「空行」、空白符</h1><p>下面列举常用的几种查找替换情况：<br>（前提是要选中 <code>正则表达式</code>模式）</p>
 <table>
 <thead>
@@ -583,8 +583,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/26/awk快速入门/" rel="next" title="awk 命令学习">
-                <i class="fa fa-chevron-left"></i> awk 命令学习
+              <a href="/2019/02/26/git pull 指定某一个文件或文件夹/" rel="next" title="git pull 指定某一个文件或文件夹">
+                <i class="fa fa-chevron-left"></i> git pull 指定某一个文件或文件夹
               </a>
             
           </div>

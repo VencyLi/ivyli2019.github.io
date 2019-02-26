@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="ivyli&#39;s blog">
 <meta property="og:description" content="一、shell 常用通配符1、*   匹配一个或多个任意的字符12345*.txt*txt*txt* 2、? 匹配一个任意的字符?.txt 3、[] 匹配一个范围中的一个字符1234567ls [123].txtls [1-3].txtls [0-9a-z].txtls [0-9a-zA-Z].txt 4、{} 匹配其中的一个字符，类似于[] {}和[]类似，都是匹配里面的其中一个字符 区别是：[">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-26T05:47:20.121Z">
+<meta property="og:updated_time" content="2019-02-26T11:29:53.395Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="shell通配符和输入输出重定向">
 <meta name="twitter:description" content="一、shell 常用通配符1、*   匹配一个或多个任意的字符12345*.txt*txt*txt* 2、? 匹配一个任意的字符?.txt 3、[] 匹配一个范围中的一个字符1234567ls [123].txtls [1-3].txtls [0-9a-z].txtls [0-9a-zA-Z].txt 4、{} 匹配其中的一个字符，类似于[] {}和[]类似，都是匹配里面的其中一个字符 区别是：[">
@@ -360,7 +360,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-02-26T13:47:20+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-02-26T19:29:53+08:00">
                 2019-02-26
               </time>
             
@@ -489,7 +489,7 @@
 <h3 id="7、-gt-和-2-gt-结合，分别输出正确和错误的信息"><a href="#7、-gt-和-2-gt-结合，分别输出正确和错误的信息" class="headerlink" title="7、&gt; 和 2&gt; 结合，分别输出正确和错误的信息"></a>7、<code>&gt;</code> 和 <code>2&gt;</code> 结合，分别输出正确和错误的信息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[app@centos tmp]$ ls</span><br><span class="line">1.txt  2.txt  log</span><br><span class="line">[app@centos tmp]$ ls [12].txt a.txt &gt; 1.txt 2&gt; err.log</span><br><span class="line"># 把命令执行后生成的正确信息重写输出到1.txt，错误信息重写输出到err.log</span><br><span class="line"></span><br><span class="line">[app@centos tmp]$ cat 1.txt</span><br><span class="line">1.txt</span><br><span class="line">2.txt</span><br><span class="line">[app@centos tmp]$ cat err.log </span><br><span class="line">ls: cannot access a.txt: No such file or directory</span><br></pre></td></tr></table></figure>
 <h3 id="8、-lt-输入重定向"><a href="#8、-lt-输入重定向" class="headerlink" title="8、&lt; 输入重定向"></a>8、<code>&lt;</code> 输入重定向</h3><ul>
 <li>把<code>&lt;</code> 右边的文件内容输入给左边的命令后，执行左边的命令</li>
-<li>==左边必须是一个命令，不能是文件==<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[app@centos tmp]$ cat 1.txt </span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">[app@centos tmp]$ wc -l &lt; 1.txt</span><br><span class="line">2</span><br><span class="line"></span><br><span class="line">[app@centos tmp]$ 2.txt &lt; 1.txt</span><br><span class="line">-bash: 2.txt: command not found</span><br><span class="line">## 左边必须是命令！</span><br></pre></td></tr></table></figure></li>
+<li><strong>左边必须是一个命令，不能是文件</strong><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[app@centos tmp]$ cat 1.txt </span><br><span class="line">1</span><br><span class="line">2</span><br><span class="line">[app@centos tmp]$ wc -l &lt; 1.txt</span><br><span class="line">2</span><br><span class="line"></span><br><span class="line">[app@centos tmp]$ 2.txt &lt; 1.txt</span><br><span class="line">-bash: 2.txt: command not found</span><br><span class="line">## 左边必须是命令！</span><br></pre></td></tr></table></figure></li>
 </ul>
 
       
@@ -543,18 +543,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/26/shell标准输入read和输出echo/" rel="next" title="shell标准输入read和输出echo">
-                <i class="fa fa-chevron-left"></i> shell标准输入read和输出echo
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/02/26/shell 管道符&作业控制/" rel="prev" title="linux管道符和作业控制">
-                linux管道符和作业控制 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/02/26/总结linux中文件查找命令find-locate-whereis-which/" rel="prev" title="总结linux中文件查找命令find-locate-whereis-which">
+                总结linux中文件查找命令find-locate-whereis-which <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
