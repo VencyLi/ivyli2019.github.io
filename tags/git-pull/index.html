@@ -319,9 +319,9 @@
 
       <h3 class="post-title">
         
-            <a class="post-title-link" href="/2019/02/26/git pull 指定某一个文件或文件夹/" itemprop="url">
+            <a class="post-title-link" href="/2019/02/26/git clone&pull，pull指定文件，批量提交/" itemprop="url">
               
-                <span itemprop="name">git pull 指定某一个文件或文件夹</span>
+                <span itemprop="name">区别 git clone 与 git pull</span>
               
             </a>
         
@@ -345,9 +345,9 @@
 
       <h3 class="post-title">
         
-            <a class="post-title-link" href="/2019/02/26/git clone&pull，pull指定文件，批量提交/" itemprop="url">
+            <a class="post-title-link" href="/2019/02/26/git pull 指定某一个文件或文件夹/" itemprop="url">
               
-                <span itemprop="name">区别 git clone 与 git pull</span>
+                <span itemprop="name">git pull 指定某一个文件或文件夹</span>
               
             </a>
         
@@ -645,6 +645,28 @@
 
 
 
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'RoyVKtH5YXKLcMv6gk1Qzil4-gzGzoHsz',
+        appKey: 'FsP3JHhzOztcHwCaa7m86rtd',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
 
 
 

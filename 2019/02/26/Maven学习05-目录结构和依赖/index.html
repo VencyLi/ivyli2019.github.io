@@ -392,6 +392,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/26/Maven学习05-目录结构和依赖/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/02/26/Maven学习05-目录结构和依赖/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -599,8 +609,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/26/git pull 指定某一个文件或文件夹/" rel="next" title="git pull 指定某一个文件或文件夹">
-                <i class="fa fa-chevron-left"></i> git pull 指定某一个文件或文件夹
+              <a href="/2019/02/26/Notepad++中查找替换「换行符」/" rel="next" title="Notepad++中查找替换「换行符」">
+                <i class="fa fa-chevron-left"></i> Notepad++中查找替换「换行符」
               </a>
             
           </div>
@@ -609,8 +619,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/02/26/Maven学习04-构建生命周期/" rel="prev" title="Maven学习04-构建生命周期">
-                Maven学习04-构建生命周期 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/02/26/Maven学习03-安装配置和maven仓库/" rel="prev" title="Maven学习03-安装配置和maven仓库">
+                Maven学习03-安装配置和maven仓库 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -640,6 +650,9 @@
 
           
 
+  
+    <div class="comments" id="comments">
+    </div>
   
 
 
@@ -938,6 +951,28 @@
 
 
 
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'RoyVKtH5YXKLcMv6gk1Qzil4-gzGzoHsz',
+        appKey: 'FsP3JHhzOztcHwCaa7m86rtd',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
 
 
 

@@ -392,6 +392,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/26/定时任务crontab/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/02/26/定时任务crontab/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -623,8 +633,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/26/shell标准输入read和输出echo/" rel="next" title="shell标准输入read和输出echo">
-                <i class="fa fa-chevron-left"></i> shell标准输入read和输出echo
+              <a href="/2019/02/26/总结linux中文本查看命令cat-less-more-tail-head/" rel="next" title="总结linux中文本查看命令cat-less-more-tail-head">
+                <i class="fa fa-chevron-left"></i> 总结linux中文本查看命令cat-less-more-tail-head
               </a>
             
           </div>
@@ -633,8 +643,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/02/26/一些有用的函数和方法/" rel="prev" title="jmeter中常用的函数和方法">
-                jmeter中常用的函数和方法 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/02/26/使用du、df和sort命令快速找出linux系统中的大文件/" rel="prev" title="使用du、df和sort命令快速找出linux系统中的大文件">
+                使用du、df和sort命令快速找出linux系统中的大文件 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -664,6 +674,9 @@
 
           
 
+  
+    <div class="comments" id="comments">
+    </div>
   
 
 
@@ -962,6 +975,28 @@
 
 
 
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'RoyVKtH5YXKLcMv6gk1Qzil4-gzGzoHsz',
+        appKey: 'FsP3JHhzOztcHwCaa7m86rtd',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
 
 
 

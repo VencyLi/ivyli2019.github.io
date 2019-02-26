@@ -394,6 +394,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/26/03_脚本结构-groovy/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/02/26/03_脚本结构-groovy/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -579,8 +589,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/26/05_在GET请求中添加参数-groovy/" rel="next" title="nGrinder在GET请求中添加参数">
-                <i class="fa fa-chevron-left"></i> nGrinder在GET请求中添加参数
+              <a href="/2019/02/26/02_搭建 nGrinder 性能测试平台 并快速使用/" rel="next" title="搭建nGrinder性能测试平台并快速使用">
+                <i class="fa fa-chevron-left"></i> 搭建nGrinder性能测试平台并快速使用
               </a>
             
           </div>
@@ -589,8 +599,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/02/26/04_解析最基本的GET请求脚本-groovy/" rel="prev" title="nGrinder解析最基本的GET请求脚本">
-                nGrinder解析最基本的GET请求脚本 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/02/26/intellij idea 和 eclipse 区别/" rel="prev" title="intellij idea 和 eclipse 区别（IDEA使用手册01）">
+                intellij idea 和 eclipse 区别（IDEA使用手册01） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -620,6 +630,9 @@
 
           
 
+  
+    <div class="comments" id="comments">
+    </div>
   
 
 
@@ -918,6 +931,28 @@
 
 
 
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'RoyVKtH5YXKLcMv6gk1Qzil4-gzGzoHsz',
+        appKey: 'FsP3JHhzOztcHwCaa7m86rtd',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
 
 
 

@@ -395,6 +395,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/26/intellij idea使用手册-03 导入和创建项目/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/02/26/intellij idea使用手册-03 导入和创建项目/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -533,8 +543,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/26/01_nGrinder详细介绍及性能工具对比/" rel="next" title="nGrinder详细介绍及性能测试工具对比">
-                <i class="fa fa-chevron-left"></i> nGrinder详细介绍及性能测试工具对比
+              <a href="/2019/02/26/maven学习02-pom文件/" rel="next" title="maven学习02-pom文件">
+                <i class="fa fa-chevron-left"></i> maven学习02-pom文件
               </a>
             
           </div>
@@ -542,6 +552,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/26/maven学习01 - 关键特性/" rel="prev" title="Maven入门学习01-关键特性">
+                Maven入门学习01-关键特性 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -570,6 +584,9 @@
 
           
 
+  
+    <div class="comments" id="comments">
+    </div>
   
 
 
@@ -868,6 +885,28 @@
 
 
 
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'RoyVKtH5YXKLcMv6gk1Qzil4-gzGzoHsz',
+        appKey: 'FsP3JHhzOztcHwCaa7m86rtd',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
 
 
 

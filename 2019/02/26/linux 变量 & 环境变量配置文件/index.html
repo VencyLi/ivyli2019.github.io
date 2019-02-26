@@ -394,6 +394,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/26/linux 变量 & 环境变量配置文件/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/02/26/linux 变量 & 环境变量配置文件/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -550,8 +560,8 @@ a=a37
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/26/不同操作系统中的换行符/" rel="next" title="不同操作系统中的换行符">
-                <i class="fa fa-chevron-left"></i> 不同操作系统中的换行符
+              <a href="/2019/02/26/linux系统查看各种信息/" rel="next" title="linux系统查看各种信息">
+                <i class="fa fa-chevron-left"></i> linux系统查看各种信息
               </a>
             
           </div>
@@ -560,8 +570,8 @@ a=a37
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/02/26/sort排序、uniq去重、wc统计/" rel="prev" title="sort排序、uniq去重、wc统计">
-                sort排序、uniq去重、wc统计 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/02/26/01_nGrinder详细介绍及性能工具对比/" rel="prev" title="nGrinder详细介绍及性能测试工具对比">
+                nGrinder详细介绍及性能测试工具对比 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -591,6 +601,9 @@ a=a37
 
           
 
+  
+    <div class="comments" id="comments">
+    </div>
   
 
 
@@ -889,6 +902,28 @@ a=a37
 
 
 
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'RoyVKtH5YXKLcMv6gk1Qzil4-gzGzoHsz',
+        appKey: 'FsP3JHhzOztcHwCaa7m86rtd',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
 
 
 

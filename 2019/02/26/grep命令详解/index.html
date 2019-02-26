@@ -395,6 +395,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/26/grep命令详解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/02/26/grep命令详解/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -621,8 +631,8 @@ cp  /etc/man.config  .
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/26/git一次性 add多个文件或提交多次修改/" rel="next" title="git一次性add多个文件或提交多次修改">
-                <i class="fa fa-chevron-left"></i> git一次性add多个文件或提交多次修改
+              <a href="/2019/02/26/01_nGrinder详细介绍及性能工具对比/" rel="next" title="nGrinder详细介绍及性能测试工具对比">
+                <i class="fa fa-chevron-left"></i> nGrinder详细介绍及性能测试工具对比
               </a>
             
           </div>
@@ -631,8 +641,8 @@ cp  /etc/man.config  .
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/02/26/git clone&pull，pull指定文件，批量提交/" rel="prev" title="区别 git clone 与 git pull">
-                区别 git clone 与 git pull <i class="fa fa-chevron-right"></i>
+              <a href="/2019/02/26/git pull 指定某一个文件或文件夹/" rel="prev" title="git pull 指定某一个文件或文件夹">
+                git pull 指定某一个文件或文件夹 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -662,6 +672,9 @@ cp  /etc/man.config  .
 
           
 
+  
+    <div class="comments" id="comments">
+    </div>
   
 
 
@@ -960,6 +973,28 @@ cp  /etc/man.config  .
 
 
 
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'RoyVKtH5YXKLcMv6gk1Qzil4-gzGzoHsz',
+        appKey: 'FsP3JHhzOztcHwCaa7m86rtd',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
 
 
 
