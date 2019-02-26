@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="软件测试, 测试, 性能测试, 自动化测试">
+  <meta name="keywords" content="jmeter,IntelliJ IDEA,jmeter源码导入IDEA,">
 
 
 
@@ -79,20 +79,25 @@
 
 
 
-<meta name="description" content="[toc] 一、git clone 与 git pull1、git clone 与 git pull 相同点相同点：都是从远程服务器拉取代码到本地 2、git clone 与 git pull 不同点git clone是在本地没有版本库的时候，从远程服务器克隆整个版本库到本地，是一个本地从无到有的过程。 git pull在本地有版本库的情况下，从远程库获取最新commit 数据（如果有的话），并m">
-<meta name="keywords" content="软件测试">
+<meta name="description" content="之前文章中讲了 idea 导入 maven 项目，但是 jmeter 源码是 eclipse 项目结构，而且有些地方要进行特殊配置，所以单独记录一下。  使用环境： Win 7 + JMeter 5.0 + IntelliJ IDEA 2018.2.6 1、下载并解压 jmeter 源码 源码下载地址: http://jmeter.apache.org/download_jmeter.cgi，选">
+<meta name="keywords" content="jmeter,IntelliJ IDEA,jmeter源码导入IDEA">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ivyli&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/2018/12/31/git clone&pull，pull指定文件，批量提交/index.html">
+<meta property="og:title" content="JMeter源码导入IntelliJ IDEA">
+<meta property="og:url" content="http://yoursite.com/2019/02/26/181227 JMeter源码导入IntelliJ IDEA/index.html">
 <meta property="og:site_name" content="ivyli&#39;s blog">
-<meta property="og:description" content="[toc] 一、git clone 与 git pull1、git clone 与 git pull 相同点相同点：都是从远程服务器拉取代码到本地 2、git clone 与 git pull 不同点git clone是在本地没有版本库的时候，从远程服务器克隆整个版本库到本地，是一个本地从无到有的过程。 git pull在本地有版本库的情况下，从远程库获取最新commit 数据（如果有的话），并m">
+<meta property="og:description" content="之前文章中讲了 idea 导入 maven 项目，但是 jmeter 源码是 eclipse 项目结构，而且有些地方要进行特殊配置，所以单独记录一下。  使用环境： Win 7 + JMeter 5.0 + IntelliJ IDEA 2018.2.6 1、下载并解压 jmeter 源码 源码下载地址: http://jmeter.apache.org/download_jmeter.cgi，选">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20181129165650845.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2018-12-15T06:10:41.950Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181227164205889.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181227170647611.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181227173940431.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181227174338423.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181227174404946.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20181227175038576.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-02-26T04:46:44.604Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ivyli&#39;s blog">
-<meta name="twitter:description" content="[toc] 一、git clone 与 git pull1、git clone 与 git pull 相同点相同点：都是从远程服务器拉取代码到本地 2、git clone 与 git pull 不同点git clone是在本地没有版本库的时候，从远程服务器克隆整个版本库到本地，是一个本地从无到有的过程。 git pull在本地有版本库的情况下，从远程库获取最新commit 数据（如果有的话），并m">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20181129165650845.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70">
+<meta name="twitter:title" content="JMeter源码导入IntelliJ IDEA">
+<meta name="twitter:description" content="之前文章中讲了 idea 导入 maven 项目，但是 jmeter 源码是 eclipse 项目结构，而且有些地方要进行特殊配置，所以单独记录一下。  使用环境： Win 7 + JMeter 5.0 + IntelliJ IDEA 2018.2.6 1、下载并解压 jmeter 源码 源码下载地址: http://jmeter.apache.org/download_jmeter.cgi，选">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20181227164205889.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70">
 
 
 
@@ -122,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/12/31/git clone&pull，pull指定文件，批量提交/">
+  <link rel="canonical" href="http://yoursite.com/2019/02/26/181227 JMeter源码导入IntelliJ IDEA/">
 
 
 
 
 
-  <title> | ivyli's blog</title>
+  <title>JMeter源码导入IntelliJ IDEA | ivyli's blog</title>
   
 
 
@@ -317,7 +322,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/31/git clone&pull，pull指定文件，批量提交/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/26/181227 JMeter源码导入IntelliJ IDEA/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ivyLi">
@@ -334,7 +339,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline"></h2>
+          <h2 class="post-title" itemprop="name headline">JMeter源码导入IntelliJ IDEA</h2>
         
 
         <div class="post-meta">
@@ -346,8 +351,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-31T19:29:48+08:00">
-                2018-12-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-26T12:43:40+08:00">
+                2019-02-26
               </time>
             
 
@@ -362,13 +367,35 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-15T14:10:41+08:00">
-                2018-12-15
+              <time title="更新于" itemprop="dateModified" datetime="2019-02-26T12:46:44+08:00">
+                2019-02-26
               </time>
             
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/jmeter/" itemprop="url" rel="index">
+                    <span itemprop="name">jmeter</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -376,7 +403,7 @@
 
           
           
-             <span id="/2018/12/31/git clone&pull，pull指定文件，批量提交/" class="leancloud_visitors" data-flag-title="">
+             <span id="/2019/02/26/181227 JMeter源码导入IntelliJ IDEA/" class="leancloud_visitors" data-flag-title="JMeter源码导入IntelliJ IDEA">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -401,7 +428,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  541
+                  611
                 </span>
               
 
@@ -438,42 +465,62 @@
       
 
       
-        <p>[toc]</p>
-<h1 id="一、git-clone-与-git-pull"><a href="#一、git-clone-与-git-pull" class="headerlink" title="一、git clone 与 git pull"></a>一、git clone 与 git pull</h1><h2 id="1、git-clone-与-git-pull-相同点"><a href="#1、git-clone-与-git-pull-相同点" class="headerlink" title="1、git clone 与 git pull 相同点"></a>1、git clone 与 git pull 相同点</h2><p>相同点：都是从远程服务器拉取代码到本地</p>
-<h2 id="2、git-clone-与-git-pull-不同点"><a href="#2、git-clone-与-git-pull-不同点" class="headerlink" title="2、git clone 与 git pull 不同点"></a>2、git clone 与 git pull 不同点</h2><h3 id="git-clone"><a href="#git-clone" class="headerlink" title="git clone"></a>git clone</h3><p>是在本地没有版本库的时候，从远程服务器克隆整个版本库到本地，是一个本地从无到有的过程。</p>
-<h3 id="git-pull"><a href="#git-pull" class="headerlink" title="git pull"></a>git pull</h3><p>在本地有版本库的情况下，从远程库获取最新commit 数据（如果有的话），并merge（合并）到本地。</p>
-<p>git pull = git fetch + git merge</p>
-<h2 id="3、使用场景"><a href="#3、使用场景" class="headerlink" title="3、使用场景"></a>3、使用场景</h2><p>通常情况下，远程操作的第一步，是使用git clone从远程主机克隆一个版本库到本地。</p>
-<p>==本地修改代码后，每次从本地仓库push到远程仓库之前都要先进行git pull操作，保证push到远程仓库时没有版本冲突。==</p>
-<h1 id="二、git-pull-指定某一个文件-夹"><a href="#二、git-pull-指定某一个文件-夹" class="headerlink" title="二、git pull 指定某一个文件/夹"></a>二、git pull 指定某一个文件/夹</h1><h2 id="1、要解决的问题"><a href="#1、要解决的问题" class="headerlink" title="1、要解决的问题"></a>1、要解决的问题</h2><p>默认情况下，git pull 操作会把远程仓库的所有最新数据更新到本地。</p>
-<p>但是，如果你只想更新指定的某一个文件或文件夹，该怎么操作呢？</p>
-<h2 id="2、git-只-pull-某一个文件-夹"><a href="#2、git-只-pull-某一个文件-夹" class="headerlink" title="2、git 只 pull 某一个文件/夹"></a>2、git 只 pull 某一个文件/夹</h2><ul>
-<li><p>设置 <code>core.sparsecheckout</code>为 true</p>
-<pre><code>$ git config core.sparsecheckout true
-</code></pre><ul>
-<li><p><code>core.sparsecheckout</code>用于控制是否允许设置pull指定文件/夹，true为允许。</p>
+        <blockquote>
+<p>之前文章中讲了 idea 导入 maven 项目，但是 jmeter 源码是 eclipse 项目结构，而且有些地方要进行特殊配置，所以单独记录一下。</p>
+</blockquote>
+<p>使用环境：</p>
+<p>Win 7 + JMeter 5.0 + IntelliJ IDEA 2018.2.6</p>
+<h2 id="1、下载并解压-jmeter-源码"><a href="#1、下载并解压-jmeter-源码" class="headerlink" title="1、下载并解压 jmeter 源码"></a>1、下载并解压 jmeter 源码</h2><ul>
+<li><p>源码下载地址: <a href="http://jmeter.apache.org/download_jmeter.cgi，选择" target="_blank" rel="noopener">http://jmeter.apache.org/download_jmeter.cgi，选择</a> <code>Source</code> 下的 zip 格式下载到本地；</p>
 </li>
-<li><p>此方法适用于 Git1.7.0 以后版本，之前的版本没有这个功能。</p>
+<li><p>解压到本地目录，如我的目录是 <code>D:\software\apache-jmeter-5.0</code>；</p>
 </li>
 </ul>
-</li>
-<li><p>在<code>.git/info/sparse-checkout</code>文件中（如果没有则创建）添加指定的文件/夹</p>
-</li>
-<li><p>最后，拉取想要的分支即可实现checkout指定文件/夹。</p>
-<pre><code>$ git pull origin master
-</code></pre></li>
-</ul>
-<h1 id="三、git-批量提交多次修改操作"><a href="#三、git-批量提交多次修改操作" class="headerlink" title="三、git 批量提交多次修改操作"></a>三、git 批量提交多次修改操作</h1><p>实现git一次性add多个文件或提交多次修改，按如下步骤操作即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git  add --all</span><br><span class="line">git commit -m &apos;add more files&apos;</span><br><span class="line">git push origin master</span><br></pre></td></tr></table></figure></p>
-<p>示例如下：</p>
-<p><img src="https://img-blog.csdnimg.cn/20181129165650845.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h1 id="四、https-和-ssh-地址"><a href="#四、https-和-ssh-地址" class="headerlink" title="四、https 和 ssh 地址"></a>四、https 和 ssh 地址</h1><h2 id="1、https地址"><a href="#1、https地址" class="headerlink" title="1、https地址"></a>1、https地址</h2><p>若使用https地址，直接git clone….git push 即可。</p>
-<h2 id="2、ssh地址"><a href="#2、ssh地址" class="headerlink" title="2、ssh地址"></a>2、ssh地址</h2><p>若使用ssh地址：</p>
+<h2 id="2、修改配置（重要！）"><a href="#2、修改配置（重要！）" class="headerlink" title="2、修改配置（重要！）"></a>2、修改配置（重要！）</h2><p>这一步必须要进行，不然无法导入！</p>
 <ul>
-<li>要先配置公钥–在本地生成公钥放到远程服务器上，</li>
-<li>再删除远程库别名–git remote remove origin，</li>
-<li>add新的ssh地址的别名–git add remote origin <a href="mailto:git@xxxx.git" target="_blank" rel="noopener">git@xxxx.git</a>，</li>
-<li>再进行push（若push报错，则先pull再push）</li>
+<li><p>进入解压后的目录，会看到两个文件：eclipse.classpath和eclipse.projecte，分别修改为 <code>.classpath 和 .projecte</code> ；</p>
+</li>
+<li><p>在 windows 下不能直接修改，要使用 cmd 命令行；</p>
+</li>
 </ul>
+<pre><code>打开 cmd 命令行窗口，进入解压的源码目录下，执行：
+
+ren .eclipse.classpath .classpath
+ren .eclipse.project .project
+</code></pre><h2 id="3、导入-IDEA"><a href="#3、导入-IDEA" class="headerlink" title="3、导入 IDEA"></a>3、导入 IDEA</h2><p>打开 IDEA，导入源码。</p>
+<ul>
+<li><p><code>File -&gt; New -&gt; Project from Existing Sources</code> ，选择源码目录；</p>
+</li>
+<li><p>选择按 eclipse 项目导入，如下所示：</p>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20181227164205889.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<ul>
+<li>其它全部按默认，一直 Next 即可。</li>
+</ul>
+<h2 id="4、Ant-下载依赖-jar-包"><a href="#4、Ant-下载依赖-jar-包" class="headerlink" title="4、Ant 下载依赖 jar 包"></a>4、Ant 下载依赖 jar 包</h2><ul>
+<li>在窗口右侧 <code>Ant Build</code> 中，点击 + ，选择源码目录下的 build.xml，会把所有相关信息展示在右侧列表中；</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20181227170647611.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<ul>
+<li>双击列表中的 <code>download_jars</code> ,会自动下载所有缺失 jar 包，到 jmeter 源码目录的 lib 目录下；</li>
+</ul>
+<h2 id="5、更新项目中的依赖-jar-包"><a href="#5、更新项目中的依赖-jar-包" class="headerlink" title="5、更新项目中的依赖 jar 包"></a>5、更新项目中的依赖 jar 包</h2><p>在首次导入项目时，会自动在 dependency 下添加依赖 jar 包，但都是缺失状态，当我们用 Ant 下载好 jar 包后，IDEA 并不会自动更新，必须要手动更新。</p>
+<ul>
+<li><p>在项目上右键打开 <code>Open Module Settings</code>,在项目 src 下点击 protocol 文件夹，再点击上方 Sources 按钮，点击 Apply。</p>
+</li>
+<li><p>点击 Dependencies，删除所有报错的 jar 包；</p>
+</li>
+<li>重新添加新下载的 jar 包：右侧 + ，选择 JARs or directories，依次选择源码目录下的 lib 目录和 lib 下的几个目录，最后 Apply ：</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20181227173940431.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="6、Ant-install"><a href="#6、Ant-install" class="headerlink" title="6、Ant install"></a>6、Ant install</h2><p>重新添加 jar 包后，必须执行 Ant install。</p>
+<h2 id="7、设置运行的-VM-options"><a href="#7、设置运行的-VM-options" class="headerlink" title="7、设置运行的 VM options"></a>7、设置运行的 VM options</h2><p>JMeter 的启动类是 NewDriver，可以先找到这个类，尝试运行一下，肯定会报错找不到路径。</p>
+<p>因为 jmeter 启动类中默认是去找的 parent 目录，所以报找不到路径，需要手动配置一下 jmeter 运行时的 home 路径，在 VM options 中配置。</p>
+<p>在 VM options 填入 <code>-Djmeter.home=D:\myWork\apache-jmeter-5.0</code>，如下所示：</p>
+<p><img src="https://img-blog.csdnimg.cn/20181227174338423.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20181227174404946.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>此时，再次运行 NewDriver，就可以正常启动 jmeter 界面了！！</p>
+<p><img src="https://img-blog.csdnimg.cn/20181227175038576.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
 
       
     </div>
@@ -494,7 +541,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://yoursite.com/2018/12/31/git clone&pull，pull指定文件，批量提交/" title="">http://yoursite.com/2018/12/31/git clone&pull，pull指定文件，批量提交/</a>
+    <a href="http://yoursite.com/2019/02/26/181227 JMeter源码导入IntelliJ IDEA/" title="JMeter源码导入IntelliJ IDEA">http://yoursite.com/2019/02/26/181227 JMeter源码导入IntelliJ IDEA/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -507,6 +554,16 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/jmeter/" rel="tag"># jmeter</a>
+          
+            <a href="/tags/IntelliJ-IDEA/" rel="tag"># IntelliJ IDEA</a>
+          
+            <a href="/tags/jmeter源码导入IDEA/" rel="tag"># jmeter源码导入IDEA</a>
+          
+        </div>
+      
 
       
       
@@ -516,8 +573,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/31/Notepad++高级查找替换/" rel="next" title="">
-                <i class="fa fa-chevron-left"></i> 
+              <a href="/2019/01/01/intellij idea使用手册-03 导入和创建项目/" rel="next" title="intellij idea使用手册-03 导入和创建项目">
+                <i class="fa fa-chevron-left"></i> intellij idea使用手册-03 导入和创建项目
               </a>
             
           </div>
@@ -525,10 +582,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/12/31/maven学习02-pom文件/" rel="prev" title="">
-                 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -660,7 +713,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、git-clone-与-git-pull"><span class="nav-text">一、git clone 与 git pull</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、git-clone-与-git-pull-相同点"><span class="nav-text">1、git clone 与 git pull 相同点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、git-clone-与-git-pull-不同点"><span class="nav-text">2、git clone 与 git pull 不同点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#git-clone"><span class="nav-text">git clone</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-pull"><span class="nav-text">git pull</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、使用场景"><span class="nav-text">3、使用场景</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、git-pull-指定某一个文件-夹"><span class="nav-text">二、git pull 指定某一个文件/夹</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、要解决的问题"><span class="nav-text">1、要解决的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、git-只-pull-某一个文件-夹"><span class="nav-text">2、git 只 pull 某一个文件/夹</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、git-批量提交多次修改操作"><span class="nav-text">三、git 批量提交多次修改操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、https-和-ssh-地址"><span class="nav-text">四、https 和 ssh 地址</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、https地址"><span class="nav-text">1、https地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、ssh地址"><span class="nav-text">2、ssh地址</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、下载并解压-jmeter-源码"><span class="nav-text">1、下载并解压 jmeter 源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、修改配置（重要！）"><span class="nav-text">2、修改配置（重要！）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、导入-IDEA"><span class="nav-text">3、导入 IDEA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、Ant-下载依赖-jar-包"><span class="nav-text">4、Ant 下载依赖 jar 包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5、更新项目中的依赖-jar-包"><span class="nav-text">5、更新项目中的依赖 jar 包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6、Ant-install"><span class="nav-text">6、Ant install</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7、设置运行的-VM-options"><span class="nav-text">7、设置运行的 VM options</span></a></li></ol></div>
             
 
           </div>
