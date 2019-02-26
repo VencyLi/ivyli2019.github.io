@@ -87,12 +87,12 @@
 <meta property="og:site_name" content="ivyli&#39;s blog">
 <meta property="og:description" content="一、系统变量1、env显示系统环境变量，直接输入env即可。 2、set在env的基础上增加显示了用户自定义的变量，直接输入set即可。 二、自定义变量1、变量名规则：变量名只能包含字母、数字、下划线，且首位不能是数字。 a=1 a=abc a=a37 2、变量值 变量值有特殊符号时需要用单引号括起来 如果用双引号，会识别其中的特殊字符；单引号会把其中的特殊字符当作普通字符来处理。 调用变量时，使">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20181201174702402.png">
-<meta property="og:updated_time" content="2019-02-26T09:53:48.899Z">
+<meta property="og:image" content="https://res.cloudinary.com/ivyli/image/upload/v1551178731/20181201174702402.png">
+<meta property="og:updated_time" content="2019-02-26T11:00:10.066Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux 中配置用户变量和环境变量">
 <meta name="twitter:description" content="一、系统变量1、env显示系统环境变量，直接输入env即可。 2、set在env的基础上增加显示了用户自定义的变量，直接输入set即可。 二、自定义变量1、变量名规则：变量名只能包含字母、数字、下划线，且首位不能是数字。 a=1 a=abc a=a37 2、变量值 变量值有特殊符号时需要用单引号括起来 如果用双引号，会识别其中的特殊字符；单引号会把其中的特殊字符当作普通字符来处理。 调用变量时，使">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20181201174702402.png">
+<meta name="twitter:image" content="https://res.cloudinary.com/ivyli/image/upload/v1551178731/20181201174702402.png">
 
 
 
@@ -362,7 +362,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-02-26T17:53:48+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-02-26T19:00:10+08:00">
                 2019-02-26
               </time>
             
@@ -490,7 +490,7 @@ a=a37
 <h1 id="三、自定义命令行前缀-PS1"><a href="#三、自定义命令行前缀-PS1" class="headerlink" title="三、自定义命令行前缀 PS1"></a>三、自定义命令行前缀 <code>PS1</code></h1><p>默认情况下，linux中命令行前缀显示的是黑色的，内容是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">非root用户：[用户名@主机名 路径名]$</span><br><span class="line"></span><br><span class="line">root用户：[用户名@主机名 路径名]#</span><br></pre></td></tr></table></figure></p>
 <p>其实这是由环境变量 <code>PS1</code> 控制的。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">查看PS1变量的值：</span><br><span class="line">[app@xxx]$ echo $PS1</span><br><span class="line">[\u@\h \W]\$</span><br><span class="line"></span><br><span class="line">默认情况下PS1=&apos;[\u@\h \W]\$&apos;</span><br><span class="line"></span><br><span class="line">其中`\W`代表相对路径，`\w`代表绝对路径</span><br><span class="line">   </span><br><span class="line">修改PS1自定义命令前缀的颜色：</span><br><span class="line">PS1=&apos;[\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;36m\]\W\[\033[00m\]]\$ &apos;</span><br></pre></td></tr></table></figure>
-<p><img src="https://img-blog.csdnimg.cn/20181201174702402.png" alt="在这里插入图片描述"></p>
+<p><img src="https://res.cloudinary.com/ivyli/image/upload/v1551178731/20181201174702402.png" alt="在这里插入图片描述"></p>
 <p>当然，这样直接修改，只在当前会话中生效，若要所有会话生效，设置成全局变量即可。</p>
 <h1 id="四、环境变量配置文件"><a href="#四、环境变量配置文件" class="headerlink" title="四、环境变量配置文件"></a>四、环境变量配置文件</h1><ul>
 <li><code>profile</code>需要登录才生效，同时会调用<code>bashrc</code>。</li>
@@ -550,8 +550,8 @@ a=a37
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/26/01_nGrinder详细介绍及性能工具对比/" rel="next" title="nGrinder详细介绍及性能测试工具对比">
-                <i class="fa fa-chevron-left"></i> nGrinder详细介绍及性能测试工具对比
+              <a href="/2019/02/26/03_脚本结构-groovy/" rel="next" title="nGrinder脚本结构-groovy">
+                <i class="fa fa-chevron-left"></i> nGrinder脚本结构-groovy
               </a>
             
           </div>
@@ -559,6 +559,10 @@ a=a37
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/26/intellij idea使用手册-03 导入和创建项目/" rel="prev" title="intellij idea使用手册-03 导入和创建项目">
+                intellij idea使用手册-03 导入和创建项目 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
