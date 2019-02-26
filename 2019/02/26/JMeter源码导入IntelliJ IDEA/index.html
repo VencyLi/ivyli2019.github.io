@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="IntelliJ IDEA,jmeter,jmeter源码导入IDEA,">
+  <meta name="keywords" content="jmeter,IntelliJ IDEA,jmeter源码导入IDEA,">
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="之前文章中讲了 idea 导入 maven 项目，但是 jmeter 源码是 eclipse 项目结构，而且有些地方要进行特殊配置，所以单独记录一下。  使用环境： Win 7 + JMeter 5.0 + IntelliJ IDEA 2018.2.6 1、下载并解压 jmeter 源码 源码下载地址: http://jmeter.apache.org/download_jmeter.cgi，选">
-<meta name="keywords" content="IntelliJ IDEA,jmeter,jmeter源码导入IDEA">
+<meta name="keywords" content="jmeter,IntelliJ IDEA,jmeter源码导入IDEA">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JMeter源码导入IntelliJ IDEA">
 <meta property="og:url" content="http://yoursite.com/2019/02/26/JMeter源码导入IntelliJ IDEA/index.html">
@@ -93,7 +93,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20181227174338423.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20181227174404946.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20181227175038576.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70">
-<meta property="og:updated_time" content="2019-02-26T09:36:11.315Z">
+<meta property="og:updated_time" content="2019-02-26T09:48:06.236Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JMeter源码导入IntelliJ IDEA">
 <meta name="twitter:description" content="之前文章中讲了 idea 导入 maven 项目，但是 jmeter 源码是 eclipse 项目结构，而且有些地方要进行特殊配置，所以单独记录一下。  使用环境： Win 7 + JMeter 5.0 + IntelliJ IDEA 2018.2.6 1、下载并解压 jmeter 源码 源码下载地址: http://jmeter.apache.org/download_jmeter.cgi，选">
@@ -367,7 +367,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-02-26T17:36:11+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-02-26T17:48:06+08:00">
                 2019-02-26
               </time>
             
@@ -489,13 +489,12 @@ ren .eclipse.classpath .classpath
 ren .eclipse.project .project
 </code></pre><h2 id="3、导入-IDEA"><a href="#3、导入-IDEA" class="headerlink" title="3、导入 IDEA"></a>3、导入 IDEA</h2><p>打开 IDEA，导入源码。</p>
 <ul>
-<li><p><code>File -&gt; New -&gt; Project from Existing Sources</code> ，选择源码目录；</p>
-</li>
-<li><p>选择按 eclipse 项目导入，如下所示：</p>
+<li><code>File -&gt; New -&gt; Project from Existing Sources</code> ，选择源码目录；</li>
+<li>选择按 eclipse 项目导入，如下所示：</li>
+</ul>
 <p><img src="https://img-blog.csdnimg.cn/20181227164205889.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpamluZzc0MjE4MA==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-</li>
-<li><p>其它全部按默认，一直 Next 即可。</p>
-</li>
+<ul>
+<li>其它全部按默认，一直 Next 即可。</li>
 </ul>
 <h2 id="4、Ant-下载依赖-jar-包"><a href="#4、Ant-下载依赖-jar-包" class="headerlink" title="4、Ant 下载依赖 jar 包"></a>4、Ant 下载依赖 jar 包</h2><ul>
 <li>在窗口右侧 <code>Ant Build</code> 中，点击 + ，选择源码目录下的 build.xml，会把所有相关信息展示在右侧列表中；</li>
@@ -555,9 +554,9 @@ ren .eclipse.project .project
       
         <div class="post-tags">
           
-            <a href="/tags/IntelliJ-IDEA/" rel="tag"># IntelliJ IDEA</a>
-          
             <a href="/tags/jmeter/" rel="tag"># jmeter</a>
+          
+            <a href="/tags/IntelliJ-IDEA/" rel="tag"># IntelliJ IDEA</a>
           
             <a href="/tags/jmeter源码导入IDEA/" rel="tag"># jmeter源码导入IDEA</a>
           
@@ -572,8 +571,8 @@ ren .eclipse.project .project
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/26/Maven学习04-构建生命周期/" rel="next" title="Maven学习04-构建生命周期">
-                <i class="fa fa-chevron-left"></i> Maven学习04-构建生命周期
+              <a href="/2019/02/26/Maven学习03-安装配置和maven仓库/" rel="next" title="Maven学习03-安装配置和maven仓库">
+                <i class="fa fa-chevron-left"></i> Maven学习03-安装配置和maven仓库
               </a>
             
           </div>
@@ -582,8 +581,8 @@ ren .eclipse.project .project
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/02/26/Maven学习03-安装配置和maven仓库/" rel="prev" title="Maven学习03-安装配置和maven仓库">
-                Maven学习03-安装配置和maven仓库 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/02/26/IntelliJ IDEA使用手册-01/" rel="prev" title="IntelliJ IDEA使用手册-02">
+                IntelliJ IDEA使用手册-02 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
