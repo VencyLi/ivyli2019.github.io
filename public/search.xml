@@ -1,19 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[Busuanzi网站统计失效问题]]></title>
-    <url>%2F2019%2F02%2F27%2FBusuanzi%E7%BD%91%E7%AB%99%E7%BB%9F%E8%AE%A1%E5%A4%B1%E6%95%88%E9%97%AE%E9%A2%98%2F</url>
-    <content type="text"><![CDATA[在 Hexo 博客中，我使用的 Next 5.1 主题中默认集成了第三方统计服务 Busuanzi 来统计网站数据，但是实际并没有生效。 问题原因是由于 busuanzi(不蒜子) 的域名更新，导致了使用 Hexo Next 主题时统计数据失效。 不蒜子的域名由原来的 dn-lbstatics.qbox.me 更换为了 busuanzi.ibruce.info。 解决方法: 到 hexo 的 themes 文件夹下, 进入 \themes\next\layout_third-party\analytics 目录 打开 busuanzi-counter.swig 将 src=&quot;https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js&quot; 修改为 src=&quot;https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js&quot; 然后使用 hexo g 、hexo d 命令重启服务器即可生效。]]></content>
-      <categories>
-        <category>个人博客</category>
-      </categories>
-      <tags>
-        <tag>Busuanzi</tag>
-        <tag>Busuanzi统计</tag>
-        <tag>Busuanzi统计失效</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[Git操作本地仓库和远程仓库的常用命令]]></title>
     <url>%2F2019%2F02%2F27%2FGit%E6%93%8D%E4%BD%9C%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E5%92%8C%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%2F</url>
     <content type="text"><![CDATA[总结使用 Git 过程中的一些基本的、常用的命令。 一、操作本地仓库 命令示例 解释 git config –list 查看已有的全部配置信息 git config user.name 查看某个指定的环境变量的信息 git config –global user.name “ivyli” 绑定用户名为 ivyli git config –global user.email “ivyli2019@126.com“ 绑定邮箱为 ivyli2019@126.com git init 在空目录下执行该命令，从而初始化当前目录为可管理的git仓库，生成隐藏的 .git 文件(不能乱动，否则仓库就不能用了) git add 1.txt 把本地编辑好的 1.txt 文件添加到暂存区 git add . 把当前目录下的所有文件都添加到暂存区 git status 随时查看仓库状态 git commit –m “add 1.txt” 提交文件到本地仓库，–m 添加注释信息.commit 文件之后再修改，需要重新 add、commit git rm 1.txt 删除版本库中的文件 1.txt（删除文件时最好用该命令，不要手动删除） git commit -m “del 1.txt” git rm 1.txt 之后还要 commit，才能真正删除 git diff 1.txt 查看 1.txt 文件修改了那些内容 git log 查看历史记录 对本地仓库的操作，主要就是 git add/rm/commit/status。 当文件 commit 到本地版本库之后，若再次修改文件，需要重新 add、commit，若是删除文件，需要重新 commit。 二、操作远程仓库我们可以 clone 远程仓库到本地，也可以把本地文件 push 到远程仓库。 但是在第一次操作远程仓库时，会报错 Permission denied(publickey)，这是因为没有添加 SSH 公钥。 1ssh-keygen -t rsa -C "ivyli2019@126.com" 执行上述命令，可以在本地生成 .ssh 文件，复制文件中的 id_rsa.pub 公钥内容到 git 或其它源码平台，即可添加 SSH 公钥。 命令示例 解释 git clone git://gitee.com:ivyli2019/test.git 从远程库中克隆项目到本地，是一个包含整个项目的版本库文件夹。该命令通常用于新用户 clone 项目，后面基本都是用 git pull。 git remote 查看远程库的别名（进入 clone 下来的文件夹中执行该命令，别名默认是 origin） git remote –v 查看远程库的别名和仓库地址。如返回：origin git@gitee.com:ivyli2019/test.git git push origin master 把本地 master 分支推送到别名为 origin 的远程库 git remote add mytest git://gitee.com:ivyli2019/mytest.git 添加/关联一个远程仓库，并起别名为 mytest，可自定义别名。 git remote remove mytest 删除远程库的 mytest 别名 git branch 查看当前所有的分支，默认只有 master 分支 git branch test 创建 test 分支 git branch –d test 删除 test 分支 git checkout test 从当前分支切换到 test 分支 git checkout –b dev 创建 dev 分支，并切换到 dev 分支上 git merge dev 在当前分支上合并 dev 分支]]></content>
@@ -25,6 +12,19 @@
         <tag>本地仓库</tag>
         <tag>远程仓库</tag>
         <tag>git命令</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hexo Next 主题中添加本地搜索功能]]></title>
+    <url>%2F2019%2F02%2F27%2FHexo%20Next%20%E4%B8%BB%E9%A2%98%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%9C%AC%E5%9C%B0%E6%90%9C%E7%B4%A2%E5%8A%9F%E8%83%BD%2F</url>
+    <content type="text"><![CDATA[在 next 主题侧边列表有一个 搜索 菜单，但是点击之后页面会处于卡死状态，后台显示是 404，需要添加搜索插件才可以。 1、安装本地搜索插件 hexo-generator-search12# 安装插件，用于生成博客索引数据（在博客根目录下执行下列命令）：npm install hexo-generator-search --save 安装之后，会在站点目录的 public 文件夹下创建一个 search.xml 文件。 2、修改站点配置文件在站点配置文件 _config.yml 中添加如下内容：123456# Search search: path: ./public/search.xml field: post format: html limit: 10000 path：索引文件的路径，相对于站点根目录 field：搜索范围，默认是 post，还可以选择 page、all，设置成 all 表示搜索所有页面 limit：限制搜索的条目数 3、主题配置文件在主题配置文件 _config.yml 中找到如下内容：1234local_search: enable: true trigger: auto top_n_per_article: 1 确保 enable 设成 true。 top_n_per_article 字段表示在每篇文章中显示的搜索结果数量，设成 -1 会显示每篇文章的所有搜索结果数量。 然后，重新部署网站即可愉快的使用本地搜索功能了，效果参见本网站右侧的 搜索 菜单。]]></content>
+      <categories>
+        <category>个人博客</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>next主题搜索</tag>
+        <tag>next本地搜索</tag>
       </tags>
   </entry>
   <entry>
@@ -42,28 +42,40 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Hexo Next 主题中添加本地搜索功能]]></title>
-    <url>%2F2019%2F02%2F27%2FHexo%20Next%20%E4%B8%BB%E9%A2%98%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%9C%AC%E5%9C%B0%E6%90%9C%E7%B4%A2%E5%8A%9F%E8%83%BD%2F</url>
-    <content type="text"><![CDATA[在 next 主题侧边列表有一个 搜索 菜单，但是点击之后页面会处于卡死状态，后台显示是 404，需要添加搜索插件才可以。 1、安装本地搜索插件 hexo-generator-search12# 安装插件，用于生成博客索引数据（在博客根目录下执行下列命令）：npm install hexo-generator-search --save 安装之后，会在站点目录的 public 文件夹下创建一个 search.xml 文件。 2、修改站点配置文件在站点配置文件 _config.yml 中添加如下内容：123456# Search search: path: ./public/search.xml field: post format: html limit: 10000 path：索引文件的路径，相对于站点根目录 field：搜索范围，默认是 post，还可以选择 page、all，设置成 all 表示搜索所有页面 limit：限制搜索的条目数 3、主题配置文件在主题配置文件 _config.yml 中找到如下内容：1234local_search: enable: true trigger: auto top_n_per_article: 1 确保 enable 设成 true。 top_n_per_article 字段表示在每篇文章中显示的搜索结果数量，设成 -1 会显示每篇文章的所有搜索结果数量。 然后，重新部署网站即可愉快的使用本地搜索功能了，效果参见本网站右侧的 搜索 菜单。]]></content>
+    <title><![CDATA[Busuanzi网站统计失效问题]]></title>
+    <url>%2F2019%2F02%2F27%2FBusuanzi%E7%BD%91%E7%AB%99%E7%BB%9F%E8%AE%A1%E5%A4%B1%E6%95%88%E9%97%AE%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[在 Hexo 博客中，我使用的 Next 5.1 主题中默认集成了第三方统计服务 Busuanzi 来统计网站数据，但是实际并没有生效。 问题原因是由于 busuanzi(不蒜子) 的域名更新，导致了使用 Hexo Next 主题时统计数据失效。 不蒜子的域名由原来的 dn-lbstatics.qbox.me 更换为了 busuanzi.ibruce.info。 解决方法: 到 hexo 的 themes 文件夹下, 进入 \themes\next\layout_third-party\analytics 目录 打开 busuanzi-counter.swig 将 src=&quot;https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js&quot; 修改为 src=&quot;https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js&quot; 然后使用 hexo g 、hexo d 命令重启服务器即可生效。]]></content>
       <categories>
         <category>个人博客</category>
       </categories>
       <tags>
-        <tag>hexo</tag>
-        <tag>next主题搜索</tag>
-        <tag>next本地搜索</tag>
+        <tag>Busuanzi</tag>
+        <tag>Busuanzi统计</tag>
+        <tag>Busuanzi统计失效</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[git pull 指定某一个文件或文件夹]]></title>
-    <url>%2F2019%2F02%2F26%2Fgit%20pull%20%E6%8C%87%E5%AE%9A%E6%9F%90%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E6%88%96%E6%96%87%E4%BB%B6%E5%A4%B9%2F</url>
-    <content type="text"><![CDATA[1、要解决的问题默认情况下，git pull 操作会把远程仓库的所有最新数据更新到本地。 但是，如果你只想更新指定的某一个文件或文件夹，该怎么操作呢？ 2、git 只 pull 某一个文件/夹 设置 core.sparsecheckout为 true $ git config core.sparsecheckout true core.sparsecheckout用于控制是否允许设置pull指定文件/夹，true为允许。 此方法适用于 Git1.7.0 以后版本，之前的版本没有这个功能。 在.git/info/sparse-checkout文件中（如果没有则创建）添加指定的文件/夹 最后，拉取想要的分支即可实现checkout指定文件/夹。 $ git pull origin master]]></content>
+    <title><![CDATA[intellij idea 和 eclipse 区别（IDEA使用手册01）]]></title>
+    <url>%2F2019%2F02%2F26%2Fintellij%20idea%20%E5%92%8C%20eclipse%20%E5%8C%BA%E5%88%AB%2F</url>
+    <content type="text"><![CDATA[一、IDEA 和 eclipse 对比 IDEA Eclipse 说明 new Project workspace 创建 项目/工作空间，是最顶级的结构单元 new Module new Project 创建一个模块/工程，一个 Project/工作空间 下可以有多个 模块/工程 文件自动保存，不能设置为手动保存 需要手动保存 智能提示重构代码,告诉你更好的实现方式 更友好、更聪明的代码提示功能 二、IntelliJ IDEA 中的 Project 和 Module在 IntelliJ IDEA 中，没有类似于 Eclipse 工作空间（Workspace）的概念，而是提出了Project和Module这两个概念。 2.1 Project : Module = 1 : n在 IntelliJ IDEA 中Project是最顶级的结构单元，下面是一个或多个Module，是一对多的关系。 2.2 多个 Module 的划分在大型项目中，都是使用多 Module 结构，按功能不同划分为多个模块，模块之间可以相互依赖。 2.3 Project 对 Module 的意义 IDEA 的 Project 可以简单地理解为是一个单纯的目录，下面存放不同模块的文件夹。 Project 主要起到一个项目定义、范围约束、规范类型的效果，本身不具备任何编码设置、构建等开发功能。 2.4 Project 和 Module 的默认配置 IDEA 默认是单 Project 单 Module 结构，且默认名字相同，这时二者合二为一； 当一个 Project 下有多个 Module 时，最好是使用不同的名字。 三、安装目录进入IntelliJ IDEA 安装目录的bin目录下 （bin是 binary 的缩写，代表的意思是二进制，因此bin目录就是用来存放二进制文件） 在这里，我们主要了解下面五个文件： idea.exe：IntelliJ IDEA 32 位的可行执行文件，IntelliJ IDEA 安装完默认发送到桌面的就是这个执行文件的快捷方式； idea.exe.vmoptions：IntelliJ IDEA 32 位的可执行文件的 VM 配置文件； idea.properties：IntelliJ IDEA 的一些属性配置文件； idea64.exe：IntelliJ IDEA 64 位的可行执行文件，要求电脑上必须装有 JDK 64 位版本，64 位的系统也是建议使用该文件； idea64.exe.vmoptions：IntelliJ IDEA 64 位的可执行文件的 VM 配置文件。 四、新建项目通过Create New Project，选择需要的项目类型，然后设置项目和模块的名称和存储路径。 默认是一个Project下创建一个Module，因此创建时项目名称与模块名称默认是相同的。一般情况下，我们是不需要在More Settings中进行修改的。 默认界面是隐藏Toolbar和Tool Buttons的，可以通过view--&gt;Toolbar和Tool Buttons 来开启。 在创建 java project 时，默认使用的是自带的JRE，在 Project SDK 中选择自己下载的jdk目录。 创建完成后，会在IDEA左侧显示项目结构图和外部库 在项目结构图中，src目录为默认的Source root，我们一般在该目录下创建包和类； 在外部库中，显示了我们导入的 JDK 1.8 版本 五、创建包和类5.1 创建包 在 src 中创建包时，可以一次创建多个包，如：输入包名为 com.hit.demo，同时创建了三个空包。 创建的多个空包默认是重叠在一起的，如果其中某个包非空，则自动拆开包。 如果感觉空包叠在一起不爽的话，可以点击旁边的齿轮按钮，再点击 Hide Empty Middle Packages 把对勾去掉，变为 Compact Empty Middle Packages，就会把空包都按树状展示。 5.2 创建类 在一个包上点击鼠标右键，选择 Create Java Class ,创建 HelloWorld 类。 编写完成代码后，直接在编辑区右键–Run HelloWorld 运行类。 然后会在左侧目录中生成一个与 src 同级的目录 out ，用于存放项目中所有Module的编译文件。 六、项目中的配置文件6.1 .idea 目录这是整个 Project的配置文件目录。 IntelliJ IDEA 的配置文件都存在.idea目录下，以 XML 文件的形式存在，因此我们也可以通过了解这些 XML 文件来了解 IntelliJ IDEA 的相关配置。 6.2 .iml 文件这个文件是Module的配置文件。 这是 IntelliJ IDEA 为每个 Module 自动生成的配置文件，一般情况下不需要动。 七、设置主题和字体7.1 界面主题修改Files -&gt; Settings -&gt; Appearance &amp; Behavior -&gt; Appearance 在 Windows 系统上 IntelliJ IDEA 默认提供三个主题，分别为：Darcula、IntelliJ和Windows。其中，除了Darcula是黑色背景的主题，其余两个都是白色背景的主题。 7.2 界面字体修改Appearance &amp; Behavior &gt; Appearance 选中 Override default fonts by XXX ，并设置具体字体大小的数值。 这里的修改不会应用于代码编辑区！ 有一点需要注意，那就是：有的字体是包含中文的，有的字体则是不包含中文的。 一般情况下，使用英文的国家是不需要额外担心乱码问题的，但是我们需要啊！ 如果我们选择的字体不包含中文的话，很多位置上可能会出现类似于 口口口口口 这样的乱码问题。 例如，Courier New和Monaco就是纯英文字体，而Microsoft YaHei就是包含中文的字体。 7.3 代码编辑区主题修改Files -&gt; Settings -&gt; Appearance &amp; Behavior -&gt; Editor &gt; Color Scheme 在 Windows 系统上 IntelliJ IDEA 默认提供两个编辑区主题，分别为：Default和Darcula。其中，Default为默认主题；Darcula为黑色主题。 7.4 代码编辑区和控制台的字体修改Editor &gt; Font 这里的设置可以同时应用于代码编辑区和控制台 Font ：设置第一字体 Show only monospaced fonts：仅显示等宽字体，默认是勾选状态，可选的字体较少，可去掉勾选。 Fallback font：备选字体，如果首选字体中无法显示文字，系统就会自动调用备选字体来显示。例如首选字体我们可以设置为英文字体，备选字体设置为中文字体，这样即可优美的显示代码，而中文也不会变为‘口口’字 Enable font ligatures：是否启用字体连写，一般不启用。 7.5 设置 Sublime 代码颜色的方法在使用 Sublime 时，五颜六色的代码看起来非常美观，怎么让 IDEA 也设置成类似的格式呢？ 下载「SublimeMonoKaiTrue」jar 包 https://github.com/guobinhit/intellij-idea-tutorial/tree/master/resources/idea-theme/SublimeMonokaiTrue.jar； File -&gt; Import Settings，导入已经下载完的「SublimeMonoKai.jar」包，按提示重启 IDEA ； 重启后，默认就会使用新的 sublime 主题效果了，具体可以在 File -&gt; Settings -&gt; Editor -&gt; Color Scheme 中修改。]]></content>
       <categories>
-        <category>git</category>
+        <category>java</category>
       </categories>
       <tags>
-        <tag>git</tag>
-        <tag>git pull</tag>
+        <tag>intellij idea</tag>
+        <tag>eclipse</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[nGrinder在GET请求中添加参数]]></title>
+    <url>%2F2019%2F02%2F26%2F05_%E5%9C%A8GET%E8%AF%B7%E6%B1%82%E4%B8%AD%E6%B7%BB%E5%8A%A0%E5%8F%82%E6%95%B0-groovy%2F</url>
+    <content type="text"><![CDATA[https://github.com/naver/ngrinder/wiki/How-to-pass-a-parameter-to-the-script 在GET请求脚本中添加添加信息头、cookies和自定义参数，有两种方式： 一种是在UI界面添加后自动生成脚本 一种是直接在脚本中添加 一、通过UI界面添加通过 UI 设置：脚本 -&gt; 新建脚本 -&gt; 显示高级配置 生成代码如下：1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859@RunWith(GrinderRunner)@FixMethodOrder(MethodSorters.NAME_ASCENDING)class TestRunner &#123;truepublic static GTest testtruepublic static HTTPRequest requesttruepublic static NVPair[] headers = []truepublic static NVPair[] params = []truepublic static Cookie[] cookies = []true@BeforeProcesstruepublic static void beforeProcess() &#123;truetrueHTTPPluginControl.getConnectionDefaults().timeout = 6000truetruetest = new GTest(1, "www.baidu.com")truetruerequest = new HTTPRequest()truetruetruetrue// =========下面是我刚才添加的参数=========truetrue// Set header datastruetrueList&lt;NVPair&gt; headerList = new ArrayList&lt;NVPair&gt;()truetrueheaderList.add(new NVPair("Connection", "keep-alive"))truetrueheaderList.add(new NVPair("User-Agent", "Mozilla/5.0 (X11; Linux x86_64; rv:12.0) Gecko/20100101 Firefox/21.0"))truetrueheaders = headerList.toArray()truetrue// Set param datastruetrueList&lt;NVPair&gt; paramList = new ArrayList&lt;NVPair&gt;()truetrueparamList.add(new NVPair("name", "jing"))truetrueparamList.add(new NVPair("age", "18"))truetrueparamList.add(new NVPair("sex", "beauty"))truetrueparams = paramList.toArray()truetrue// Set cookie datastruetrueList&lt;Cookie&gt; cookieList = new ArrayList&lt;Cookie&gt;()truetruecookieList.add(new Cookie("myToken", "xxxxxxxx", "www.baidu.com", "", new Date(32503647599000L), false))truetruecookies = cookieList.toArray()truetrue// =========上面是我刚才添加的参数=========truetruegrinder.logger.info("before process.");true&#125;true@BeforeThreadtruepublic void beforeThread() &#123;truetruetest.record(this, "test")truetruegrinder.statistics.delayReports=true;truetruegrinder.logger.info("before thread.");true&#125;true@Beforetruepublic void before() &#123;truetruerequest.setHeaders(headers)truetruecookies.each &#123; CookieModule.addCookie(it, HTTPPluginControl.getThreadHTTPClientContext()) &#125;truetruegrinder.logger.info("before thread. init headers and cookies");true&#125;true@Testtruepublic void test()&#123;truetrueHTTPResponse result = request.GET("https://www.baidu.com", params)truetrueassertThat(result.statusCode, is(200))truetrue// 这是我通过引导页手动添加的断言truetrueassertThat(result.getText(), containsString("jing"))true&#125;&#125; 可以看到这种方式是在@beforeProcess中添加heads 、params、cookies。 二、直接在脚本中添加（在此只演示添加 headers 和 params的方式，添加cookies是类似的，不再赘述） 根据在脚本中添加的位置不同，可以分为以下几种方式： 1、在 @BeforeProcess 注解的方法里添加 headers 和 params这种方法跟第一种方法的效果是一样的1234567891011// 添加headersList&lt;NVPair&gt; headerList = new ArrayList&lt;NVPair&gt;()headerList.add(new NVPair("Accept-Language", "en-US,zh-CN;"))// ...可以添加多个headerheaders = headerList.toArray()// 添加paramsList&lt;NVPair&gt; paramList = new ArrayList&lt;NVPair&gt;()paramList.add(new NVPair("accessToken", "xxxxxxxxx"))// ...可以添加多个paramparams = paramList.toArray() 2、直接在TestRunner类的静态变量中添加 headers 和 params在整个类最前面定义静态变量的地方，直接给变量赋值：123456789// 添加headerspublic static NVPair[] headers = [ new NVPair("Accept-Language", "en-US,zh-CN;")]// 添加paramspublic static NVPair[] params = [ new NVPair("accessToken", "xxxxxxxxxx")] 3、在 @Test 注解的方法中添加 headers 和 params在发送request请求的方法里添加参数：1234567 // HTTPResponse result = request.GET("https://www.baidu.com", params) // 添加headersHTTPResponse result = request1.GET("https://www.baidu.com", [new NVPair("Accept-Language", "en-US,zh-CN;")] as NVPair[]) // 添加params HTTPResponse result = request.GET("https://www.baidu.com", [new NVPair("accessToken", "xxxxxx")] as NVPair[]) 到底选择哪种方式，要根据具体的参数类型和业务场景来决定。 三、两种方式的比较 ?123456789101112131415161718 限制很多，只能传1个参数（保存到名为 param 的属性），值只能由1-50个数字字母、_、,、.、| 组成，不能有空格。// 获取 UI 传入的字符串def foo = System.getProperty("param")// 带默认值def foo = System.getProperty("param", "XXX")// 3.2.3+ 可以放开自动生成的脚本里 import static net.grinder.util.GrinderUtils.* 的注释/* GrinderUtils 类有以下静态方法：getParam()getParam(String)getParamInt()getParamLong()getParamFloat()getParamDouble()getParamBoolean()*/]]></content>
+      <categories>
+        <category>nGrinder</category>
+      </categories>
+      <tags>
+        <tag>nGrinder</tag>
+        <tag>nGrinder请求参数</tag>
       </tags>
   </entry>
   <entry>
@@ -80,32 +92,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Beanshell Sampler 常用方法]]></title>
-    <url>%2F2019%2F02%2F26%2FBeanshell%20Sampler%20%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%2F</url>
-    <content type="text"><![CDATA[一、Beanshell Sampler1、BeanshellBeanshell 是一种轻量级的 Java 脚本，纯 Java 编写的，能够动态的执行标准 java 语法及一些扩展脚本语法，类似于 js 和 perl。 2、内置变量Beanshell Sampler 中除了可以使用标准 java 语法之外，还有一些定义好的变量，可以直接使用。 SampleResult ResponseCode, ResponseMessage IsSuccess Label FileName ctx vars props log 下面我按使用频率，分别讲一下最常用的几种变量。 3、log 用于打印日志，最常用，也最简单； 打印在 jmeter.log 中，可以设置打印级别，可以打印字符串、变量等。 使用方法：123456789101112131415161、打印 info 形式的普通字符串日志：log.info(&quot;hello world&quot;); 输出 hello world2、拼接字符串和变量 (其中 token 是 jmeter 局部变量)：log.info(&quot;hello world&quot; + &quot;$&#123;token&#125;&quot;); 输出 hello world 和 token 变量的拼接结果3、打印自定义变量str = &quot;12345&quot;;log.info(str); 输出 123454、打印 error 形式的普通字符串日志：log.info(&quot;hihihi&quot;);log.error(&quot;aaaaa&quot;);两种输出的区别：2018-12-27 19:05:13,158 INFO o.a.j.u.BeanShellTestElement: hihihi2018-12-27 19:05:13,158 ERROR o.a.j.u.BeanShellTestElement: aaaaa print() 打印日志 在 beanshell 中还可以使用 print() 函数来打印日志，输出字符串等信息； print() 是在 cmd 控制台中输出信息，log() 默认是在 jmeter.log 中输出信息。 4、vars 用于存取 jmeter 局部变量，很常用，一定要掌握； 通常用于存取字符串内容，也可以存取对象； vars.get()12String mykey = vars.get(&quot;keyname&quot;); 获取变量名为 keyname 的值，并保存在 mykey 中。 vars.put()12345vars.put(&quot;keyname&quot;,&quot;value&quot;); 把变量 keyname(值为 value)保存到 jmeter 变量中。vars.putObject(&quot;OBJname&quot;,new Object()); 把一个对象 OBJname 保存到 jmeter 变量中 vars.remove()12vars.remove(&quot;keyname&quot;);从 jmeter 变量中删除 keyname。 5、props 用于存取 jmeter 全局的静态变量； 其中的 key 和 value 均是字符串形式；12345ymd = props.get(&quot;START.YMD&quot;);获取属性 START.YMD 的值（脚本启动日期）。props.put(&quot;PROP1&quot;,&quot;1234&quot;);把 1234 存入全局属性 PROP1 中。 6、ctx 当前线程的上下文信息； 使用举例：12345678910111213ctx.getCurrentSampler(); 获取当前 sampler 请求ctx.getPreviousSampler(); 获取前一个 sampler 请求ctx.getThreadNum(); 获取当前线程的序号，从 0 开始计数ctx.getThread(); 获取当前线程ctx.getThreadGroup(); 获取当前线程组ctx.getProperties(); 获取所有属性ctx.getVariables(); 获取当前线程的所有变量 7、SampleResult12SampleResult.setResponseData(data);自定义响应数据。]]></content>
-      <categories>
-        <category>jmeter</category>
-      </categories>
-      <tags>
-        <tag>beanshell</tag>
-        <tag>jmeter</tag>
-        <tag>性能</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[nGrinder脚本结构-groovy]]></title>
-    <url>%2F2019%2F02%2F26%2F03_%E8%84%9A%E6%9C%AC%E7%BB%93%E6%9E%84-groovy%2F</url>
-    <content type="text"><![CDATA[在前面的文章中，我们已经知道，nGrinder支持groovy和Jython脚本，今天学习一下ngrinder中的groovy脚本结构。 ngrinder中的groovy脚本结构类似 junit，同时在junit的基础之上封装了自己的注解，用来控制脚本的运行。 一、运行逻辑图如下： 此处只列出了groovy脚本的逻辑，jython脚本是类似的，在此不再单独介绍. 二、各注解的使用比较 注解 描述 应用范围 用例 @BeforeProcess 定义在进程被调用之前应执行的行为 static method 加载被线程共享的资源文件，定义 GTest 等 @AfterProcess 定义在进程被终止之前应执行的行为 static method 关闭资源文件 @BeforeThread 定义在每个线程被调用之前应执行的行为 member method 登录目标系统，建立线程内的一些值，例如，Cookie 处理 @AfterThread 定义在每个线程被终止之前应执行的行为 member method 退出系统 @Before 定义每个被 @Test 注解的方法被执行前应执行的行为 member method 对个被 @Test 注解的方法的共享逻辑、变量设置 @After 定义每个被 @Test 注解的方法被执行后应执行的行为 member method 很少使用 @Test 定义测试行为，被执行多次 member method 测试体 三、关注点在ngrinder中，通常使用单进程多线程就足够大部分测试了，所以： 我们最需要关注的就是 @Test ，这个是循环体； 其次是 @Before ，这里设置多个循环体的共享变量； 再其次是 @BeforeThread 和 @AfterThread ，用于设置每个线程执行前后的行为。 四、具体代码结构123456789101112131415161718192021222324252627282930313233343536373839@RunWith(GrinderRunner) // 每个测试类都要加这个注解class TestRunner &#123; @BeforeProcess // 在每个进程启动前执行 public static void beforeProcess() &#123; // 加载资源文件、初始化 GTest 等 &#125; @BeforeThread // 在每个线程执行前执行 public void beforeThread() &#123; // 登录、设置 cookie 之类 &#125; @Before // 在每个 @Test 注解的方法执行前执行 public void before() &#123; // 设置变量、多个 @Test 方法共用的逻辑等 &#125; @Test // 在测试结束前不断运行。各个 @Test 注解的方法异步执行。 public void foo() &#123; // ... &#125; @Test public void bar() &#123; // ... &#125; @After // 在每个 @Test 注解的方法执行后执行 public void after() &#123; // 很少用到 &#125; @AfterThread public void afterThread() &#123; // 登出之类 &#125; @AfterProcess // 在每个进程结束后执行 public static void afterProcess() &#123; // 关闭资源 &#125;]]></content>
-      <categories>
-        <category>nGrinder</category>
-      </categories>
-      <tags>
-        <tag>nGrinder</tag>
-        <tag>groovy</tag>
-        <tag>ngrinder脚本</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[nGrinder详细介绍及性能测试工具对比]]></title>
     <url>%2F2019%2F02%2F26%2F01_nGrinder%E8%AF%A6%E7%BB%86%E4%BB%8B%E7%BB%8D%E5%8F%8A%E6%80%A7%E8%83%BD%E5%B7%A5%E5%85%B7%E5%AF%B9%E6%AF%94%2F</url>
     <content type="text"><![CDATA[目前主流的性能测试工具，除了LR、JMeter之外，还有很多公司在用B/S架构的nGrinder 。最近公司搭建了一个基于nGrinder的二次开发平台，在此写一波nGrinder相关的文章。 在介绍nGrinder之前，有必要先说一下 The Grinder 抛砖引玉。 一、The Grinder1、The Grinder是一个基于Java的开源性能测试框架，通过多个agent负载机很方便的进行分布式测试。 2、主要特性： 可以测试任何java代码，包括各种常用的接口 如HTTP web servers, SOAP和REST web services，还有客户端服务器RMI、JMS、EJBs等，还支持自定义协议。 测试脚本使用python和Clojure语言 成熟的HTTP协议支持： 自动管理客户端连接和cookies，SSL代理； 支持录制脚本，能够记录并回放浏览器和网站之间的复杂交互。 包括console和agent端 3、不足 一次只能运行一个测试 没有测试历史记录 没有图形化的测试报告 二、nGrinder nGrinder是基于Grinder的开源的web性能测试平台，由韩国最大互联网公司NHN公司的开发团队进行了重新设计和完善。 特性：开源、易用、高可用、可扩展 1、nGrinder 在 Grinder 的基础上： 实现多测试并行 基于web的管理 实现cluster 内置svn，方便的脚本编辑、管理 支持Groovy脚本，相对于Jython，可以启动更多的虚拟用户 实现对目标服务器的监控 插件系统扩展 2、工作原理 由一个控制端controller和多个代理端agent组成，通过控制端(浏览器访问)建立测试场景，然后分发到代理端进行压力测试。 用户按照一定规范编写测试脚本，controller会将脚本以及需要的资源分发到agent，用jython执行。 在脚本执行的过程中收集运行情况、相应时间、测试目标服务器的运行情况等。并且保存这些数据生成测试报告，通过动态图和数据表的形式展示出来。用户可以方便的看到TPS、被测服务器的CPU和内存等情况。 三、LoadRunner JMeter 与 nGrinder对比1、Loadrunner 基于UI操作，容易上手。早期很流行，功能强大，但是太笨重，安装很麻烦。 不开源，扩展性不高，收费贵。往后的方向肯定是客户端工具逐步向平台化发展，所以已经慢慢被替代了。 2、JMeter 基于UI操作，容易上手，但是编程能力较弱（使用beanshell脚本语言）。 其次JMeter基于线程，模拟数千用户几乎不可能。 3、nGrinder 单节点可支持4000~6000并发、支持分布式、可监控被测服务器、可录制脚本、开源、平台化。 参数化功能较弱 对测试人员的代码要求较高 比较点 JMeter Ngrinder LoadRunner 实现语言 Java java/python java/VB/C/.NET 使用方式 C/S或Command B/S B/S 支持分布式 master/slave controller/agent master/slave 资源监控 monitor/plugin，如果二开，需要查找plugin的源码 monitor方式，有直接可用的源码 自带资源监控功能 社区活跃度 文档完善 有中文社区 网上资料和相关培训很多，购买正版还可以得到技术支持 是否需要编码 基本不需要 需要，Jython/Groovy 需要 脚本的维护 本地 内置SVN 本地 脚本录制 可使用BadBoy进行录制 可通过PTS插件进行录制 自带录制功能 可扩展性 可增加plugin，输出结果可以再加工 可增加plugin 通过扩展函数库实现 安装 简单，解压即可 简单，可以下载安装包或绿色包解压 安装包比较大，安装繁琐 nGrinder 安装配置及使用 见下篇。]]></content>
@@ -115,18 +101,6 @@
       <tags>
         <tag>nGrinder</tag>
         <tag>性能测试工具</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[IDEA 中的版本控制机制]]></title>
-    <url>%2F2019%2F02%2F26%2FIDEA%20%E4%B8%AD%E7%9A%84%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E6%9C%BA%E5%88%B6%2F</url>
-    <content type="text"><![CDATA[一、版本控制的分类1、版本控制 版本控制是指对软件开发过程中各种程序代码、配置文件及说明文档等文件变更的管理。 版本控制的内容主要包括：检入检出控制、分支和合并、历史记录。 2、集中式版本控制系统（CVCS）典型代表是 SVN，有如下特点： 管理方便，逻辑明确，操作简单，上手快 使用集中式服务器，安全易管理 对服务器性能要求高，数据库容量经常暴增，体量大 必须联网！如果不能连接到服务器上，就不能提交，还原，对比等等 分支管控不灵活 还有一个风险，就是如果源码库出现问题，导致项目代码丢失，那么大家手里的都是部分代码，就算勉强合并到一起，也不能保证项目源码的准确性。 3、分布式版本控制系统（DVCS）分布式相比于集中式的最大区别在于开发者可以提交到本地，每个开发者通过克隆（git clone），在本地机器上拷贝一个完整的Git仓库。 典型代表是 Git，有如下特点： 适合分布式开发，每一个个体都可以作为服务器。每一次Clone就是从服务器上pull到了所有的内容，包括版本信息 公共服务器压力和数据量都不会太大 速度快、灵活，分支之间可以任意切换 任意两个开发者之间可以很容易的解决冲突，并且单机上就可以进行分支合并 可以离线工作，不影响本地代码编写，等有网络连接以后可以再上传代码，并且可以在本地根据不同的需要新建自己的分支。 二、IDEA 中的版本控制机制1、Version Control File -&gt; Settings -&gt; Version Control ，这里是 IDEA 自带的用于支持主流版本控制软件的插件，如 git 、gitHub 、svn 、cvs等。 仅有插件并不能在 IDEA 中直接使用版本控制，还需要下载相应的版本控制软件才行。 2、Plugins File -&gt; Settings -&gt; Plugins ，这里是 IDEA 下载和管理插件的地方，在 Version Control 中展示的插件就是默认在这里已经下载了的。 三、IDEA 中配置版本控制软件1、SVN 先安装 SVN 客户端，或者是图形化工具，windows 推荐用 TortoiseSVN。 File -&gt; Settings -&gt; Version Control -&gt; Subverion，选择自己的 SVN 安装路径，否则 IDEA 可能无法正常识别SVN。 Clear Auth Cache，当使用过程中出现无法正常 checkout 等问题时，可以尝试点击这里清除缓存。 2、Git 先安装 Git 客户端，windows 下推荐用 TortoiseGit。 File -&gt; Settings -&gt; Version Control -&gt; Git，选择自己的 Git 安装路径，否则 IDEA 可能无法正常识别 Git。 3、GitHub 先注册 GitHub 账号 File -&gt; Settings -&gt; Version Control -&gt; GitHub -&gt; Add account，输入用户名和密码登录 GitHub，并点击 Test 测试连接是否成功。 四、代码检出和上传1、检出代码VCS -&gt; Checkout from Version Control 选择对应的版本控制系统，如 GitHub、SVN、Git 等，进一步从中检出项目。 以 SVN 为例： 先在本地创建一个空文件夹，右键 svn -&gt; checkout 所有代码； 在 IDEA 中 Import Module 导入； VCS -&gt; Checkout from Version Control -&gt; Subversion，输入 svn 地址，checkout 到工作空间目录。 2、上传代码VCS -&gt; Import into Version Control ，选择对应的版本控制系统，并进一步上传代码到版本控制系统中。 3、配置忽略文件File -&gt; Settings -&gt; Version Control -&gt; Ignored Files 在这里通过 + -设置是否把文件或目录加入到版本控制中。]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-      <tags>
-        <tag>IDEA</tag>
-        <tag>版本控制</tag>
       </tags>
   </entry>
   <entry>
@@ -142,15 +116,27 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[nGrinder在GET请求中添加参数]]></title>
-    <url>%2F2019%2F02%2F26%2F05_%E5%9C%A8GET%E8%AF%B7%E6%B1%82%E4%B8%AD%E6%B7%BB%E5%8A%A0%E5%8F%82%E6%95%B0-groovy%2F</url>
-    <content type="text"><![CDATA[https://github.com/naver/ngrinder/wiki/How-to-pass-a-parameter-to-the-script 在GET请求脚本中添加添加信息头、cookies和自定义参数，有两种方式： 一种是在UI界面添加后自动生成脚本 一种是直接在脚本中添加 一、通过UI界面添加通过 UI 设置：脚本 -&gt; 新建脚本 -&gt; 显示高级配置 生成代码如下：1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859@RunWith(GrinderRunner)@FixMethodOrder(MethodSorters.NAME_ASCENDING)class TestRunner &#123;truepublic static GTest testtruepublic static HTTPRequest requesttruepublic static NVPair[] headers = []truepublic static NVPair[] params = []truepublic static Cookie[] cookies = []true@BeforeProcesstruepublic static void beforeProcess() &#123;truetrueHTTPPluginControl.getConnectionDefaults().timeout = 6000truetruetest = new GTest(1, "www.baidu.com")truetruerequest = new HTTPRequest()truetruetruetrue// =========下面是我刚才添加的参数=========truetrue// Set header datastruetrueList&lt;NVPair&gt; headerList = new ArrayList&lt;NVPair&gt;()truetrueheaderList.add(new NVPair("Connection", "keep-alive"))truetrueheaderList.add(new NVPair("User-Agent", "Mozilla/5.0 (X11; Linux x86_64; rv:12.0) Gecko/20100101 Firefox/21.0"))truetrueheaders = headerList.toArray()truetrue// Set param datastruetrueList&lt;NVPair&gt; paramList = new ArrayList&lt;NVPair&gt;()truetrueparamList.add(new NVPair("name", "jing"))truetrueparamList.add(new NVPair("age", "18"))truetrueparamList.add(new NVPair("sex", "beauty"))truetrueparams = paramList.toArray()truetrue// Set cookie datastruetrueList&lt;Cookie&gt; cookieList = new ArrayList&lt;Cookie&gt;()truetruecookieList.add(new Cookie("myToken", "xxxxxxxx", "www.baidu.com", "", new Date(32503647599000L), false))truetruecookies = cookieList.toArray()truetrue// =========上面是我刚才添加的参数=========truetruegrinder.logger.info("before process.");true&#125;true@BeforeThreadtruepublic void beforeThread() &#123;truetruetest.record(this, "test")truetruegrinder.statistics.delayReports=true;truetruegrinder.logger.info("before thread.");true&#125;true@Beforetruepublic void before() &#123;truetruerequest.setHeaders(headers)truetruecookies.each &#123; CookieModule.addCookie(it, HTTPPluginControl.getThreadHTTPClientContext()) &#125;truetruegrinder.logger.info("before thread. init headers and cookies");true&#125;true@Testtruepublic void test()&#123;truetrueHTTPResponse result = request.GET("https://www.baidu.com", params)truetrueassertThat(result.statusCode, is(200))truetrue// 这是我通过引导页手动添加的断言truetrueassertThat(result.getText(), containsString("jing"))true&#125;&#125; 可以看到这种方式是在@beforeProcess中添加heads 、params、cookies。 二、直接在脚本中添加（在此只演示添加 headers 和 params的方式，添加cookies是类似的，不再赘述） 根据在脚本中添加的位置不同，可以分为以下几种方式： 1、在 @BeforeProcess 注解的方法里添加 headers 和 params这种方法跟第一种方法的效果是一样的1234567891011// 添加headersList&lt;NVPair&gt; headerList = new ArrayList&lt;NVPair&gt;()headerList.add(new NVPair("Accept-Language", "en-US,zh-CN;"))// ...可以添加多个headerheaders = headerList.toArray()// 添加paramsList&lt;NVPair&gt; paramList = new ArrayList&lt;NVPair&gt;()paramList.add(new NVPair("accessToken", "xxxxxxxxx"))// ...可以添加多个paramparams = paramList.toArray() 2、直接在TestRunner类的静态变量中添加 headers 和 params在整个类最前面定义静态变量的地方，直接给变量赋值：123456789// 添加headerspublic static NVPair[] headers = [ new NVPair("Accept-Language", "en-US,zh-CN;")]// 添加paramspublic static NVPair[] params = [ new NVPair("accessToken", "xxxxxxxxxx")] 3、在 @Test 注解的方法中添加 headers 和 params在发送request请求的方法里添加参数：1234567 // HTTPResponse result = request.GET("https://www.baidu.com", params) // 添加headersHTTPResponse result = request1.GET("https://www.baidu.com", [new NVPair("Accept-Language", "en-US,zh-CN;")] as NVPair[]) // 添加params HTTPResponse result = request.GET("https://www.baidu.com", [new NVPair("accessToken", "xxxxxx")] as NVPair[]) 到底选择哪种方式，要根据具体的参数类型和业务场景来决定。 三、两种方式的比较 ?123456789101112131415161718 限制很多，只能传1个参数（保存到名为 param 的属性），值只能由1-50个数字字母、_、,、.、| 组成，不能有空格。// 获取 UI 传入的字符串def foo = System.getProperty("param")// 带默认值def foo = System.getProperty("param", "XXX")// 3.2.3+ 可以放开自动生成的脚本里 import static net.grinder.util.GrinderUtils.* 的注释/* GrinderUtils 类有以下静态方法：getParam()getParam(String)getParamInt()getParamLong()getParamFloat()getParamDouble()getParamBoolean()*/]]></content>
+    <title><![CDATA[搭建nGrinder性能测试平台并快速使用]]></title>
+    <url>%2F2019%2F02%2F26%2F02_%E6%90%AD%E5%BB%BA%20nGrinder%20%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%20%E5%B9%B6%E5%BF%AB%E9%80%9F%E4%BD%BF%E7%94%A8%2F</url>
+    <content type="text"><![CDATA[接上一篇的nGrinder介绍篇 一、nGrinder 组件介绍ngrinder包含Controller、agent 和 monitor 三部分 1、Controller 提供性能测试的web接口 协调测试进程 调整和显示测试的统计结果 让用户创建和修改脚本 2、Agent 在代理服务器上加载运行测试进程和线程 可以部署多台，提升压测能力 最好是能部署在单独的服务器上，如果没有条件的话，也可以跟Controller在一台服务器 但是不能部署在被测服务器上 3、Monitor 用于监控被测服务器的系统性能（例如：CPU/MEMORY） 必须部署在被测服务器上 二、nGrinder 环境搭建 $ java -XX:MaxPermSize=512m -jar ngrinder-controller-3.4.war –port 80可在下载ngrinder后，直接通过上面的命令运行也可以通过下面的方式，把war包放在tomcat容器中运行 1、安装JDK，配置环境变量2、安装Tomcat3、下载nGrinder：https://github.com/naver/ngrinder/releases4、把下载好的包放到Tomcat的webApps文件夹中5、启动Tomcat，并访问nGrinder nGrinder主页：http://localhost:8080/ngrinder-controller-3.4/ 看到下图表示搭建成功。 如果想直接通过http://localhost:8080/访问，把文件名改为ROOT.war即可 6、安装Agent 登录 nGrinder 管理台，默认账号和密码都是admin，点击右上角，选择 Download Private Agent (不同版本可能会稍有区别) ，如下图所示 把 ngrinder-agent 压缩包解压到用作Agent的服务器上，运行 run_agent.sh 即可 7、安装Monitor（需要安装在被测服务器上） 下载Monitor安装包，方法类似Agent 把 ngrinder-monitor 压缩包解压到被测服务器上，运行 run_monitor.sh 即可 补充说明： ngrinder支持开箱即用，不需要额外配置，第一次启动时，系统配置自动生成 默认使用H2数据库，且schema自动创建 版本更新时，数据库schema自动更新 agent 、monitor模块从controller下载，无需配置 版本更新时，只需更新controller，agent和monitor会自动更新 在线修改系统配置，多数据修改无需重启 即使用cluster模式，配置也很简单 三、快速使用1、输入测试URL，选择脚本语言，然后点击开始测试，会自动生成测试脚本并进入配置页面或者通过点击管理后上方的 script 或 脚本 按钮，进入脚本管理页面，创建脚本，效果相同。 在创建脚本时，可以选择使用的语言为Groovy或Jython，但是由于这两种语言执行性能上的差别，建议优先使用性能更好的Groovy来编写压测脚本（官方验证相同情况下groovy比jython支持2倍左右的并发数） 2、基本的压测配置 代理：是指压测所需要的server的数量 虚拟用户有两个指标： 进程数：每个server起多少进程去跑 线程数：每个进程新建的线程数量 并发量=代理数x进程数x线程数 Ramp-Up：设置增量测试，逐渐向最大的的并发量增长，只有勾选该框时，初始数、增量、初始等待时间、进程增长间隔的值才有效 测试时间：表示压测需要持续运行的时间测试次数：脚本执行的次数，同测试时间二选一 3、运行测试在配置页面右上角点击保存并运行，启动测试。 4、监控测试，查看结果当启动测试后，会在页面显示当前的TPS、虚拟用户、测试成功与否的数量等信息。测试完成后，会显示测试结果。 可以点击详细测试结果查看更详细的信息，比如TPS、平均时间、首次接受数据平均时间，以及被测服务器的CPU，MEM等信息。]]></content>
       <categories>
         <category>nGrinder</category>
       </categories>
       <tags>
         <tag>nGrinder</tag>
-        <tag>nGrinder请求参数</tag>
+        <tag>nGrinder性能测试平台</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[IDEA 中的版本控制机制]]></title>
+    <url>%2F2019%2F02%2F26%2FIDEA%20%E4%B8%AD%E7%9A%84%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E6%9C%BA%E5%88%B6%2F</url>
+    <content type="text"><![CDATA[一、版本控制的分类1、版本控制 版本控制是指对软件开发过程中各种程序代码、配置文件及说明文档等文件变更的管理。 版本控制的内容主要包括：检入检出控制、分支和合并、历史记录。 2、集中式版本控制系统（CVCS）典型代表是 SVN，有如下特点： 管理方便，逻辑明确，操作简单，上手快 使用集中式服务器，安全易管理 对服务器性能要求高，数据库容量经常暴增，体量大 必须联网！如果不能连接到服务器上，就不能提交，还原，对比等等 分支管控不灵活 还有一个风险，就是如果源码库出现问题，导致项目代码丢失，那么大家手里的都是部分代码，就算勉强合并到一起，也不能保证项目源码的准确性。 3、分布式版本控制系统（DVCS）分布式相比于集中式的最大区别在于开发者可以提交到本地，每个开发者通过克隆（git clone），在本地机器上拷贝一个完整的Git仓库。 典型代表是 Git，有如下特点： 适合分布式开发，每一个个体都可以作为服务器。每一次Clone就是从服务器上pull到了所有的内容，包括版本信息 公共服务器压力和数据量都不会太大 速度快、灵活，分支之间可以任意切换 任意两个开发者之间可以很容易的解决冲突，并且单机上就可以进行分支合并 可以离线工作，不影响本地代码编写，等有网络连接以后可以再上传代码，并且可以在本地根据不同的需要新建自己的分支。 二、IDEA 中的版本控制机制1、Version Control File -&gt; Settings -&gt; Version Control ，这里是 IDEA 自带的用于支持主流版本控制软件的插件，如 git 、gitHub 、svn 、cvs等。 仅有插件并不能在 IDEA 中直接使用版本控制，还需要下载相应的版本控制软件才行。 2、Plugins File -&gt; Settings -&gt; Plugins ，这里是 IDEA 下载和管理插件的地方，在 Version Control 中展示的插件就是默认在这里已经下载了的。 三、IDEA 中配置版本控制软件1、SVN 先安装 SVN 客户端，或者是图形化工具，windows 推荐用 TortoiseSVN。 File -&gt; Settings -&gt; Version Control -&gt; Subverion，选择自己的 SVN 安装路径，否则 IDEA 可能无法正常识别SVN。 Clear Auth Cache，当使用过程中出现无法正常 checkout 等问题时，可以尝试点击这里清除缓存。 2、Git 先安装 Git 客户端，windows 下推荐用 TortoiseGit。 File -&gt; Settings -&gt; Version Control -&gt; Git，选择自己的 Git 安装路径，否则 IDEA 可能无法正常识别 Git。 3、GitHub 先注册 GitHub 账号 File -&gt; Settings -&gt; Version Control -&gt; GitHub -&gt; Add account，输入用户名和密码登录 GitHub，并点击 Test 测试连接是否成功。 四、代码检出和上传1、检出代码VCS -&gt; Checkout from Version Control 选择对应的版本控制系统，如 GitHub、SVN、Git 等，进一步从中检出项目。 以 SVN 为例： 先在本地创建一个空文件夹，右键 svn -&gt; checkout 所有代码； 在 IDEA 中 Import Module 导入； VCS -&gt; Checkout from Version Control -&gt; Subversion，输入 svn 地址，checkout 到工作空间目录。 2、上传代码VCS -&gt; Import into Version Control ，选择对应的版本控制系统，并进一步上传代码到版本控制系统中。 3、配置忽略文件File -&gt; Settings -&gt; Version Control -&gt; Ignored Files 在这里通过 + -设置是否把文件或目录加入到版本控制中。]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>IDEA</tag>
+        <tag>版本控制</tag>
       </tags>
   </entry>
   <entry>
@@ -178,6 +164,19 @@
         <tag>maven</tag>
         <tag>maven安装配置</tag>
         <tag>maven仓库</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[JMeter源码导入IntelliJ IDEA]]></title>
+    <url>%2F2019%2F02%2F26%2FJMeter%E6%BA%90%E7%A0%81%E5%AF%BC%E5%85%A5IntelliJ%20IDEA%2F</url>
+    <content type="text"><![CDATA[之前文章中讲了 idea 导入 maven 项目，但是 jmeter 源码是 eclipse 项目结构，而且有些地方要进行特殊配置，所以单独记录一下。 使用环境： Win 7 + JMeter 5.0 + IntelliJ IDEA 2018.2.6 1、下载并解压 jmeter 源码 源码下载地址: http://jmeter.apache.org/download_jmeter.cgi，选择 Source 下的 zip 格式下载到本地； 解压到本地目录，如我的目录是 D:\software\apache-jmeter-5.0； 2、修改配置（重要！）这一步必须要进行，不然无法导入！ 进入解压后的目录，会看到两个文件：eclipse.classpath和eclipse.projecte，分别修改为 .classpath 和 .projecte ； 在 windows 下不能直接修改，要使用 cmd 命令行； 打开 cmd 命令行窗口，进入解压的源码目录下，执行： ren .eclipse.classpath .classpath ren .eclipse.project .project 3、导入 IDEA打开 IDEA，导入源码。 File -&gt; New -&gt; Project from Existing Sources ，选择源码目录； 选择按 eclipse 项目导入，如下所示： 其它全部按默认，一直 Next 即可。 4、Ant 下载依赖 jar 包 在窗口右侧 Ant Build 中，点击 + ，选择源码目录下的 build.xml，会把所有相关信息展示在右侧列表中； 双击列表中的 download_jars ,会自动下载所有缺失 jar 包，到 jmeter 源码目录的 lib 目录下； 5、更新项目中的依赖 jar 包在首次导入项目时，会自动在 dependency 下添加依赖 jar 包，但都是缺失状态，当我们用 Ant 下载好 jar 包后，IDEA 并不会自动更新，必须要手动更新。 在项目上右键打开 Open Module Settings,在项目 src 下点击 protocol 文件夹，再点击上方 Sources 按钮，点击 Apply。 点击 Dependencies，删除所有报错的 jar 包； 重新添加新下载的 jar 包：右侧 + ，选择 JARs or directories，依次选择源码目录下的 lib 目录和 lib 下的几个目录，最后 Apply ： 6、Ant install重新添加 jar 包后，必须执行 Ant install。 7、设置运行的 VM optionsJMeter 的启动类是 NewDriver，可以先找到这个类，尝试运行一下，肯定会报错找不到路径。 因为 jmeter 启动类中默认是去找的 parent 目录，所以报找不到路径，需要手动配置一下 jmeter 运行时的 home 路径，在 VM options 中配置。 在 VM options 填入 -Djmeter.home=D:\myWork\apache-jmeter-5.0，如下所示： 此时，再次运行 NewDriver，就可以正常启动 jmeter 界面了！！]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>jmeter</tag>
+        <tag>IntelliJ IDEA</tag>
+        <tag>jmeter源码导入IDEA</tag>
       </tags>
   </entry>
   <entry>
@@ -218,19 +217,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[JMeter源码导入IntelliJ IDEA]]></title>
-    <url>%2F2019%2F02%2F26%2FJMeter%E6%BA%90%E7%A0%81%E5%AF%BC%E5%85%A5IntelliJ%20IDEA%2F</url>
-    <content type="text"><![CDATA[之前文章中讲了 idea 导入 maven 项目，但是 jmeter 源码是 eclipse 项目结构，而且有些地方要进行特殊配置，所以单独记录一下。 使用环境： Win 7 + JMeter 5.0 + IntelliJ IDEA 2018.2.6 1、下载并解压 jmeter 源码 源码下载地址: http://jmeter.apache.org/download_jmeter.cgi，选择 Source 下的 zip 格式下载到本地； 解压到本地目录，如我的目录是 D:\software\apache-jmeter-5.0； 2、修改配置（重要！）这一步必须要进行，不然无法导入！ 进入解压后的目录，会看到两个文件：eclipse.classpath和eclipse.projecte，分别修改为 .classpath 和 .projecte ； 在 windows 下不能直接修改，要使用 cmd 命令行； 打开 cmd 命令行窗口，进入解压的源码目录下，执行： ren .eclipse.classpath .classpath ren .eclipse.project .project 3、导入 IDEA打开 IDEA，导入源码。 File -&gt; New -&gt; Project from Existing Sources ，选择源码目录； 选择按 eclipse 项目导入，如下所示： 其它全部按默认，一直 Next 即可。 4、Ant 下载依赖 jar 包 在窗口右侧 Ant Build 中，点击 + ，选择源码目录下的 build.xml，会把所有相关信息展示在右侧列表中； 双击列表中的 download_jars ,会自动下载所有缺失 jar 包，到 jmeter 源码目录的 lib 目录下； 5、更新项目中的依赖 jar 包在首次导入项目时，会自动在 dependency 下添加依赖 jar 包，但都是缺失状态，当我们用 Ant 下载好 jar 包后，IDEA 并不会自动更新，必须要手动更新。 在项目上右键打开 Open Module Settings,在项目 src 下点击 protocol 文件夹，再点击上方 Sources 按钮，点击 Apply。 点击 Dependencies，删除所有报错的 jar 包； 重新添加新下载的 jar 包：右侧 + ，选择 JARs or directories，依次选择源码目录下的 lib 目录和 lib 下的几个目录，最后 Apply ： 6、Ant install重新添加 jar 包后，必须执行 Ant install。 7、设置运行的 VM optionsJMeter 的启动类是 NewDriver，可以先找到这个类，尝试运行一下，肯定会报错找不到路径。 因为 jmeter 启动类中默认是去找的 parent 目录，所以报找不到路径，需要手动配置一下 jmeter 运行时的 home 路径，在 VM options 中配置。 在 VM options 填入 -Djmeter.home=D:\myWork\apache-jmeter-5.0，如下所示： 此时，再次运行 NewDriver，就可以正常启动 jmeter 界面了！！]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-      <tags>
-        <tag>jmeter</tag>
-        <tag>IntelliJ IDEA</tag>
-        <tag>jmeter源码导入IDEA</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[awk 命令学习]]></title>
     <url>%2F2019%2F02%2F26%2Fawk%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%2F</url>
     <content type="text"><![CDATA[一、awk 介绍AWK是一种处理文本文件的语言，是一个强大的文本分析工具。 之所以叫AWK是因为其取了三位创始人 Alfred Aho，Peter Weinberger, 和 Brian Kernighan 的Family Name的首字符。 二、语法格式123awk [选项参数] 'script' var=value file(s)或awk [选项参数] -f scriptfile var=value file(s) table th:first-of-type{ width: 15%; } table th:last-of-type{ width: 55%; } 选项 第二种写法 参数说明 -F ‘fs’ -F 相当于内置变量 FS，即 field-separator -F 指定文件的分隔符，fs是一个字符串或者正则表达式，可以加引号也可以不加（最好加上单引号）； 默认不带 -F 参数时，使用空格或制表符等空白字符做为分隔符。 -v var=value –asign var=value 赋值一个用户定义变量 -f scripfile –file scriptfile 从脚本文件中读取awk命令 三、基本用法log.txt文本内容如下： 12342 this is a test3 Are you like awkThis's a test10 There are orange,apple,mongo 实例： 1、每行按空格或TAB分割，并输出文本中的第1、4项123456$ awk '&#123;print $1,$4&#125;' log.txt---------------------------------------------2 a3 likeThis's10 orange,apple,mongo 2、格式化输出123456$ awk '&#123;printf "%-8s %-10s\n",$1,$4&#125;' log.txt---------------------------------------------2 a3 likeThis's10 orange,apple,mongo 3、awk -F 指定分割字符3.1 使用 ,分割 -F 和分隔符之间可以有空格也可以没有，分隔符可以加单引号或双引号，也可以不加。 建议最好是 -F 和分隔符之间有一个空格，并给分隔符加单引号，不容易出错。 1234567# 文本中没有分隔符字符，所以 $1 就是全部文本，$2 是空。$ awk -F ',' '&#123;print $1,$2&#125;' log.txt---------------------------------------------2 this is a test3 Are you like awkThis's a test10 There are orange apple 3.2 使用 a分割123456$ awk -F 'a' '&#123;print $1&#125;' log.txt ---------------------------------------------2 this is 3 Are you like This's 10 There 3.3 使用多个分隔符先使用空格分割，然后对分割结果再使用”,”分割 123456$ awk -F '[ ,]' '&#123;print $1,$2,$5&#125;' log.txt --------------------------------------------- 2 this test 3 Are awk This's a 10 There apple 4、awk -v 设置变量常用语法： awk -v var=value &apos;{print $1,$2}&apos; filename 4.1 定义一个变量，并在输出时对变量进行运算数字与数字运算，结果正常； 数字与字符串运算，只保留数字。 123456$ awk -va=1 '&#123;print $1,$1+a&#125;' log.txt--------------------------------------------- 2 3 3 4 This's 1 10 11 4.2 定义多个变量，并在输出时对变量进行运算数字与数字运算，结果正常； 数字与字符运算，只保留数字； 字符或数字与字符拼接； 123456$ awk -va=1 -vb=s '&#123;print $1,$1+a,$1b&#125;' log.txt----------------------------------------------- 2 3 2s 3 4 3s This's 1 This'ss 10 11 10s 5、awk -f 指定脚本常用语法： awk -f {awk脚本} {文件名} 1$ awk -f cal.awk log.txt]]></content>
@@ -257,6 +243,18 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[git pull 指定某一个文件或文件夹]]></title>
+    <url>%2F2019%2F02%2F26%2Fgit%20pull%20%E6%8C%87%E5%AE%9A%E6%9F%90%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E6%88%96%E6%96%87%E4%BB%B6%E5%A4%B9%2F</url>
+    <content type="text"><![CDATA[1、要解决的问题默认情况下，git pull 操作会把远程仓库的所有最新数据更新到本地。 但是，如果你只想更新指定的某一个文件或文件夹，该怎么操作呢？ 2、git 只 pull 某一个文件/夹 设置 core.sparsecheckout为 true $ git config core.sparsecheckout true core.sparsecheckout用于控制是否允许设置pull指定文件/夹，true为允许。 此方法适用于 Git1.7.0 以后版本，之前的版本没有这个功能。 在.git/info/sparse-checkout文件中（如果没有则创建）添加指定的文件/夹 最后，拉取想要的分支即可实现checkout指定文件/夹。 $ git pull origin master]]></content>
+      <categories>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+        <tag>git pull</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[git一次性add多个文件或提交多次修改]]></title>
     <url>%2F2019%2F02%2F26%2Fgit%E4%B8%80%E6%AC%A1%E6%80%A7%20add%E5%A4%9A%E4%B8%AA%E6%96%87%E4%BB%B6%E6%88%96%E6%8F%90%E4%BA%A4%E5%A4%9A%E6%AC%A1%E4%BF%AE%E6%94%B9%2F</url>
     <content type="text"><![CDATA[有时我们需要对 git 的修改操作进行批量提交，此时该怎么操作呢？ 按下面的步骤操作即可实现一次性add多个文件或提交多次修改： git add --all git commit -m &apos;add more files&apos; git push origin master]]></content>
@@ -269,15 +267,16 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[搭建nGrinder性能测试平台并快速使用]]></title>
-    <url>%2F2019%2F02%2F26%2F02_%E6%90%AD%E5%BB%BA%20nGrinder%20%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%20%E5%B9%B6%E5%BF%AB%E9%80%9F%E4%BD%BF%E7%94%A8%2F</url>
-    <content type="text"><![CDATA[接上一篇的nGrinder介绍篇 一、nGrinder 组件介绍ngrinder包含Controller、agent 和 monitor 三部分 1、Controller 提供性能测试的web接口 协调测试进程 调整和显示测试的统计结果 让用户创建和修改脚本 2、Agent 在代理服务器上加载运行测试进程和线程 可以部署多台，提升压测能力 最好是能部署在单独的服务器上，如果没有条件的话，也可以跟Controller在一台服务器 但是不能部署在被测服务器上 3、Monitor 用于监控被测服务器的系统性能（例如：CPU/MEMORY） 必须部署在被测服务器上 二、nGrinder 环境搭建 $ java -XX:MaxPermSize=512m -jar ngrinder-controller-3.4.war –port 80可在下载ngrinder后，直接通过上面的命令运行也可以通过下面的方式，把war包放在tomcat容器中运行 1、安装JDK，配置环境变量2、安装Tomcat3、下载nGrinder：https://github.com/naver/ngrinder/releases4、把下载好的包放到Tomcat的webApps文件夹中5、启动Tomcat，并访问nGrinder nGrinder主页：http://localhost:8080/ngrinder-controller-3.4/ 看到下图表示搭建成功。 如果想直接通过http://localhost:8080/访问，把文件名改为ROOT.war即可 6、安装Agent 登录 nGrinder 管理台，默认账号和密码都是admin，点击右上角，选择 Download Private Agent (不同版本可能会稍有区别) ，如下图所示 把 ngrinder-agent 压缩包解压到用作Agent的服务器上，运行 run_agent.sh 即可 7、安装Monitor（需要安装在被测服务器上） 下载Monitor安装包，方法类似Agent 把 ngrinder-monitor 压缩包解压到被测服务器上，运行 run_monitor.sh 即可 补充说明： ngrinder支持开箱即用，不需要额外配置，第一次启动时，系统配置自动生成 默认使用H2数据库，且schema自动创建 版本更新时，数据库schema自动更新 agent 、monitor模块从controller下载，无需配置 版本更新时，只需更新controller，agent和monitor会自动更新 在线修改系统配置，多数据修改无需重启 即使用cluster模式，配置也很简单 三、快速使用1、输入测试URL，选择脚本语言，然后点击开始测试，会自动生成测试脚本并进入配置页面或者通过点击管理后上方的 script 或 脚本 按钮，进入脚本管理页面，创建脚本，效果相同。 在创建脚本时，可以选择使用的语言为Groovy或Jython，但是由于这两种语言执行性能上的差别，建议优先使用性能更好的Groovy来编写压测脚本（官方验证相同情况下groovy比jython支持2倍左右的并发数） 2、基本的压测配置 代理：是指压测所需要的server的数量 虚拟用户有两个指标： 进程数：每个server起多少进程去跑 线程数：每个进程新建的线程数量 并发量=代理数x进程数x线程数 Ramp-Up：设置增量测试，逐渐向最大的的并发量增长，只有勾选该框时，初始数、增量、初始等待时间、进程增长间隔的值才有效 测试时间：表示压测需要持续运行的时间测试次数：脚本执行的次数，同测试时间二选一 3、运行测试在配置页面右上角点击保存并运行，启动测试。 4、监控测试，查看结果当启动测试后，会在页面显示当前的TPS、虚拟用户、测试成功与否的数量等信息。测试完成后，会显示测试结果。 可以点击详细测试结果查看更详细的信息，比如TPS、平均时间、首次接受数据平均时间，以及被测服务器的CPU，MEM等信息。]]></content>
+    <title><![CDATA[nGrinder脚本结构-groovy]]></title>
+    <url>%2F2019%2F02%2F26%2F03_%E8%84%9A%E6%9C%AC%E7%BB%93%E6%9E%84-groovy%2F</url>
+    <content type="text"><![CDATA[在前面的文章中，我们已经知道，nGrinder支持groovy和Jython脚本，今天学习一下ngrinder中的groovy脚本结构。 ngrinder中的groovy脚本结构类似 junit，同时在junit的基础之上封装了自己的注解，用来控制脚本的运行。 一、运行逻辑图如下： 此处只列出了groovy脚本的逻辑，jython脚本是类似的，在此不再单独介绍. 二、各注解的使用比较 注解 描述 应用范围 用例 @BeforeProcess 定义在进程被调用之前应执行的行为 static method 加载被线程共享的资源文件，定义 GTest 等 @AfterProcess 定义在进程被终止之前应执行的行为 static method 关闭资源文件 @BeforeThread 定义在每个线程被调用之前应执行的行为 member method 登录目标系统，建立线程内的一些值，例如，Cookie 处理 @AfterThread 定义在每个线程被终止之前应执行的行为 member method 退出系统 @Before 定义每个被 @Test 注解的方法被执行前应执行的行为 member method 对个被 @Test 注解的方法的共享逻辑、变量设置 @After 定义每个被 @Test 注解的方法被执行后应执行的行为 member method 很少使用 @Test 定义测试行为，被执行多次 member method 测试体 三、关注点在ngrinder中，通常使用单进程多线程就足够大部分测试了，所以： 我们最需要关注的就是 @Test ，这个是循环体； 其次是 @Before ，这里设置多个循环体的共享变量； 再其次是 @BeforeThread 和 @AfterThread ，用于设置每个线程执行前后的行为。 四、具体代码结构123456789101112131415161718192021222324252627282930313233343536373839@RunWith(GrinderRunner) // 每个测试类都要加这个注解class TestRunner &#123; @BeforeProcess // 在每个进程启动前执行 public static void beforeProcess() &#123; // 加载资源文件、初始化 GTest 等 &#125; @BeforeThread // 在每个线程执行前执行 public void beforeThread() &#123; // 登录、设置 cookie 之类 &#125; @Before // 在每个 @Test 注解的方法执行前执行 public void before() &#123; // 设置变量、多个 @Test 方法共用的逻辑等 &#125; @Test // 在测试结束前不断运行。各个 @Test 注解的方法异步执行。 public void foo() &#123; // ... &#125; @Test public void bar() &#123; // ... &#125; @After // 在每个 @Test 注解的方法执行后执行 public void after() &#123; // 很少用到 &#125; @AfterThread public void afterThread() &#123; // 登出之类 &#125; @AfterProcess // 在每个进程结束后执行 public static void afterProcess() &#123; // 关闭资源 &#125;]]></content>
       <categories>
         <category>nGrinder</category>
       </categories>
       <tags>
         <tag>nGrinder</tag>
-        <tag>nGrinder性能测试平台</tag>
+        <tag>groovy</tag>
+        <tag>ngrinder脚本</tag>
       </tags>
   </entry>
   <entry>
@@ -294,15 +293,16 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[intellij idea 和 eclipse 区别（IDEA使用手册01）]]></title>
-    <url>%2F2019%2F02%2F26%2Fintellij%20idea%20%E5%92%8C%20eclipse%20%E5%8C%BA%E5%88%AB%2F</url>
-    <content type="text"><![CDATA[一、IDEA 和 eclipse 对比 IDEA Eclipse 说明 new Project workspace 创建 项目/工作空间，是最顶级的结构单元 new Module new Project 创建一个模块/工程，一个 Project/工作空间 下可以有多个 模块/工程 文件自动保存，不能设置为手动保存 需要手动保存 智能提示重构代码,告诉你更好的实现方式 更友好、更聪明的代码提示功能 二、IntelliJ IDEA 中的 Project 和 Module在 IntelliJ IDEA 中，没有类似于 Eclipse 工作空间（Workspace）的概念，而是提出了Project和Module这两个概念。 2.1 Project : Module = 1 : n在 IntelliJ IDEA 中Project是最顶级的结构单元，下面是一个或多个Module，是一对多的关系。 2.2 多个 Module 的划分在大型项目中，都是使用多 Module 结构，按功能不同划分为多个模块，模块之间可以相互依赖。 2.3 Project 对 Module 的意义 IDEA 的 Project 可以简单地理解为是一个单纯的目录，下面存放不同模块的文件夹。 Project 主要起到一个项目定义、范围约束、规范类型的效果，本身不具备任何编码设置、构建等开发功能。 2.4 Project 和 Module 的默认配置 IDEA 默认是单 Project 单 Module 结构，且默认名字相同，这时二者合二为一； 当一个 Project 下有多个 Module 时，最好是使用不同的名字。 三、安装目录进入IntelliJ IDEA 安装目录的bin目录下 （bin是 binary 的缩写，代表的意思是二进制，因此bin目录就是用来存放二进制文件） 在这里，我们主要了解下面五个文件： idea.exe：IntelliJ IDEA 32 位的可行执行文件，IntelliJ IDEA 安装完默认发送到桌面的就是这个执行文件的快捷方式； idea.exe.vmoptions：IntelliJ IDEA 32 位的可执行文件的 VM 配置文件； idea.properties：IntelliJ IDEA 的一些属性配置文件； idea64.exe：IntelliJ IDEA 64 位的可行执行文件，要求电脑上必须装有 JDK 64 位版本，64 位的系统也是建议使用该文件； idea64.exe.vmoptions：IntelliJ IDEA 64 位的可执行文件的 VM 配置文件。 四、新建项目通过Create New Project，选择需要的项目类型，然后设置项目和模块的名称和存储路径。 默认是一个Project下创建一个Module，因此创建时项目名称与模块名称默认是相同的。一般情况下，我们是不需要在More Settings中进行修改的。 默认界面是隐藏Toolbar和Tool Buttons的，可以通过view--&gt;Toolbar和Tool Buttons 来开启。 在创建 java project 时，默认使用的是自带的JRE，在 Project SDK 中选择自己下载的jdk目录。 创建完成后，会在IDEA左侧显示项目结构图和外部库 在项目结构图中，src目录为默认的Source root，我们一般在该目录下创建包和类； 在外部库中，显示了我们导入的 JDK 1.8 版本 五、创建包和类5.1 创建包 在 src 中创建包时，可以一次创建多个包，如：输入包名为 com.hit.demo，同时创建了三个空包。 创建的多个空包默认是重叠在一起的，如果其中某个包非空，则自动拆开包。 如果感觉空包叠在一起不爽的话，可以点击旁边的齿轮按钮，再点击 Hide Empty Middle Packages 把对勾去掉，变为 Compact Empty Middle Packages，就会把空包都按树状展示。 5.2 创建类 在一个包上点击鼠标右键，选择 Create Java Class ,创建 HelloWorld 类。 编写完成代码后，直接在编辑区右键–Run HelloWorld 运行类。 然后会在左侧目录中生成一个与 src 同级的目录 out ，用于存放项目中所有Module的编译文件。 六、项目中的配置文件6.1 .idea 目录这是整个 Project的配置文件目录。 IntelliJ IDEA 的配置文件都存在.idea目录下，以 XML 文件的形式存在，因此我们也可以通过了解这些 XML 文件来了解 IntelliJ IDEA 的相关配置。 6.2 .iml 文件这个文件是Module的配置文件。 这是 IntelliJ IDEA 为每个 Module 自动生成的配置文件，一般情况下不需要动。 七、设置主题和字体7.1 界面主题修改Files -&gt; Settings -&gt; Appearance &amp; Behavior -&gt; Appearance 在 Windows 系统上 IntelliJ IDEA 默认提供三个主题，分别为：Darcula、IntelliJ和Windows。其中，除了Darcula是黑色背景的主题，其余两个都是白色背景的主题。 7.2 界面字体修改Appearance &amp; Behavior &gt; Appearance 选中 Override default fonts by XXX ，并设置具体字体大小的数值。 这里的修改不会应用于代码编辑区！ 有一点需要注意，那就是：有的字体是包含中文的，有的字体则是不包含中文的。 一般情况下，使用英文的国家是不需要额外担心乱码问题的，但是我们需要啊！ 如果我们选择的字体不包含中文的话，很多位置上可能会出现类似于 口口口口口 这样的乱码问题。 例如，Courier New和Monaco就是纯英文字体，而Microsoft YaHei就是包含中文的字体。 7.3 代码编辑区主题修改Files -&gt; Settings -&gt; Appearance &amp; Behavior -&gt; Editor &gt; Color Scheme 在 Windows 系统上 IntelliJ IDEA 默认提供两个编辑区主题，分别为：Default和Darcula。其中，Default为默认主题；Darcula为黑色主题。 7.4 代码编辑区和控制台的字体修改Editor &gt; Font 这里的设置可以同时应用于代码编辑区和控制台 Font ：设置第一字体 Show only monospaced fonts：仅显示等宽字体，默认是勾选状态，可选的字体较少，可去掉勾选。 Fallback font：备选字体，如果首选字体中无法显示文字，系统就会自动调用备选字体来显示。例如首选字体我们可以设置为英文字体，备选字体设置为中文字体，这样即可优美的显示代码，而中文也不会变为‘口口’字 Enable font ligatures：是否启用字体连写，一般不启用。 7.5 设置 Sublime 代码颜色的方法在使用 Sublime 时，五颜六色的代码看起来非常美观，怎么让 IDEA 也设置成类似的格式呢？ 下载「SublimeMonoKaiTrue」jar 包 https://github.com/guobinhit/intellij-idea-tutorial/tree/master/resources/idea-theme/SublimeMonokaiTrue.jar； File -&gt; Import Settings，导入已经下载完的「SublimeMonoKai.jar」包，按提示重启 IDEA ； 重启后，默认就会使用新的 sublime 主题效果了，具体可以在 File -&gt; Settings -&gt; Editor -&gt; Color Scheme 中修改。]]></content>
+    <title><![CDATA[linux 中配置用户变量和环境变量]]></title>
+    <url>%2F2019%2F02%2F26%2Flinux%20%E5%8F%98%E9%87%8F%20%26%20%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%2F</url>
+    <content type="text"><![CDATA[一、系统变量1、env显示系统环境变量，直接输入env即可。 2、set在env的基础上增加显示了用户自定义的变量，直接输入set即可。 二、自定义变量1、变量名规则：变量名只能包含字母、数字、下划线，且首位不能是数字。 a=1 a=abc a=a37 2、变量值 变量值有特殊符号时需要用单引号括起来 如果用双引号，会识别其中的特殊字符；单引号会把其中的特殊字符当作普通字符来处理。 调用变量时，使用$加上变量名即可。1234567891011121314没有特殊字符时，单引号和双引号效果相同：[app@centos tmp]$ a=&apos;a b c&apos;[app@centos tmp]$ echo $aa b c[app@centos tmp]$ a=&quot;b c&quot;[app@centos tmp]$ echo $ab c有特殊字符时，单引号和双引号效果不同：[app@centos tmp]$ echo $aa[app@centos tmp]$ a=&apos;a$bc&apos;[app@centos tmp]$ echo $aa$bc 3、连接多个变量也称为变量的累加。 调用时直接连接多个变量即可，依次计算出变量的值后，连接在一起。 多个变量连接时，最好把每个变量都用双引号括起来。 示例： 1234567891011121314151617181920212223242526定义变量a、b：[app@centos tmp]$ a=1[app@centos tmp]$ b=2两个变量直接相连：[app@centos tmp]$ echo $a$b12变量值中包含特殊字符时也可以直接相连：[app@centos tmp]$ a=&apos;a$b&apos; 修改了变量a的值[app@centos tmp]$ echo $a$ba$b2[app@centos tmp]$ c=&quot;c$b&quot; [app@centos tmp]$ echo $a$c 其中$c值为c2a$bc2当$后跟有多个字母时，均视为一个变量名，所以需要分开写：[app@centos tmp]$ c=c&quot;$bc&quot;[app@centos tmp]$ echo $cc把&quot;$bc&quot;分开成&quot;$b&quot;c，不然不能识别$b[app@centos tmp]$ c=c&quot;$b&quot;c[app@centos tmp]$ echo $cc2c 4、全局变量export 变量名=变量值 export b=123 把变量b设置为全局变量，且值为123 5、unset取消变量unset 变量名 注意：不加$ 12345[app@V]$ b=123[app@V]$ echo $b123[app@V]$ unset b[app@V]$ echo $b 三、自定义命令行前缀 PS1默认情况下，linux中命令行前缀显示的是黑色的，内容是：123非root用户：[用户名@主机名 路径名]$root用户：[用户名@主机名 路径名]# 其实这是由环境变量 PS1 控制的。 12345678910查看PS1变量的值：[app@xxx]$ echo $PS1[\u@\h \W]\$默认情况下PS1=&apos;[\u@\h \W]\$&apos;其中`\W`代表相对路径，`\w`代表绝对路径 修改PS1自定义命令前缀的颜色：PS1=&apos;[\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;36m\]\W\[\033[00m\]]\$ &apos; 当然，这样直接修改，只在当前会话中生效，若要所有会话生效，设置成全局变量即可。 四、环境变量配置文件 profile需要登录才生效，同时会调用bashrc。 bashrc不需要用户登录，执行shell就生效。 1、系统层次的123/etc/profile/etc/bashrc 2、用户层次的只对当前用户生效的配置：1234567~/.bashrc~/.bash_profile~/.bash_history~/.bash_logout 当前用户退出时执行的命令]]></content>
       <categories>
-        <category>java</category>
+        <category>linux</category>
       </categories>
       <tags>
-        <tag>intellij idea</tag>
-        <tag>eclipse</tag>
+        <tag>linux</tag>
+        <tag>linux系统变量</tag>
+        <tag>linux环境变量</tag>
       </tags>
   </entry>
   <entry>
@@ -315,19 +315,6 @@
       <tags>
         <tag>intellij idea</tag>
         <tag>IDEA导入项目</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[linux 中配置用户变量和环境变量]]></title>
-    <url>%2F2019%2F02%2F26%2Flinux%20%E5%8F%98%E9%87%8F%20%26%20%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%2F</url>
-    <content type="text"><![CDATA[一、系统变量1、env显示系统环境变量，直接输入env即可。 2、set在env的基础上增加显示了用户自定义的变量，直接输入set即可。 二、自定义变量1、变量名规则：变量名只能包含字母、数字、下划线，且首位不能是数字。 a=1 a=abc a=a37 2、变量值 变量值有特殊符号时需要用单引号括起来 如果用双引号，会识别其中的特殊字符；单引号会把其中的特殊字符当作普通字符来处理。 调用变量时，使用$加上变量名即可。1234567891011121314没有特殊字符时，单引号和双引号效果相同：[app@centos tmp]$ a=&apos;a b c&apos;[app@centos tmp]$ echo $aa b c[app@centos tmp]$ a=&quot;b c&quot;[app@centos tmp]$ echo $ab c有特殊字符时，单引号和双引号效果不同：[app@centos tmp]$ echo $aa[app@centos tmp]$ a=&apos;a$bc&apos;[app@centos tmp]$ echo $aa$bc 3、连接多个变量也称为变量的累加。 调用时直接连接多个变量即可，依次计算出变量的值后，连接在一起。 多个变量连接时，最好把每个变量都用双引号括起来。 示例： 1234567891011121314151617181920212223242526定义变量a、b：[app@centos tmp]$ a=1[app@centos tmp]$ b=2两个变量直接相连：[app@centos tmp]$ echo $a$b12变量值中包含特殊字符时也可以直接相连：[app@centos tmp]$ a=&apos;a$b&apos; 修改了变量a的值[app@centos tmp]$ echo $a$ba$b2[app@centos tmp]$ c=&quot;c$b&quot; [app@centos tmp]$ echo $a$c 其中$c值为c2a$bc2当$后跟有多个字母时，均视为一个变量名，所以需要分开写：[app@centos tmp]$ c=c&quot;$bc&quot;[app@centos tmp]$ echo $cc把&quot;$bc&quot;分开成&quot;$b&quot;c，不然不能识别$b[app@centos tmp]$ c=c&quot;$b&quot;c[app@centos tmp]$ echo $cc2c 4、全局变量export 变量名=变量值 export b=123 把变量b设置为全局变量，且值为123 5、unset取消变量unset 变量名 注意：不加$ 12345[app@V]$ b=123[app@V]$ echo $b123[app@V]$ unset b[app@V]$ echo $b 三、自定义命令行前缀 PS1默认情况下，linux中命令行前缀显示的是黑色的，内容是：123非root用户：[用户名@主机名 路径名]$root用户：[用户名@主机名 路径名]# 其实这是由环境变量 PS1 控制的。 12345678910查看PS1变量的值：[app@xxx]$ echo $PS1[\u@\h \W]\$默认情况下PS1=&apos;[\u@\h \W]\$&apos;其中`\W`代表相对路径，`\w`代表绝对路径 修改PS1自定义命令前缀的颜色：PS1=&apos;[\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;36m\]\W\[\033[00m\]]\$ &apos; 当然，这样直接修改，只在当前会话中生效，若要所有会话生效，设置成全局变量即可。 四、环境变量配置文件 profile需要登录才生效，同时会调用bashrc。 bashrc不需要用户登录，执行shell就生效。 1、系统层次的123/etc/profile/etc/bashrc 2、用户层次的只对当前用户生效的配置：1234567~/.bashrc~/.bash_profile~/.bash_history~/.bash_logout 当前用户退出时执行的命令]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-        <tag>linux系统变量</tag>
-        <tag>linux环境变量</tag>
       </tags>
   </entry>
   <entry>
@@ -517,6 +504,19 @@
       <tags>
         <tag>参数化</tag>
         <tag>性能测试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Beanshell Sampler 常用方法]]></title>
+    <url>%2F2019%2F02%2F26%2FBeanshell%20Sampler%20%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%2F</url>
+    <content type="text"><![CDATA[一、Beanshell Sampler1、BeanshellBeanshell 是一种轻量级的 Java 脚本，纯 Java 编写的，能够动态的执行标准 java 语法及一些扩展脚本语法，类似于 js 和 perl。 2、内置变量Beanshell Sampler 中除了可以使用标准 java 语法之外，还有一些定义好的变量，可以直接使用。 SampleResult ResponseCode, ResponseMessage IsSuccess Label FileName ctx vars props log 下面我按使用频率，分别讲一下最常用的几种变量。 3、log 用于打印日志，最常用，也最简单； 打印在 jmeter.log 中，可以设置打印级别，可以打印字符串、变量等。 使用方法：123456789101112131415161、打印 info 形式的普通字符串日志：log.info(&quot;hello world&quot;); 输出 hello world2、拼接字符串和变量 (其中 token 是 jmeter 局部变量)：log.info(&quot;hello world&quot; + &quot;$&#123;token&#125;&quot;); 输出 hello world 和 token 变量的拼接结果3、打印自定义变量str = &quot;12345&quot;;log.info(str); 输出 123454、打印 error 形式的普通字符串日志：log.info(&quot;hihihi&quot;);log.error(&quot;aaaaa&quot;);两种输出的区别：2018-12-27 19:05:13,158 INFO o.a.j.u.BeanShellTestElement: hihihi2018-12-27 19:05:13,158 ERROR o.a.j.u.BeanShellTestElement: aaaaa print() 打印日志 在 beanshell 中还可以使用 print() 函数来打印日志，输出字符串等信息； print() 是在 cmd 控制台中输出信息，log() 默认是在 jmeter.log 中输出信息。 4、vars 用于存取 jmeter 局部变量，很常用，一定要掌握； 通常用于存取字符串内容，也可以存取对象； vars.get()12String mykey = vars.get(&quot;keyname&quot;); 获取变量名为 keyname 的值，并保存在 mykey 中。 vars.put()12345vars.put(&quot;keyname&quot;,&quot;value&quot;); 把变量 keyname(值为 value)保存到 jmeter 变量中。vars.putObject(&quot;OBJname&quot;,new Object()); 把一个对象 OBJname 保存到 jmeter 变量中 vars.remove()12vars.remove(&quot;keyname&quot;);从 jmeter 变量中删除 keyname。 5、props 用于存取 jmeter 全局的静态变量； 其中的 key 和 value 均是字符串形式；12345ymd = props.get(&quot;START.YMD&quot;);获取属性 START.YMD 的值（脚本启动日期）。props.put(&quot;PROP1&quot;,&quot;1234&quot;);把 1234 存入全局属性 PROP1 中。 6、ctx 当前线程的上下文信息； 使用举例：12345678910111213ctx.getCurrentSampler(); 获取当前 sampler 请求ctx.getPreviousSampler(); 获取前一个 sampler 请求ctx.getThreadNum(); 获取当前线程的序号，从 0 开始计数ctx.getThread(); 获取当前线程ctx.getThreadGroup(); 获取当前线程组ctx.getProperties(); 获取所有属性ctx.getVariables(); 获取当前线程的所有变量 7、SampleResult12SampleResult.setResponseData(data);自定义响应数据。]]></content>
+      <categories>
+        <category>jmeter</category>
+      </categories>
+      <tags>
+        <tag>beanshell</tag>
+        <tag>jmeter</tag>
+        <tag>性能</tag>
       </tags>
   </entry>
   <entry>
