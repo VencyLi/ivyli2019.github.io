@@ -336,9 +336,9 @@
 
       <h3 class="post-title">
         
-            <a class="post-title-link" href="/2019/02/26/Beanshell Sampler 常用方法/" itemprop="url">
+            <a class="post-title-link" href="/2019/02/26/脚本参数化的思考/" itemprop="url">
               
-                <span itemprop="name">Beanshell Sampler 常用方法</span>
+                <span itemprop="name">性能测试脚本参数化的思考</span>
               
             </a>
         
@@ -1150,3 +1150,21 @@
 </body>
 </html>
 <script type="text/javascript" src="/js/src/love.js"></script> 
+<!-- calendar widget -->
+
+    <script src="/lib/CloudCalendar.min.js"></script>
+    <script src="/lib/languages.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        $('#CloudCalendar').aCalendar('zh-CN', 
+            $.extend(
+                '', {
+                    single:true,
+                    root:'/calendar/'
+                }
+            )
+        );
+    });
+    </script>
+
+

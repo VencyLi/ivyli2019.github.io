@@ -548,8 +548,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/02/27/Git操作本地仓库和远程仓库的常用命令/" rel="prev" title="Git操作本地仓库和远程仓库的常用命令">
-                Git操作本地仓库和远程仓库的常用命令 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/02/27/Busuanzi网站统计失效问题/" rel="prev" title="Busuanzi网站统计失效问题">
+                Busuanzi网站统计失效问题 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -1353,3 +1353,21 @@
 </body>
 </html>
 <script type="text/javascript" src="/js/src/love.js"></script> 
+<!-- calendar widget -->
+
+    <script src="/lib/CloudCalendar.min.js"></script>
+    <script src="/lib/languages.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        $('#CloudCalendar').aCalendar('zh-CN', 
+            $.extend(
+                '', {
+                    single:true,
+                    root:'/calendar/'
+                }
+            )
+        );
+    });
+    </script>
+
+

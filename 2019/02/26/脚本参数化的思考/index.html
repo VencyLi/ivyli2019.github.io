@@ -541,8 +541,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/26/Beanshell Sampler 常用方法/" rel="next" title="Beanshell Sampler 常用方法">
-                <i class="fa fa-chevron-left"></i> Beanshell Sampler 常用方法
+              <a href="/2019/02/26/总结linux中文件查找命令find-locate-whereis-which/" rel="next" title="总结linux中文件查找命令find-locate-whereis-which">
+                <i class="fa fa-chevron-left"></i> 总结linux中文件查找命令find-locate-whereis-which
               </a>
             
           </div>
@@ -1356,3 +1356,21 @@
 </body>
 </html>
 <script type="text/javascript" src="/js/src/love.js"></script> 
+<!-- calendar widget -->
+
+    <script src="/lib/CloudCalendar.min.js"></script>
+    <script src="/lib/languages.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        $('#CloudCalendar').aCalendar('zh-CN', 
+            $.extend(
+                '', {
+                    single:true,
+                    root:'/calendar/'
+                }
+            )
+        );
+    });
+    </script>
+
+

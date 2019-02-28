@@ -548,8 +548,8 @@ env    # 查看环境变量
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/02/26/intellij idea使用手册-03 导入和创建项目/" rel="prev" title="intellij idea使用手册-03 导入和创建项目">
-                intellij idea使用手册-03 导入和创建项目 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/02/26/linux 变量 & 环境变量配置文件/" rel="prev" title="linux 中配置用户变量和环境变量">
+                linux 中配置用户变量和环境变量 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -1353,3 +1353,21 @@ env    # 查看环境变量
 </body>
 </html>
 <script type="text/javascript" src="/js/src/love.js"></script> 
+<!-- calendar widget -->
+
+    <script src="/lib/CloudCalendar.min.js"></script>
+    <script src="/lib/languages.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        $('#CloudCalendar').aCalendar('zh-CN', 
+            $.extend(
+                '', {
+                    single:true,
+                    root:'/calendar/'
+                }
+            )
+        );
+    });
+    </script>
+
+

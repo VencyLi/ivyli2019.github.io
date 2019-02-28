@@ -319,6 +319,32 @@
 
       <h3 class="post-title">
         
+            <a class="post-title-link" href="/2019/02/27/Busuanzi网站统计失效问题/" itemprop="url">
+              
+                <span itemprop="name">Busuanzi网站统计失效问题</span>
+              
+            </a>
+        
+      </h3>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2019-02-27T00:00:00+08:00" content="2019-02-27">
+          02-27
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h3 class="post-title">
+        
             <a class="post-title-link" href="/2019/02/27/Hexo Next 主题中添加本地搜索功能/" itemprop="url">
               
                 <span itemprop="name">Hexo Next 主题中添加本地搜索功能</span>
@@ -348,32 +374,6 @@
             <a class="post-title-link" href="/2019/02/27/Hexo博客使用LeanCloud统计页面访问次数/" itemprop="url">
               
                 <span itemprop="name">Hexo博客使用LeanCloud统计页面访问次数</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-02-27T00:00:00+08:00" content="2019-02-27">
-          02-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2019/02/27/Busuanzi网站统计失效问题/" itemprop="url">
-              
-                <span itemprop="name">Busuanzi网站统计失效问题</span>
               
             </a>
         
@@ -1145,3 +1145,21 @@
 </body>
 </html>
 <script type="text/javascript" src="/js/src/love.js"></script> 
+<!-- calendar widget -->
+
+    <script src="/lib/CloudCalendar.min.js"></script>
+    <script src="/lib/languages.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        $('#CloudCalendar').aCalendar('zh-CN', 
+            $.extend(
+                '', {
+                    single:true,
+                    root:'/calendar/'
+                }
+            )
+        );
+    });
+    </script>
+
+

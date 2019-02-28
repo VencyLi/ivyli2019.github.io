@@ -591,8 +591,8 @@ table th:last-of-type{
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/26/git clone&pull，pull指定文件，批量提交/" rel="next" title="区别 git clone 与 git pull">
-                <i class="fa fa-chevron-left"></i> 区别 git clone 与 git pull
+              <a href="/2019/02/26/git pull 指定某一个文件或文件夹/" rel="next" title="git pull 指定某一个文件或文件夹">
+                <i class="fa fa-chevron-left"></i> git pull 指定某一个文件或文件夹
               </a>
             
           </div>
@@ -1406,3 +1406,21 @@ table th:last-of-type{
 </body>
 </html>
 <script type="text/javascript" src="/js/src/love.js"></script> 
+<!-- calendar widget -->
+
+    <script src="/lib/CloudCalendar.min.js"></script>
+    <script src="/lib/languages.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+        $('#CloudCalendar').aCalendar('zh-CN', 
+            $.extend(
+                '', {
+                    single:true,
+                    root:'/calendar/'
+                }
+            )
+        );
+    });
+    </script>
+
+
