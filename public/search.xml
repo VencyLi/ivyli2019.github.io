@@ -14,6 +14,20 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[Git操作本地仓库和远程仓库的常用命令]]></title>
+    <url>%2F2019%2F02%2F27%2FGit%E6%93%8D%E4%BD%9C%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E5%92%8C%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%2F</url>
+    <content type="text"><![CDATA[总结使用 Git 过程中的一些基本的、常用的命令。 一、操作本地仓库 命令示例 解释 git config –list 查看已有的全部配置信息 git config user.name 查看某个指定的环境变量的信息 git config –global user.name “ivyli” 绑定用户名为 ivyli git config –global user.email “ivyli2019@126.com“ 绑定邮箱为 ivyli2019@126.com git init 在空目录下执行该命令，从而初始化当前目录为可管理的git仓库，生成隐藏的 .git 文件(不能乱动，否则仓库就不能用了) git add 1.txt 把本地编辑好的 1.txt 文件添加到暂存区 git add . 把当前目录下的所有文件都添加到暂存区 git status 随时查看仓库状态 git commit –m “add 1.txt” 提交文件到本地仓库，–m 添加注释信息.commit 文件之后再修改，需要重新 add、commit git rm 1.txt 删除版本库中的文件 1.txt（删除文件时最好用该命令，不要手动删除） git commit -m “del 1.txt” git rm 1.txt 之后还要 commit，才能真正删除 git diff 1.txt 查看 1.txt 文件修改了那些内容 git log 查看历史记录 对本地仓库的操作，主要就是 git add/rm/commit/status。 当文件 commit 到本地版本库之后，若再次修改文件，需要重新 add、commit，若是删除文件，需要重新 commit。 二、操作远程仓库我们可以 clone 远程仓库到本地，也可以把本地文件 push 到远程仓库。 但是在第一次操作远程仓库时，会报错 Permission denied(publickey)，这是因为没有添加 SSH 公钥。 1ssh-keygen -t rsa -C "ivyli2019@126.com" 执行上述命令，可以在本地生成 .ssh 文件，复制文件中的 id_rsa.pub 公钥内容到 git 或其它源码平台，即可添加 SSH 公钥。 命令示例 解释 git clone git://gitee.com:ivyli2019/test.git 从远程库中克隆项目到本地，是一个包含整个项目的版本库文件夹。该命令通常用于新用户 clone 项目，后面基本都是用 git pull。 git remote 查看远程库的别名（进入 clone 下来的文件夹中执行该命令，别名默认是 origin） git remote –v 查看远程库的别名和仓库地址。如返回：origin git@gitee.com:ivyli2019/test.git git push origin master 把本地 master 分支推送到别名为 origin 的远程库 git remote add mytest git://gitee.com:ivyli2019/mytest.git 添加/关联一个远程仓库，并起别名为 mytest，可自定义别名。 git remote remove mytest 删除远程库的 mytest 别名 git branch 查看当前所有的分支，默认只有 master 分支 git branch test 创建 test 分支 git branch –d test 删除 test 分支 git checkout test 从当前分支切换到 test 分支 git checkout –b dev 创建 dev 分支，并切换到 dev 分支上 git merge dev 在当前分支上合并 dev 分支]]></content>
+      <categories>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+        <tag>本地仓库</tag>
+        <tag>远程仓库</tag>
+        <tag>git命令</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Hexo Next 主题中添加本地搜索功能]]></title>
     <url>%2F2019%2F02%2F27%2FHexo%20Next%20%E4%B8%BB%E9%A2%98%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%9C%AC%E5%9C%B0%E6%90%9C%E7%B4%A2%E5%8A%9F%E8%83%BD%2F</url>
     <content type="text"><![CDATA[在 next 主题侧边列表有一个 搜索 菜单，但是点击之后页面会处于卡死状态，后台显示是 404，需要添加搜索插件才可以。 1、安装本地搜索插件 hexo-generator-search12# 安装插件，用于生成博客索引数据（在博客根目录下执行下列命令）：npm install hexo-generator-search --save 安装之后，会在站点目录的 public 文件夹下创建一个 search.xml 文件。 2、修改站点配置文件在站点配置文件 _config.yml 中添加如下内容：123456# Search search: path: ./public/search.xml field: post format: html limit: 10000 path：索引文件的路径，相对于站点根目录 field：搜索范围，默认是 post，还可以选择 page、all，设置成 all 表示搜索所有页面 limit：限制搜索的条目数 3、主题配置文件在主题配置文件 _config.yml 中找到如下内容：1234local_search: enable: true trigger: auto top_n_per_article: 1 确保 enable 设成 true。 top_n_per_article 字段表示在每篇文章中显示的搜索结果数量，设成 -1 会显示每篇文章的所有搜索结果数量。 然后，重新部署网站即可愉快的使用本地搜索功能了，效果参见本网站右侧的 搜索 菜单。]]></content>
@@ -41,67 +55,15 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Git操作本地仓库和远程仓库的常用命令]]></title>
-    <url>%2F2019%2F02%2F27%2FGit%E6%93%8D%E4%BD%9C%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E5%92%8C%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%2F</url>
-    <content type="text"><![CDATA[总结使用 Git 过程中的一些基本的、常用的命令。 一、操作本地仓库 命令示例 解释 git config –list 查看已有的全部配置信息 git config user.name 查看某个指定的环境变量的信息 git config –global user.name “ivyli” 绑定用户名为 ivyli git config –global user.email “ivyli2019@126.com“ 绑定邮箱为 ivyli2019@126.com git init 在空目录下执行该命令，从而初始化当前目录为可管理的git仓库，生成隐藏的 .git 文件(不能乱动，否则仓库就不能用了) git add 1.txt 把本地编辑好的 1.txt 文件添加到暂存区 git add . 把当前目录下的所有文件都添加到暂存区 git status 随时查看仓库状态 git commit –m “add 1.txt” 提交文件到本地仓库，–m 添加注释信息.commit 文件之后再修改，需要重新 add、commit git rm 1.txt 删除版本库中的文件 1.txt（删除文件时最好用该命令，不要手动删除） git commit -m “del 1.txt” git rm 1.txt 之后还要 commit，才能真正删除 git diff 1.txt 查看 1.txt 文件修改了那些内容 git log 查看历史记录 对本地仓库的操作，主要就是 git add/rm/commit/status。 当文件 commit 到本地版本库之后，若再次修改文件，需要重新 add、commit，若是删除文件，需要重新 commit。 二、操作远程仓库我们可以 clone 远程仓库到本地，也可以把本地文件 push 到远程仓库。 但是在第一次操作远程仓库时，会报错 Permission denied(publickey)，这是因为没有添加 SSH 公钥。 1ssh-keygen -t rsa -C "ivyli2019@126.com" 执行上述命令，可以在本地生成 .ssh 文件，复制文件中的 id_rsa.pub 公钥内容到 git 或其它源码平台，即可添加 SSH 公钥。 命令示例 解释 git clone git://gitee.com:ivyli2019/test.git 从远程库中克隆项目到本地，是一个包含整个项目的版本库文件夹。该命令通常用于新用户 clone 项目，后面基本都是用 git pull。 git remote 查看远程库的别名（进入 clone 下来的文件夹中执行该命令，别名默认是 origin） git remote –v 查看远程库的别名和仓库地址。如返回：origin git@gitee.com:ivyli2019/test.git git push origin master 把本地 master 分支推送到别名为 origin 的远程库 git remote add mytest git://gitee.com:ivyli2019/mytest.git 添加/关联一个远程仓库，并起别名为 mytest，可自定义别名。 git remote remove mytest 删除远程库的 mytest 别名 git branch 查看当前所有的分支，默认只有 master 分支 git branch test 创建 test 分支 git branch –d test 删除 test 分支 git checkout test 从当前分支切换到 test 分支 git checkout –b dev 创建 dev 分支，并切换到 dev 分支上 git merge dev 在当前分支上合并 dev 分支]]></content>
+    <title><![CDATA[intellij idea 和 eclipse 区别（IDEA使用手册01）]]></title>
+    <url>%2F2019%2F02%2F26%2Fintellij%20idea%20%E5%92%8C%20eclipse%20%E5%8C%BA%E5%88%AB%2F</url>
+    <content type="text"><![CDATA[一、IDEA 和 eclipse 对比 IDEA Eclipse 说明 new Project workspace 创建 项目/工作空间，是最顶级的结构单元 new Module new Project 创建一个模块/工程，一个 Project/工作空间 下可以有多个 模块/工程 文件自动保存，不能设置为手动保存 需要手动保存 智能提示重构代码,告诉你更好的实现方式 更友好、更聪明的代码提示功能 二、IntelliJ IDEA 中的 Project 和 Module在 IntelliJ IDEA 中，没有类似于 Eclipse 工作空间（Workspace）的概念，而是提出了Project和Module这两个概念。 2.1 Project : Module = 1 : n在 IntelliJ IDEA 中Project是最顶级的结构单元，下面是一个或多个Module，是一对多的关系。 2.2 多个 Module 的划分在大型项目中，都是使用多 Module 结构，按功能不同划分为多个模块，模块之间可以相互依赖。 2.3 Project 对 Module 的意义 IDEA 的 Project 可以简单地理解为是一个单纯的目录，下面存放不同模块的文件夹。 Project 主要起到一个项目定义、范围约束、规范类型的效果，本身不具备任何编码设置、构建等开发功能。 2.4 Project 和 Module 的默认配置 IDEA 默认是单 Project 单 Module 结构，且默认名字相同，这时二者合二为一； 当一个 Project 下有多个 Module 时，最好是使用不同的名字。 三、安装目录进入IntelliJ IDEA 安装目录的bin目录下 （bin是 binary 的缩写，代表的意思是二进制，因此bin目录就是用来存放二进制文件） 在这里，我们主要了解下面五个文件： idea.exe：IntelliJ IDEA 32 位的可行执行文件，IntelliJ IDEA 安装完默认发送到桌面的就是这个执行文件的快捷方式； idea.exe.vmoptions：IntelliJ IDEA 32 位的可执行文件的 VM 配置文件； idea.properties：IntelliJ IDEA 的一些属性配置文件； idea64.exe：IntelliJ IDEA 64 位的可行执行文件，要求电脑上必须装有 JDK 64 位版本，64 位的系统也是建议使用该文件； idea64.exe.vmoptions：IntelliJ IDEA 64 位的可执行文件的 VM 配置文件。 四、新建项目通过Create New Project，选择需要的项目类型，然后设置项目和模块的名称和存储路径。 默认是一个Project下创建一个Module，因此创建时项目名称与模块名称默认是相同的。一般情况下，我们是不需要在More Settings中进行修改的。 默认界面是隐藏Toolbar和Tool Buttons的，可以通过view--&gt;Toolbar和Tool Buttons 来开启。 在创建 java project 时，默认使用的是自带的JRE，在 Project SDK 中选择自己下载的jdk目录。 创建完成后，会在IDEA左侧显示项目结构图和外部库 在项目结构图中，src目录为默认的Source root，我们一般在该目录下创建包和类； 在外部库中，显示了我们导入的 JDK 1.8 版本 五、创建包和类5.1 创建包 在 src 中创建包时，可以一次创建多个包，如：输入包名为 com.hit.demo，同时创建了三个空包。 创建的多个空包默认是重叠在一起的，如果其中某个包非空，则自动拆开包。 如果感觉空包叠在一起不爽的话，可以点击旁边的齿轮按钮，再点击 Hide Empty Middle Packages 把对勾去掉，变为 Compact Empty Middle Packages，就会把空包都按树状展示。 5.2 创建类 在一个包上点击鼠标右键，选择 Create Java Class ,创建 HelloWorld 类。 编写完成代码后，直接在编辑区右键–Run HelloWorld 运行类。 然后会在左侧目录中生成一个与 src 同级的目录 out ，用于存放项目中所有Module的编译文件。 六、项目中的配置文件6.1 .idea 目录这是整个 Project的配置文件目录。 IntelliJ IDEA 的配置文件都存在.idea目录下，以 XML 文件的形式存在，因此我们也可以通过了解这些 XML 文件来了解 IntelliJ IDEA 的相关配置。 6.2 .iml 文件这个文件是Module的配置文件。 这是 IntelliJ IDEA 为每个 Module 自动生成的配置文件，一般情况下不需要动。 七、设置主题和字体7.1 界面主题修改Files -&gt; Settings -&gt; Appearance &amp; Behavior -&gt; Appearance 在 Windows 系统上 IntelliJ IDEA 默认提供三个主题，分别为：Darcula、IntelliJ和Windows。其中，除了Darcula是黑色背景的主题，其余两个都是白色背景的主题。 7.2 界面字体修改Appearance &amp; Behavior &gt; Appearance 选中 Override default fonts by XXX ，并设置具体字体大小的数值。 这里的修改不会应用于代码编辑区！ 有一点需要注意，那就是：有的字体是包含中文的，有的字体则是不包含中文的。 一般情况下，使用英文的国家是不需要额外担心乱码问题的，但是我们需要啊！ 如果我们选择的字体不包含中文的话，很多位置上可能会出现类似于 口口口口口 这样的乱码问题。 例如，Courier New和Monaco就是纯英文字体，而Microsoft YaHei就是包含中文的字体。 7.3 代码编辑区主题修改Files -&gt; Settings -&gt; Appearance &amp; Behavior -&gt; Editor &gt; Color Scheme 在 Windows 系统上 IntelliJ IDEA 默认提供两个编辑区主题，分别为：Default和Darcula。其中，Default为默认主题；Darcula为黑色主题。 7.4 代码编辑区和控制台的字体修改Editor &gt; Font 这里的设置可以同时应用于代码编辑区和控制台 Font ：设置第一字体 Show only monospaced fonts：仅显示等宽字体，默认是勾选状态，可选的字体较少，可去掉勾选。 Fallback font：备选字体，如果首选字体中无法显示文字，系统就会自动调用备选字体来显示。例如首选字体我们可以设置为英文字体，备选字体设置为中文字体，这样即可优美的显示代码，而中文也不会变为‘口口’字 Enable font ligatures：是否启用字体连写，一般不启用。 7.5 设置 Sublime 代码颜色的方法在使用 Sublime 时，五颜六色的代码看起来非常美观，怎么让 IDEA 也设置成类似的格式呢？ 下载「SublimeMonoKaiTrue」jar 包 https://github.com/guobinhit/intellij-idea-tutorial/tree/master/resources/idea-theme/SublimeMonokaiTrue.jar； File -&gt; Import Settings，导入已经下载完的「SublimeMonoKai.jar」包，按提示重启 IDEA ； 重启后，默认就会使用新的 sublime 主题效果了，具体可以在 File -&gt; Settings -&gt; Editor -&gt; Color Scheme 中修改。]]></content>
       <categories>
-        <category>git</category>
+        <category>java</category>
       </categories>
       <tags>
-        <tag>git</tag>
-        <tag>本地仓库</tag>
-        <tag>远程仓库</tag>
-        <tag>git命令</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[git一次性add多个文件或提交多次修改]]></title>
-    <url>%2F2019%2F02%2F26%2Fgit%E4%B8%80%E6%AC%A1%E6%80%A7%20add%E5%A4%9A%E4%B8%AA%E6%96%87%E4%BB%B6%E6%88%96%E6%8F%90%E4%BA%A4%E5%A4%9A%E6%AC%A1%E4%BF%AE%E6%94%B9%2F</url>
-    <content type="text"><![CDATA[有时我们需要对 git 的修改操作进行批量提交，此时该怎么操作呢？ 按下面的步骤操作即可实现一次性add多个文件或提交多次修改： git add --all git commit -m &apos;add more files&apos; git push origin master]]></content>
-      <categories>
-        <category>git</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-        <tag>git add</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[nGrinder解析响应结果并断言]]></title>
-    <url>%2F2019%2F02%2F26%2F08_%E8%A7%A3%E6%9E%90%E5%93%8D%E5%BA%94%E7%BB%93%E6%9E%9C%E5%B9%B6%E6%96%AD%E8%A8%80%2F</url>
-    <content type="text"><![CDATA[一、解析 JSONhttps://github.com/naver/ngrinder/wiki/How-to-parse-JSON 1、使用 JSONObject 解析并断言假设服务器返回以下内容，成功标志是 “responseCode”: “0000”：12345678910111213141516171819202122232425import com.alibaba.fastjson.JSONObject// ...@Testpublic void test1()&#123;truetry&#123;truetrue//发送请求truetrueHTTPResponse result = request.POST("http://xxxx/aa/bb/cc.html");truetrue//获取返回报文truetrueString respCode = JSONObject.parseObject(result.getText()).get("responseCode");truetrueif (respCode.equals("0000")) &#123;truetruetrueprintln "===返回==========成功"+result.getText();truetruetrueassertTrue("成功&lt;&lt;&lt;", respCode.equals("0000"))truetruetrueassertThat(result.responseCode, is(200));truetrue&#125;else &#123;truetruetruegrinder.logger.error("===失败=========="+result.getText())truetruetrueassertFalse("失败&gt;&gt;&gt;", !respCode.equals("0000"))truetrue&#125;true&#125; catch (Exception ex) &#123;truetrueassertFalse("失败&gt;&gt;&gt;"+ex,false)truetruegrinder.logger.error("===异常======"+ex)true&#125;&#125; 2、使用groovy的JsonSlurper解析并断言假设服务器返回以下内容，成功标志是 “resultCode”: 1：123456&#123; "data": &#123; "token": "9de6d5f2b62d4bb686de8033fd00bc65" &#125;, "resultCode": 1&#125; 解析方式：123456import groovy.json.JsonSlurper// ...def jsonData = new JsonSlurper().parseText(result.text)assertThat(jsonData.resultCode, is(1)) 二、使用 JUnit 的断言1、断言HTTP状态码和响应体123456def result = request.GET("http://www.google.com")// HTTP 状态码assertThat(result.statusCode, is(200))// 响应体assertThat(result.text, containsString("google")) 2、断言HTTP状态码，并进行逻辑判断123456789@Testpublic void testGoogle()&#123; HTTPResponse result = request.GET("http://www.google.com"); if (result.statusCode == 301 || result.statusCode == 302) &#123; grinder.logger.warn("Warning. The response may not be correct. The response code was &#123;&#125;.", result.statusCode); &#125; else &#123; assertThat(result.statusCode, is(200)); &#125;&#125;]]></content>
-      <categories>
-        <category>nGrinder</category>
-      </categories>
-      <tags>
-        <tag>nGrinder</tag>
-        <tag>ngrinder解析json</tag>
-        <tag>ngrinder断言</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Beanshell Sampler 常用方法]]></title>
-    <url>%2F2019%2F02%2F26%2FBeanshell%20Sampler%20%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%2F</url>
-    <content type="text"><![CDATA[一、Beanshell Sampler1、BeanshellBeanshell 是一种轻量级的 Java 脚本，纯 Java 编写的，能够动态的执行标准 java 语法及一些扩展脚本语法，类似于 js 和 perl。 2、内置变量Beanshell Sampler 中除了可以使用标准 java 语法之外，还有一些定义好的变量，可以直接使用。 SampleResult ResponseCode, ResponseMessage IsSuccess Label FileName ctx vars props log 下面我按使用频率，分别讲一下最常用的几种变量。 3、log 用于打印日志，最常用，也最简单； 打印在 jmeter.log 中，可以设置打印级别，可以打印字符串、变量等。 使用方法：123456789101112131415161、打印 info 形式的普通字符串日志：log.info(&quot;hello world&quot;); 输出 hello world2、拼接字符串和变量 (其中 token 是 jmeter 局部变量)：log.info(&quot;hello world&quot; + &quot;$&#123;token&#125;&quot;); 输出 hello world 和 token 变量的拼接结果3、打印自定义变量str = &quot;12345&quot;;log.info(str); 输出 123454、打印 error 形式的普通字符串日志：log.info(&quot;hihihi&quot;);log.error(&quot;aaaaa&quot;);两种输出的区别：2018-12-27 19:05:13,158 INFO o.a.j.u.BeanShellTestElement: hihihi2018-12-27 19:05:13,158 ERROR o.a.j.u.BeanShellTestElement: aaaaa print() 打印日志 在 beanshell 中还可以使用 print() 函数来打印日志，输出字符串等信息； print() 是在 cmd 控制台中输出信息，log() 默认是在 jmeter.log 中输出信息。 4、vars 用于存取 jmeter 局部变量，很常用，一定要掌握； 通常用于存取字符串内容，也可以存取对象； vars.get()12String mykey = vars.get(&quot;keyname&quot;); 获取变量名为 keyname 的值，并保存在 mykey 中。 vars.put()12345vars.put(&quot;keyname&quot;,&quot;value&quot;); 把变量 keyname(值为 value)保存到 jmeter 变量中。vars.putObject(&quot;OBJname&quot;,new Object()); 把一个对象 OBJname 保存到 jmeter 变量中 vars.remove()12vars.remove(&quot;keyname&quot;);从 jmeter 变量中删除 keyname。 5、props 用于存取 jmeter 全局的静态变量； 其中的 key 和 value 均是字符串形式；12345ymd = props.get(&quot;START.YMD&quot;);获取属性 START.YMD 的值（脚本启动日期）。props.put(&quot;PROP1&quot;,&quot;1234&quot;);把 1234 存入全局属性 PROP1 中。 6、ctx 当前线程的上下文信息； 使用举例：12345678910111213ctx.getCurrentSampler(); 获取当前 sampler 请求ctx.getPreviousSampler(); 获取前一个 sampler 请求ctx.getThreadNum(); 获取当前线程的序号，从 0 开始计数ctx.getThread(); 获取当前线程ctx.getThreadGroup(); 获取当前线程组ctx.getProperties(); 获取所有属性ctx.getVariables(); 获取当前线程的所有变量 7、SampleResult12SampleResult.setResponseData(data);自定义响应数据。]]></content>
-      <categories>
-        <category>jmeter</category>
-      </categories>
-      <tags>
-        <tag>beanshell</tag>
-        <tag>jmeter</tag>
-        <tag>性能</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[nGrinder详细介绍及性能测试工具对比]]></title>
-    <url>%2F2019%2F02%2F26%2F01_nGrinder%E8%AF%A6%E7%BB%86%E4%BB%8B%E7%BB%8D%E5%8F%8A%E6%80%A7%E8%83%BD%E5%B7%A5%E5%85%B7%E5%AF%B9%E6%AF%94%2F</url>
-    <content type="text"><![CDATA[目前主流的性能测试工具，除了LR、JMeter之外，还有很多公司在用B/S架构的nGrinder 。最近公司搭建了一个基于nGrinder的二次开发平台，在此写一波nGrinder相关的文章。 在介绍nGrinder之前，有必要先说一下 The Grinder 抛砖引玉。 一、The Grinder1、The Grinder是一个基于Java的开源性能测试框架，通过多个agent负载机很方便的进行分布式测试。 2、主要特性： 可以测试任何java代码，包括各种常用的接口 如HTTP web servers, SOAP和REST web services，还有客户端服务器RMI、JMS、EJBs等，还支持自定义协议。 测试脚本使用python和Clojure语言 成熟的HTTP协议支持： 自动管理客户端连接和cookies，SSL代理； 支持录制脚本，能够记录并回放浏览器和网站之间的复杂交互。 包括console和agent端 3、不足 一次只能运行一个测试 没有测试历史记录 没有图形化的测试报告 二、nGrinder nGrinder是基于Grinder的开源的web性能测试平台，由韩国最大互联网公司NHN公司的开发团队进行了重新设计和完善。 特性：开源、易用、高可用、可扩展 1、nGrinder 在 Grinder 的基础上： 实现多测试并行 基于web的管理 实现cluster 内置svn，方便的脚本编辑、管理 支持Groovy脚本，相对于Jython，可以启动更多的虚拟用户 实现对目标服务器的监控 插件系统扩展 2、工作原理 由一个控制端controller和多个代理端agent组成，通过控制端(浏览器访问)建立测试场景，然后分发到代理端进行压力测试。 用户按照一定规范编写测试脚本，controller会将脚本以及需要的资源分发到agent，用jython执行。 在脚本执行的过程中收集运行情况、相应时间、测试目标服务器的运行情况等。并且保存这些数据生成测试报告，通过动态图和数据表的形式展示出来。用户可以方便的看到TPS、被测服务器的CPU和内存等情况。 三、LoadRunner JMeter 与 nGrinder对比1、Loadrunner 基于UI操作，容易上手。早期很流行，功能强大，但是太笨重，安装很麻烦。 不开源，扩展性不高，收费贵。往后的方向肯定是客户端工具逐步向平台化发展，所以已经慢慢被替代了。 2、JMeter 基于UI操作，容易上手，但是编程能力较弱（使用beanshell脚本语言）。 其次JMeter基于线程，模拟数千用户几乎不可能。 3、nGrinder 单节点可支持4000~6000并发、支持分布式、可监控被测服务器、可录制脚本、开源、平台化。 参数化功能较弱 对测试人员的代码要求较高 比较点 JMeter Ngrinder LoadRunner 实现语言 Java java/python java/VB/C/.NET 使用方式 C/S或Command B/S B/S 支持分布式 master/slave controller/agent master/slave 资源监控 monitor/plugin，如果二开，需要查找plugin的源码 monitor方式，有直接可用的源码 自带资源监控功能 社区活跃度 文档完善 有中文社区 网上资料和相关培训很多，购买正版还可以得到技术支持 是否需要编码 基本不需要 需要，Jython/Groovy 需要 脚本的维护 本地 内置SVN 本地 脚本录制 可使用BadBoy进行录制 可通过PTS插件进行录制 自带录制功能 可扩展性 可增加plugin，输出结果可以再加工 可增加plugin 通过扩展函数库实现 安装 简单，解压即可 简单，可以下载安装包或绿色包解压 安装包比较大，安装繁琐 nGrinder 安装配置及使用 见下篇。]]></content>
-      <categories>
-        <category>nGrinder</category>
-      </categories>
-      <tags>
-        <tag>nGrinder</tag>
-        <tag>性能测试工具</tag>
+        <tag>intellij idea</tag>
+        <tag>eclipse</tag>
       </tags>
   </entry>
   <entry>
@@ -118,15 +80,27 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[IDEA 中的版本控制机制]]></title>
-    <url>%2F2019%2F02%2F26%2FIDEA%20%E4%B8%AD%E7%9A%84%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E6%9C%BA%E5%88%B6%2F</url>
-    <content type="text"><![CDATA[一、版本控制的分类1、版本控制 版本控制是指对软件开发过程中各种程序代码、配置文件及说明文档等文件变更的管理。 版本控制的内容主要包括：检入检出控制、分支和合并、历史记录。 2、集中式版本控制系统（CVCS）典型代表是 SVN，有如下特点： 管理方便，逻辑明确，操作简单，上手快 使用集中式服务器，安全易管理 对服务器性能要求高，数据库容量经常暴增，体量大 必须联网！如果不能连接到服务器上，就不能提交，还原，对比等等 分支管控不灵活 还有一个风险，就是如果源码库出现问题，导致项目代码丢失，那么大家手里的都是部分代码，就算勉强合并到一起，也不能保证项目源码的准确性。 3、分布式版本控制系统（DVCS）分布式相比于集中式的最大区别在于开发者可以提交到本地，每个开发者通过克隆（git clone），在本地机器上拷贝一个完整的Git仓库。 典型代表是 Git，有如下特点： 适合分布式开发，每一个个体都可以作为服务器。每一次Clone就是从服务器上pull到了所有的内容，包括版本信息 公共服务器压力和数据量都不会太大 速度快、灵活，分支之间可以任意切换 任意两个开发者之间可以很容易的解决冲突，并且单机上就可以进行分支合并 可以离线工作，不影响本地代码编写，等有网络连接以后可以再上传代码，并且可以在本地根据不同的需要新建自己的分支。 二、IDEA 中的版本控制机制1、Version Control File -&gt; Settings -&gt; Version Control ，这里是 IDEA 自带的用于支持主流版本控制软件的插件，如 git 、gitHub 、svn 、cvs等。 仅有插件并不能在 IDEA 中直接使用版本控制，还需要下载相应的版本控制软件才行。 2、Plugins File -&gt; Settings -&gt; Plugins ，这里是 IDEA 下载和管理插件的地方，在 Version Control 中展示的插件就是默认在这里已经下载了的。 三、IDEA 中配置版本控制软件1、SVN 先安装 SVN 客户端，或者是图形化工具，windows 推荐用 TortoiseSVN。 File -&gt; Settings -&gt; Version Control -&gt; Subverion，选择自己的 SVN 安装路径，否则 IDEA 可能无法正常识别SVN。 Clear Auth Cache，当使用过程中出现无法正常 checkout 等问题时，可以尝试点击这里清除缓存。 2、Git 先安装 Git 客户端，windows 下推荐用 TortoiseGit。 File -&gt; Settings -&gt; Version Control -&gt; Git，选择自己的 Git 安装路径，否则 IDEA 可能无法正常识别 Git。 3、GitHub 先注册 GitHub 账号 File -&gt; Settings -&gt; Version Control -&gt; GitHub -&gt; Add account，输入用户名和密码登录 GitHub，并点击 Test 测试连接是否成功。 四、代码检出和上传1、检出代码VCS -&gt; Checkout from Version Control 选择对应的版本控制系统，如 GitHub、SVN、Git 等，进一步从中检出项目。 以 SVN 为例： 先在本地创建一个空文件夹，右键 svn -&gt; checkout 所有代码； 在 IDEA 中 Import Module 导入； VCS -&gt; Checkout from Version Control -&gt; Subversion，输入 svn 地址，checkout 到工作空间目录。 2、上传代码VCS -&gt; Import into Version Control ，选择对应的版本控制系统，并进一步上传代码到版本控制系统中。 3、配置忽略文件File -&gt; Settings -&gt; Version Control -&gt; Ignored Files 在这里通过 + -设置是否把文件或目录加入到版本控制中。]]></content>
+    <title><![CDATA[nGrinder详细介绍及性能测试工具对比]]></title>
+    <url>%2F2019%2F02%2F26%2F01_nGrinder%E8%AF%A6%E7%BB%86%E4%BB%8B%E7%BB%8D%E5%8F%8A%E6%80%A7%E8%83%BD%E5%B7%A5%E5%85%B7%E5%AF%B9%E6%AF%94%2F</url>
+    <content type="text"><![CDATA[目前主流的性能测试工具，除了LR、JMeter之外，还有很多公司在用B/S架构的nGrinder 。最近公司搭建了一个基于nGrinder的二次开发平台，在此写一波nGrinder相关的文章。 在介绍nGrinder之前，有必要先说一下 The Grinder 抛砖引玉。 一、The Grinder1、The Grinder是一个基于Java的开源性能测试框架，通过多个agent负载机很方便的进行分布式测试。 2、主要特性： 可以测试任何java代码，包括各种常用的接口 如HTTP web servers, SOAP和REST web services，还有客户端服务器RMI、JMS、EJBs等，还支持自定义协议。 测试脚本使用python和Clojure语言 成熟的HTTP协议支持： 自动管理客户端连接和cookies，SSL代理； 支持录制脚本，能够记录并回放浏览器和网站之间的复杂交互。 包括console和agent端 3、不足 一次只能运行一个测试 没有测试历史记录 没有图形化的测试报告 二、nGrinder nGrinder是基于Grinder的开源的web性能测试平台，由韩国最大互联网公司NHN公司的开发团队进行了重新设计和完善。 特性：开源、易用、高可用、可扩展 1、nGrinder 在 Grinder 的基础上： 实现多测试并行 基于web的管理 实现cluster 内置svn，方便的脚本编辑、管理 支持Groovy脚本，相对于Jython，可以启动更多的虚拟用户 实现对目标服务器的监控 插件系统扩展 2、工作原理 由一个控制端controller和多个代理端agent组成，通过控制端(浏览器访问)建立测试场景，然后分发到代理端进行压力测试。 用户按照一定规范编写测试脚本，controller会将脚本以及需要的资源分发到agent，用jython执行。 在脚本执行的过程中收集运行情况、相应时间、测试目标服务器的运行情况等。并且保存这些数据生成测试报告，通过动态图和数据表的形式展示出来。用户可以方便的看到TPS、被测服务器的CPU和内存等情况。 三、LoadRunner JMeter 与 nGrinder对比1、Loadrunner 基于UI操作，容易上手。早期很流行，功能强大，但是太笨重，安装很麻烦。 不开源，扩展性不高，收费贵。往后的方向肯定是客户端工具逐步向平台化发展，所以已经慢慢被替代了。 2、JMeter 基于UI操作，容易上手，但是编程能力较弱（使用beanshell脚本语言）。 其次JMeter基于线程，模拟数千用户几乎不可能。 3、nGrinder 单节点可支持4000~6000并发、支持分布式、可监控被测服务器、可录制脚本、开源、平台化。 参数化功能较弱 对测试人员的代码要求较高 比较点 JMeter Ngrinder LoadRunner 实现语言 Java java/python java/VB/C/.NET 使用方式 C/S或Command B/S B/S 支持分布式 master/slave controller/agent master/slave 资源监控 monitor/plugin，如果二开，需要查找plugin的源码 monitor方式，有直接可用的源码 自带资源监控功能 社区活跃度 文档完善 有中文社区 网上资料和相关培训很多，购买正版还可以得到技术支持 是否需要编码 基本不需要 需要，Jython/Groovy 需要 脚本的维护 本地 内置SVN 本地 脚本录制 可使用BadBoy进行录制 可通过PTS插件进行录制 自带录制功能 可扩展性 可增加plugin，输出结果可以再加工 可增加plugin 通过扩展函数库实现 安装 简单，解压即可 简单，可以下载安装包或绿色包解压 安装包比较大，安装繁琐 nGrinder 安装配置及使用 见下篇。]]></content>
       <categories>
-        <category>java</category>
+        <category>nGrinder</category>
       </categories>
       <tags>
-        <tag>IDEA</tag>
-        <tag>版本控制</tag>
+        <tag>nGrinder</tag>
+        <tag>性能测试工具</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[nGrinder解析最基本的GET请求脚本]]></title>
+    <url>%2F2019%2F02%2F26%2F04_%E8%A7%A3%E6%9E%90%E6%9C%80%E5%9F%BA%E6%9C%AC%E7%9A%84GET%E8%AF%B7%E6%B1%82%E8%84%9A%E6%9C%AC-groovy%2F</url>
+    <content type="text"><![CDATA[一、自动生成GET请求脚本1、配置 Create a script在ngrinder管理台主页，点击script–&gt;Create a script，并填写脚本名称和请求的url； 点击 Create 按钮，nGrinder会自动生成对应的脚本结构，如果没有参数需要设置的话，可以直接运行了。 二、详细解析GET请求脚本脚本说明ngrinder自动生成的脚本如下所示（groovy版本）： 解析见代码中的注释123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990import static net.grinder.script.Grinder.grinderimport static org.junit.Assert.*import static org.hamcrest.Matchers.*import net.grinder.plugin.http.HTTPRequestimport net.grinder.plugin.http.HTTPPluginControlimport net.grinder.script.GTestimport net.grinder.script.Grinderimport net.grinder.scriptengine.groovy.junit.GrinderRunnerimport net.grinder.scriptengine.groovy.junit.annotation.BeforeProcessimport net.grinder.scriptengine.groovy.junit.annotation.BeforeThread// import static net.grinder.util.GrinderUtils.* // You can use this if you're using nGrinder after 3.2.3import org.junit.Beforeimport org.junit.BeforeClassimport org.junit.Testimport org.junit.runner.RunWithimport org.junit.FixMethodOrderimport org.junit.runners.MethodSortersimport java.util.Dateimport java.util.Listimport java.util.ArrayListimport HTTPClient.Cookieimport HTTPClient.CookieModuleimport HTTPClient.HTTPResponseimport HTTPClient.NVPair/** * A simple example using the HTTP plugin that shows the retrieval of a * single page via HTTP. * * This script is automatically generated by ngrinder. * * @author admin */@RunWith(GrinderRunner)@FixMethodOrder(MethodSorters.NAME_ASCENDING)class TestRunner &#123;truepublic static GTest testtrue// 定义 HTTPRequest 静态变量 request，用于发送 HTTP 请求truepublic static HTTPRequest request true// 定义 NVPair 数组 headers ，用于存放通用的请求头数据truepublic static NVPair[] headers = []true// 定义 NVPair 数组 params ，用于存放请求参数数据truepublic static NVPair[] params = []true// 定义 Cookie 数组 cookies ，用于存放通用的 cookie 数据truepublic static Cookie[] cookies = []true@BeforeProcesstruepublic static void beforeProcess() &#123;truetrue// 设置请求响应超时时间（ms），超过则抛出异常truetrueHTTPPluginControl.getConnectionDefaults().timeout = 6000truetruetruetrue// 创建GTest对象，第一个参数1代表有多个请求/事务时的执行顺序IDtruetrue// 第二个参数是请求/事务的名称，会显示在summary结果中truetrue// 有多个请求/事务时，要创建多个GTest对象truetruetest = new GTest(1, "www.baidu.com") truetrue// 创建 HTTPRequest 对象，用于发起 HTTP 请求truetruerequest = new HTTPRequest() truetruegrinder.logger.info("before process.");true&#125;true@BeforeThreadtruepublic void beforeThread() &#123;truetrue// 注册事件，启动test，第二个参数要与@Test注解的方法名保持一致truetrue// 有多个请求/事务时，要注册多个事件truetruetest.record(this, "test")truetrue// 配置延迟报告统计结果truetruegrinder.statistics.delayReports=true;truetruegrinder.logger.info("before thread.");true&#125;true@Beforetruepublic void before() &#123;truetrue// 在这里可以添加headers属性和cookiestruetruerequest.setHeaders(headers)truetrue// 设置本次请求的 cookiestruetruecookies.each &#123; CookieModule.addCookie(it, HTTPPluginControl.getThreadHTTPClientContext()) &#125;truetruegrinder.logger.info("before thread. init headers and cookies");true&#125;true@Testtruepublic void test()&#123;truetrue// 发送GET请求truetrueHTTPResponse result = request.GET("https://www.baidu.com", params)truetrue// 断言HTTP请求状态码truetrueassertThat(result.statusCode, is(200))true&#125;&#125; GTest GTest是对测试记录进行统计的单元; 使用 GTest 的构造方法 GTest(int number, String description) 创建，在脚本内每个GTest对象都使用唯一的编号定义。 如果创建了多个编号一样的对象，最后只会选用第一个。 test.record()在@BeforeThread注解下会执行 test.record(this, &quot;test&quot;) record(Object target, String methodName) 这里使用 GTest的record方法给 GTest 配置需要进行统计的方法； target 指脚本对象，这里是this； methodName 是需要统计的方法名，通常都是被 @Test 注释的方法。如果未配置，方法会正常执行，但是没有统计结果数据； 每一个被 @Test 注释的方法都是一个整体事务，在运行测试时，即便里面有 多次 HTTP 请求也只做一次统计！！ Cookies可以通过 Cookie(String name, String value, String domain, String path, Date expires, boolean secure) 构造 cookie 对象，然后存放到相应的数组中，传递到请求中。]]></content>
+      <categories>
+        <category>nGrinder</category>
+      </categories>
+      <tags>
+        <tag>nGrinder</tag>
+        <tag>ngrinder脚本解析</tag>
       </tags>
   </entry>
   <entry>
@@ -139,6 +113,19 @@
       <tags>
         <tag>nGrinder</tag>
         <tag>nGrinder请求参数</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Beanshell Sampler 常用方法]]></title>
+    <url>%2F2019%2F02%2F26%2FBeanshell%20Sampler%20%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95%2F</url>
+    <content type="text"><![CDATA[一、Beanshell Sampler1、BeanshellBeanshell 是一种轻量级的 Java 脚本，纯 Java 编写的，能够动态的执行标准 java 语法及一些扩展脚本语法，类似于 js 和 perl。 2、内置变量Beanshell Sampler 中除了可以使用标准 java 语法之外，还有一些定义好的变量，可以直接使用。 SampleResult ResponseCode, ResponseMessage IsSuccess Label FileName ctx vars props log 下面我按使用频率，分别讲一下最常用的几种变量。 3、log 用于打印日志，最常用，也最简单； 打印在 jmeter.log 中，可以设置打印级别，可以打印字符串、变量等。 使用方法：123456789101112131415161、打印 info 形式的普通字符串日志：log.info(&quot;hello world&quot;); 输出 hello world2、拼接字符串和变量 (其中 token 是 jmeter 局部变量)：log.info(&quot;hello world&quot; + &quot;$&#123;token&#125;&quot;); 输出 hello world 和 token 变量的拼接结果3、打印自定义变量str = &quot;12345&quot;;log.info(str); 输出 123454、打印 error 形式的普通字符串日志：log.info(&quot;hihihi&quot;);log.error(&quot;aaaaa&quot;);两种输出的区别：2018-12-27 19:05:13,158 INFO o.a.j.u.BeanShellTestElement: hihihi2018-12-27 19:05:13,158 ERROR o.a.j.u.BeanShellTestElement: aaaaa print() 打印日志 在 beanshell 中还可以使用 print() 函数来打印日志，输出字符串等信息； print() 是在 cmd 控制台中输出信息，log() 默认是在 jmeter.log 中输出信息。 4、vars 用于存取 jmeter 局部变量，很常用，一定要掌握； 通常用于存取字符串内容，也可以存取对象； vars.get()12String mykey = vars.get(&quot;keyname&quot;); 获取变量名为 keyname 的值，并保存在 mykey 中。 vars.put()12345vars.put(&quot;keyname&quot;,&quot;value&quot;); 把变量 keyname(值为 value)保存到 jmeter 变量中。vars.putObject(&quot;OBJname&quot;,new Object()); 把一个对象 OBJname 保存到 jmeter 变量中 vars.remove()12vars.remove(&quot;keyname&quot;);从 jmeter 变量中删除 keyname。 5、props 用于存取 jmeter 全局的静态变量； 其中的 key 和 value 均是字符串形式；12345ymd = props.get(&quot;START.YMD&quot;);获取属性 START.YMD 的值（脚本启动日期）。props.put(&quot;PROP1&quot;,&quot;1234&quot;);把 1234 存入全局属性 PROP1 中。 6、ctx 当前线程的上下文信息； 使用举例：12345678910111213ctx.getCurrentSampler(); 获取当前 sampler 请求ctx.getPreviousSampler(); 获取前一个 sampler 请求ctx.getThreadNum(); 获取当前线程的序号，从 0 开始计数ctx.getThread(); 获取当前线程ctx.getThreadGroup(); 获取当前线程组ctx.getProperties(); 获取所有属性ctx.getVariables(); 获取当前线程的所有变量 7、SampleResult12SampleResult.setResponseData(data);自定义响应数据。]]></content>
+      <categories>
+        <category>jmeter</category>
+      </categories>
+      <tags>
+        <tag>beanshell</tag>
+        <tag>jmeter</tag>
+        <tag>性能</tag>
       </tags>
   </entry>
   <entry>
@@ -156,40 +143,15 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[nGrinder解析最基本的GET请求脚本]]></title>
-    <url>%2F2019%2F02%2F26%2F04_%E8%A7%A3%E6%9E%90%E6%9C%80%E5%9F%BA%E6%9C%AC%E7%9A%84GET%E8%AF%B7%E6%B1%82%E8%84%9A%E6%9C%AC-groovy%2F</url>
-    <content type="text"><![CDATA[一、自动生成GET请求脚本1、配置 Create a script在ngrinder管理台主页，点击script–&gt;Create a script，并填写脚本名称和请求的url； 点击 Create 按钮，nGrinder会自动生成对应的脚本结构，如果没有参数需要设置的话，可以直接运行了。 二、详细解析GET请求脚本脚本说明ngrinder自动生成的脚本如下所示（groovy版本）： 解析见代码中的注释123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990import static net.grinder.script.Grinder.grinderimport static org.junit.Assert.*import static org.hamcrest.Matchers.*import net.grinder.plugin.http.HTTPRequestimport net.grinder.plugin.http.HTTPPluginControlimport net.grinder.script.GTestimport net.grinder.script.Grinderimport net.grinder.scriptengine.groovy.junit.GrinderRunnerimport net.grinder.scriptengine.groovy.junit.annotation.BeforeProcessimport net.grinder.scriptengine.groovy.junit.annotation.BeforeThread// import static net.grinder.util.GrinderUtils.* // You can use this if you're using nGrinder after 3.2.3import org.junit.Beforeimport org.junit.BeforeClassimport org.junit.Testimport org.junit.runner.RunWithimport org.junit.FixMethodOrderimport org.junit.runners.MethodSortersimport java.util.Dateimport java.util.Listimport java.util.ArrayListimport HTTPClient.Cookieimport HTTPClient.CookieModuleimport HTTPClient.HTTPResponseimport HTTPClient.NVPair/** * A simple example using the HTTP plugin that shows the retrieval of a * single page via HTTP. * * This script is automatically generated by ngrinder. * * @author admin */@RunWith(GrinderRunner)@FixMethodOrder(MethodSorters.NAME_ASCENDING)class TestRunner &#123;truepublic static GTest testtrue// 定义 HTTPRequest 静态变量 request，用于发送 HTTP 请求truepublic static HTTPRequest request true// 定义 NVPair 数组 headers ，用于存放通用的请求头数据truepublic static NVPair[] headers = []true// 定义 NVPair 数组 params ，用于存放请求参数数据truepublic static NVPair[] params = []true// 定义 Cookie 数组 cookies ，用于存放通用的 cookie 数据truepublic static Cookie[] cookies = []true@BeforeProcesstruepublic static void beforeProcess() &#123;truetrue// 设置请求响应超时时间（ms），超过则抛出异常truetrueHTTPPluginControl.getConnectionDefaults().timeout = 6000truetruetruetrue// 创建GTest对象，第一个参数1代表有多个请求/事务时的执行顺序IDtruetrue// 第二个参数是请求/事务的名称，会显示在summary结果中truetrue// 有多个请求/事务时，要创建多个GTest对象truetruetest = new GTest(1, "www.baidu.com") truetrue// 创建 HTTPRequest 对象，用于发起 HTTP 请求truetruerequest = new HTTPRequest() truetruegrinder.logger.info("before process.");true&#125;true@BeforeThreadtruepublic void beforeThread() &#123;truetrue// 注册事件，启动test，第二个参数要与@Test注解的方法名保持一致truetrue// 有多个请求/事务时，要注册多个事件truetruetest.record(this, "test")truetrue// 配置延迟报告统计结果truetruegrinder.statistics.delayReports=true;truetruegrinder.logger.info("before thread.");true&#125;true@Beforetruepublic void before() &#123;truetrue// 在这里可以添加headers属性和cookiestruetruerequest.setHeaders(headers)truetrue// 设置本次请求的 cookiestruetruecookies.each &#123; CookieModule.addCookie(it, HTTPPluginControl.getThreadHTTPClientContext()) &#125;truetruegrinder.logger.info("before thread. init headers and cookies");true&#125;true@Testtruepublic void test()&#123;truetrue// 发送GET请求truetrueHTTPResponse result = request.GET("https://www.baidu.com", params)truetrue// 断言HTTP请求状态码truetrueassertThat(result.statusCode, is(200))true&#125;&#125; GTest GTest是对测试记录进行统计的单元; 使用 GTest 的构造方法 GTest(int number, String description) 创建，在脚本内每个GTest对象都使用唯一的编号定义。 如果创建了多个编号一样的对象，最后只会选用第一个。 test.record()在@BeforeThread注解下会执行 test.record(this, &quot;test&quot;) record(Object target, String methodName) 这里使用 GTest的record方法给 GTest 配置需要进行统计的方法； target 指脚本对象，这里是this； methodName 是需要统计的方法名，通常都是被 @Test 注释的方法。如果未配置，方法会正常执行，但是没有统计结果数据； 每一个被 @Test 注释的方法都是一个整体事务，在运行测试时，即便里面有 多次 HTTP 请求也只做一次统计！！ Cookies可以通过 Cookie(String name, String value, String domain, String path, Date expires, boolean secure) 构造 cookie 对象，然后存放到相应的数组中，传递到请求中。]]></content>
-      <categories>
-        <category>nGrinder</category>
-      </categories>
-      <tags>
-        <tag>nGrinder</tag>
-        <tag>ngrinder脚本解析</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[JMeter源码导入IntelliJ IDEA]]></title>
-    <url>%2F2019%2F02%2F26%2FJMeter%E6%BA%90%E7%A0%81%E5%AF%BC%E5%85%A5IntelliJ%20IDEA%2F</url>
-    <content type="text"><![CDATA[之前文章中讲了 idea 导入 maven 项目，但是 jmeter 源码是 eclipse 项目结构，而且有些地方要进行特殊配置，所以单独记录一下。 使用环境： Win 7 + JMeter 5.0 + IntelliJ IDEA 2018.2.6 1、下载并解压 jmeter 源码 源码下载地址: http://jmeter.apache.org/download_jmeter.cgi，选择 Source 下的 zip 格式下载到本地； 解压到本地目录，如我的目录是 D:\software\apache-jmeter-5.0； 2、修改配置（重要！）这一步必须要进行，不然无法导入！ 进入解压后的目录，会看到两个文件：eclipse.classpath和eclipse.projecte，分别修改为 .classpath 和 .projecte ； 在 windows 下不能直接修改，要使用 cmd 命令行； 打开 cmd 命令行窗口，进入解压的源码目录下，执行： ren .eclipse.classpath .classpath ren .eclipse.project .project 3、导入 IDEA打开 IDEA，导入源码。 File -&gt; New -&gt; Project from Existing Sources ，选择源码目录； 选择按 eclipse 项目导入，如下所示： 其它全部按默认，一直 Next 即可。 4、Ant 下载依赖 jar 包 在窗口右侧 Ant Build 中，点击 + ，选择源码目录下的 build.xml，会把所有相关信息展示在右侧列表中； 双击列表中的 download_jars ,会自动下载所有缺失 jar 包，到 jmeter 源码目录的 lib 目录下； 5、更新项目中的依赖 jar 包在首次导入项目时，会自动在 dependency 下添加依赖 jar 包，但都是缺失状态，当我们用 Ant 下载好 jar 包后，IDEA 并不会自动更新，必须要手动更新。 在项目上右键打开 Open Module Settings,在项目 src 下点击 protocol 文件夹，再点击上方 Sources 按钮，点击 Apply。 点击 Dependencies，删除所有报错的 jar 包； 重新添加新下载的 jar 包：右侧 + ，选择 JARs or directories，依次选择源码目录下的 lib 目录和 lib 下的几个目录，最后 Apply ： 6、Ant install重新添加 jar 包后，必须执行 Ant install。 7、设置运行的 VM optionsJMeter 的启动类是 NewDriver，可以先找到这个类，尝试运行一下，肯定会报错找不到路径。 因为 jmeter 启动类中默认是去找的 parent 目录，所以报找不到路径，需要手动配置一下 jmeter 运行时的 home 路径，在 VM options 中配置。 在 VM options 填入 -Djmeter.home=D:\myWork\apache-jmeter-5.0，如下所示： 此时，再次运行 NewDriver，就可以正常启动 jmeter 界面了！！]]></content>
+    <title><![CDATA[IDEA 中的版本控制机制]]></title>
+    <url>%2F2019%2F02%2F26%2FIDEA%20%E4%B8%AD%E7%9A%84%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E6%9C%BA%E5%88%B6%2F</url>
+    <content type="text"><![CDATA[一、版本控制的分类1、版本控制 版本控制是指对软件开发过程中各种程序代码、配置文件及说明文档等文件变更的管理。 版本控制的内容主要包括：检入检出控制、分支和合并、历史记录。 2、集中式版本控制系统（CVCS）典型代表是 SVN，有如下特点： 管理方便，逻辑明确，操作简单，上手快 使用集中式服务器，安全易管理 对服务器性能要求高，数据库容量经常暴增，体量大 必须联网！如果不能连接到服务器上，就不能提交，还原，对比等等 分支管控不灵活 还有一个风险，就是如果源码库出现问题，导致项目代码丢失，那么大家手里的都是部分代码，就算勉强合并到一起，也不能保证项目源码的准确性。 3、分布式版本控制系统（DVCS）分布式相比于集中式的最大区别在于开发者可以提交到本地，每个开发者通过克隆（git clone），在本地机器上拷贝一个完整的Git仓库。 典型代表是 Git，有如下特点： 适合分布式开发，每一个个体都可以作为服务器。每一次Clone就是从服务器上pull到了所有的内容，包括版本信息 公共服务器压力和数据量都不会太大 速度快、灵活，分支之间可以任意切换 任意两个开发者之间可以很容易的解决冲突，并且单机上就可以进行分支合并 可以离线工作，不影响本地代码编写，等有网络连接以后可以再上传代码，并且可以在本地根据不同的需要新建自己的分支。 二、IDEA 中的版本控制机制1、Version Control File -&gt; Settings -&gt; Version Control ，这里是 IDEA 自带的用于支持主流版本控制软件的插件，如 git 、gitHub 、svn 、cvs等。 仅有插件并不能在 IDEA 中直接使用版本控制，还需要下载相应的版本控制软件才行。 2、Plugins File -&gt; Settings -&gt; Plugins ，这里是 IDEA 下载和管理插件的地方，在 Version Control 中展示的插件就是默认在这里已经下载了的。 三、IDEA 中配置版本控制软件1、SVN 先安装 SVN 客户端，或者是图形化工具，windows 推荐用 TortoiseSVN。 File -&gt; Settings -&gt; Version Control -&gt; Subverion，选择自己的 SVN 安装路径，否则 IDEA 可能无法正常识别SVN。 Clear Auth Cache，当使用过程中出现无法正常 checkout 等问题时，可以尝试点击这里清除缓存。 2、Git 先安装 Git 客户端，windows 下推荐用 TortoiseGit。 File -&gt; Settings -&gt; Version Control -&gt; Git，选择自己的 Git 安装路径，否则 IDEA 可能无法正常识别 Git。 3、GitHub 先注册 GitHub 账号 File -&gt; Settings -&gt; Version Control -&gt; GitHub -&gt; Add account，输入用户名和密码登录 GitHub，并点击 Test 测试连接是否成功。 四、代码检出和上传1、检出代码VCS -&gt; Checkout from Version Control 选择对应的版本控制系统，如 GitHub、SVN、Git 等，进一步从中检出项目。 以 SVN 为例： 先在本地创建一个空文件夹，右键 svn -&gt; checkout 所有代码； 在 IDEA 中 Import Module 导入； VCS -&gt; Checkout from Version Control -&gt; Subversion，输入 svn 地址，checkout 到工作空间目录。 2、上传代码VCS -&gt; Import into Version Control ，选择对应的版本控制系统，并进一步上传代码到版本控制系统中。 3、配置忽略文件File -&gt; Settings -&gt; Version Control -&gt; Ignored Files 在这里通过 + -设置是否把文件或目录加入到版本控制中。]]></content>
       <categories>
         <category>java</category>
       </categories>
       <tags>
-        <tag>jmeter</tag>
-        <tag>IntelliJ IDEA</tag>
-        <tag>jmeter源码导入IDEA</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Maven学习04-构建生命周期]]></title>
-    <url>%2F2019%2F02%2F26%2FMaven%E5%AD%A6%E4%B9%A004-%E6%9E%84%E5%BB%BA%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%2F</url>
-    <content type="text"><![CDATA[构建生命周期是指为一个工程进行项目构建和发布的过程，它是 Maven 中的一个核心概念。 1、标准生命周期Maven中内置了三个标准的构建生命周期： default（或build）：处理工程的部署 clean：处理工程的清理 site：负责创建工程的站点文档。 这三个构建生命周期都是由一系列不同的构建阶段组成，每一个构建阶段代表了生命周期的一个阶段。 2、default 生命周期的阶段一个典型的 Maven default（build）生命周期主要由以下几个阶段的序列组成（此处并完全列出）： 阶段 描述 验证 validate 验证项目是否正确且所有必须信息是可用的 编译 compile 源代码编译在此阶段完成 测试 Test 使用适当的单元测试框架（例如JUnit）运行测试。 包装 package 创建JAR/WAR包如在 pom.xml 中定义提及的包 检查 verify 对集成测试的结果进行检查，以保证质量达标 安装 install 安装打包的项目到本地仓库，以供其他项目使用 部署 deploy 拷贝最终的工程包到远程仓库中，以共享给其他开发人员和工程 使用默认的生命周期时，Maven将首先验证项目，然后将编译源代码，运行单元测试，再打包二进制文件（例如：jar），然后再对包文件进行集成测试（如果需要的话），再校验包文件，并将已经校验的包文件安装到本地仓库，然后在指定的环境中部署包。 3、生命周期阶段的执行顺序 各生命周期的阶段会被顺序地执行（包括那些这里没有展示的其他生命周期阶段）。 而且在调用一个生命周期阶段时，maven 不仅执行指定的构建阶段，也会执行指定构建阶段之前的每一个阶段 比如，在默认生命周期中，只需要调用最后一个deploy生命阶段，即可执行前面所有阶段：1234567891011121314mvn deploy // 会先执行前面的所有阶段mvn install // 会先执行前面的 validate ... verify 等阶段- 同样的命令可以用在多模块的情况下（即包含一个或多个子项目的工程）：mvn clean install// 会遍历所有的子项目，并且运行clean命令，然后运行install命令（包含所有之前步骤的命令） - 构建命令中也可以加入插件目标* 一个插件目标代表一个特定的任务（比构建阶段更为精细）。这些目标的执行顺序取决于调用目标和构建阶段的顺序。例如下面的命令：mvn clean dependency:copy-dependencies package// 其中clean 和 pakage 是构建阶段，dependency:copy-dependencies 是目标。// 执行顺序是` clean 阶段 -&gt; dependency:copy-dependencies 目标 -&gt; package 阶段 ` 4、Clean 生命周期clean 阶段用于清除上一次编译之后在target包下生成的字节码文件。 阶段 描述 pre-clean 执行一些清理前需要完成的工作 clean 清理上一次构建生成的文件 post-clean 执行一些清理后需要完成的工作 5、Site生命周期 阶段 描述 pre-site 执行一些在生成站点之前需要完成的工作 site 生成项目的站点文档 post-site 执行一些在生成站点之后需要完成的工作 site-deploy 将生成的站点文件发布到远程服务器上]]></content>
-      <categories>
-        <category>maven</category>
-      </categories>
-      <tags>
-        <tag>maven</tag>
-        <tag>maven生命周期</tag>
+        <tag>IDEA</tag>
+        <tag>版本控制</tag>
       </tags>
   </entry>
   <entry>
@@ -203,6 +165,18 @@
         <tag>maven</tag>
         <tag>maven安装配置</tag>
         <tag>maven仓库</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Maven学习04-构建生命周期]]></title>
+    <url>%2F2019%2F02%2F26%2FMaven%E5%AD%A6%E4%B9%A004-%E6%9E%84%E5%BB%BA%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%2F</url>
+    <content type="text"><![CDATA[构建生命周期是指为一个工程进行项目构建和发布的过程，它是 Maven 中的一个核心概念。 1、标准生命周期Maven中内置了三个标准的构建生命周期： default（或build）：处理工程的部署 clean：处理工程的清理 site：负责创建工程的站点文档。 这三个构建生命周期都是由一系列不同的构建阶段组成，每一个构建阶段代表了生命周期的一个阶段。 2、default 生命周期的阶段一个典型的 Maven default（build）生命周期主要由以下几个阶段的序列组成（此处并完全列出）： 阶段 描述 验证 validate 验证项目是否正确且所有必须信息是可用的 编译 compile 源代码编译在此阶段完成 测试 Test 使用适当的单元测试框架（例如JUnit）运行测试。 包装 package 创建JAR/WAR包如在 pom.xml 中定义提及的包 检查 verify 对集成测试的结果进行检查，以保证质量达标 安装 install 安装打包的项目到本地仓库，以供其他项目使用 部署 deploy 拷贝最终的工程包到远程仓库中，以共享给其他开发人员和工程 使用默认的生命周期时，Maven将首先验证项目，然后将编译源代码，运行单元测试，再打包二进制文件（例如：jar），然后再对包文件进行集成测试（如果需要的话），再校验包文件，并将已经校验的包文件安装到本地仓库，然后在指定的环境中部署包。 3、生命周期阶段的执行顺序 各生命周期的阶段会被顺序地执行（包括那些这里没有展示的其他生命周期阶段）。 而且在调用一个生命周期阶段时，maven 不仅执行指定的构建阶段，也会执行指定构建阶段之前的每一个阶段 比如，在默认生命周期中，只需要调用最后一个deploy生命阶段，即可执行前面所有阶段：1234567891011121314mvn deploy // 会先执行前面的所有阶段mvn install // 会先执行前面的 validate ... verify 等阶段- 同样的命令可以用在多模块的情况下（即包含一个或多个子项目的工程）：mvn clean install// 会遍历所有的子项目，并且运行clean命令，然后运行install命令（包含所有之前步骤的命令） - 构建命令中也可以加入插件目标* 一个插件目标代表一个特定的任务（比构建阶段更为精细）。这些目标的执行顺序取决于调用目标和构建阶段的顺序。例如下面的命令：mvn clean dependency:copy-dependencies package// 其中clean 和 pakage 是构建阶段，dependency:copy-dependencies 是目标。// 执行顺序是` clean 阶段 -&gt; dependency:copy-dependencies 目标 -&gt; package 阶段 ` 4、Clean 生命周期clean 阶段用于清除上一次编译之后在target包下生成的字节码文件。 阶段 描述 pre-clean 执行一些清理前需要完成的工作 clean 清理上一次构建生成的文件 post-clean 执行一些清理后需要完成的工作 5、Site生命周期 阶段 描述 pre-site 执行一些在生成站点之前需要完成的工作 site 生成项目的站点文档 post-site 执行一些在生成站点之后需要完成的工作 site-deploy 将生成的站点文件发布到远程服务器上]]></content>
+      <categories>
+        <category>maven</category>
+      </categories>
+      <tags>
+        <tag>maven</tag>
+        <tag>maven生命周期</tag>
       </tags>
   </entry>
   <entry>
@@ -244,18 +218,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[git pull 指定某一个文件或文件夹]]></title>
-    <url>%2F2019%2F02%2F26%2Fgit%20pull%20%E6%8C%87%E5%AE%9A%E6%9F%90%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E6%88%96%E6%96%87%E4%BB%B6%E5%A4%B9%2F</url>
-    <content type="text"><![CDATA[1、要解决的问题默认情况下，git pull 操作会把远程仓库的所有最新数据更新到本地。 但是，如果你只想更新指定的某一个文件或文件夹，该怎么操作呢？ 2、git 只 pull 某一个文件/夹 设置 core.sparsecheckout为 true $ git config core.sparsecheckout true core.sparsecheckout用于控制是否允许设置pull指定文件/夹，true为允许。 此方法适用于 Git1.7.0 以后版本，之前的版本没有这个功能。 在.git/info/sparse-checkout文件中（如果没有则创建）添加指定的文件/夹 最后，拉取想要的分支即可实现checkout指定文件/夹。 $ git pull origin master]]></content>
-      <categories>
-        <category>git</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-        <tag>git pull</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[区别 git clone 与 git pull]]></title>
     <url>%2F2019%2F02%2F26%2Fgit%20clone%26pull%EF%BC%8Cpull%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%EF%BC%8C%E6%89%B9%E9%87%8F%E6%8F%90%E4%BA%A4%2F</url>
     <content type="text"><![CDATA[1、git clone 与 git pull 相同点相同点：都是从远程服务器拉取代码到本地 2、git clone 与 git pull 不同点git clone是在本地没有版本库的时候，从远程服务器克隆整个版本库到本地，是一个本地从无到有的过程。 git pull在本地有版本库的情况下，从远程库获取最新commit 数据（如果有的话），并merge（合并）到本地。 git pull = git fetch + git merge 3、使用场景通常情况下，远程操作的第一步，是使用git clone从远程主机克隆一个版本库到本地。 本地修改代码后，每次从本地仓库push到远程仓库之前都要先进行git pull操作，保证push到远程仓库时没有版本冲突。]]></content>
@@ -264,20 +226,20 @@
       </categories>
       <tags>
         <tag>git</tag>
-        <tag>git pull</tag>
         <tag>git clone</tag>
+        <tag>git pull</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[搭建nGrinder性能测试平台并快速使用]]></title>
-    <url>%2F2019%2F02%2F26%2F02_%E6%90%AD%E5%BB%BA%20nGrinder%20%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%20%E5%B9%B6%E5%BF%AB%E9%80%9F%E4%BD%BF%E7%94%A8%2F</url>
-    <content type="text"><![CDATA[接上一篇的nGrinder介绍篇 一、nGrinder 组件介绍ngrinder包含Controller、agent 和 monitor 三部分 1、Controller 提供性能测试的web接口 协调测试进程 调整和显示测试的统计结果 让用户创建和修改脚本 2、Agent 在代理服务器上加载运行测试进程和线程 可以部署多台，提升压测能力 最好是能部署在单独的服务器上，如果没有条件的话，也可以跟Controller在一台服务器 但是不能部署在被测服务器上 3、Monitor 用于监控被测服务器的系统性能（例如：CPU/MEMORY） 必须部署在被测服务器上 二、nGrinder 环境搭建 $ java -XX:MaxPermSize=512m -jar ngrinder-controller-3.4.war –port 80可在下载ngrinder后，直接通过上面的命令运行也可以通过下面的方式，把war包放在tomcat容器中运行 1、安装JDK，配置环境变量2、安装Tomcat3、下载nGrinder：https://github.com/naver/ngrinder/releases4、把下载好的包放到Tomcat的webApps文件夹中5、启动Tomcat，并访问nGrinder nGrinder主页：http://localhost:8080/ngrinder-controller-3.4/ 看到下图表示搭建成功。 如果想直接通过http://localhost:8080/访问，把文件名改为ROOT.war即可 6、安装Agent 登录 nGrinder 管理台，默认账号和密码都是admin，点击右上角，选择 Download Private Agent (不同版本可能会稍有区别) ，如下图所示 把 ngrinder-agent 压缩包解压到用作Agent的服务器上，运行 run_agent.sh 即可 7、安装Monitor（需要安装在被测服务器上） 下载Monitor安装包，方法类似Agent 把 ngrinder-monitor 压缩包解压到被测服务器上，运行 run_monitor.sh 即可 补充说明： ngrinder支持开箱即用，不需要额外配置，第一次启动时，系统配置自动生成 默认使用H2数据库，且schema自动创建 版本更新时，数据库schema自动更新 agent 、monitor模块从controller下载，无需配置 版本更新时，只需更新controller，agent和monitor会自动更新 在线修改系统配置，多数据修改无需重启 即使用cluster模式，配置也很简单 三、快速使用1、输入测试URL，选择脚本语言，然后点击开始测试，会自动生成测试脚本并进入配置页面或者通过点击管理后上方的 script 或 脚本 按钮，进入脚本管理页面，创建脚本，效果相同。 在创建脚本时，可以选择使用的语言为Groovy或Jython，但是由于这两种语言执行性能上的差别，建议优先使用性能更好的Groovy来编写压测脚本（官方验证相同情况下groovy比jython支持2倍左右的并发数） 2、基本的压测配置 代理：是指压测所需要的server的数量 虚拟用户有两个指标： 进程数：每个server起多少进程去跑 线程数：每个进程新建的线程数量 并发量=代理数x进程数x线程数 Ramp-Up：设置增量测试，逐渐向最大的的并发量增长，只有勾选该框时，初始数、增量、初始等待时间、进程增长间隔的值才有效 测试时间：表示压测需要持续运行的时间测试次数：脚本执行的次数，同测试时间二选一 3、运行测试在配置页面右上角点击保存并运行，启动测试。 4、监控测试，查看结果当启动测试后，会在页面显示当前的TPS、虚拟用户、测试成功与否的数量等信息。测试完成后，会显示测试结果。 可以点击详细测试结果查看更详细的信息，比如TPS、平均时间、首次接受数据平均时间，以及被测服务器的CPU，MEM等信息。]]></content>
+    <title><![CDATA[git一次性add多个文件或提交多次修改]]></title>
+    <url>%2F2019%2F02%2F26%2Fgit%E4%B8%80%E6%AC%A1%E6%80%A7%20add%E5%A4%9A%E4%B8%AA%E6%96%87%E4%BB%B6%E6%88%96%E6%8F%90%E4%BA%A4%E5%A4%9A%E6%AC%A1%E4%BF%AE%E6%94%B9%2F</url>
+    <content type="text"><![CDATA[有时我们需要对 git 的修改操作进行批量提交，此时该怎么操作呢？ 按下面的步骤操作即可实现一次性add多个文件或提交多次修改： git add --all git commit -m &apos;add more files&apos; git push origin master]]></content>
       <categories>
-        <category>nGrinder</category>
+        <category>git</category>
       </categories>
       <tags>
-        <tag>nGrinder</tag>
-        <tag>nGrinder性能测试平台</tag>
+        <tag>git</tag>
+        <tag>git add</tag>
       </tags>
   </entry>
   <entry>
@@ -294,15 +256,27 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[intellij idea 和 eclipse 区别（IDEA使用手册01）]]></title>
-    <url>%2F2019%2F02%2F26%2Fintellij%20idea%20%E5%92%8C%20eclipse%20%E5%8C%BA%E5%88%AB%2F</url>
-    <content type="text"><![CDATA[一、IDEA 和 eclipse 对比 IDEA Eclipse 说明 new Project workspace 创建 项目/工作空间，是最顶级的结构单元 new Module new Project 创建一个模块/工程，一个 Project/工作空间 下可以有多个 模块/工程 文件自动保存，不能设置为手动保存 需要手动保存 智能提示重构代码,告诉你更好的实现方式 更友好、更聪明的代码提示功能 二、IntelliJ IDEA 中的 Project 和 Module在 IntelliJ IDEA 中，没有类似于 Eclipse 工作空间（Workspace）的概念，而是提出了Project和Module这两个概念。 2.1 Project : Module = 1 : n在 IntelliJ IDEA 中Project是最顶级的结构单元，下面是一个或多个Module，是一对多的关系。 2.2 多个 Module 的划分在大型项目中，都是使用多 Module 结构，按功能不同划分为多个模块，模块之间可以相互依赖。 2.3 Project 对 Module 的意义 IDEA 的 Project 可以简单地理解为是一个单纯的目录，下面存放不同模块的文件夹。 Project 主要起到一个项目定义、范围约束、规范类型的效果，本身不具备任何编码设置、构建等开发功能。 2.4 Project 和 Module 的默认配置 IDEA 默认是单 Project 单 Module 结构，且默认名字相同，这时二者合二为一； 当一个 Project 下有多个 Module 时，最好是使用不同的名字。 三、安装目录进入IntelliJ IDEA 安装目录的bin目录下 （bin是 binary 的缩写，代表的意思是二进制，因此bin目录就是用来存放二进制文件） 在这里，我们主要了解下面五个文件： idea.exe：IntelliJ IDEA 32 位的可行执行文件，IntelliJ IDEA 安装完默认发送到桌面的就是这个执行文件的快捷方式； idea.exe.vmoptions：IntelliJ IDEA 32 位的可执行文件的 VM 配置文件； idea.properties：IntelliJ IDEA 的一些属性配置文件； idea64.exe：IntelliJ IDEA 64 位的可行执行文件，要求电脑上必须装有 JDK 64 位版本，64 位的系统也是建议使用该文件； idea64.exe.vmoptions：IntelliJ IDEA 64 位的可执行文件的 VM 配置文件。 四、新建项目通过Create New Project，选择需要的项目类型，然后设置项目和模块的名称和存储路径。 默认是一个Project下创建一个Module，因此创建时项目名称与模块名称默认是相同的。一般情况下，我们是不需要在More Settings中进行修改的。 默认界面是隐藏Toolbar和Tool Buttons的，可以通过view--&gt;Toolbar和Tool Buttons 来开启。 在创建 java project 时，默认使用的是自带的JRE，在 Project SDK 中选择自己下载的jdk目录。 创建完成后，会在IDEA左侧显示项目结构图和外部库 在项目结构图中，src目录为默认的Source root，我们一般在该目录下创建包和类； 在外部库中，显示了我们导入的 JDK 1.8 版本 五、创建包和类5.1 创建包 在 src 中创建包时，可以一次创建多个包，如：输入包名为 com.hit.demo，同时创建了三个空包。 创建的多个空包默认是重叠在一起的，如果其中某个包非空，则自动拆开包。 如果感觉空包叠在一起不爽的话，可以点击旁边的齿轮按钮，再点击 Hide Empty Middle Packages 把对勾去掉，变为 Compact Empty Middle Packages，就会把空包都按树状展示。 5.2 创建类 在一个包上点击鼠标右键，选择 Create Java Class ,创建 HelloWorld 类。 编写完成代码后，直接在编辑区右键–Run HelloWorld 运行类。 然后会在左侧目录中生成一个与 src 同级的目录 out ，用于存放项目中所有Module的编译文件。 六、项目中的配置文件6.1 .idea 目录这是整个 Project的配置文件目录。 IntelliJ IDEA 的配置文件都存在.idea目录下，以 XML 文件的形式存在，因此我们也可以通过了解这些 XML 文件来了解 IntelliJ IDEA 的相关配置。 6.2 .iml 文件这个文件是Module的配置文件。 这是 IntelliJ IDEA 为每个 Module 自动生成的配置文件，一般情况下不需要动。 七、设置主题和字体7.1 界面主题修改Files -&gt; Settings -&gt; Appearance &amp; Behavior -&gt; Appearance 在 Windows 系统上 IntelliJ IDEA 默认提供三个主题，分别为：Darcula、IntelliJ和Windows。其中，除了Darcula是黑色背景的主题，其余两个都是白色背景的主题。 7.2 界面字体修改Appearance &amp; Behavior &gt; Appearance 选中 Override default fonts by XXX ，并设置具体字体大小的数值。 这里的修改不会应用于代码编辑区！ 有一点需要注意，那就是：有的字体是包含中文的，有的字体则是不包含中文的。 一般情况下，使用英文的国家是不需要额外担心乱码问题的，但是我们需要啊！ 如果我们选择的字体不包含中文的话，很多位置上可能会出现类似于 口口口口口 这样的乱码问题。 例如，Courier New和Monaco就是纯英文字体，而Microsoft YaHei就是包含中文的字体。 7.3 代码编辑区主题修改Files -&gt; Settings -&gt; Appearance &amp; Behavior -&gt; Editor &gt; Color Scheme 在 Windows 系统上 IntelliJ IDEA 默认提供两个编辑区主题，分别为：Default和Darcula。其中，Default为默认主题；Darcula为黑色主题。 7.4 代码编辑区和控制台的字体修改Editor &gt; Font 这里的设置可以同时应用于代码编辑区和控制台 Font ：设置第一字体 Show only monospaced fonts：仅显示等宽字体，默认是勾选状态，可选的字体较少，可去掉勾选。 Fallback font：备选字体，如果首选字体中无法显示文字，系统就会自动调用备选字体来显示。例如首选字体我们可以设置为英文字体，备选字体设置为中文字体，这样即可优美的显示代码，而中文也不会变为‘口口’字 Enable font ligatures：是否启用字体连写，一般不启用。 7.5 设置 Sublime 代码颜色的方法在使用 Sublime 时，五颜六色的代码看起来非常美观，怎么让 IDEA 也设置成类似的格式呢？ 下载「SublimeMonoKaiTrue」jar 包 https://github.com/guobinhit/intellij-idea-tutorial/tree/master/resources/idea-theme/SublimeMonokaiTrue.jar； File -&gt; Import Settings，导入已经下载完的「SublimeMonoKai.jar」包，按提示重启 IDEA ； 重启后，默认就会使用新的 sublime 主题效果了，具体可以在 File -&gt; Settings -&gt; Editor -&gt; Color Scheme 中修改。]]></content>
+    <title><![CDATA[git pull 指定某一个文件或文件夹]]></title>
+    <url>%2F2019%2F02%2F26%2Fgit%20pull%20%E6%8C%87%E5%AE%9A%E6%9F%90%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E6%88%96%E6%96%87%E4%BB%B6%E5%A4%B9%2F</url>
+    <content type="text"><![CDATA[1、要解决的问题默认情况下，git pull 操作会把远程仓库的所有最新数据更新到本地。 但是，如果你只想更新指定的某一个文件或文件夹，该怎么操作呢？ 2、git 只 pull 某一个文件/夹 设置 core.sparsecheckout为 true $ git config core.sparsecheckout true core.sparsecheckout用于控制是否允许设置pull指定文件/夹，true为允许。 此方法适用于 Git1.7.0 以后版本，之前的版本没有这个功能。 在.git/info/sparse-checkout文件中（如果没有则创建）添加指定的文件/夹 最后，拉取想要的分支即可实现checkout指定文件/夹。 $ git pull origin master]]></content>
       <categories>
-        <category>java</category>
+        <category>git</category>
       </categories>
       <tags>
-        <tag>intellij idea</tag>
-        <tag>eclipse</tag>
+        <tag>git</tag>
+        <tag>git pull</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[搭建nGrinder性能测试平台并快速使用]]></title>
+    <url>%2F2019%2F02%2F26%2F02_%E6%90%AD%E5%BB%BA%20nGrinder%20%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%20%E5%B9%B6%E5%BF%AB%E9%80%9F%E4%BD%BF%E7%94%A8%2F</url>
+    <content type="text"><![CDATA[接上一篇的nGrinder介绍篇 一、nGrinder 组件介绍ngrinder包含Controller、agent 和 monitor 三部分 1、Controller 提供性能测试的web接口 协调测试进程 调整和显示测试的统计结果 让用户创建和修改脚本 2、Agent 在代理服务器上加载运行测试进程和线程 可以部署多台，提升压测能力 最好是能部署在单独的服务器上，如果没有条件的话，也可以跟Controller在一台服务器 但是不能部署在被测服务器上 3、Monitor 用于监控被测服务器的系统性能（例如：CPU/MEMORY） 必须部署在被测服务器上 二、nGrinder 环境搭建 $ java -XX:MaxPermSize=512m -jar ngrinder-controller-3.4.war –port 80可在下载ngrinder后，直接通过上面的命令运行也可以通过下面的方式，把war包放在tomcat容器中运行 1、安装JDK，配置环境变量2、安装Tomcat3、下载nGrinder：https://github.com/naver/ngrinder/releases4、把下载好的包放到Tomcat的webApps文件夹中5、启动Tomcat，并访问nGrinder nGrinder主页：http://localhost:8080/ngrinder-controller-3.4/ 看到下图表示搭建成功。 如果想直接通过http://localhost:8080/访问，把文件名改为ROOT.war即可 6、安装Agent 登录 nGrinder 管理台，默认账号和密码都是admin，点击右上角，选择 Download Private Agent (不同版本可能会稍有区别) ，如下图所示 把 ngrinder-agent 压缩包解压到用作Agent的服务器上，运行 run_agent.sh 即可 7、安装Monitor（需要安装在被测服务器上） 下载Monitor安装包，方法类似Agent 把 ngrinder-monitor 压缩包解压到被测服务器上，运行 run_monitor.sh 即可 补充说明： ngrinder支持开箱即用，不需要额外配置，第一次启动时，系统配置自动生成 默认使用H2数据库，且schema自动创建 版本更新时，数据库schema自动更新 agent 、monitor模块从controller下载，无需配置 版本更新时，只需更新controller，agent和monitor会自动更新 在线修改系统配置，多数据修改无需重启 即使用cluster模式，配置也很简单 三、快速使用1、输入测试URL，选择脚本语言，然后点击开始测试，会自动生成测试脚本并进入配置页面或者通过点击管理后上方的 script 或 脚本 按钮，进入脚本管理页面，创建脚本，效果相同。 在创建脚本时，可以选择使用的语言为Groovy或Jython，但是由于这两种语言执行性能上的差别，建议优先使用性能更好的Groovy来编写压测脚本（官方验证相同情况下groovy比jython支持2倍左右的并发数） 2、基本的压测配置 代理：是指压测所需要的server的数量 虚拟用户有两个指标： 进程数：每个server起多少进程去跑 线程数：每个进程新建的线程数量 并发量=代理数x进程数x线程数 Ramp-Up：设置增量测试，逐渐向最大的的并发量增长，只有勾选该框时，初始数、增量、初始等待时间、进程增长间隔的值才有效 测试时间：表示压测需要持续运行的时间测试次数：脚本执行的次数，同测试时间二选一 3、运行测试在配置页面右上角点击保存并运行，启动测试。 4、监控测试，查看结果当启动测试后，会在页面显示当前的TPS、虚拟用户、测试成功与否的数量等信息。测试完成后，会显示测试结果。 可以点击详细测试结果查看更详细的信息，比如TPS、平均时间、首次接受数据平均时间，以及被测服务器的CPU，MEM等信息。]]></content>
+      <categories>
+        <category>nGrinder</category>
+      </categories>
+      <tags>
+        <tag>nGrinder</tag>
+        <tag>nGrinder性能测试平台</tag>
       </tags>
   </entry>
   <entry>
@@ -331,15 +305,16 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[linux系统查看各种信息]]></title>
-    <url>%2F2019%2F02%2F26%2Flinux%E7%B3%BB%E7%BB%9F%E6%9F%A5%E7%9C%8B%E5%90%84%E7%A7%8D%E4%BF%A1%E6%81%AF%2F</url>
-    <content type="text"><![CDATA[一、查看操作系统信息1、uname -a 查看操作系统信息$ uname -a Linux VM_101_50_centos 2.6.32-642.6.2.el6.x86_64 #1 SMP Wed Oct 26 06:52:09 UTC 2016 x86_64 x86_64 x86_64 GNU/Linux 2、cat /etc/issue 查看内核$ cat /etc/issue CentOS release 6.3 (Final) Kernel \r on an \m 3、cat /etc/redhat-release # 查看内核$ cat /etc/redhat-release CentOS release 6.3 (Final) 4、其它hostname # 查看计算机名 env # 查看环境变量 二、查看CPU、内存、网络等资源信息1、常用命令1234567top # 实时显示进程状态free -m # 查看内存使用量和交换区使用量df -h # 查看各分区使用情况du -sh &lt;目录名&gt; # 查看指定目录的大小 2、查看网络12345ifconfig # 查看所有网络接口的属性netstat -lntp # 查看所有监听端口netstat -antp # 查看所有已经建立的连接netstat -s # 查看网络统计信息 3、查看进程和程序1234ps -ef # 查看所有进程 程序： rpm -qa # 查看所有安装的软件包 4、查看详细CPU信息/proc/cpuinfo12345678910111213141516171819202122232425262728$ cat /proc/cpuinfo processor : 0vendor_id : GenuineIntelcpu family : 6model : 63model name : Intel(R) Xeon(R) CPU E5-26xx v3stepping : 2microcode : 1cpu MHz : 2397.222cache size : 4096 KBphysical id : 0siblings : 1core id : 0cpu cores : 1apicid : 0initial apicid : 0fpu : yesfpu_exception : yescpuid level : 13wp : yesflags : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx lm constant_tsc rep_good unfair_spinlock pni pclmulqdq ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm abm xsaveoptbogomips : 4794.44clflush size : 64cache_alignment : 64address sizes : 40 bits physical, 48 bits virtualpower management:....有几核就会显示几块信息.... 5、查看详细内存信息/proc/meminfo12345678910111213141516171819202122232425262728293031323334353637383940414243$ cat /proc/meminfo MemTotal: 16332028 kBMemFree: 192596 kBBuffers: 9028 kBCached: 1082200 kBSwapCached: 220488 kBActive: 13422780 kBInactive: 2244716 kBActive(anon): 12885068 kBInactive(anon): 1706192 kBActive(file): 537712 kBInactive(file): 538524 kBUnevictable: 0 kBMlocked: 0 kBSwapTotal: 8191996 kBSwapFree: 1180728 kBDirty: 684 kBWriteback: 0 kBAnonPages: 14356000 kBMapped: 40076 kBShmem: 14992 kBSlab: 235844 kBSReclaimable: 183452 kBSUnreclaim: 52392 kBKernelStack: 39776 kBPageTables: 68364 kBNFS_Unstable: 0 kBBounce: 0 kBWritebackTmp: 0 kBCommitLimit: 16358008 kBCommitted_AS: 26461844 kBVmallocTotal: 34359738367 kBVmallocUsed: 42328 kBVmallocChunk: 34359687928 kBHardwareCorrupted: 0 kBAnonHugePages: 12441600 kBHugePages_Total: 0HugePages_Free: 0HugePages_Rsvd: 0HugePages_Surp: 0Hugepagesize: 2048 kBDirectMap4k: 8184 kBDirectMap2M: 16769024 kB 三、系统日志文件123456/var/log/message 系统启动后的信息和错误日志，是Red Hat Linux中最常用的日志之一 /var/log/secure 与安全相关的日志信息 /var/log/maillog 与邮件相关的日志信息 /var/log/cron 与定时任务相关的日志信息 /var/log/spooler 与UUCP和news设备相关的日志信息 /var/log/boot.log 守护进程启动和停止相关的日志消息]]></content>
+    <title><![CDATA[nGrinder解析响应结果并断言]]></title>
+    <url>%2F2019%2F02%2F26%2F08_%E8%A7%A3%E6%9E%90%E5%93%8D%E5%BA%94%E7%BB%93%E6%9E%9C%E5%B9%B6%E6%96%AD%E8%A8%80%2F</url>
+    <content type="text"><![CDATA[一、解析 JSONhttps://github.com/naver/ngrinder/wiki/How-to-parse-JSON 1、使用 JSONObject 解析并断言假设服务器返回以下内容，成功标志是 “responseCode”: “0000”：12345678910111213141516171819202122232425import com.alibaba.fastjson.JSONObject// ...@Testpublic void test1()&#123;truetry&#123;truetrue//发送请求truetrueHTTPResponse result = request.POST("http://xxxx/aa/bb/cc.html");truetrue//获取返回报文truetrueString respCode = JSONObject.parseObject(result.getText()).get("responseCode");truetrueif (respCode.equals("0000")) &#123;truetruetrueprintln "===返回==========成功"+result.getText();truetruetrueassertTrue("成功&lt;&lt;&lt;", respCode.equals("0000"))truetruetrueassertThat(result.responseCode, is(200));truetrue&#125;else &#123;truetruetruegrinder.logger.error("===失败=========="+result.getText())truetruetrueassertFalse("失败&gt;&gt;&gt;", !respCode.equals("0000"))truetrue&#125;true&#125; catch (Exception ex) &#123;truetrueassertFalse("失败&gt;&gt;&gt;"+ex,false)truetruegrinder.logger.error("===异常======"+ex)true&#125;&#125; 2、使用groovy的JsonSlurper解析并断言假设服务器返回以下内容，成功标志是 “resultCode”: 1：123456&#123; "data": &#123; "token": "9de6d5f2b62d4bb686de8033fd00bc65" &#125;, "resultCode": 1&#125; 解析方式：123456import groovy.json.JsonSlurper// ...def jsonData = new JsonSlurper().parseText(result.text)assertThat(jsonData.resultCode, is(1)) 二、使用 JUnit 的断言1、断言HTTP状态码和响应体123456def result = request.GET("http://www.google.com")// HTTP 状态码assertThat(result.statusCode, is(200))// 响应体assertThat(result.text, containsString("google")) 2、断言HTTP状态码，并进行逻辑判断123456789@Testpublic void testGoogle()&#123; HTTPResponse result = request.GET("http://www.google.com"); if (result.statusCode == 301 || result.statusCode == 302) &#123; grinder.logger.warn("Warning. The response may not be correct. The response code was &#123;&#125;.", result.statusCode); &#125; else &#123; assertThat(result.statusCode, is(200)); &#125;&#125;]]></content>
       <categories>
-        <category>linux</category>
+        <category>nGrinder</category>
       </categories>
       <tags>
-        <tag>linux</tag>
-        <tag>liunx系统信息</tag>
+        <tag>nGrinder</tag>
+        <tag>ngrinder解析json</tag>
+        <tag>ngrinder断言</tag>
       </tags>
   </entry>
   <entry>
@@ -367,19 +342,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[shell通配符和输入输出重定向]]></title>
-    <url>%2F2019%2F02%2F26%2Fshell%20%E9%80%9A%E9%85%8D%E7%AC%A6%26%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%87%8D%E5%AE%9A%E5%90%91%2F</url>
-    <content type="text"><![CDATA[一、shell 常用通配符1、* 匹配一个或多个任意的字符12345*.txt*txt*txt* 2、? 匹配一个任意的字符?.txt 3、[] 匹配一个范围中的一个字符1234567ls [123].txtls [1-3].txtls [0-9a-z].txtls [0-9a-zA-Z].txt 4、{} 匹配其中的一个字符，类似于[] {}和[]类似，都是匹配里面的其中一个字符 区别是：[]支持范围，{}不支持范围12345678910ls &#123;1,2,3,a,b&#125;.txtls &#123;1,2&#125;.txt## &#123;&#125; 和 [] 的区别：[app@centos tmp]$ ls &#123;1-3&#125;.txtls: cannot access &#123;1-3&#125;.txt: No such file or directory[app@centos tmp]$ ls [1-3].txt1.txt 2.txt 二、输入输出重定向1、&gt; (正确)输出重定向（重写）cat 1.txt &gt; 2.txt # 把1.txt中的内容写入2.txt； # 若2.txt在写入前非空，会先清除原有内容后再写入。 2、&gt;&gt; (正确)输出重定向（追加）cat 1.txt &gt;&gt; 2.txt # 把1.txt中的内容追加在2.txt原有内容之后 3、2&gt; 错误输出重定向（重写）lsaaa 2&gt; err.log # 把左边命令执行后的错误信息输出到err.log中； # 如果err.log在输出前非空，会先清除原有内容后再输出。 4、2&gt;&gt;错误输出重定向（追加）lsaaa 2&gt;&gt; err.log # 把左边命令执行后的错误信息追加到err.log原有内容后面，不会清除原有内容。 5、&amp;&gt;（重写）重定向正确和错误的信息 把&amp;&gt;左边命令执行后产生的正确和错误的所有信息，输出到 &amp;&gt;右边的文件中（先清除文件内容）。 等价于 &gt; 和 2&gt; 结合使用123456[app@centos tmp]$ ls1.txt[app@centos tmp]$ ls 1.txt 2.txt &amp;&gt; log[app@centos tmp]$ cat logls: cannot access 2.txt: No such file or directory1.txt 6、&amp;&gt;&gt;（追加）重定向正确和错误的信息 把&amp;&gt;&gt;左边命令执行后产生的正确和错误的所有信息，追加输出到 &amp;&gt;&gt;右边的文件中。 等价于 &gt;&gt; 和 2&gt;&gt; 结合使用 12345678[app@centos tmp]$ ls1.txt log[app@centos tmp]$ ls 1.txt 2.txt &amp;&gt;&gt; log[app@centos tmp]$ cat logls: cannot access 2.txt: No such file or directory1.txtls: cannot access 2.txt: No such file or directory1.txt 7、&gt; 和 2&gt; 结合，分别输出正确和错误的信息12345678910[app@centos tmp]$ ls1.txt 2.txt log[app@centos tmp]$ ls [12].txt a.txt &gt; 1.txt 2&gt; err.log# 把命令执行后生成的正确信息重写输出到1.txt，错误信息重写输出到err.log[app@centos tmp]$ cat 1.txt1.txt2.txt[app@centos tmp]$ cat err.log ls: cannot access a.txt: No such file or directory 8、&lt; 输入重定向 把&lt; 右边的文件内容输入给左边的命令后，执行左边的命令 左边必须是一个命令，不能是文件123456789[app@centos tmp]$ cat 1.txt 12[app@centos tmp]$ wc -l &lt; 1.txt2[app@centos tmp]$ 2.txt &lt; 1.txt-bash: 2.txt: command not found## 左边必须是命令！]]></content>
-      <categories>
-        <category>shell</category>
-      </categories>
-      <tags>
-        <tag>shell</tag>
-        <tag>通配符</tag>
-        <tag>输入输出重定向</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[linux管道符和作业控制]]></title>
     <url>%2F2019%2F02%2F26%2Fshell%20%E7%AE%A1%E9%81%93%E7%AC%A6%26%E4%BD%9C%E4%B8%9A%E6%8E%A7%E5%88%B6%2F</url>
     <content type="text"><![CDATA[一、管道符 | 把前面命令输出的结果，传递给后面的命令。 示例：12345678统计文件的行数cat 1.txt | wc -l过滤文件内容cat 1.txt | grep aaa查看当前目录下有多少个文件：find ./ -type f | wc -l 二、作业控制1、Ctrl C停止一个任务 在执行一个命令的过程中，彻底停止一个任务。 执行之后，jobs查看不到该任务。 1234[app@centos tmp]$ sleep 10^C[app@centos tmp]$ jobs[1]+ Stopped sleep 100 2、Ctrl Z 暂停一个任务 在执行一个命令的过程中，暂停一个任务。 执行之后，jobs可以查看到该任务。 12345[app@centos tmp]$ sleep 100^Z[1]+ Stopped sleep 100[app@centos tmp]$ jobs[1]+ Stopped sleep 100 注意： 执行Ctrl C 和 Ctrl Z之后，都会显示 Stopped 状态，但是Ctrl Z的任务只是被暂停了，可以通过jobs进行调度。 3、jobs 查看后台的任务 查看当前会话窗口中后台任务，包括名称和命令序号id 包括被ctrl z暂停的任务 和 被 &amp;放入后台运行的任务123456789[app@centos tmp]$ sleep 10^Z[1]+ Stopped sleep 10[app@centos tmp]$ sleep 20^Z[2]+ Stopped sleep 20[app@centos tmp]$ jobs[1]- Stopped sleep 10[2]+ Stopped sleep 20 4、bg[id]把任务调到后台并运行 bg即background，把被暂停的任务放入后台运行 后面加上作业id号可以指定某一个作业，不加id时默认最近的一个作业。 示例： （注意下面命令中的状态变化）12345678[app@centos tmp]$ jobs[2]- Stopped sleep 20[3]+ Stopped sleep 50[app@centos tmp]$ bg 3[3]+ sleep 50 &amp;[app@centos tmp]$ jobs[2]+ Stopped sleep 20[3]- Running sleep 50 &amp; 5、fg[id]把任务调到前台 fg即foreground，把后台作业调到前台运行 后面加上作业id号可以指定某一个作业，不加id时默认最近的一个作业。 示例： 把被暂停的任务调到前台继续运行： 6、&amp;把任务放入后台运行 直接在命令后面加&amp;即可 命令在后台是Running状态 相当于对命令执行Ctrl Z 和 bg 1234567[app@centos tmp]$ jobs[2]+ Stopped sleep 20[app@centos tmp]$ sleep 50 &amp;[3] 12580[app@centos tmp]$ jobs[2]+ Stopped sleep 20[3]- Running sleep 50 &amp;]]></content>
@@ -390,6 +352,19 @@
         <tag>shell</tag>
         <tag>管道符</tag>
         <tag>linux作业控制</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[shell通配符和输入输出重定向]]></title>
+    <url>%2F2019%2F02%2F26%2Fshell%20%E9%80%9A%E9%85%8D%E7%AC%A6%26%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%87%8D%E5%AE%9A%E5%90%91%2F</url>
+    <content type="text"><![CDATA[一、shell 常用通配符1、* 匹配一个或多个任意的字符12345*.txt*txt*txt* 2、? 匹配一个任意的字符?.txt 3、[] 匹配一个范围中的一个字符1234567ls [123].txtls [1-3].txtls [0-9a-z].txtls [0-9a-zA-Z].txt 4、{} 匹配其中的一个字符，类似于[] {}和[]类似，都是匹配里面的其中一个字符 区别是：[]支持范围，{}不支持范围12345678910ls &#123;1,2,3,a,b&#125;.txtls &#123;1,2&#125;.txt## &#123;&#125; 和 [] 的区别：[app@centos tmp]$ ls &#123;1-3&#125;.txtls: cannot access &#123;1-3&#125;.txt: No such file or directory[app@centos tmp]$ ls [1-3].txt1.txt 2.txt 二、输入输出重定向1、&gt; (正确)输出重定向（重写）cat 1.txt &gt; 2.txt # 把1.txt中的内容写入2.txt； # 若2.txt在写入前非空，会先清除原有内容后再写入。 2、&gt;&gt; (正确)输出重定向（追加）cat 1.txt &gt;&gt; 2.txt # 把1.txt中的内容追加在2.txt原有内容之后 3、2&gt; 错误输出重定向（重写）lsaaa 2&gt; err.log # 把左边命令执行后的错误信息输出到err.log中； # 如果err.log在输出前非空，会先清除原有内容后再输出。 4、2&gt;&gt;错误输出重定向（追加）lsaaa 2&gt;&gt; err.log # 把左边命令执行后的错误信息追加到err.log原有内容后面，不会清除原有内容。 5、&amp;&gt;（重写）重定向正确和错误的信息 把&amp;&gt;左边命令执行后产生的正确和错误的所有信息，输出到 &amp;&gt;右边的文件中（先清除文件内容）。 等价于 &gt; 和 2&gt; 结合使用123456[app@centos tmp]$ ls1.txt[app@centos tmp]$ ls 1.txt 2.txt &amp;&gt; log[app@centos tmp]$ cat logls: cannot access 2.txt: No such file or directory1.txt 6、&amp;&gt;&gt;（追加）重定向正确和错误的信息 把&amp;&gt;&gt;左边命令执行后产生的正确和错误的所有信息，追加输出到 &amp;&gt;&gt;右边的文件中。 等价于 &gt;&gt; 和 2&gt;&gt; 结合使用 12345678[app@centos tmp]$ ls1.txt log[app@centos tmp]$ ls 1.txt 2.txt &amp;&gt;&gt; log[app@centos tmp]$ cat logls: cannot access 2.txt: No such file or directory1.txtls: cannot access 2.txt: No such file or directory1.txt 7、&gt; 和 2&gt; 结合，分别输出正确和错误的信息12345678910[app@centos tmp]$ ls1.txt 2.txt log[app@centos tmp]$ ls [12].txt a.txt &gt; 1.txt 2&gt; err.log# 把命令执行后生成的正确信息重写输出到1.txt，错误信息重写输出到err.log[app@centos tmp]$ cat 1.txt1.txt2.txt[app@centos tmp]$ cat err.log ls: cannot access a.txt: No such file or directory 8、&lt; 输入重定向 把&lt; 右边的文件内容输入给左边的命令后，执行左边的命令 左边必须是一个命令，不能是文件123456789[app@centos tmp]$ cat 1.txt 12[app@centos tmp]$ wc -l &lt; 1.txt2[app@centos tmp]$ 2.txt &lt; 1.txt-bash: 2.txt: command not found## 左边必须是命令！]]></content>
+      <categories>
+        <category>shell</category>
+      </categories>
+      <tags>
+        <tag>shell</tag>
+        <tag>通配符</tag>
+        <tag>输入输出重定向</tag>
       </tags>
   </entry>
   <entry>
@@ -442,6 +417,19 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[JMeter源码导入IntelliJ IDEA]]></title>
+    <url>%2F2019%2F02%2F26%2FJMeter%E6%BA%90%E7%A0%81%E5%AF%BC%E5%85%A5IntelliJ%20IDEA%2F</url>
+    <content type="text"><![CDATA[之前文章中讲了 idea 导入 maven 项目，但是 jmeter 源码是 eclipse 项目结构，而且有些地方要进行特殊配置，所以单独记录一下。 使用环境： Win 7 + JMeter 5.0 + IntelliJ IDEA 2018.2.6 1、下载并解压 jmeter 源码 源码下载地址: http://jmeter.apache.org/download_jmeter.cgi，选择 Source 下的 zip 格式下载到本地； 解压到本地目录，如我的目录是 D:\software\apache-jmeter-5.0； 2、修改配置（重要！）这一步必须要进行，不然无法导入！ 进入解压后的目录，会看到两个文件：eclipse.classpath和eclipse.projecte，分别修改为 .classpath 和 .projecte ； 在 windows 下不能直接修改，要使用 cmd 命令行； 打开 cmd 命令行窗口，进入解压的源码目录下，执行： ren .eclipse.classpath .classpath ren .eclipse.project .project 3、导入 IDEA打开 IDEA，导入源码。 File -&gt; New -&gt; Project from Existing Sources ，选择源码目录； 选择按 eclipse 项目导入，如下所示： 其它全部按默认，一直 Next 即可。 4、Ant 下载依赖 jar 包 在窗口右侧 Ant Build 中，点击 + ，选择源码目录下的 build.xml，会把所有相关信息展示在右侧列表中； 双击列表中的 download_jars ,会自动下载所有缺失 jar 包，到 jmeter 源码目录的 lib 目录下； 5、更新项目中的依赖 jar 包在首次导入项目时，会自动在 dependency 下添加依赖 jar 包，但都是缺失状态，当我们用 Ant 下载好 jar 包后，IDEA 并不会自动更新，必须要手动更新。 在项目上右键打开 Open Module Settings,在项目 src 下点击 protocol 文件夹，再点击上方 Sources 按钮，点击 Apply。 点击 Dependencies，删除所有报错的 jar 包； 重新添加新下载的 jar 包：右侧 + ，选择 JARs or directories，依次选择源码目录下的 lib 目录和 lib 下的几个目录，最后 Apply ： 6、Ant install重新添加 jar 包后，必须执行 Ant install。 7、设置运行的 VM optionsJMeter 的启动类是 NewDriver，可以先找到这个类，尝试运行一下，肯定会报错找不到路径。 因为 jmeter 启动类中默认是去找的 parent 目录，所以报找不到路径，需要手动配置一下 jmeter 运行时的 home 路径，在 VM options 中配置。 在 VM options 填入 -Djmeter.home=D:\myWork\apache-jmeter-5.0，如下所示： 此时，再次运行 NewDriver，就可以正常启动 jmeter 界面了！！]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>jmeter</tag>
+        <tag>IntelliJ IDEA</tag>
+        <tag>jmeter源码导入IDEA</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[使用du、df和sort命令快速找出linux系统中的大文件]]></title>
     <url>%2F2019%2F02%2F26%2F%E4%BD%BF%E7%94%A8du%E3%80%81df%E5%92%8Csort%E5%91%BD%E4%BB%A4%E5%BF%AB%E9%80%9F%E6%89%BE%E5%87%BAlinux%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E5%A4%A7%E6%96%87%E4%BB%B6%2F</url>
     <content type="text"><![CDATA[在性能测试中，我们经常要关注系统磁盘空间，防止因磁盘空间占满而导致的报错，那么具体怎么查看磁盘空间的大小呢？怎么找到占用空间最大的文件呢？ 使用df、du并结合sort，可以快速找到系统中的大文件！ 一、df 和 du 两者区别1、df—disk free 可以快速获取 磁盘 被占用了多少空间，目前还剩下多少空间等信息。 2、du—disk usage 显示磁盘空间的使用情况，统计 目录（或文件）所占磁盘空间的大小。 是不是感觉字面看起来没啥区别呀？哈哈，实际有很多不同哦 3、df 和 du 的不同点：（1）统计的范围不同123df 是从总体上统计系统各磁盘的占用情况，不能统计具体的文件夹或文件的大小。du 既可以从总体上统计，又可以统计具体的某个文件夹或文件的大小。 （2）计算方式不同，计算速度不同1234df 通过文件系统来快速获取空间大小的信息，速度快，效率高du 通过逐级进入指定目录的每一个子目录，逐个计算每个文件大小并相加，最终显示出来。所以计算速度慢，当文件目录较多文件较大时要等很久很久！！而且因为要进入每个子目录计算文件大小，如果当前用户对某些文件/夹没有访问权限时，无法进行计算。 （3）计算结果的差异1234567df 可以获取已经删除的文件。由于df是通过文件系统来获取空间大小的，当我们删除一个文件的时候，这个文件不是马上就在文件系统当中消失了，而是暂时消失了，当所有程序都不用时，才会根据OS的规则释放掉已经删除的文件。所以当一个文件刚删除清空没完全释放时，df 仍会把它计算在内。（当你删除一个大文件前后可以分别用df 命令查看一下，刚删除时还在占用磁盘空间）du 只能看到当前存在的、没有被删除的文件。他计算的大小就是当前他认为存在的所有文件大小的累加和。当文件系统也确定删除了该文件后，这时候du与df 的结果就一致了。所以在这一点上，可以说du 计算更精确，也可以说df 计算有延迟，根据个人情况使用就行。 二、df 命令1、df -h(-h参数使结果以K，M，G为单位，提高信息的可读性) 1234[app@VM_18_18_centos jjingli]$ df -hFilesystem Size Used Avail Use% Mounted on/dev/vda1 20G 15G 4.3G 78% //dev/vdb 118G 100G 13G 89% /data 默认显示系统所有的磁盘情况，此图中显示当前一共有两个硬盘分区，及各自的占用情况。 2、df -h 分区名该命令可以指定显示某个分区的占用情况，用的比较少 当使用 df -h 命令看到磁盘占用较高时，需要使用 du 命令进一步查看哪些文件较大，进而删除。 三、du 命令1、du -sh(-h 参数同样是为了提高可读性，-s 代表summary，只显示总大小) 12[app@VM_18_18_centos jjingli]$ du -sh6.4G 默认显示当前目录下所有文件和文件夹的总大小。 当目录下文件夹特别多时，记得不要去掉-s参数，不然会把所有文件夹下的所有文件分别列出来。 2、du -sh 目录名du -sh 在不指定目录的情况下，默认会显示当前目录下的所有子目录的总大小。 du -sh 目录名 在指定目录的情况下，会显示指定目录下的所有文件或文件夹的大小。12345du -sh * # 显示当前目录下的所有文件和文件夹大小du -sh / # 显示根目录下所有的文件和文件夹大小du -sh /data # 显示/data目录下所有的文件和文件夹大小 3、du 和 sort 结合对文件排序1234567891011121314# 查看/data目录下的所有文件和文件夹大小，并从大到小排序du -sh /data | sort -nr这个命令对吗？不对！因为du -sh展示的结果单位不同，但是sort排序只能针对数字，导致980KB的文件排在1GB文件的前面。 # 查看/data目录下的所有文件和文件夹大小，找出所有GB大小的文件，并从大到小排序du -sh /data | grep G | sort -nr# 这样就可以达到目的了~, 但是如果文件夹较多的话，还要一个一个的进入去找# 去掉 -s 参数，可以直接查看包括所有文件夹下的所有文件du -h /data | grep G | sort -nr]]></content>
@@ -470,17 +458,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[有道云和csdn中使用markdown]]></title>
-    <url>%2F2019%2F02%2F26%2F%E6%9C%89%E9%81%93%E4%BA%91%E5%92%8Ccsdn%E4%B8%ADmarkdown%E4%BD%BF%E7%94%A8%2F</url>
-    <content type="text"><![CDATA[此文中的方法适用于有道云和csdn的markdown编辑器，其它平台尚未验证。 一、字体增大1、为什么要字体增大？有道云的普通笔记可以设置默认字体大小，但是不支持markdown默认字体。当写完预览markdown，发会现，正文字太小了。 2、字体增大的方法？ 用一组 &lt;font size=4&gt; &lt;/font&gt;将全部正文内容包含进去就可以了。 可以直接修改正文中的所有普通文本大小，同时不会影响标题字号。 可以修改size自由调整大小 二、生成目录1、为什么要生成目录？方便有个对文章的大局观，一眼就知道这篇文章到底写了什么，便于定位。 2、生成目录的方法？ 非常简单，直接在第一行加上 [toc]即可！ 当然，前提是你在正文中正确使用了标题格式。 如果在第一行设置了字体大小，那么把 [toc]写在第二行就行了。 三、设置锚点-页内链接1、锚点的作用？ 用于文章快速定位，点击目录便可直接跳转到指定位置。 锚点是是网页制作中超级链接的一种，又叫命名锚记。 使用命名锚记可以在文档中设置标记，这些标记通常放在文档的特定主题处或顶部。然后可以创建到这些命名锚记的链接，这些链接可快速将访问者带到指定位置。 2、如何创建锚点？锚点的添加：使用a标签，href里面填写对应的标题名字 分为两步： 创建命名锚记 格式为 [指引到目标位置的说明文字](#目标位置的id名称) 创建到该命名锚记的链接 格式为 &lt;span id = &quot;目标位置的id名称&quot;&gt;跳转到的目标位置&lt;/span&gt; 举例：123&lt;a href="#jump" target="_self"&gt;说明文字&lt;/a&gt;&lt;span id ="jump"&gt;&lt;font color="red"&gt;跳转到这里：&lt;/font&gt;&lt;/span&gt; 效果： 说明文字 跳转到这里： 四、输入空格有两种方法： 1、中文模式下，Shift+空格切换为全角模式后，按空格键即可。 2、\&nbsp; 或 \&#160; 需要几个空格就输入几次。 五、csdn markdown中添加黄色高亮在有道云笔记的markdown编辑器中，工具栏有Mark按钮可以直接对文字进行黄色高亮显示，非常方便。 实际在源码中是通过一对 == 包围文字即可。 在csdn markdown中也可以用这种方法，实现黄色高亮！ 如： ==xxxxxxx==xxxxx 效果：==xxxxxxx==xxxxx 六、表格内换行使用html代码\实现单元格换行，变相实现合并单元格的效果。 1、markdown语法：1234|姓名|爱好|--|--|张三|足球&lt;br&gt;篮球李四|羽毛球&lt;br&gt;乒乓球 2、实现效果： 姓名 爱好 张三 足球篮球 李四 羽毛球乒乓球]]></content>
-      <categories>
-        <category>办公利器</category>
-      </categories>
-      <tags>
-        <tag>markdown</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[总结linux中文本查看命令cat-less-more-tail-head]]></title>
     <url>%2F2019%2F02%2F26%2F%E6%80%BB%E7%BB%93linux%E4%B8%AD%E6%96%87%E6%9C%AC%E6%9F%A5%E7%9C%8B%E5%91%BD%E4%BB%A4cat-less-more-tail-head%2F</url>
     <content type="text"><![CDATA[0、各命令的主要区别：linux命令中cat、more、less、tail、head均可用来查看文件内容，主要区别有： cat是一次性显示整个文件的内容，适用于文件内容少的情况； more和less一般用于显示文件内容超过一屏的内容，并且提供翻页的功能。 tail 和 head分别显示文件的后几行和前几行内容。常用于大文件的截取。 一、catcat 命令常用于显示整个文件的内容，或者合并多个文件。 cat [options] fileName 1、常用参数： -n 或 --number：由 1 开始对所有输出的行数编号。 -b 或 --number-nonblank：和 -n 相似，只不过对于空白行不编号。 2、实例：（1）把 file1 的文档内容全部显示在屏幕上： cat file1 （2）把 file1 的文档内容加上行号后输入 file2 这个文档里： cat -n file1 &gt; file2 （注意：如果file2中原本有内容，此命令会覆盖file2中原有内容） （3）把file1和file2的内容合并到file3，同样会覆盖原file3.txt中的内容： cat file1 file2 &gt; file3 （4）把 file1 和 file2 的文档内容加上行号（空白行不加）之后将内容追加到 file3 文档里： cat -b file1 file2 &gt;&gt; file3 （5）清空 /etc/test.txt 文档内容： cat /dev/null &gt; /etc/test.txt ==当使用&gt;时，cat会覆盖右边的文件；当使用&gt;&gt;时，cat会追加到右边的文件中。== 3、cat 的反命令–tac 命令把cat 单词反过来就是 tac, 该命令同样是显示整个文件的内容，但是倒序显示。 二、moremore 比 cat 功能更强大，会让日志分页显示，同时显示内容的百分比，更方便阅读。 最基本的指令就是按空白键（space）就往下一页显示，按 b 键就会往回（back）一页显示，而且还有搜寻字串的功能（只能用/向下搜索）。 1、语法：more [-dlfpcsu] [-num] [+/pattern] [+linenum] [fileNames..] 2、常用参数： -num 一次显示的行数 +/pattern 在每个文档显示前搜寻该字串（pattern），然后从该字串前两行开始显示 /字符串：向下搜索”字符串”的功能 +num 从第 num 行开始显示 fileNames 欲显示内容的文档，可以是多个文件 3、实例：（1）逐页显示file1内容： more file1 （2）设定每屏显示的行数： more -10 file1 以10行为单位翻页 （3）从第 20 行开始显示 file1 内容： more +20 file1 （4）同时显示多个文件内容： more file1 file2 依次显示出file1和file2的全部内容。 （5）从文件中查找第一个出现”liu”字符串的行，并从该处前两行开始显示输出： more +/liu test.log 4、常用操作命令 命令 作用 Enter 向下n行，需要定义，默认为1行 空格键 向下滚动一屏 b 向上滚动一屏 = 输出当前行的行号 :f 输出文件名和当前行的行号 V 调用vi编辑器 ! 调用Shell，并执行命令 三、lessless 与 more 类似，less 的用法比起 more 更加的有弹性。 而且拥有更多的搜索功能，不止可以向下搜，也可以向上搜，跟vi中的搜索功能更相似。 1、语法：less [参数] [fileNames...] 2、常用参数： 命令 作用 -f 强迫打开特殊文件，例如外围设备代号、目录和二进制文件 -i 忽略搜索时的大小写 -m 显示类似more命令的百分比 -M 显示读取文件的百分比、行号及总行数 -N 在每行前显示行号 /字符串 向下搜索”字符串”的功能 ?字符串 向上搜索”字符串”的功能 n 重复前一个搜索（与 / 或 ? 有关） N 反向重复前一个搜索（与 / 或 ? 有关） &amp;pattern 仅显示匹配模式的行，而不是整个文件 空格键 滚动一页 回车键 滚动一行 [pagedown] 向下翻动一页 [pageup] 向上翻动一页 G 移动到最后一行 g 移动到第一行 v 使用配置的编辑器编辑当前文件 h 显示 less 的帮助文档 3、less 版 tail -f在 Linux 动态查看日志文件常用的命令非 tail -f 莫属。 其实 less 也能完成这项工作，使用 F 命令即可。 在 less 查看日志文件时： 可以按大写 F，就会有类似 tail -f 的效果，读取写入文件的最新内容， 按 ctrl+C 停止。 可以按 v 进入编辑模型， shift+ZZ 保存退出到 less 查看模式。 可以按 :e 查看下一个文件， 用 :n 和 :p 来回切换。 4、实例1、分页查看文件，与more类似： less log1.log 2、ps查看进程信息并通过less分页显示同时显示行号： ps -ef | less -N 3、查看命令历史使用记录并通过less分页显示： 4、浏览多个文件 less log2.log log2.log 说明： 输入 ：n后，切换到 log2.log 输入 ：p 后，切换到log1.log 总结：less 和 more 对比 1、more命令从前向后读取文件，因此在启动时就加载整个文件，如果文件较大时，加载速度慢。 2、 less 并未在一开始就读入整个文件，因此在遇上查看大文件时，会比more、vi等工具的速度更快。同时，less的查找功能更强大。 3、more和less都支持：用空格显示下一页，按键b显示上一页。。 四、tailtail 用来显示文件的最后几行内容。 当文件内容有更新时，tail会自己主动刷新，确保一直显示最新的文件内容。 1、命令语法tail [ -f ] [ -c Number | -n Number | -m Number | -b Number | -k Number ] [ File ] 2、常用参数： -f 监视File文件增长，动态刷新文件 -n Number 从倒数Number行位置读取指定文件 -c Number 从倒数Number字节数位置读取指定文件 3、实例（1）显示文件最后几行内容： tail filename 默认只显示文件最后10行内容，并退出文件，不会自动刷新。 （2）显示文件最后50行内容： tail -n 50 filename 显示文件最后50行内容，并退出文件，不会自动刷新。 （3）显示文件最后内容，并动态刷新： tail -f filename 或 tailf filename 监视filename文件的尾部内容（默认10行，相当于增加参数 -n 10），并动态刷新显示在屏幕上。按下CTRL+C可退出。 （4）指定文件动态刷新的行数：tail -50f filename显示最后50行文件内容，并动态刷新，每次刷新50行。（5）截取文件的后1000行，并保存到新文件中 tail -n 1000 file1.txt &gt; file2.txt 五、headhead 用来显示文件的前面几行内容，可以指定行数和字节数。 1、命令语法tail [-v | -c Number | -n Number] [ File ] 2、常用参数： -v 在输出内容前面显示文件名 -n Number 显示文件的前面Number行内容 -c Number 显示文件的前面Number字节内容 3、实例（1）显示前5行，并显示文件名 head -vn 5 head.txt （2）显示前5个字节 head -c 5 head.txt （3）截取文件的前100行，并保存到新文件中 head -n 1000 file1.txt &gt; file2.txt 总结：tail 和 head 对比1、tail 可显示文件最后几行的内容，并动态刷新。 2、head 可显示文件前面几行的内容。 3、二者也常用于大文件的截取。]]></content>
@@ -497,14 +474,14 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[看图学Git！]]></title>
-    <url>%2F2019%2F02%2F26%2F%E7%9C%8B%E5%9B%BE%E5%AD%A6Git%20!%2F</url>
-    <content type="text"><![CDATA[之前在学习 git 的过程中，经常被各种命令和概念搞晕，所以我总结了一个个图表，方便记忆，希望对正在学习git 的朋友有帮助。 能发图就不打字，哈哈哈哈哈…… 一、常用命令图解单纯用文字表达不容易理解，所以我把关键内容转化成图表，方便理解。 1、add - commit - push 2、暂存区-本地仓库-远程仓库可以结合上面的图一起理解。(这张图是借鉴其它网友的，不记得在哪里看的了) 二、主要功能图解我把 git 的主要功能全部体现在这张图里了，一图在手，git 无忧~ 如果还觉得不够详细，再放出我之前总结的思维导图吧：]]></content>
+    <title><![CDATA[有道云和csdn中使用markdown]]></title>
+    <url>%2F2019%2F02%2F26%2F%E6%9C%89%E9%81%93%E4%BA%91%E5%92%8Ccsdn%E4%B8%ADmarkdown%E4%BD%BF%E7%94%A8%2F</url>
+    <content type="text"><![CDATA[此文中的方法适用于有道云和csdn的markdown编辑器，其它平台尚未验证。 一、字体增大1、为什么要字体增大？有道云的普通笔记可以设置默认字体大小，但是不支持markdown默认字体。当写完预览markdown，发会现，正文字太小了。 2、字体增大的方法？ 用一组 &lt;font size=4&gt; &lt;/font&gt;将全部正文内容包含进去就可以了。 可以直接修改正文中的所有普通文本大小，同时不会影响标题字号。 可以修改size自由调整大小 二、生成目录1、为什么要生成目录？方便有个对文章的大局观，一眼就知道这篇文章到底写了什么，便于定位。 2、生成目录的方法？ 非常简单，直接在第一行加上 [toc]即可！ 当然，前提是你在正文中正确使用了标题格式。 如果在第一行设置了字体大小，那么把 [toc]写在第二行就行了。 三、设置锚点-页内链接1、锚点的作用？ 用于文章快速定位，点击目录便可直接跳转到指定位置。 锚点是是网页制作中超级链接的一种，又叫命名锚记。 使用命名锚记可以在文档中设置标记，这些标记通常放在文档的特定主题处或顶部。然后可以创建到这些命名锚记的链接，这些链接可快速将访问者带到指定位置。 2、如何创建锚点？锚点的添加：使用a标签，href里面填写对应的标题名字 分为两步： 创建命名锚记 格式为 [指引到目标位置的说明文字](#目标位置的id名称) 创建到该命名锚记的链接 格式为 &lt;span id = &quot;目标位置的id名称&quot;&gt;跳转到的目标位置&lt;/span&gt; 举例：123&lt;a href="#jump" target="_self"&gt;说明文字&lt;/a&gt;&lt;span id ="jump"&gt;&lt;font color="red"&gt;跳转到这里：&lt;/font&gt;&lt;/span&gt; 效果： 说明文字 跳转到这里： 四、输入空格有两种方法： 1、中文模式下，Shift+空格切换为全角模式后，按空格键即可。 2、\&nbsp; 或 \&#160; 需要几个空格就输入几次。 五、csdn markdown中添加黄色高亮在有道云笔记的markdown编辑器中，工具栏有Mark按钮可以直接对文字进行黄色高亮显示，非常方便。 实际在源码中是通过一对 == 包围文字即可。 在csdn markdown中也可以用这种方法，实现黄色高亮！ 如： ==xxxxxxx==xxxxx 效果：==xxxxxxx==xxxxx 六、表格内换行使用html代码\实现单元格换行，变相实现合并单元格的效果。 1、markdown语法：1234|姓名|爱好|--|--|张三|足球&lt;br&gt;篮球李四|羽毛球&lt;br&gt;乒乓球 2、实现效果： 姓名 爱好 张三 足球篮球 李四 羽毛球乒乓球]]></content>
       <categories>
-        <category>git</category>
+        <category>办公利器</category>
       </categories>
       <tags>
-        <tag>git</tag>
+        <tag>markdown</tag>
       </tags>
   </entry>
   <entry>
@@ -517,6 +494,29 @@
       <tags>
         <tag>参数化</tag>
         <tag>性能测试</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[linux系统查看各种信息]]></title>
+    <url>%2F2019%2F02%2F26%2Flinux%E7%B3%BB%E7%BB%9F%E6%9F%A5%E7%9C%8B%E5%90%84%E7%A7%8D%E4%BF%A1%E6%81%AF%2F</url>
+    <content type="text"><![CDATA[一、查看操作系统信息1、uname -a 查看操作系统信息$ uname -a Linux VM_101_50_centos 2.6.32-642.6.2.el6.x86_64 #1 SMP Wed Oct 26 06:52:09 UTC 2016 x86_64 x86_64 x86_64 GNU/Linux 2、cat /etc/issue 查看内核$ cat /etc/issue CentOS release 6.3 (Final) Kernel \r on an \m 3、cat /etc/redhat-release # 查看内核$ cat /etc/redhat-release CentOS release 6.3 (Final) 4、其它hostname # 查看计算机名 env # 查看环境变量 二、查看CPU、内存、网络等资源信息1、常用命令1234567top # 实时显示进程状态free -m # 查看内存使用量和交换区使用量df -h # 查看各分区使用情况du -sh &lt;目录名&gt; # 查看指定目录的大小 2、查看网络12345ifconfig # 查看所有网络接口的属性netstat -lntp # 查看所有监听端口netstat -antp # 查看所有已经建立的连接netstat -s # 查看网络统计信息 3、查看进程和程序1234ps -ef # 查看所有进程 程序： rpm -qa # 查看所有安装的软件包 4、查看详细CPU信息/proc/cpuinfo12345678910111213141516171819202122232425262728$ cat /proc/cpuinfo processor : 0vendor_id : GenuineIntelcpu family : 6model : 63model name : Intel(R) Xeon(R) CPU E5-26xx v3stepping : 2microcode : 1cpu MHz : 2397.222cache size : 4096 KBphysical id : 0siblings : 1core id : 0cpu cores : 1apicid : 0initial apicid : 0fpu : yesfpu_exception : yescpuid level : 13wp : yesflags : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx lm constant_tsc rep_good unfair_spinlock pni pclmulqdq ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm abm xsaveoptbogomips : 4794.44clflush size : 64cache_alignment : 64address sizes : 40 bits physical, 48 bits virtualpower management:....有几核就会显示几块信息.... 5、查看详细内存信息/proc/meminfo12345678910111213141516171819202122232425262728293031323334353637383940414243$ cat /proc/meminfo MemTotal: 16332028 kBMemFree: 192596 kBBuffers: 9028 kBCached: 1082200 kBSwapCached: 220488 kBActive: 13422780 kBInactive: 2244716 kBActive(anon): 12885068 kBInactive(anon): 1706192 kBActive(file): 537712 kBInactive(file): 538524 kBUnevictable: 0 kBMlocked: 0 kBSwapTotal: 8191996 kBSwapFree: 1180728 kBDirty: 684 kBWriteback: 0 kBAnonPages: 14356000 kBMapped: 40076 kBShmem: 14992 kBSlab: 235844 kBSReclaimable: 183452 kBSUnreclaim: 52392 kBKernelStack: 39776 kBPageTables: 68364 kBNFS_Unstable: 0 kBBounce: 0 kBWritebackTmp: 0 kBCommitLimit: 16358008 kBCommitted_AS: 26461844 kBVmallocTotal: 34359738367 kBVmallocUsed: 42328 kBVmallocChunk: 34359687928 kBHardwareCorrupted: 0 kBAnonHugePages: 12441600 kBHugePages_Total: 0HugePages_Free: 0HugePages_Rsvd: 0HugePages_Surp: 0Hugepagesize: 2048 kBDirectMap4k: 8184 kBDirectMap2M: 16769024 kB 三、系统日志文件123456/var/log/message 系统启动后的信息和错误日志，是Red Hat Linux中最常用的日志之一 /var/log/secure 与安全相关的日志信息 /var/log/maillog 与邮件相关的日志信息 /var/log/cron 与定时任务相关的日志信息 /var/log/spooler 与UUCP和news设备相关的日志信息 /var/log/boot.log 守护进程启动和停止相关的日志消息]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>liunx系统信息</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[看图学Git！]]></title>
+    <url>%2F2019%2F02%2F26%2F%E7%9C%8B%E5%9B%BE%E5%AD%A6Git%20!%2F</url>
+    <content type="text"><![CDATA[之前在学习 git 的过程中，经常被各种命令和概念搞晕，所以我总结了一个个图表，方便记忆，希望对正在学习git 的朋友有帮助。 能发图就不打字，哈哈哈哈哈…… 一、常用命令图解单纯用文字表达不容易理解，所以我把关键内容转化成图表，方便理解。 1、add - commit - push 2、暂存区-本地仓库-远程仓库可以结合上面的图一起理解。(这张图是借鉴其它网友的，不记得在哪里看的了) 二、主要功能图解我把 git 的主要功能全部体现在这张图里了，一图在手，git 无忧~ 如果还觉得不够详细，再放出我之前总结的思维导图吧：]]></content>
+      <categories>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
       </tags>
   </entry>
   <entry>
