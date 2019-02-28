@@ -10,20 +10,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Git操作本地仓库和远程仓库的常用命令]]></title>
-    <url>%2F2019%2F02%2F27%2FGit%E6%93%8D%E4%BD%9C%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E5%92%8C%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%2F</url>
-    <content type="text"><![CDATA[总结使用 Git 过程中的一些基本的、常用的命令。 一、操作本地仓库 命令示例 解释 git config –list 查看已有的全部配置信息 git config user.name 查看某个指定的环境变量的信息 git config –global user.name “ivyli” 绑定用户名为 ivyli git config –global user.email “ivyli2019@126.com“ 绑定邮箱为 ivyli2019@126.com git init 在空目录下执行该命令，从而初始化当前目录为可管理的git仓库，生成隐藏的 .git 文件(不能乱动，否则仓库就不能用了) git add 1.txt 把本地编辑好的 1.txt 文件添加到暂存区 git add . 把当前目录下的所有文件都添加到暂存区 git status 随时查看仓库状态 git commit –m “add 1.txt” 提交文件到本地仓库，–m 添加注释信息.commit 文件之后再修改，需要重新 add、commit git rm 1.txt 删除版本库中的文件 1.txt（删除文件时最好用该命令，不要手动删除） git commit -m “del 1.txt” git rm 1.txt 之后还要 commit，才能真正删除 git diff 1.txt 查看 1.txt 文件修改了那些内容 git log 查看历史记录 对本地仓库的操作，主要就是 git add/rm/commit/status。 当文件 commit 到本地版本库之后，若再次修改文件，需要重新 add、commit，若是删除文件，需要重新 commit。 二、操作远程仓库我们可以 clone 远程仓库到本地，也可以把本地文件 push 到远程仓库。 但是在第一次操作远程仓库时，会报错 Permission denied(publickey)，这是因为没有添加 SSH 公钥。 1ssh-keygen -t rsa -C "ivyli2019@126.com" 执行上述命令，可以在本地生成 .ssh 文件，复制文件中的 id_rsa.pub 公钥内容到 git 或其它源码平台，即可添加 SSH 公钥。 命令示例 解释 git clone git://gitee.com:ivyli2019/test.git 从远程库中克隆项目到本地，是一个包含整个项目的版本库文件夹。该命令通常用于新用户 clone 项目，后面基本都是用 git pull。 git remote 查看远程库的别名（进入 clone 下来的文件夹中执行该命令，别名默认是 origin） git remote –v 查看远程库的别名和仓库地址。如返回：origin git@gitee.com:ivyli2019/test.git git push origin master 把本地 master 分支推送到别名为 origin 的远程库 git remote add mytest git://gitee.com:ivyli2019/mytest.git 添加/关联一个远程仓库，并起别名为 mytest，可自定义别名。 git remote remove mytest 删除远程库的 mytest 别名 git branch 查看当前所有的分支，默认只有 master 分支 git branch test 创建 test 分支 git branch –d test 删除 test 分支 git checkout test 从当前分支切换到 test 分支 git checkout –b dev 创建 dev 分支，并切换到 dev 分支上 git merge dev 在当前分支上合并 dev 分支]]></content>
-      <categories>
-        <category>git</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-        <tag>本地仓库</tag>
-        <tag>远程仓库</tag>
-        <tag>git命令</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[Busuanzi网站统计失效问题]]></title>
     <url>%2F2019%2F02%2F27%2FBusuanzi%E7%BD%91%E7%AB%99%E7%BB%9F%E8%AE%A1%E5%A4%B1%E6%95%88%E9%97%AE%E9%A2%98%2F</url>
     <content type="text"><![CDATA[在 Hexo 博客中，我使用的 Next 5.1 主题中默认集成了第三方统计服务 Busuanzi 来统计网站数据，但是实际并没有生效。 问题原因是由于 busuanzi(不蒜子) 的域名更新，导致了使用 Hexo Next 主题时统计数据失效。 不蒜子的域名由原来的 dn-lbstatics.qbox.me 更换为了 busuanzi.ibruce.info。 解决方法: 到 hexo 的 themes 文件夹下, 进入 \themes\next\layout_third-party\analytics 目录 打开 busuanzi-counter.swig 将 src=&quot;https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js&quot; 修改为 src=&quot;https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js&quot; 然后使用 hexo g 、hexo d 命令重启服务器即可生效。]]></content>
@@ -50,6 +36,20 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[Git操作本地仓库和远程仓库的常用命令]]></title>
+    <url>%2F2019%2F02%2F27%2FGit%E6%93%8D%E4%BD%9C%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E5%92%8C%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%2F</url>
+    <content type="text"><![CDATA[总结使用 Git 过程中的一些基本的、常用的命令。 一、操作本地仓库 命令示例 解释 git config –list 查看已有的全部配置信息 git config user.name 查看某个指定的环境变量的信息 git config –global user.name “ivyli” 绑定用户名为 ivyli git config –global user.email “ivyli2019@126.com“ 绑定邮箱为 ivyli2019@126.com git init 在空目录下执行该命令，从而初始化当前目录为可管理的git仓库，生成隐藏的 .git 文件(不能乱动，否则仓库就不能用了) git add 1.txt 把本地编辑好的 1.txt 文件添加到暂存区 git add . 把当前目录下的所有文件都添加到暂存区 git status 随时查看仓库状态 git commit –m “add 1.txt” 提交文件到本地仓库，–m 添加注释信息.commit 文件之后再修改，需要重新 add、commit git rm 1.txt 删除版本库中的文件 1.txt（删除文件时最好用该命令，不要手动删除） git commit -m “del 1.txt” git rm 1.txt 之后还要 commit，才能真正删除 git diff 1.txt 查看 1.txt 文件修改了那些内容 git log 查看历史记录 对本地仓库的操作，主要就是 git add/rm/commit/status。 当文件 commit 到本地版本库之后，若再次修改文件，需要重新 add、commit，若是删除文件，需要重新 commit。 二、操作远程仓库我们可以 clone 远程仓库到本地，也可以把本地文件 push 到远程仓库。 但是在第一次操作远程仓库时，会报错 Permission denied(publickey)，这是因为没有添加 SSH 公钥。 1ssh-keygen -t rsa -C "ivyli2019@126.com" 执行上述命令，可以在本地生成 .ssh 文件，复制文件中的 id_rsa.pub 公钥内容到 git 或其它源码平台，即可添加 SSH 公钥。 命令示例 解释 git clone git://gitee.com:ivyli2019/test.git 从远程库中克隆项目到本地，是一个包含整个项目的版本库文件夹。该命令通常用于新用户 clone 项目，后面基本都是用 git pull。 git remote 查看远程库的别名（进入 clone 下来的文件夹中执行该命令，别名默认是 origin） git remote –v 查看远程库的别名和仓库地址。如返回：origin git@gitee.com:ivyli2019/test.git git push origin master 把本地 master 分支推送到别名为 origin 的远程库 git remote add mytest git://gitee.com:ivyli2019/mytest.git 添加/关联一个远程仓库，并起别名为 mytest，可自定义别名。 git remote remove mytest 删除远程库的 mytest 别名 git branch 查看当前所有的分支，默认只有 master 分支 git branch test 创建 test 分支 git branch –d test 删除 test 分支 git checkout test 从当前分支切换到 test 分支 git checkout –b dev 创建 dev 分支，并切换到 dev 分支上 git merge dev 在当前分支上合并 dev 分支]]></content>
+      <categories>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+        <tag>本地仓库</tag>
+        <tag>远程仓库</tag>
+        <tag>git命令</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Hexo博客使用LeanCloud统计页面访问次数]]></title>
     <url>%2F2019%2F02%2F27%2FHexo%E5%8D%9A%E5%AE%A2%E4%BD%BF%E7%94%A8LeanCloud%E7%BB%9F%E8%AE%A1%E9%A1%B5%E9%9D%A2%E8%AE%BF%E9%97%AE%E6%AC%A1%E6%95%B0%2F</url>
     <content type="text"><![CDATA[本文环境： Hexo + Next v5.1.4 在 Hexo 博客中，借助 LeanCloud 第三方服务来实现统计页数访问次数的功能。 1、配置 LeanCloud 进入官网 https://leancloud.cn/，进入右侧控制台并注册账号、验证邮箱； 创建应用：控制台 -&gt; 创建应用（开发版） 应用名称可以随意输入，后面还可以修改，我用的是 test； 创建 Class：点击刚创建的 test 应用，创建一个 Class 表用来保存我们的博客访问数据。 此处创建的 Class 名字必须为 Counter，用来保证与 NexT 主题的修改相兼容； ACL 权限选择 无限制，避免后续因为权限的问题导致次数统计显示不正常。 创建 Class 完成之后，新创建的 Counter 表会显示在左侧，这时再切换到 test 应用的 设置 - 应用 Key 界面： 把你的 AppID 和 AppKey 复制出来。 2、修改主题配置文件打开 NexT 主题的 _config.yml 文件，把刚才拿到的 AppID 和 AppKey 和填入下面相应位置：1234leancloud_visitors: enable: true # 这里要设置成 true app_id: joaeddf4hsqudUUwx4gIvGF6-gzGzoHsz app_key: E9UJsJpw1omCHuS22PdSpKoh 这时再使用 hexo g、hexo d 命令重新部署博客，就可以正常使用文章阅读量统计的功能了，如下图所示： 需要特别说明的是： 记录文章访问量的唯一标识符是文章的发布日期和文章的标题，因此要确保这两个数值组合的唯一性，如果你更改了这两个数值，会造成文章阅读数值的清零重计。 3、后台管理当以上部分配置完成之后，我们的博客页面第一次打开时，便会自动向服务器发送信息，在我们刚才创建的应用 test 的 Counter 表中创建一条数据。 其中 time 字段的数值表示某一篇文章的访问量。其他字段的具体作用可以查阅 LeanCloud 官方文档，最好不要随意修改。]]></content>
@@ -64,16 +64,15 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[区别 git clone 与 git pull]]></title>
-    <url>%2F2019%2F02%2F26%2Fgit%20clone%26pull%EF%BC%8Cpull%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%EF%BC%8C%E6%89%B9%E9%87%8F%E6%8F%90%E4%BA%A4%2F</url>
-    <content type="text"><![CDATA[1、git clone 与 git pull 相同点相同点：都是从远程服务器拉取代码到本地 2、git clone 与 git pull 不同点git clone是在本地没有版本库的时候，从远程服务器克隆整个版本库到本地，是一个本地从无到有的过程。 git pull在本地有版本库的情况下，从远程库获取最新commit 数据（如果有的话），并merge（合并）到本地。 git pull = git fetch + git merge 3、使用场景通常情况下，远程操作的第一步，是使用git clone从远程主机克隆一个版本库到本地。 本地修改代码后，每次从本地仓库push到远程仓库之前都要先进行git pull操作，保证push到远程仓库时没有版本冲突。]]></content>
+    <title><![CDATA[git pull 指定某一个文件或文件夹]]></title>
+    <url>%2F2019%2F02%2F26%2Fgit%20pull%20%E6%8C%87%E5%AE%9A%E6%9F%90%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E6%88%96%E6%96%87%E4%BB%B6%E5%A4%B9%2F</url>
+    <content type="text"><![CDATA[1、要解决的问题默认情况下，git pull 操作会把远程仓库的所有最新数据更新到本地。 但是，如果你只想更新指定的某一个文件或文件夹，该怎么操作呢？ 2、git 只 pull 某一个文件/夹 设置 core.sparsecheckout为 true $ git config core.sparsecheckout true core.sparsecheckout用于控制是否允许设置pull指定文件/夹，true为允许。 此方法适用于 Git1.7.0 以后版本，之前的版本没有这个功能。 在.git/info/sparse-checkout文件中（如果没有则创建）添加指定的文件/夹 最后，拉取想要的分支即可实现checkout指定文件/夹。 $ git pull origin master]]></content>
       <categories>
         <category>git</category>
       </categories>
       <tags>
         <tag>git</tag>
         <tag>git pull</tag>
-        <tag>git clone</tag>
       </tags>
   </entry>
   <entry>
@@ -126,6 +125,18 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[IDEA 中的版本控制机制]]></title>
+    <url>%2F2019%2F02%2F26%2FIDEA%20%E4%B8%AD%E7%9A%84%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E6%9C%BA%E5%88%B6%2F</url>
+    <content type="text"><![CDATA[一、版本控制的分类1、版本控制 版本控制是指对软件开发过程中各种程序代码、配置文件及说明文档等文件变更的管理。 版本控制的内容主要包括：检入检出控制、分支和合并、历史记录。 2、集中式版本控制系统（CVCS）典型代表是 SVN，有如下特点： 管理方便，逻辑明确，操作简单，上手快 使用集中式服务器，安全易管理 对服务器性能要求高，数据库容量经常暴增，体量大 必须联网！如果不能连接到服务器上，就不能提交，还原，对比等等 分支管控不灵活 还有一个风险，就是如果源码库出现问题，导致项目代码丢失，那么大家手里的都是部分代码，就算勉强合并到一起，也不能保证项目源码的准确性。 3、分布式版本控制系统（DVCS）分布式相比于集中式的最大区别在于开发者可以提交到本地，每个开发者通过克隆（git clone），在本地机器上拷贝一个完整的Git仓库。 典型代表是 Git，有如下特点： 适合分布式开发，每一个个体都可以作为服务器。每一次Clone就是从服务器上pull到了所有的内容，包括版本信息 公共服务器压力和数据量都不会太大 速度快、灵活，分支之间可以任意切换 任意两个开发者之间可以很容易的解决冲突，并且单机上就可以进行分支合并 可以离线工作，不影响本地代码编写，等有网络连接以后可以再上传代码，并且可以在本地根据不同的需要新建自己的分支。 二、IDEA 中的版本控制机制1、Version Control File -&gt; Settings -&gt; Version Control ，这里是 IDEA 自带的用于支持主流版本控制软件的插件，如 git 、gitHub 、svn 、cvs等。 仅有插件并不能在 IDEA 中直接使用版本控制，还需要下载相应的版本控制软件才行。 2、Plugins File -&gt; Settings -&gt; Plugins ，这里是 IDEA 下载和管理插件的地方，在 Version Control 中展示的插件就是默认在这里已经下载了的。 三、IDEA 中配置版本控制软件1、SVN 先安装 SVN 客户端，或者是图形化工具，windows 推荐用 TortoiseSVN。 File -&gt; Settings -&gt; Version Control -&gt; Subverion，选择自己的 SVN 安装路径，否则 IDEA 可能无法正常识别SVN。 Clear Auth Cache，当使用过程中出现无法正常 checkout 等问题时，可以尝试点击这里清除缓存。 2、Git 先安装 Git 客户端，windows 下推荐用 TortoiseGit。 File -&gt; Settings -&gt; Version Control -&gt; Git，选择自己的 Git 安装路径，否则 IDEA 可能无法正常识别 Git。 3、GitHub 先注册 GitHub 账号 File -&gt; Settings -&gt; Version Control -&gt; GitHub -&gt; Add account，输入用户名和密码登录 GitHub，并点击 Test 测试连接是否成功。 四、代码检出和上传1、检出代码VCS -&gt; Checkout from Version Control 选择对应的版本控制系统，如 GitHub、SVN、Git 等，进一步从中检出项目。 以 SVN 为例： 先在本地创建一个空文件夹，右键 svn -&gt; checkout 所有代码； 在 IDEA 中 Import Module 导入； VCS -&gt; Checkout from Version Control -&gt; Subversion，输入 svn 地址，checkout 到工作空间目录。 2、上传代码VCS -&gt; Import into Version Control ，选择对应的版本控制系统，并进一步上传代码到版本控制系统中。 3、配置忽略文件File -&gt; Settings -&gt; Version Control -&gt; Ignored Files 在这里通过 + -设置是否把文件或目录加入到版本控制中。]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>IDEA</tag>
+        <tag>版本控制</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[nGrinder在GET请求中添加参数]]></title>
     <url>%2F2019%2F02%2F26%2F05_%E5%9C%A8GET%E8%AF%B7%E6%B1%82%E4%B8%AD%E6%B7%BB%E5%8A%A0%E5%8F%82%E6%95%B0-groovy%2F</url>
     <content type="text"><![CDATA[https://github.com/naver/ngrinder/wiki/How-to-pass-a-parameter-to-the-script 在GET请求脚本中添加添加信息头、cookies和自定义参数，有两种方式： 一种是在UI界面添加后自动生成脚本 一种是直接在脚本中添加 一、通过UI界面添加通过 UI 设置：脚本 -&gt; 新建脚本 -&gt; 显示高级配置 生成代码如下：1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859@RunWith(GrinderRunner)@FixMethodOrder(MethodSorters.NAME_ASCENDING)class TestRunner &#123;truepublic static GTest testtruepublic static HTTPRequest requesttruepublic static NVPair[] headers = []truepublic static NVPair[] params = []truepublic static Cookie[] cookies = []true@BeforeProcesstruepublic static void beforeProcess() &#123;truetrueHTTPPluginControl.getConnectionDefaults().timeout = 6000truetruetest = new GTest(1, "www.baidu.com")truetruerequest = new HTTPRequest()truetruetruetrue// =========下面是我刚才添加的参数=========truetrue// Set header datastruetrueList&lt;NVPair&gt; headerList = new ArrayList&lt;NVPair&gt;()truetrueheaderList.add(new NVPair("Connection", "keep-alive"))truetrueheaderList.add(new NVPair("User-Agent", "Mozilla/5.0 (X11; Linux x86_64; rv:12.0) Gecko/20100101 Firefox/21.0"))truetrueheaders = headerList.toArray()truetrue// Set param datastruetrueList&lt;NVPair&gt; paramList = new ArrayList&lt;NVPair&gt;()truetrueparamList.add(new NVPair("name", "jing"))truetrueparamList.add(new NVPair("age", "18"))truetrueparamList.add(new NVPair("sex", "beauty"))truetrueparams = paramList.toArray()truetrue// Set cookie datastruetrueList&lt;Cookie&gt; cookieList = new ArrayList&lt;Cookie&gt;()truetruecookieList.add(new Cookie("myToken", "xxxxxxxx", "www.baidu.com", "", new Date(32503647599000L), false))truetruecookies = cookieList.toArray()truetrue// =========上面是我刚才添加的参数=========truetruegrinder.logger.info("before process.");true&#125;true@BeforeThreadtruepublic void beforeThread() &#123;truetruetest.record(this, "test")truetruegrinder.statistics.delayReports=true;truetruegrinder.logger.info("before thread.");true&#125;true@Beforetruepublic void before() &#123;truetruerequest.setHeaders(headers)truetruecookies.each &#123; CookieModule.addCookie(it, HTTPPluginControl.getThreadHTTPClientContext()) &#125;truetruegrinder.logger.info("before thread. init headers and cookies");true&#125;true@Testtruepublic void test()&#123;truetrueHTTPResponse result = request.GET("https://www.baidu.com", params)truetrueassertThat(result.statusCode, is(200))truetrue// 这是我通过引导页手动添加的断言truetrueassertThat(result.getText(), containsString("jing"))true&#125;&#125; 可以看到这种方式是在@beforeProcess中添加heads 、params、cookies。 二、直接在脚本中添加（在此只演示添加 headers 和 params的方式，添加cookies是类似的，不再赘述） 根据在脚本中添加的位置不同，可以分为以下几种方式： 1、在 @BeforeProcess 注解的方法里添加 headers 和 params这种方法跟第一种方法的效果是一样的1234567891011// 添加headersList&lt;NVPair&gt; headerList = new ArrayList&lt;NVPair&gt;()headerList.add(new NVPair("Accept-Language", "en-US,zh-CN;"))// ...可以添加多个headerheaders = headerList.toArray()// 添加paramsList&lt;NVPair&gt; paramList = new ArrayList&lt;NVPair&gt;()paramList.add(new NVPair("accessToken", "xxxxxxxxx"))// ...可以添加多个paramparams = paramList.toArray() 2、直接在TestRunner类的静态变量中添加 headers 和 params在整个类最前面定义静态变量的地方，直接给变量赋值：123456789// 添加headerspublic static NVPair[] headers = [ new NVPair("Accept-Language", "en-US,zh-CN;")]// 添加paramspublic static NVPair[] params = [ new NVPair("accessToken", "xxxxxxxxxx")] 3、在 @Test 注解的方法中添加 headers 和 params在发送request请求的方法里添加参数：1234567 // HTTPResponse result = request.GET("https://www.baidu.com", params) // 添加headersHTTPResponse result = request1.GET("https://www.baidu.com", [new NVPair("Accept-Language", "en-US,zh-CN;")] as NVPair[]) // 添加params HTTPResponse result = request.GET("https://www.baidu.com", [new NVPair("accessToken", "xxxxxx")] as NVPair[]) 到底选择哪种方式，要根据具体的参数类型和业务场景来决定。 三、两种方式的比较 ?123456789101112131415161718 限制很多，只能传1个参数（保存到名为 param 的属性），值只能由1-50个数字字母、_、,、.、| 组成，不能有空格。// 获取 UI 传入的字符串def foo = System.getProperty("param")// 带默认值def foo = System.getProperty("param", "XXX")// 3.2.3+ 可以放开自动生成的脚本里 import static net.grinder.util.GrinderUtils.* 的注释/* GrinderUtils 类有以下静态方法：getParam()getParam(String)getParamInt()getParamLong()getParamFloat()getParamDouble()getParamBoolean()*/]]></content>
@@ -151,15 +162,17 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[IDEA 中的版本控制机制]]></title>
-    <url>%2F2019%2F02%2F26%2FIDEA%20%E4%B8%AD%E7%9A%84%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E6%9C%BA%E5%88%B6%2F</url>
-    <content type="text"><![CDATA[一、版本控制的分类1、版本控制 版本控制是指对软件开发过程中各种程序代码、配置文件及说明文档等文件变更的管理。 版本控制的内容主要包括：检入检出控制、分支和合并、历史记录。 2、集中式版本控制系统（CVCS）典型代表是 SVN，有如下特点： 管理方便，逻辑明确，操作简单，上手快 使用集中式服务器，安全易管理 对服务器性能要求高，数据库容量经常暴增，体量大 必须联网！如果不能连接到服务器上，就不能提交，还原，对比等等 分支管控不灵活 还有一个风险，就是如果源码库出现问题，导致项目代码丢失，那么大家手里的都是部分代码，就算勉强合并到一起，也不能保证项目源码的准确性。 3、分布式版本控制系统（DVCS）分布式相比于集中式的最大区别在于开发者可以提交到本地，每个开发者通过克隆（git clone），在本地机器上拷贝一个完整的Git仓库。 典型代表是 Git，有如下特点： 适合分布式开发，每一个个体都可以作为服务器。每一次Clone就是从服务器上pull到了所有的内容，包括版本信息 公共服务器压力和数据量都不会太大 速度快、灵活，分支之间可以任意切换 任意两个开发者之间可以很容易的解决冲突，并且单机上就可以进行分支合并 可以离线工作，不影响本地代码编写，等有网络连接以后可以再上传代码，并且可以在本地根据不同的需要新建自己的分支。 二、IDEA 中的版本控制机制1、Version Control File -&gt; Settings -&gt; Version Control ，这里是 IDEA 自带的用于支持主流版本控制软件的插件，如 git 、gitHub 、svn 、cvs等。 仅有插件并不能在 IDEA 中直接使用版本控制，还需要下载相应的版本控制软件才行。 2、Plugins File -&gt; Settings -&gt; Plugins ，这里是 IDEA 下载和管理插件的地方，在 Version Control 中展示的插件就是默认在这里已经下载了的。 三、IDEA 中配置版本控制软件1、SVN 先安装 SVN 客户端，或者是图形化工具，windows 推荐用 TortoiseSVN。 File -&gt; Settings -&gt; Version Control -&gt; Subverion，选择自己的 SVN 安装路径，否则 IDEA 可能无法正常识别SVN。 Clear Auth Cache，当使用过程中出现无法正常 checkout 等问题时，可以尝试点击这里清除缓存。 2、Git 先安装 Git 客户端，windows 下推荐用 TortoiseGit。 File -&gt; Settings -&gt; Version Control -&gt; Git，选择自己的 Git 安装路径，否则 IDEA 可能无法正常识别 Git。 3、GitHub 先注册 GitHub 账号 File -&gt; Settings -&gt; Version Control -&gt; GitHub -&gt; Add account，输入用户名和密码登录 GitHub，并点击 Test 测试连接是否成功。 四、代码检出和上传1、检出代码VCS -&gt; Checkout from Version Control 选择对应的版本控制系统，如 GitHub、SVN、Git 等，进一步从中检出项目。 以 SVN 为例： 先在本地创建一个空文件夹，右键 svn -&gt; checkout 所有代码； 在 IDEA 中 Import Module 导入； VCS -&gt; Checkout from Version Control -&gt; Subversion，输入 svn 地址，checkout 到工作空间目录。 2、上传代码VCS -&gt; Import into Version Control ，选择对应的版本控制系统，并进一步上传代码到版本控制系统中。 3、配置忽略文件File -&gt; Settings -&gt; Version Control -&gt; Ignored Files 在这里通过 + -设置是否把文件或目录加入到版本控制中。]]></content>
+    <title><![CDATA[IntelliJ IDEA使用手册-02]]></title>
+    <url>%2F2019%2F02%2F26%2FIntelliJ%20IDEA%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C-01%2F</url>
+    <content type="text"><![CDATA[本文内容基于ideaIC-2018.2.6版本 一、添加/修改代码模板代码模板是用于自动生成某种格式的代码，节省代码编写的时间。 1.1 添加文件头部的注释模板在ideaIC-2018.2.6版本中，默认是没有文件头部的注释模板的，需要自己添加。 Editor &gt; File and Code Templates -&gt; Includes -&gt; File Header 在右侧输入注释模板内容，一般使用如下格式： 123/** * Created by $&#123;USER&#125; on $&#123;DATE&#125;. */ 其中 ${USER} 取的是主机名；${DATE} 是文件被创建时的日期。 保存模板后，新建一个类，就会发现 IDEA 在类上方自动帮我们创建了如上注释。 1.2 修改文件头部的注释模板如果你的 IDEA 中已经有注释模板了，想要修改内容或格式的话，方法类似。 还是定位到 File Header ，修改模板内容后保存即可。 二、缓存和索引2.1 缓存和索引的作用 IntelliJ IDEA 的缓存和索引主要是用来加快文件查询的速度，从而提高各种查找、代码提示等操作的速度。 2.2 创建/清除索引 首次创建或打开新项目时，IntelliJ IDEA 都会自动创建项目索引，可以在界面下方的状态栏中看到提示 Scanning files to index。 创建索引的耗时与项目的文件数量成正比，因此，在打开大型项目时，会发现IntelliJ IDEA比较卡，此时最好不要做任何操作，静待 IDEA 忙完了再说，不然会更卡。 2.3 清除/重建索引 在遇到一些突发情况时（如突然断电、蓝屏引起的强制关机等等），可能会造成缓存和索引的损坏，这种情况下重启 IDEA 后，会出现一些莫名其妙的问题，这时需要清除被损坏的缓存和索引文件。 File &gt; Invalidate Caches / Restart 打开清理缓存和索引的对话框一般选择第一项 Invalidate and Restart 这种清除方式的本质结果是删除了本地保存的 IDEA 的缓存文件和索引文件，一般是位于目录 C:\Users\当前系统的用户名\.IdeaIC版本号\system\caches、index、LocalHistory 。 所以如果因为突发情况导致项目都打不开的时候，可以直接把本地的 system 目录备份后删除，再重启后 IDEA 会重新创建新的缓存和索引文件。 三、编译方式 在 Eclipse 中是实时自动编译的，但是 IDEA 默认情况下需要手动点击编译按钮。 3.1 IDEA 四种编译方式在主菜单 Build 下有四种编译方式： Build Project，编译项目 对选定的 Project 进行编译，但只编译修改过的文件，没有修改过的文件不会进行编译； Build Module，编译模块 对选定的 Module 进行编译，但只编译修改过的文件，没有修改过的文件不会进行编译； Recomplie，重新编译类文件 对选定的Java 类文件进行强制性编译，不管目标是否被修改过； Rebuild Project，重新编译项目 对选定的 Project 进行强制性编译，不管目标是否被修改过（编译时间较长）； 3.2 IDEA 设置实时自动编译进入 File -&gt; Settings -&gt; Build、Execution、Deployment &gt; Complie 界面： Build project automatically：设置 IntelliJ IDEA 进行自动编译，但是会比较耗内存，所以不建议开启。 Build process heap size ：设置编译进程的堆内存大小，默认是700M，如果设置了自动编译可能会出现 OutOfMemoryError报错，此时可以适当增大该值的大小。 3.3 设置编译排除文件IntelliJ IDEA 在编译项目的时候，需要所有可编译文件全部编译通过，才能正常运行。当在开发过程中，某个文件暂时无法编译通过，但是又想运行其它文件时，可以它加到排除编译列表中。 具体方法为： 进入上面的 `Compile -&gt; Excludes `界面，点击右侧的+和-，即可添加或删减目录（或文件）进行编译排除 四、控制台输出中文乱码问题 进入 IntelliJ IDEA 安装目录的 bin 目录下，打开 idea.vmoptions文件，在尾部追加一行： -Dfile.encoding=UTF-8 打开 IDEA，进入 Run -&gt; Edit Configurations 界面，在 VM options 中填写同样内容： -Dfile.encoding=UTF-8 五、添加 jar 包File -&gt; Project Structure -&gt; Module -&gt; Dependencies -&gt; +JARs or directories 六、 Debug 菜单 以上图为例，上面从 Console 开始，往后图标依次为： Show Execution Point：显示执行断点（Alt + F10） Step Over ：跳到下一步 （F6） Step Into：进入代码或者方法内部（F5） Force Step Into ：强制进入代码或者方法内部（Alt + Shift + F7） Step Out：跳到下一个断点或者跳出方法（F7） Drop Frame：放弃当前 debug，重新执行 debug Run to Cursor：运行到光标处（Ctrl + R） 再看左边的一列图标，上从上向下依次为： Rerun &#39;xxxx&#39;：重新运行当前类（Ctrl + F11） Resume Program：从 debug 模式中恢复程序，执行到底（F8） Pause Program ：中止运行 Stop &#39;xxxx&#39;：停止当前类（Ctrl + F2） View Breakpoints：显示所有断点（Ctrl + Shift + F8） 七、代码回退7.1 使用场景在开发过程中，当删除了部分代码后想要恢复回去，可以通过多种方式回退回去，而不用担心要重新写啦！ 7.2 使用 Local History 回退代码 选中类文件右键，或直接在编辑区右键，选择 Local History -&gt; Show History 在弹出界面中会列出历史版本，可查看各版本的变更信息，选中要回退的版本，右键 -&gt; Revert即可 此方法更适合回退某个文件的情况，如果是涉及多个文件、甚至整个模块或项目要进行回退，就要用别的办法了 7.3 使用 svn 回退代码 如果项目是通过Subversion也就是SVN检出的，那么可以使用 SVN 来回退 在项目名称上点击右键 -&gt; Subversion -&gt; Revert，即可进行代码回退 需要注意一点：这种方法是直接将代码恢复至从SVN检出时的状态，需谨慎使用 7.4 使用 git 回退代码==todo==]]></content>
       <categories>
         <category>java</category>
       </categories>
       <tags>
-        <tag>IDEA</tag>
-        <tag>版本控制</tag>
+        <tag>IntelliJ IDEA</tag>
+        <tag>IDEA四种编译方式</tag>
+        <tag>IDEA中文乱码</tag>
+        <tag>IDEA代码回退</tag>
       </tags>
   </entry>
   <entry>
@@ -189,20 +202,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[IntelliJ IDEA使用手册-02]]></title>
-    <url>%2F2019%2F02%2F26%2FIntelliJ%20IDEA%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C-01%2F</url>
-    <content type="text"><![CDATA[本文内容基于ideaIC-2018.2.6版本 一、添加/修改代码模板代码模板是用于自动生成某种格式的代码，节省代码编写的时间。 1.1 添加文件头部的注释模板在ideaIC-2018.2.6版本中，默认是没有文件头部的注释模板的，需要自己添加。 Editor &gt; File and Code Templates -&gt; Includes -&gt; File Header 在右侧输入注释模板内容，一般使用如下格式： 123/** * Created by $&#123;USER&#125; on $&#123;DATE&#125;. */ 其中 ${USER} 取的是主机名；${DATE} 是文件被创建时的日期。 保存模板后，新建一个类，就会发现 IDEA 在类上方自动帮我们创建了如上注释。 1.2 修改文件头部的注释模板如果你的 IDEA 中已经有注释模板了，想要修改内容或格式的话，方法类似。 还是定位到 File Header ，修改模板内容后保存即可。 二、缓存和索引2.1 缓存和索引的作用 IntelliJ IDEA 的缓存和索引主要是用来加快文件查询的速度，从而提高各种查找、代码提示等操作的速度。 2.2 创建/清除索引 首次创建或打开新项目时，IntelliJ IDEA 都会自动创建项目索引，可以在界面下方的状态栏中看到提示 Scanning files to index。 创建索引的耗时与项目的文件数量成正比，因此，在打开大型项目时，会发现IntelliJ IDEA比较卡，此时最好不要做任何操作，静待 IDEA 忙完了再说，不然会更卡。 2.3 清除/重建索引 在遇到一些突发情况时（如突然断电、蓝屏引起的强制关机等等），可能会造成缓存和索引的损坏，这种情况下重启 IDEA 后，会出现一些莫名其妙的问题，这时需要清除被损坏的缓存和索引文件。 File &gt; Invalidate Caches / Restart 打开清理缓存和索引的对话框一般选择第一项 Invalidate and Restart 这种清除方式的本质结果是删除了本地保存的 IDEA 的缓存文件和索引文件，一般是位于目录 C:\Users\当前系统的用户名\.IdeaIC版本号\system\caches、index、LocalHistory 。 所以如果因为突发情况导致项目都打不开的时候，可以直接把本地的 system 目录备份后删除，再重启后 IDEA 会重新创建新的缓存和索引文件。 三、编译方式 在 Eclipse 中是实时自动编译的，但是 IDEA 默认情况下需要手动点击编译按钮。 3.1 IDEA 四种编译方式在主菜单 Build 下有四种编译方式： Build Project，编译项目 对选定的 Project 进行编译，但只编译修改过的文件，没有修改过的文件不会进行编译； Build Module，编译模块 对选定的 Module 进行编译，但只编译修改过的文件，没有修改过的文件不会进行编译； Recomplie，重新编译类文件 对选定的Java 类文件进行强制性编译，不管目标是否被修改过； Rebuild Project，重新编译项目 对选定的 Project 进行强制性编译，不管目标是否被修改过（编译时间较长）； 3.2 IDEA 设置实时自动编译进入 File -&gt; Settings -&gt; Build、Execution、Deployment &gt; Complie 界面： Build project automatically：设置 IntelliJ IDEA 进行自动编译，但是会比较耗内存，所以不建议开启。 Build process heap size ：设置编译进程的堆内存大小，默认是700M，如果设置了自动编译可能会出现 OutOfMemoryError报错，此时可以适当增大该值的大小。 3.3 设置编译排除文件IntelliJ IDEA 在编译项目的时候，需要所有可编译文件全部编译通过，才能正常运行。当在开发过程中，某个文件暂时无法编译通过，但是又想运行其它文件时，可以它加到排除编译列表中。 具体方法为： 进入上面的 `Compile -&gt; Excludes `界面，点击右侧的+和-，即可添加或删减目录（或文件）进行编译排除 四、控制台输出中文乱码问题 进入 IntelliJ IDEA 安装目录的 bin 目录下，打开 idea.vmoptions文件，在尾部追加一行： -Dfile.encoding=UTF-8 打开 IDEA，进入 Run -&gt; Edit Configurations 界面，在 VM options 中填写同样内容： -Dfile.encoding=UTF-8 五、添加 jar 包File -&gt; Project Structure -&gt; Module -&gt; Dependencies -&gt; +JARs or directories 六、 Debug 菜单 以上图为例，上面从 Console 开始，往后图标依次为： Show Execution Point：显示执行断点（Alt + F10） Step Over ：跳到下一步 （F6） Step Into：进入代码或者方法内部（F5） Force Step Into ：强制进入代码或者方法内部（Alt + Shift + F7） Step Out：跳到下一个断点或者跳出方法（F7） Drop Frame：放弃当前 debug，重新执行 debug Run to Cursor：运行到光标处（Ctrl + R） 再看左边的一列图标，上从上向下依次为： Rerun &#39;xxxx&#39;：重新运行当前类（Ctrl + F11） Resume Program：从 debug 模式中恢复程序，执行到底（F8） Pause Program ：中止运行 Stop &#39;xxxx&#39;：停止当前类（Ctrl + F2） View Breakpoints：显示所有断点（Ctrl + Shift + F8） 七、代码回退7.1 使用场景在开发过程中，当删除了部分代码后想要恢复回去，可以通过多种方式回退回去，而不用担心要重新写啦！ 7.2 使用 Local History 回退代码 选中类文件右键，或直接在编辑区右键，选择 Local History -&gt; Show History 在弹出界面中会列出历史版本，可查看各版本的变更信息，选中要回退的版本，右键 -&gt; Revert即可 此方法更适合回退某个文件的情况，如果是涉及多个文件、甚至整个模块或项目要进行回退，就要用别的办法了 7.3 使用 svn 回退代码 如果项目是通过Subversion也就是SVN检出的，那么可以使用 SVN 来回退 在项目名称上点击右键 -&gt; Subversion -&gt; Revert，即可进行代码回退 需要注意一点：这种方法是直接将代码恢复至从SVN检出时的状态，需谨慎使用 7.4 使用 git 回退代码==todo==]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-      <tags>
-        <tag>IntelliJ IDEA</tag>
-        <tag>IDEA四种编译方式</tag>
-        <tag>IDEA中文乱码</tag>
-        <tag>IDEA代码回退</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[Maven学习04-构建生命周期]]></title>
     <url>%2F2019%2F02%2F26%2FMaven%E5%AD%A6%E4%B9%A004-%E6%9E%84%E5%BB%BA%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%2F</url>
     <content type="text"><![CDATA[构建生命周期是指为一个工程进行项目构建和发布的过程，它是 Maven 中的一个核心概念。 1、标准生命周期Maven中内置了三个标准的构建生命周期： default（或build）：处理工程的部署 clean：处理工程的清理 site：负责创建工程的站点文档。 这三个构建生命周期都是由一系列不同的构建阶段组成，每一个构建阶段代表了生命周期的一个阶段。 2、default 生命周期的阶段一个典型的 Maven default（build）生命周期主要由以下几个阶段的序列组成（此处并完全列出）： 阶段 描述 验证 validate 验证项目是否正确且所有必须信息是可用的 编译 compile 源代码编译在此阶段完成 测试 Test 使用适当的单元测试框架（例如JUnit）运行测试。 包装 package 创建JAR/WAR包如在 pom.xml 中定义提及的包 检查 verify 对集成测试的结果进行检查，以保证质量达标 安装 install 安装打包的项目到本地仓库，以供其他项目使用 部署 deploy 拷贝最终的工程包到远程仓库中，以共享给其他开发人员和工程 使用默认的生命周期时，Maven将首先验证项目，然后将编译源代码，运行单元测试，再打包二进制文件（例如：jar），然后再对包文件进行集成测试（如果需要的话），再校验包文件，并将已经校验的包文件安装到本地仓库，然后在指定的环境中部署包。 3、生命周期阶段的执行顺序 各生命周期的阶段会被顺序地执行（包括那些这里没有展示的其他生命周期阶段）。 而且在调用一个生命周期阶段时，maven 不仅执行指定的构建阶段，也会执行指定构建阶段之前的每一个阶段 比如，在默认生命周期中，只需要调用最后一个deploy生命阶段，即可执行前面所有阶段：1234567891011121314mvn deploy // 会先执行前面的所有阶段mvn install // 会先执行前面的 validate ... verify 等阶段- 同样的命令可以用在多模块的情况下（即包含一个或多个子项目的工程）：mvn clean install// 会遍历所有的子项目，并且运行clean命令，然后运行install命令（包含所有之前步骤的命令） - 构建命令中也可以加入插件目标* 一个插件目标代表一个特定的任务（比构建阶段更为精细）。这些目标的执行顺序取决于调用目标和构建阶段的顺序。例如下面的命令：mvn clean dependency:copy-dependencies package// 其中clean 和 pakage 是构建阶段，dependency:copy-dependencies 是目标。// 执行顺序是` clean 阶段 -&gt; dependency:copy-dependencies 目标 -&gt; package 阶段 ` 4、Clean 生命周期clean 阶段用于清除上一次编译之后在target包下生成的字节码文件。 阶段 描述 pre-clean 执行一些清理前需要完成的工作 clean 清理上一次构建生成的文件 post-clean 执行一些清理后需要完成的工作 5、Site生命周期 阶段 描述 pre-site 执行一些在生成站点之前需要完成的工作 site 生成项目的站点文档 post-site 执行一些在生成站点之后需要完成的工作 site-deploy 将生成的站点文件发布到远程服务器上]]></content>
@@ -228,6 +227,18 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[Notepad++中查找替换「换行符」]]></title>
+    <url>%2F2019%2F02%2F26%2FNotepad%2B%2B%E4%B8%AD%E6%9F%A5%E6%89%BE%E6%9B%BF%E6%8D%A2%E3%80%8C%E6%8D%A2%E8%A1%8C%E7%AC%A6%E3%80%8D%2F</url>
+    <content type="text"><![CDATA[Notepad++ 是 Windows 中一款优秀的文本编辑软件，功能非常强大。 重要说明： 1、为更好的理解本文，建议先阅读相关文章 – 不同操作系统中的换行符。 2、本文内容基于 Notepad++ 7.5.1 版本，为方便书写，若无特殊说明，下文中内容均指在该软件版本下的操作。 一、查找替换「换行符」1、设置「显示行尾符」为了更清楚的看到换行符的变化，首先进行下面设置：视图 -&gt; 显示符号 -&gt; 显示行尾符 然后新建一个文本，在其中随意输入内容，会看到显示「换行符」为 CRLF，即 \r\n。 2、查找并替换「换行符」 Ctrl + H，打开替换对话框，查找模式 选中 扩展 或者 正则表达式，使查找目标 和 替换为 中同时支持字符串和特殊字符的匹配； 然后在 查找目标 中输入 \r\n ，即可匹配到文本中的回车换行符； 在 替换为 中输入要替换成的字符即可； 二、扩展：查找替换「空行」、空白符下面列举常用的几种查找替换情况：（前提是要选中 正则表达式模式） 查找目标 替换为 说明 \r\n ,\r\n 在行尾加上逗号 \r\n 替换为空，即合并多行内容为一行 \r\n \n 把 windows 下的换行符替换为 linux 下的换行符 \n 把 \n 替换为空，即把 windows 下的换行符替换为 Mac 下的换行符 , \r\n 把逗号全部替换成换行 \r\n\r\n \r\n 去掉空行 1\s\s 1 去掉 1 后的两个空格，其中一个 \s 表示一个空格 1两个半角空格 1 可以直接在 1 后跟两个半角空格来匹配，跟上面 \s 是一样的效果 \r\n \r\n\t 在每行行首添加制表符，即四个半角空格的效果]]></content>
+      <categories>
+        <category>办公利器</category>
+      </categories>
+      <tags>
+        <tag>Notepad++</tag>
+        <tag>换行符</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[awk 命令学习]]></title>
     <url>%2F2019%2F02%2F26%2Fawk%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8%2F</url>
     <content type="text"><![CDATA[一、awk 介绍AWK是一种处理文本文件的语言，是一个强大的文本分析工具。 之所以叫AWK是因为其取了三位创始人 Alfred Aho，Peter Weinberger, 和 Brian Kernighan 的Family Name的首字符。 二、语法格式123awk [选项参数] 'script' var=value file(s)或awk [选项参数] -f scriptfile var=value file(s) table th:first-of-type{ width: 15%; } table th:last-of-type{ width: 55%; } 选项 第二种写法 参数说明 -F ‘fs’ -F 相当于内置变量 FS，即 field-separator -F 指定文件的分隔符，fs是一个字符串或者正则表达式，可以加引号也可以不加（最好加上单引号）； 默认不带 -F 参数时，使用空格或制表符等空白字符做为分隔符。 -v var=value –asign var=value 赋值一个用户定义变量 -f scripfile –file scriptfile 从脚本文件中读取awk命令 三、基本用法log.txt文本内容如下： 12342 this is a test3 Are you like awkThis's a test10 There are orange,apple,mongo 实例： 1、每行按空格或TAB分割，并输出文本中的第1、4项123456$ awk '&#123;print $1,$4&#125;' log.txt---------------------------------------------2 a3 likeThis's10 orange,apple,mongo 2、格式化输出123456$ awk '&#123;printf "%-8s %-10s\n",$1,$4&#125;' log.txt---------------------------------------------2 a3 likeThis's10 orange,apple,mongo 3、awk -F 指定分割字符3.1 使用 ,分割 -F 和分隔符之间可以有空格也可以没有，分隔符可以加单引号或双引号，也可以不加。 建议最好是 -F 和分隔符之间有一个空格，并给分隔符加单引号，不容易出错。 1234567# 文本中没有分隔符字符，所以 $1 就是全部文本，$2 是空。$ awk -F ',' '&#123;print $1,$2&#125;' log.txt---------------------------------------------2 this is a test3 Are you like awkThis's a test10 There are orange apple 3.2 使用 a分割123456$ awk -F 'a' '&#123;print $1&#125;' log.txt ---------------------------------------------2 this is 3 Are you like This's 10 There 3.3 使用多个分隔符先使用空格分割，然后对分割结果再使用”,”分割 123456$ awk -F '[ ,]' '&#123;print $1,$2,$5&#125;' log.txt --------------------------------------------- 2 this test 3 Are awk This's a 10 There apple 4、awk -v 设置变量常用语法： awk -v var=value &apos;{print $1,$2}&apos; filename 4.1 定义一个变量，并在输出时对变量进行运算数字与数字运算，结果正常； 数字与字符串运算，只保留数字。 123456$ awk -va=1 '&#123;print $1,$1+a&#125;' log.txt--------------------------------------------- 2 3 3 4 This's 1 10 11 4.2 定义多个变量，并在输出时对变量进行运算数字与数字运算，结果正常； 数字与字符运算，只保留数字； 字符或数字与字符拼接； 123456$ awk -va=1 -vb=s '&#123;print $1,$1+a,$1b&#125;' log.txt----------------------------------------------- 2 3 2s 3 4 3s This's 1 This'ss 10 11 10s 5、awk -f 指定脚本常用语法： awk -f {awk脚本} {文件名} 1$ awk -f cal.awk log.txt]]></content>
@@ -241,26 +252,15 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Notepad++中查找替换「换行符」]]></title>
-    <url>%2F2019%2F02%2F26%2FNotepad%2B%2B%E4%B8%AD%E6%9F%A5%E6%89%BE%E6%9B%BF%E6%8D%A2%E3%80%8C%E6%8D%A2%E8%A1%8C%E7%AC%A6%E3%80%8D%2F</url>
-    <content type="text"><![CDATA[Notepad++ 是 Windows 中一款优秀的文本编辑软件，功能非常强大。 重要说明： 1、为更好的理解本文，建议先阅读相关文章 – 不同操作系统中的换行符。 2、本文内容基于 Notepad++ 7.5.1 版本，为方便书写，若无特殊说明，下文中内容均指在该软件版本下的操作。 一、查找替换「换行符」1、设置「显示行尾符」为了更清楚的看到换行符的变化，首先进行下面设置：视图 -&gt; 显示符号 -&gt; 显示行尾符 然后新建一个文本，在其中随意输入内容，会看到显示「换行符」为 CRLF，即 \r\n。 2、查找并替换「换行符」 Ctrl + H，打开替换对话框，查找模式 选中 扩展 或者 正则表达式，使查找目标 和 替换为 中同时支持字符串和特殊字符的匹配； 然后在 查找目标 中输入 \r\n ，即可匹配到文本中的回车换行符； 在 替换为 中输入要替换成的字符即可； 二、扩展：查找替换「空行」、空白符下面列举常用的几种查找替换情况：（前提是要选中 正则表达式模式） 查找目标 替换为 说明 \r\n ,\r\n 在行尾加上逗号 \r\n 替换为空，即合并多行内容为一行 \r\n \n 把 windows 下的换行符替换为 linux 下的换行符 \n 把 \n 替换为空，即把 windows 下的换行符替换为 Mac 下的换行符 , \r\n 把逗号全部替换成换行 \r\n\r\n \r\n 去掉空行 1\s\s 1 去掉 1 后的两个空格，其中一个 \s 表示一个空格 1两个半角空格 1 可以直接在 1 后跟两个半角空格来匹配，跟上面 \s 是一样的效果 \r\n \r\n\t 在每行行首添加制表符，即四个半角空格的效果]]></content>
-      <categories>
-        <category>办公利器</category>
-      </categories>
-      <tags>
-        <tag>Notepad++</tag>
-        <tag>换行符</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[git pull 指定某一个文件或文件夹]]></title>
-    <url>%2F2019%2F02%2F26%2Fgit%20pull%20%E6%8C%87%E5%AE%9A%E6%9F%90%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E6%88%96%E6%96%87%E4%BB%B6%E5%A4%B9%2F</url>
-    <content type="text"><![CDATA[1、要解决的问题默认情况下，git pull 操作会把远程仓库的所有最新数据更新到本地。 但是，如果你只想更新指定的某一个文件或文件夹，该怎么操作呢？ 2、git 只 pull 某一个文件/夹 设置 core.sparsecheckout为 true $ git config core.sparsecheckout true core.sparsecheckout用于控制是否允许设置pull指定文件/夹，true为允许。 此方法适用于 Git1.7.0 以后版本，之前的版本没有这个功能。 在.git/info/sparse-checkout文件中（如果没有则创建）添加指定的文件/夹 最后，拉取想要的分支即可实现checkout指定文件/夹。 $ git pull origin master]]></content>
+    <title><![CDATA[区别 git clone 与 git pull]]></title>
+    <url>%2F2019%2F02%2F26%2Fgit%20clone%26pull%EF%BC%8Cpull%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6%EF%BC%8C%E6%89%B9%E9%87%8F%E6%8F%90%E4%BA%A4%2F</url>
+    <content type="text"><![CDATA[1、git clone 与 git pull 相同点相同点：都是从远程服务器拉取代码到本地 2、git clone 与 git pull 不同点git clone是在本地没有版本库的时候，从远程服务器克隆整个版本库到本地，是一个本地从无到有的过程。 git pull在本地有版本库的情况下，从远程库获取最新commit 数据（如果有的话），并merge（合并）到本地。 git pull = git fetch + git merge 3、使用场景通常情况下，远程操作的第一步，是使用git clone从远程主机克隆一个版本库到本地。 本地修改代码后，每次从本地仓库push到远程仓库之前都要先进行git pull操作，保证push到远程仓库时没有版本冲突。]]></content>
       <categories>
         <category>git</category>
       </categories>
       <tags>
         <tag>git</tag>
+        <tag>git clone</tag>
         <tag>git pull</tag>
       </tags>
   </entry>
@@ -303,18 +303,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[intellij idea使用手册-03 导入和创建项目]]></title>
-    <url>%2F2019%2F02%2F26%2Fintellij%20idea%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C-03%20%E5%AF%BC%E5%85%A5%E5%92%8C%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE%2F</url>
-    <content type="text"><![CDATA[idea导入maven项目1、import project -&gt; 选择本地的maven项目文件夹(包含pom.xml的文件夹) -&gt; import project from external model + Maven -&gt; ，然后选择下图中的选项 2、设置maven环境为本地自己下载的maven路径，及自己的仓库地址，override 3、select profiles -&gt; 选中public-snapshots -&gt; 配置sdk -&gt; 其它默认即可。 idea导入maven模块1、打开一个现有的idea工程 2、File –&gt;new–&gt; module from existing sources –&gt; Select File or Directory to Import根据不同的项目类型选择不同的文件，如Maven项目选中pom.xml， 点击 finish 即可导入完成。 3、然后在 terminal 命令行中测试导入的项目是否可以正常运行。如：mvn test, mvn package, mvn install。 idea 本地创建 maven项目1、本地搭建 maven 环境下载解压 maven，修改配置文件 settings.xml（最好用sublime Text3 编辑，避免改错），设置本地仓库。 2、idea 创建一个 maven 管理的 web 项目（1）Create New Project -&gt; Maven -&gt; maven-archetype-webapp -&gt; 填写项目名称 -&gt; 选择maven home ， 路径为自己下载的 maven 路径（不用 idea 自带的bundled版本） -&gt; User settings file 选中 Override。 （2）第一次创建项目非常慢（尤其是没网的状态下），要等右下角进度条完成后再操作。 （3）创建成功后，检查目录结构是否正确，src -&gt; main -&gt; webapp -&gt; web-inf，若目录结构不正确，说明操作有误，删除重新创建。 idea 导入和打开项目的区别idea 导入(import)项目和打开(open)项目稍微有点区别。 如果你要使用的项目是 idea 模型的项目，既原来就是用 idea 开发的，那么直接 open 打开就可以了。 如果你要使用的项目不是 idea 模型的项目，既原来不是用 idea 开发的，如用 eclipse 开发的项目，没有 impl 文件，这时直接 open 打开会有很多报错，需要选择导入项目 import。]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-      <tags>
-        <tag>intellij idea</tag>
-        <tag>IDEA导入项目</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[intellij idea 和 eclipse 区别（IDEA使用手册01）]]></title>
     <url>%2F2019%2F02%2F26%2Fintellij%20idea%20%E5%92%8C%20eclipse%20%E5%8C%BA%E5%88%AB%2F</url>
     <content type="text"><![CDATA[一、IDEA 和 eclipse 对比 IDEA Eclipse 说明 new Project workspace 创建 项目/工作空间，是最顶级的结构单元 new Module new Project 创建一个模块/工程，一个 Project/工作空间 下可以有多个 模块/工程 文件自动保存，不能设置为手动保存 需要手动保存 智能提示重构代码,告诉你更好的实现方式 更友好、更聪明的代码提示功能 二、IntelliJ IDEA 中的 Project 和 Module在 IntelliJ IDEA 中，没有类似于 Eclipse 工作空间（Workspace）的概念，而是提出了Project和Module这两个概念。 2.1 Project : Module = 1 : n在 IntelliJ IDEA 中Project是最顶级的结构单元，下面是一个或多个Module，是一对多的关系。 2.2 多个 Module 的划分在大型项目中，都是使用多 Module 结构，按功能不同划分为多个模块，模块之间可以相互依赖。 2.3 Project 对 Module 的意义 IDEA 的 Project 可以简单地理解为是一个单纯的目录，下面存放不同模块的文件夹。 Project 主要起到一个项目定义、范围约束、规范类型的效果，本身不具备任何编码设置、构建等开发功能。 2.4 Project 和 Module 的默认配置 IDEA 默认是单 Project 单 Module 结构，且默认名字相同，这时二者合二为一； 当一个 Project 下有多个 Module 时，最好是使用不同的名字。 三、安装目录进入IntelliJ IDEA 安装目录的bin目录下 （bin是 binary 的缩写，代表的意思是二进制，因此bin目录就是用来存放二进制文件） 在这里，我们主要了解下面五个文件： idea.exe：IntelliJ IDEA 32 位的可行执行文件，IntelliJ IDEA 安装完默认发送到桌面的就是这个执行文件的快捷方式； idea.exe.vmoptions：IntelliJ IDEA 32 位的可执行文件的 VM 配置文件； idea.properties：IntelliJ IDEA 的一些属性配置文件； idea64.exe：IntelliJ IDEA 64 位的可行执行文件，要求电脑上必须装有 JDK 64 位版本，64 位的系统也是建议使用该文件； idea64.exe.vmoptions：IntelliJ IDEA 64 位的可执行文件的 VM 配置文件。 四、新建项目通过Create New Project，选择需要的项目类型，然后设置项目和模块的名称和存储路径。 默认是一个Project下创建一个Module，因此创建时项目名称与模块名称默认是相同的。一般情况下，我们是不需要在More Settings中进行修改的。 默认界面是隐藏Toolbar和Tool Buttons的，可以通过view--&gt;Toolbar和Tool Buttons 来开启。 在创建 java project 时，默认使用的是自带的JRE，在 Project SDK 中选择自己下载的jdk目录。 创建完成后，会在IDEA左侧显示项目结构图和外部库 在项目结构图中，src目录为默认的Source root，我们一般在该目录下创建包和类； 在外部库中，显示了我们导入的 JDK 1.8 版本 五、创建包和类5.1 创建包 在 src 中创建包时，可以一次创建多个包，如：输入包名为 com.hit.demo，同时创建了三个空包。 创建的多个空包默认是重叠在一起的，如果其中某个包非空，则自动拆开包。 如果感觉空包叠在一起不爽的话，可以点击旁边的齿轮按钮，再点击 Hide Empty Middle Packages 把对勾去掉，变为 Compact Empty Middle Packages，就会把空包都按树状展示。 5.2 创建类 在一个包上点击鼠标右键，选择 Create Java Class ,创建 HelloWorld 类。 编写完成代码后，直接在编辑区右键–Run HelloWorld 运行类。 然后会在左侧目录中生成一个与 src 同级的目录 out ，用于存放项目中所有Module的编译文件。 六、项目中的配置文件6.1 .idea 目录这是整个 Project的配置文件目录。 IntelliJ IDEA 的配置文件都存在.idea目录下，以 XML 文件的形式存在，因此我们也可以通过了解这些 XML 文件来了解 IntelliJ IDEA 的相关配置。 6.2 .iml 文件这个文件是Module的配置文件。 这是 IntelliJ IDEA 为每个 Module 自动生成的配置文件，一般情况下不需要动。 七、设置主题和字体7.1 界面主题修改Files -&gt; Settings -&gt; Appearance &amp; Behavior -&gt; Appearance 在 Windows 系统上 IntelliJ IDEA 默认提供三个主题，分别为：Darcula、IntelliJ和Windows。其中，除了Darcula是黑色背景的主题，其余两个都是白色背景的主题。 7.2 界面字体修改Appearance &amp; Behavior &gt; Appearance 选中 Override default fonts by XXX ，并设置具体字体大小的数值。 这里的修改不会应用于代码编辑区！ 有一点需要注意，那就是：有的字体是包含中文的，有的字体则是不包含中文的。 一般情况下，使用英文的国家是不需要额外担心乱码问题的，但是我们需要啊！ 如果我们选择的字体不包含中文的话，很多位置上可能会出现类似于 口口口口口 这样的乱码问题。 例如，Courier New和Monaco就是纯英文字体，而Microsoft YaHei就是包含中文的字体。 7.3 代码编辑区主题修改Files -&gt; Settings -&gt; Appearance &amp; Behavior -&gt; Editor &gt; Color Scheme 在 Windows 系统上 IntelliJ IDEA 默认提供两个编辑区主题，分别为：Default和Darcula。其中，Default为默认主题；Darcula为黑色主题。 7.4 代码编辑区和控制台的字体修改Editor &gt; Font 这里的设置可以同时应用于代码编辑区和控制台 Font ：设置第一字体 Show only monospaced fonts：仅显示等宽字体，默认是勾选状态，可选的字体较少，可去掉勾选。 Fallback font：备选字体，如果首选字体中无法显示文字，系统就会自动调用备选字体来显示。例如首选字体我们可以设置为英文字体，备选字体设置为中文字体，这样即可优美的显示代码，而中文也不会变为‘口口’字 Enable font ligatures：是否启用字体连写，一般不启用。 7.5 设置 Sublime 代码颜色的方法在使用 Sublime 时，五颜六色的代码看起来非常美观，怎么让 IDEA 也设置成类似的格式呢？ 下载「SublimeMonoKaiTrue」jar 包 https://github.com/guobinhit/intellij-idea-tutorial/tree/master/resources/idea-theme/SublimeMonokaiTrue.jar； File -&gt; Import Settings，导入已经下载完的「SublimeMonoKai.jar」包，按提示重启 IDEA ； 重启后，默认就会使用新的 sublime 主题效果了，具体可以在 File -&gt; Settings -&gt; Editor -&gt; Color Scheme 中修改。]]></content>
@@ -324,6 +312,18 @@
       <tags>
         <tag>intellij idea</tag>
         <tag>eclipse</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[intellij idea使用手册-03 导入和创建项目]]></title>
+    <url>%2F2019%2F02%2F26%2Fintellij%20idea%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C-03%20%E5%AF%BC%E5%85%A5%E5%92%8C%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE%2F</url>
+    <content type="text"><![CDATA[idea导入maven项目1、import project -&gt; 选择本地的maven项目文件夹(包含pom.xml的文件夹) -&gt; import project from external model + Maven -&gt; ，然后选择下图中的选项 2、设置maven环境为本地自己下载的maven路径，及自己的仓库地址，override 3、select profiles -&gt; 选中public-snapshots -&gt; 配置sdk -&gt; 其它默认即可。 idea导入maven模块1、打开一个现有的idea工程 2、File –&gt;new–&gt; module from existing sources –&gt; Select File or Directory to Import根据不同的项目类型选择不同的文件，如Maven项目选中pom.xml， 点击 finish 即可导入完成。 3、然后在 terminal 命令行中测试导入的项目是否可以正常运行。如：mvn test, mvn package, mvn install。 idea 本地创建 maven项目1、本地搭建 maven 环境下载解压 maven，修改配置文件 settings.xml（最好用sublime Text3 编辑，避免改错），设置本地仓库。 2、idea 创建一个 maven 管理的 web 项目（1）Create New Project -&gt; Maven -&gt; maven-archetype-webapp -&gt; 填写项目名称 -&gt; 选择maven home ， 路径为自己下载的 maven 路径（不用 idea 自带的bundled版本） -&gt; User settings file 选中 Override。 （2）第一次创建项目非常慢（尤其是没网的状态下），要等右下角进度条完成后再操作。 （3）创建成功后，检查目录结构是否正确，src -&gt; main -&gt; webapp -&gt; web-inf，若目录结构不正确，说明操作有误，删除重新创建。 idea 导入和打开项目的区别idea 导入(import)项目和打开(open)项目稍微有点区别。 如果你要使用的项目是 idea 模型的项目，既原来就是用 idea 开发的，那么直接 open 打开就可以了。 如果你要使用的项目不是 idea 模型的项目，既原来不是用 idea 开发的，如用 eclipse 开发的项目，没有 impl 文件，这时直接 open 打开会有很多报错，需要选择导入项目 import。]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>intellij idea</tag>
+        <tag>IDEA导入项目</tag>
       </tags>
   </entry>
   <entry>
@@ -340,18 +340,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Maven入门学习01-关键特性]]></title>
-    <url>%2F2019%2F02%2F26%2Fmaven%E5%AD%A6%E4%B9%A001%20-%20%E5%85%B3%E9%94%AE%E7%89%B9%E6%80%A7%2F</url>
-    <content type="text"><![CDATA[一、认识 Maven1、Maven 最重要的功能Apache Maven 是一个强大的项目管理工具，可以用于项目构建、依赖管理、项目信息管理。 Maven 更多的被用作项目构建工具，它使项目的构建过程简单化、标准化、可复用，极大的方便了整个项目的开发和管理。 它基于工程对象模型（POM）的概念，使用 pom.xml进行核心功能配置，进而管理项目的构建、报告和文档等。 2、什么是构建工具？构建工具是将软件项目构建相关的过程自动化的工具。 构建一个软件项目通常包含以下一个或多个过程： 生成源码（如果项目使用自动生成源码）； 从源码生成项目文档； 编译源码； 将编译后的代码打包成JAR文件或者ZIP文件； 将打包好的代码安装到服务器、仓库或者其它的地方； 当然，有些项目可能需要更多的过程才能完成构建，同样也可以实现自动化。 自动化构建过程的好处： 将手动构建过程中犯错的风险降到最低。 自动构建工具通常要比手动执行同样的构建过程要快。 二、Maven 关键特性1、简化并标准化项目构建过程 Maven 为开发者提供了一套完整的构建生命周期框架，开发人员只需要按照框架操作。 Maven 使用一个标准的目录结构和一个默认的构建生命周期，开发人员只需要把代码放入相应的目录中并使用默认配置。 2、自动管理依赖2.1 以前项目开发中的问题jar 包依赖和冲突问题： 在构建一个大型项目时，经常需要用到很多第三方的类库，需要引入大量的jar包，需要一个个去查找。 一个大型项目中 jar 包的数量之多往往让我们瞠目结舌，并且jar包之间的关系错综复杂，多个jar包之间又可能会引起冲突问题，都可能导致项目编译失败。 以往开发项目时，程序员往往需要花较多的精力在引用jar包搭建项目环境上，而这一项工作尤为艰难，少一个Jar包、多一个jar包往往会报一些让人摸不着头脑的异常。 2.2 Maven 如何解决依赖问题？我们只需要告诉Maven需要哪些 jar 包，它会帮助我们自动下载、并统一管理，极大提升开发效率。 自动下载依赖jar包 通过在pom.xml文件中的&lt;dependency&gt;节点添加相应配置，就会自动下载相应jar包。123456&lt;dependency&gt; &lt;groupId&gt;junit&lt;/groupId&gt; 项目名 &lt;artifactId&gt;junit&lt;/artifactId&gt; 项目模块 &lt;version&gt;4.1.1&lt;/version&gt; 项目版本 &lt;scope&gt;test&lt;/scope&gt; 作用范围 &lt;/dependency&gt; 自动管理依赖 每一个jar包也有自己的 pom.xml文件，里面也会有&lt;dependency&gt;配置，在这里配置的是这个jar包所依赖的其他jar包，也会被maven自动下载下来 统一管理jar包 通过仓库来实现统一管理，后面会详细讲解Maven仓库的概念。 3、约定优于配置Maven 使用约定而不是配置。 也就是说开发者不需要关心每一个配置细节，Maven 会为工程提供合理的默认行为。 当创建 Maven 工程时，Maven 会创建默认的工程结构。开发者只需要合理的放置文件，不再需要定义任何配置。 下表是工程源码文件、资源文件的默认配置，和其他一些配置： （假定 ${basedir} 表示工程目录） 配置项 默认值 source code ${basedir}/src/main/java resources ${basedir}/src/main/resources Tests ${basedir}/src/test Complied byte code ${basedir}/target distributable JAR ${basedir}/target/classes 4、热部署，热编译在web项目已经运行的时候，修改代码能直接被web服务器所接受，不需要重启服务器或者重新部署代码，而且可以直接通过maven 打包war或者jar项目。]]></content>
-      <categories>
-        <category>maven</category>
-      </categories>
-      <tags>
-        <tag>maven</tag>
-        <tag>mavne关键特性</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[linux系统查看各种信息]]></title>
     <url>%2F2019%2F02%2F26%2Flinux%E7%B3%BB%E7%BB%9F%E6%9F%A5%E7%9C%8B%E5%90%84%E7%A7%8D%E4%BF%A1%E6%81%AF%2F</url>
     <content type="text"><![CDATA[一、查看操作系统信息1、uname -a 查看操作系统信息$ uname -a Linux VM_101_50_centos 2.6.32-642.6.2.el6.x86_64 #1 SMP Wed Oct 26 06:52:09 UTC 2016 x86_64 x86_64 x86_64 GNU/Linux 2、cat /etc/issue 查看内核$ cat /etc/issue CentOS release 6.3 (Final) Kernel \r on an \m 3、cat /etc/redhat-release # 查看内核$ cat /etc/redhat-release CentOS release 6.3 (Final) 4、其它hostname # 查看计算机名 env # 查看环境变量 二、查看CPU、内存、网络等资源信息1、常用命令1234567top # 实时显示进程状态free -m # 查看内存使用量和交换区使用量df -h # 查看各分区使用情况du -sh &lt;目录名&gt; # 查看指定目录的大小 2、查看网络12345ifconfig # 查看所有网络接口的属性netstat -lntp # 查看所有监听端口netstat -antp # 查看所有已经建立的连接netstat -s # 查看网络统计信息 3、查看进程和程序1234ps -ef # 查看所有进程 程序： rpm -qa # 查看所有安装的软件包 4、查看详细CPU信息/proc/cpuinfo12345678910111213141516171819202122232425262728$ cat /proc/cpuinfo processor : 0vendor_id : GenuineIntelcpu family : 6model : 63model name : Intel(R) Xeon(R) CPU E5-26xx v3stepping : 2microcode : 1cpu MHz : 2397.222cache size : 4096 KBphysical id : 0siblings : 1core id : 0cpu cores : 1apicid : 0initial apicid : 0fpu : yesfpu_exception : yescpuid level : 13wp : yesflags : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ss ht syscall nx lm constant_tsc rep_good unfair_spinlock pni pclmulqdq ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm abm xsaveoptbogomips : 4794.44clflush size : 64cache_alignment : 64address sizes : 40 bits physical, 48 bits virtualpower management:....有几核就会显示几块信息.... 5、查看详细内存信息/proc/meminfo12345678910111213141516171819202122232425262728293031323334353637383940414243$ cat /proc/meminfo MemTotal: 16332028 kBMemFree: 192596 kBBuffers: 9028 kBCached: 1082200 kBSwapCached: 220488 kBActive: 13422780 kBInactive: 2244716 kBActive(anon): 12885068 kBInactive(anon): 1706192 kBActive(file): 537712 kBInactive(file): 538524 kBUnevictable: 0 kBMlocked: 0 kBSwapTotal: 8191996 kBSwapFree: 1180728 kBDirty: 684 kBWriteback: 0 kBAnonPages: 14356000 kBMapped: 40076 kBShmem: 14992 kBSlab: 235844 kBSReclaimable: 183452 kBSUnreclaim: 52392 kBKernelStack: 39776 kBPageTables: 68364 kBNFS_Unstable: 0 kBBounce: 0 kBWritebackTmp: 0 kBCommitLimit: 16358008 kBCommitted_AS: 26461844 kBVmallocTotal: 34359738367 kBVmallocUsed: 42328 kBVmallocChunk: 34359687928 kBHardwareCorrupted: 0 kBAnonHugePages: 12441600 kBHugePages_Total: 0HugePages_Free: 0HugePages_Rsvd: 0HugePages_Surp: 0Hugepagesize: 2048 kBDirectMap4k: 8184 kBDirectMap2M: 16769024 kB 三、系统日志文件123456/var/log/message 系统启动后的信息和错误日志，是Red Hat Linux中最常用的日志之一 /var/log/secure 与安全相关的日志信息 /var/log/maillog 与邮件相关的日志信息 /var/log/cron 与定时任务相关的日志信息 /var/log/spooler 与UUCP和news设备相关的日志信息 /var/log/boot.log 守护进程启动和停止相关的日志消息]]></content>
@@ -364,19 +352,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[linux管道符和作业控制]]></title>
-    <url>%2F2019%2F02%2F26%2Fshell%20%E7%AE%A1%E9%81%93%E7%AC%A6%26%E4%BD%9C%E4%B8%9A%E6%8E%A7%E5%88%B6%2F</url>
-    <content type="text"><![CDATA[一、管道符 | 把前面命令输出的结果，传递给后面的命令。 示例：12345678统计文件的行数cat 1.txt | wc -l过滤文件内容cat 1.txt | grep aaa查看当前目录下有多少个文件：find ./ -type f | wc -l 二、作业控制1、Ctrl C停止一个任务 在执行一个命令的过程中，彻底停止一个任务。 执行之后，jobs查看不到该任务。 1234[app@centos tmp]$ sleep 10^C[app@centos tmp]$ jobs[1]+ Stopped sleep 100 2、Ctrl Z 暂停一个任务 在执行一个命令的过程中，暂停一个任务。 执行之后，jobs可以查看到该任务。 12345[app@centos tmp]$ sleep 100^Z[1]+ Stopped sleep 100[app@centos tmp]$ jobs[1]+ Stopped sleep 100 注意： 执行Ctrl C 和 Ctrl Z之后，都会显示 Stopped 状态，但是Ctrl Z的任务只是被暂停了，可以通过jobs进行调度。 3、jobs 查看后台的任务 查看当前会话窗口中后台任务，包括名称和命令序号id 包括被ctrl z暂停的任务 和 被 &amp;放入后台运行的任务123456789[app@centos tmp]$ sleep 10^Z[1]+ Stopped sleep 10[app@centos tmp]$ sleep 20^Z[2]+ Stopped sleep 20[app@centos tmp]$ jobs[1]- Stopped sleep 10[2]+ Stopped sleep 20 4、bg[id]把任务调到后台并运行 bg即background，把被暂停的任务放入后台运行 后面加上作业id号可以指定某一个作业，不加id时默认最近的一个作业。 示例： （注意下面命令中的状态变化）12345678[app@centos tmp]$ jobs[2]- Stopped sleep 20[3]+ Stopped sleep 50[app@centos tmp]$ bg 3[3]+ sleep 50 &amp;[app@centos tmp]$ jobs[2]+ Stopped sleep 20[3]- Running sleep 50 &amp; 5、fg[id]把任务调到前台 fg即foreground，把后台作业调到前台运行 后面加上作业id号可以指定某一个作业，不加id时默认最近的一个作业。 示例： 把被暂停的任务调到前台继续运行： 6、&amp;把任务放入后台运行 直接在命令后面加&amp;即可 命令在后台是Running状态 相当于对命令执行Ctrl Z 和 bg 1234567[app@centos tmp]$ jobs[2]+ Stopped sleep 20[app@centos tmp]$ sleep 50 &amp;[3] 12580[app@centos tmp]$ jobs[2]+ Stopped sleep 20[3]- Running sleep 50 &amp;]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>shell</tag>
-        <tag>管道符</tag>
-        <tag>linux作业控制</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[maven学习02-pom文件]]></title>
     <url>%2F2019%2F02%2F26%2Fmaven%E5%AD%A6%E4%B9%A002-pom%E6%96%87%E4%BB%B6%2F</url>
     <content type="text"><![CDATA[一、POM 文件是什么？Maven的中心思想即POM文件（(Project Object Model)项目对象模型）。 POM文件是以XML文件的形式，描述项目用到的资源，如源码目录、测试代码目录、依赖（用到的外部Jar包）等。 pom.xml 是整个系统的基础组件，位于项目根目录下。 二、Maven 如何使用POM文件？ 上图说明了Maven是如何使用POM文件的，当执行一条Maven命令的时候，会依次进行以下步骤： 1、读取项目根目录下的pom.xml，并根据pom.xml中的描述来执行下一步操作。 2、根据pom.xml中的&lt;dependencies&gt;，下载依赖到本地仓库中。 3、构建生命周期、阶段和目标。 4、构建插件。 三、POM文件的主要组成部分POM文件描述的是构建“什么”，而不是“如何”构建。 如何构建是取决于Maven的构建阶段和目标。 每一个项目都有一个POM文件，即pom.xml，位于项目的根目录下。 pom.xml 主要包括以下几部分： 3.1 构建生命周期、阶段和目标Maven的构建过程被分解为构建生命周期、阶段和目标。 &lt;build&gt; -&gt; &lt;phase&gt; -&gt; &lt;goals&gt; 一个构建周期由一系列的构建阶段组成。 每一个构建阶段由一系列的目标组成。 当我们使用一条命令来运行Maven的时候，这条命令就是构建生命周期、阶段或目标的名字。 如果执行的是一个生命周期，该生命周期内的所有构建阶段都会被执行。 如果执行的是一个构建阶段，在预定义的构建阶段中，所有处于当前构建阶段之前的阶段也都会被执行。 3.2 依赖和仓库&lt;repository&gt; 仓库节点，&lt;dependencies&gt; 依赖节点 Maven执行时，其中一个首要目标就是检查项目的依赖（需要的jar 包）。 如果在本地仓库中不存在该依赖，则Maven会从中央仓库和远程仓库下载并放到本地仓库。（后面会单独讲解怎么修改本地仓库路径、怎么添加远程仓库） 3.3 构建插件&lt;plugins&gt; 节点 构建插件可以向构建阶段中增加额外的构建目标。 如果Maven标准的构建阶段和目标无法满足项目构建的需求，可以在POM文件里增加插件。 Maven有一些标准的插件供选用，如果需要也可以自己实现插件。 3.4 配置文件&lt;profiles&gt; 节点 配置文件用于以不同的方式构建项目。 比如，你可能需要在本地环境构建，用于开发和测试，你也可能需要构建后用于开发环境。这两个构建过程是不同的。 在POM文件中增加不同的构建配置，可以启用不同的构建过程。当运行Maven时，可以指定要使用的配置。 四、Maven 项目继承1、父子工程中的POM（以下内容中子项目 与 模块的概念是类似的，所以也可以对应的理解为模块） 一个项目如果分为多个子项目/模块，一般来讲，父项目有一个POM文件，每一个子项目也有一个POM文件。在这种结构下，既可以一步构建整个项目，也可以各个子项目分开构建。 2、 POM 继承的原理POM 继承的原理类似于Java中的类继承关系，可以结合理解。 当有多个子项目时，使用 POM 继承可以大大减少配置的工作量。 把多个子项目之间一些共性的东西（比如说类似的配置、相同的jar包等等），定义在父项目的pom.xml文件中。 子项目继承父项目后，在自己的pom.xml中只放自己个性的东西，大大减少了工作量。 默认情况下，所有的Maven pom文件都继承自一个根pom。如果没有显式指定父pom，则该pom文件继承自根pom。 子pom文件的设置可以覆盖父pom文件的设置，只需要在子pom文件里指定新的设置即可。 3、POM继承关系图 如果要继承根pom以外的pom，需要在子pom中显示地指定父pom。 4、如何显示指定父pom呢？ 在子项目的pom.xml起始处设置 &lt;parent&gt; 节点来指定父项目。如：12345678910111213141516&lt;project xmlns="http://maven.apache.org/POM/4.0.0"xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"xsi:schemaLocation="http://maven.apache.org/POM/4.0.0http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;&lt;parent&gt; 指定父pom&lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;&lt;artifactId&gt;my-parent&lt;/artifactId&gt;&lt;version&gt;2.0&lt;/version&gt;&lt;relativePath&gt;../my-parent&lt;/relativePath&gt;&lt;/parent&gt;&lt;artifactId&gt;my-project&lt;/artifactId&gt;…&lt;/project&gt; 五、POM文件字段解析如下为一个最小化的POM文件示例：12345678910&lt;project xmlns="http://maven.apache.org/POM/4.0.0"xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"xsi:schemaLocation="http://maven.apache.org/POM/4.0.0http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;&lt;groupId&gt;com.jenkov&lt;/groupId&gt;&lt;artifactId&gt;java-web-crawler&lt;/artifactId&gt;&lt;version&gt;1.0.0&lt;/version&gt;&lt;/project&gt; 1、各字段解析 modelVersion：使用的POM模型的版本。 一般选择正在使用的Maven版本一致的版本即可。 版本4.0.0适用于Maven 2和3。 groupId：一个组织或者项目（比如开源项目）的唯一ID。一般使用项目的java包的根名称作为group ID。类似com.xxx.xxxx 。 使用带.分隔符的java包名作为groupId，这一点并不是必须的。 但是，如果按照这样的规范来定义groupId，项目将会位于Maven仓库的结构化目录中，该结构化目录与group ID匹配。每一个.是一个目录分隔符，每一个词都表示一个目录。 比如：group ID为com.jenkov的项目将位于目录MAVEN_REPO/com/jenkov中。目录路径中的MAVEN_REPO表示Maven仓库的路径。 artifactId：正在构建的项目的名称。 它也是构建完项目后生成的jar包的文件名的一部分。构建过程的输出，即构建结果，在Maven中称为构件（artifact）。通常它就是一个jar包、war包或者EAR包等等。 version：项目的版本号。 可以用来识别项目不同的发行版。 它是artifact ID目录下的子目录名。 它也用作构建结果即jar包名称的一部分。 上文中的groupId，artifactId和version属性，在项目构建后会生成一个jar文件，位于Maven仓库的如下路径中（目录和文件名）：MAVEN_REPO/com/jenkov/java-web-crawler/1.0.0/java-web-crawler-1.0.0.jar 上面只是构建maven项目最基本的一些配置，实际开发中，还会增加更多的配置来辅助构建。]]></content>
@@ -386,6 +361,18 @@
       <tags>
         <tag>maven</tag>
         <tag>pom文件</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Maven入门学习01-关键特性]]></title>
+    <url>%2F2019%2F02%2F26%2Fmaven%E5%AD%A6%E4%B9%A001%20-%20%E5%85%B3%E9%94%AE%E7%89%B9%E6%80%A7%2F</url>
+    <content type="text"><![CDATA[一、认识 Maven1、Maven 最重要的功能Apache Maven 是一个强大的项目管理工具，可以用于项目构建、依赖管理、项目信息管理。 Maven 更多的被用作项目构建工具，它使项目的构建过程简单化、标准化、可复用，极大的方便了整个项目的开发和管理。 它基于工程对象模型（POM）的概念，使用 pom.xml进行核心功能配置，进而管理项目的构建、报告和文档等。 2、什么是构建工具？构建工具是将软件项目构建相关的过程自动化的工具。 构建一个软件项目通常包含以下一个或多个过程： 生成源码（如果项目使用自动生成源码）； 从源码生成项目文档； 编译源码； 将编译后的代码打包成JAR文件或者ZIP文件； 将打包好的代码安装到服务器、仓库或者其它的地方； 当然，有些项目可能需要更多的过程才能完成构建，同样也可以实现自动化。 自动化构建过程的好处： 将手动构建过程中犯错的风险降到最低。 自动构建工具通常要比手动执行同样的构建过程要快。 二、Maven 关键特性1、简化并标准化项目构建过程 Maven 为开发者提供了一套完整的构建生命周期框架，开发人员只需要按照框架操作。 Maven 使用一个标准的目录结构和一个默认的构建生命周期，开发人员只需要把代码放入相应的目录中并使用默认配置。 2、自动管理依赖2.1 以前项目开发中的问题jar 包依赖和冲突问题： 在构建一个大型项目时，经常需要用到很多第三方的类库，需要引入大量的jar包，需要一个个去查找。 一个大型项目中 jar 包的数量之多往往让我们瞠目结舌，并且jar包之间的关系错综复杂，多个jar包之间又可能会引起冲突问题，都可能导致项目编译失败。 以往开发项目时，程序员往往需要花较多的精力在引用jar包搭建项目环境上，而这一项工作尤为艰难，少一个Jar包、多一个jar包往往会报一些让人摸不着头脑的异常。 2.2 Maven 如何解决依赖问题？我们只需要告诉Maven需要哪些 jar 包，它会帮助我们自动下载、并统一管理，极大提升开发效率。 自动下载依赖jar包 通过在pom.xml文件中的&lt;dependency&gt;节点添加相应配置，就会自动下载相应jar包。123456&lt;dependency&gt; &lt;groupId&gt;junit&lt;/groupId&gt; 项目名 &lt;artifactId&gt;junit&lt;/artifactId&gt; 项目模块 &lt;version&gt;4.1.1&lt;/version&gt; 项目版本 &lt;scope&gt;test&lt;/scope&gt; 作用范围 &lt;/dependency&gt; 自动管理依赖 每一个jar包也有自己的 pom.xml文件，里面也会有&lt;dependency&gt;配置，在这里配置的是这个jar包所依赖的其他jar包，也会被maven自动下载下来 统一管理jar包 通过仓库来实现统一管理，后面会详细讲解Maven仓库的概念。 3、约定优于配置Maven 使用约定而不是配置。 也就是说开发者不需要关心每一个配置细节，Maven 会为工程提供合理的默认行为。 当创建 Maven 工程时，Maven 会创建默认的工程结构。开发者只需要合理的放置文件，不再需要定义任何配置。 下表是工程源码文件、资源文件的默认配置，和其他一些配置： （假定 ${basedir} 表示工程目录） 配置项 默认值 source code ${basedir}/src/main/java resources ${basedir}/src/main/resources Tests ${basedir}/src/test Complied byte code ${basedir}/target distributable JAR ${basedir}/target/classes 4、热部署，热编译在web项目已经运行的时候，修改代码能直接被web服务器所接受，不需要重启服务器或者重新部署代码，而且可以直接通过maven 打包war或者jar项目。]]></content>
+      <categories>
+        <category>maven</category>
+      </categories>
+      <tags>
+        <tag>maven</tag>
+        <tag>mavne关键特性</tag>
       </tags>
   </entry>
   <entry>
@@ -402,6 +389,19 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[linux管道符和作业控制]]></title>
+    <url>%2F2019%2F02%2F26%2Fshell%20%E7%AE%A1%E9%81%93%E7%AC%A6%26%E4%BD%9C%E4%B8%9A%E6%8E%A7%E5%88%B6%2F</url>
+    <content type="text"><![CDATA[一、管道符 | 把前面命令输出的结果，传递给后面的命令。 示例：12345678统计文件的行数cat 1.txt | wc -l过滤文件内容cat 1.txt | grep aaa查看当前目录下有多少个文件：find ./ -type f | wc -l 二、作业控制1、Ctrl C停止一个任务 在执行一个命令的过程中，彻底停止一个任务。 执行之后，jobs查看不到该任务。 1234[app@centos tmp]$ sleep 10^C[app@centos tmp]$ jobs[1]+ Stopped sleep 100 2、Ctrl Z 暂停一个任务 在执行一个命令的过程中，暂停一个任务。 执行之后，jobs可以查看到该任务。 12345[app@centos tmp]$ sleep 100^Z[1]+ Stopped sleep 100[app@centos tmp]$ jobs[1]+ Stopped sleep 100 注意： 执行Ctrl C 和 Ctrl Z之后，都会显示 Stopped 状态，但是Ctrl Z的任务只是被暂停了，可以通过jobs进行调度。 3、jobs 查看后台的任务 查看当前会话窗口中后台任务，包括名称和命令序号id 包括被ctrl z暂停的任务 和 被 &amp;放入后台运行的任务123456789[app@centos tmp]$ sleep 10^Z[1]+ Stopped sleep 10[app@centos tmp]$ sleep 20^Z[2]+ Stopped sleep 20[app@centos tmp]$ jobs[1]- Stopped sleep 10[2]+ Stopped sleep 20 4、bg[id]把任务调到后台并运行 bg即background，把被暂停的任务放入后台运行 后面加上作业id号可以指定某一个作业，不加id时默认最近的一个作业。 示例： （注意下面命令中的状态变化）12345678[app@centos tmp]$ jobs[2]- Stopped sleep 20[3]+ Stopped sleep 50[app@centos tmp]$ bg 3[3]+ sleep 50 &amp;[app@centos tmp]$ jobs[2]+ Stopped sleep 20[3]- Running sleep 50 &amp; 5、fg[id]把任务调到前台 fg即foreground，把后台作业调到前台运行 后面加上作业id号可以指定某一个作业，不加id时默认最近的一个作业。 示例： 把被暂停的任务调到前台继续运行： 6、&amp;把任务放入后台运行 直接在命令后面加&amp;即可 命令在后台是Running状态 相当于对命令执行Ctrl Z 和 bg 1234567[app@centos tmp]$ jobs[2]+ Stopped sleep 20[app@centos tmp]$ sleep 50 &amp;[3] 12580[app@centos tmp]$ jobs[2]+ Stopped sleep 20[3]- Running sleep 50 &amp;]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>shell</tag>
+        <tag>管道符</tag>
+        <tag>linux作业控制</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[shell标准输入read和输出echo]]></title>
     <url>%2F2019%2F02%2F26%2Fshell%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5read%E5%92%8C%E8%BE%93%E5%87%BAecho%2F</url>
     <content type="text"><![CDATA[一、标准输入 readshell 中通过 read 语句从键盘或文件的某一行文本中读入信息，并将内容赋给变量，多个变量之间用空格分隔。 read 变量1 变量2 ... ==read 每次只能读取一行数据。== 把一行内容全部赋值给一个变量，并直接通过 echo 输出。 123456789$ read name jjing$ echo $name jjing $ read name jjing jj$ echo $name jjing jj 一次赋值多个变量，多个值用空格分隔。 123456$ read name1 name2 jjing tao$ echo $name1 jjing$ echo $name2 tao 赋值多个变量时，当值多于变量名时，最后多余的内容全部赋值给最后一个变量。 123456$ read name1 name2 jjing tao yayaa$ echo $name1 jjing$ echo $name2 tao yayaa 二、标准输出 echo使用 echo 命令可以输出文本字符串、变量、表达式、命令等。 直接在 echo 后面加上要输出的内容即可。 命令 输出内容 说明 echo “abcd1234” abcd1234 输出一个普通字符串，默认在结尾包含换行符，光标定位在下一行开头。 echo -e “my name is :\c” my name is : \c表示不换行，输出字符串后光标定位在字符串末尾。(在 Linux 中要加上 -e 参数才能生效) echo -e “1\n2\n3\n4\n” 输出多行，每个数字为一行 \n表示换行，实现一次性输出多行内容。(在 Linux 中要加上 -e 参数才能生效) a=1 echo “$a” 输出变量，使用 $ 引用变量名即可 引用变量时，可以不加双引号，但是不能用单引号。 echo “\“13242\“”echo ‘“13242”‘ “13242” 输出特殊字符时要转义，也可以在最外层使用单引号则不用转义。 echo “`date`“ 2018年 12月 20日 星期四 09:08:25 CST 输出命令 date的返回值。 说明： 输出内容可以带引号，也可以不带，但是为了书写规范及减少错误，最好统一带双引号。 \c–不换行，\n–换行，使用时前面要加上 -e参数。 输出变量时，直接用 $ 加上变量名即可。 输出特殊字符时，要使用 \转义，或者在最外层加上单引号，可以原文输出为字符串。 输出命令时，注意命令外面的特殊引号。]]></content>
@@ -411,20 +411,6 @@
       <tags>
         <tag>shell</tag>
         <tag>输入输出</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[sort排序、uniq去重、wc统计]]></title>
-    <url>%2F2019%2F02%2F26%2Fsort%E6%8E%92%E5%BA%8F%E3%80%81uniq%E5%8E%BB%E9%87%8D%E3%80%81wc%E7%BB%9F%E8%AE%A1%2F</url>
-    <content type="text"><![CDATA[一、sort 排序 sort命令用于 对文本文件内容，以行为单位来排序。 sort命令以空格作为字段分隔符，将一行分割为多个关键字对文件进行排序。 需要注意的是除非你将输出重定向到文件中，否则sort命令并不对文件内容进行实际的排序(即文件内容没有修改)，只是将文件内容按有序输出。 1、语法sort [-bcdfimMnr][-o&lt;输出文件&gt;][-t&lt;分隔字符&gt;][+&lt;起始栏位&gt;-&lt;结束栏位&gt;][--help][--verison][文件] 2、参数说明 参数 说明 -m 将几个排序好的文件进行合并。 -u 内容去重 -n 依照数值的大小排序，升序排列。 -o&lt;输出文件&gt; 将排序后的结果存入指定的文件。 -r 以相反的顺序来排序。 -t&lt;分隔字符&gt; 指定排序时所用的栏位分隔字符。 -k&lt;指定排序的列数&gt; 指定要排序的列数，默认是从第一列开始比较，-k可指定某一列，也可与-t 结合使用时，代表某一栏 +&lt;起始栏位&gt;-&lt;结束栏位&gt; 以指定的栏位来排序，范围由起始栏位到结束栏位的前一栏位。 3、实例（1）对文件进行升序排序 sort testfile 以行为单位，相互比较，从首字符向后，依次按ASCII码值进行比较，最后将他们按升序输出。 注意：原文件内容并未被修改！ （2）对文件进行升序排序，并去除重复行 sort -u sort -u 1.txt 可以看出： sort -u是先对内容进行排序，然后再去重（实际也是去除了相邻的重复行）。 而uniq不能实现排序，只能去除相邻的重复行，所以要跟sort合并使用，先用sort排序，再用uniq去重 sort 1.txt | uniq （3）按数值大小降序排列后，把结果再输出到原文件中 -o （直接用重定向做不到）1234sort -nr num.txt -o num.txt如果用重定向 &gt; 的方式，只会把num.txt清空！sort -nr num.txt &gt; num.txt（4）使用sort的-t选项和-k选项，设置间隔符后再指定排序的列如上图所示，对年月日的日期进行排序，直接使用sort dat.txt时，会按列从左到右来排序； sort -t’-‘ -k2 dat.txt 其中-t’-‘ 是以 ‘-’ 为分隔符对每行内容分栏，然后-k 2 表示对分栏后的第二栏内容进行默认的升序排列。（5）使用sort -k指定以某一列排序 sort -k9 a.txt （基于a.txt的第九列来排序）（6）sort命令并非仅能对文件进行排序，我们还可以通过管道将命令的输出内容重定向到sort命令中 ls -l /home/$USER | sort -nk5（7）对/etc/passwd以‘：’分隔，再以第六个域的第2个字符到第4个字符进行正向排序，再基于第一个域进行反向排序。12345cat /etc/passwd | sort -t&apos;:&apos; -k 6.2,6.4 -k 1r sync:x:4:65534:sync:/bin:/bin/syncproxy:x:13:13:proxy:/bin:/bin/shbin:x:2:2:bin:/bin:/bin/shsys:x:3:3:sys:/dev:/bin/sh# 二、uniq 去重## 1、uniq使用- uniq命令用于去重文件内容中的连续重复行，通常要跟sort一起使用，先利用sort排序，然后用uniq去重。- uniq命令与sort命令类似，并不对文件内容进行实际的排序(即文件内容没有修改)，只是在输出内容中去重。- uniq -c ：在输出行前面加上每一行重复的次数- uniq -d ：仅显示重复行- uniq -u ：仅显示不重复的行- uniq -n ：前n个字段与每个字段前的空白一起被忽略。一个字段是一个非空格、非制表符的字符串，彼此由制表符和空格隔开（字段从0开始编号）。- uniq +n ：前n个字符被忽略，之前的字符被跳过（字符从0开始编号）。## 2、sort和uniq去重结果对比1、sort -u使用sort对文件去重 sort -u 1.txt可以看出，sort -u是先对内容进行排序，然后再去重（实际也是去除了相邻的重复行）。2、使用uniq对文件去重可以看出，当内容中的重复行不相邻时，直接使用uniq 1.txt 并不能达到去重。 因为uniq只能去除相邻的重复行，所以要跟sort合并使用，先用sort排序，再用uniq去重sort 1.txt | uniq。 3、最常用的方式实际工作中，最常用的方式是sort和uniq结合： sort -n 1.txt | uniq -c 4、只显示文件中不重复的行uniq -u 1.txt 5、uniq -u -n 结合使用显示文件 1.txt 中不重复的行，从第2个字段的第2个字符开始做比较。 uniq -u -1 +1 1.txt 三、wc 统计wc命令用于统计文件里面有多少行，多少单词，多少字符。 常与sort、grep等其它命令结合使用。 参数 说明 -l line，统计行数； -w word，统计单词数(英文单词)，以空格或换行为单位； -m 统计字符数； wc 1.txt 默认显示所有的行数、单词数、字符数。 如下图所示：]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-        <tag>sort</tag>
-        <tag>uniq</tag>
-        <tag>wc</tag>
       </tags>
   </entry>
   <entry>
@@ -459,10 +445,24 @@
       </categories>
       <tags>
         <tag>linux</tag>
-        <tag>sort</tag>
         <tag>du</tag>
         <tag>df</tag>
+        <tag>sort</tag>
         <tag>linux大文件</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[sort排序、uniq去重、wc统计]]></title>
+    <url>%2F2019%2F02%2F26%2Fsort%E6%8E%92%E5%BA%8F%E3%80%81uniq%E5%8E%BB%E9%87%8D%E3%80%81wc%E7%BB%9F%E8%AE%A1%2F</url>
+    <content type="text"><![CDATA[一、sort 排序 sort命令用于 对文本文件内容，以行为单位来排序。 sort命令以空格作为字段分隔符，将一行分割为多个关键字对文件进行排序。 需要注意的是除非你将输出重定向到文件中，否则sort命令并不对文件内容进行实际的排序(即文件内容没有修改)，只是将文件内容按有序输出。 1、语法sort [-bcdfimMnr][-o&lt;输出文件&gt;][-t&lt;分隔字符&gt;][+&lt;起始栏位&gt;-&lt;结束栏位&gt;][--help][--verison][文件] 2、参数说明 参数 说明 -m 将几个排序好的文件进行合并。 -u 内容去重 -n 依照数值的大小排序，升序排列。 -o&lt;输出文件&gt; 将排序后的结果存入指定的文件。 -r 以相反的顺序来排序。 -t&lt;分隔字符&gt; 指定排序时所用的栏位分隔字符。 -k&lt;指定排序的列数&gt; 指定要排序的列数，默认是从第一列开始比较，-k可指定某一列，也可与-t 结合使用时，代表某一栏 +&lt;起始栏位&gt;-&lt;结束栏位&gt; 以指定的栏位来排序，范围由起始栏位到结束栏位的前一栏位。 3、实例（1）对文件进行升序排序 sort testfile 以行为单位，相互比较，从首字符向后，依次按ASCII码值进行比较，最后将他们按升序输出。 注意：原文件内容并未被修改！ （2）对文件进行升序排序，并去除重复行 sort -u sort -u 1.txt 可以看出： sort -u是先对内容进行排序，然后再去重（实际也是去除了相邻的重复行）。 而uniq不能实现排序，只能去除相邻的重复行，所以要跟sort合并使用，先用sort排序，再用uniq去重 sort 1.txt | uniq （3）按数值大小降序排列后，把结果再输出到原文件中 -o （直接用重定向做不到）1234sort -nr num.txt -o num.txt如果用重定向 &gt; 的方式，只会把num.txt清空！sort -nr num.txt &gt; num.txt（4）使用sort的-t选项和-k选项，设置间隔符后再指定排序的列如上图所示，对年月日的日期进行排序，直接使用sort dat.txt时，会按列从左到右来排序； sort -t’-‘ -k2 dat.txt 其中-t’-‘ 是以 ‘-’ 为分隔符对每行内容分栏，然后-k 2 表示对分栏后的第二栏内容进行默认的升序排列。（5）使用sort -k指定以某一列排序 sort -k9 a.txt （基于a.txt的第九列来排序）（6）sort命令并非仅能对文件进行排序，我们还可以通过管道将命令的输出内容重定向到sort命令中 ls -l /home/$USER | sort -nk5（7）对/etc/passwd以‘：’分隔，再以第六个域的第2个字符到第4个字符进行正向排序，再基于第一个域进行反向排序。12345cat /etc/passwd | sort -t&apos;:&apos; -k 6.2,6.4 -k 1r sync:x:4:65534:sync:/bin:/bin/syncproxy:x:13:13:proxy:/bin:/bin/shbin:x:2:2:bin:/bin:/bin/shsys:x:3:3:sys:/dev:/bin/sh# 二、uniq 去重## 1、uniq使用- uniq命令用于去重文件内容中的连续重复行，通常要跟sort一起使用，先利用sort排序，然后用uniq去重。- uniq命令与sort命令类似，并不对文件内容进行实际的排序(即文件内容没有修改)，只是在输出内容中去重。- uniq -c ：在输出行前面加上每一行重复的次数- uniq -d ：仅显示重复行- uniq -u ：仅显示不重复的行- uniq -n ：前n个字段与每个字段前的空白一起被忽略。一个字段是一个非空格、非制表符的字符串，彼此由制表符和空格隔开（字段从0开始编号）。- uniq +n ：前n个字符被忽略，之前的字符被跳过（字符从0开始编号）。## 2、sort和uniq去重结果对比1、sort -u使用sort对文件去重 sort -u 1.txt可以看出，sort -u是先对内容进行排序，然后再去重（实际也是去除了相邻的重复行）。2、使用uniq对文件去重可以看出，当内容中的重复行不相邻时，直接使用uniq 1.txt 并不能达到去重。 因为uniq只能去除相邻的重复行，所以要跟sort合并使用，先用sort排序，再用uniq去重sort 1.txt | uniq。 3、最常用的方式实际工作中，最常用的方式是sort和uniq结合： sort -n 1.txt | uniq -c 4、只显示文件中不重复的行uniq -u 1.txt 5、uniq -u -n 结合使用显示文件 1.txt 中不重复的行，从第2个字段的第2个字符开始做比较。 uniq -u -1 +1 1.txt 三、wc 统计wc命令用于统计文件里面有多少行，多少单词，多少字符。 常与sort、grep等其它命令结合使用。 参数 说明 -l line，统计行数； -w word，统计单词数(英文单词)，以空格或换行为单位； -m 统计字符数； wc 1.txt 默认显示所有的行数、单词数、字符数。 如下图所示：]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>sort</tag>
+        <tag>uniq</tag>
+        <tag>wc</tag>
       </tags>
   </entry>
   <entry>
@@ -476,6 +476,17 @@
         <tag>linux</tag>
         <tag>定时任务</tag>
         <tag>crontab</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[有道云和csdn中使用markdown]]></title>
+    <url>%2F2019%2F02%2F26%2F%E6%9C%89%E9%81%93%E4%BA%91%E5%92%8Ccsdn%E4%B8%ADmarkdown%E4%BD%BF%E7%94%A8%2F</url>
+    <content type="text"><![CDATA[此文中的方法适用于有道云和csdn的markdown编辑器，其它平台尚未验证。 一、字体增大1、为什么要字体增大？有道云的普通笔记可以设置默认字体大小，但是不支持markdown默认字体。当写完预览markdown，发会现，正文字太小了。 2、字体增大的方法？ 用一组 &lt;font size=4&gt; &lt;/font&gt;将全部正文内容包含进去就可以了。 可以直接修改正文中的所有普通文本大小，同时不会影响标题字号。 可以修改size自由调整大小 二、生成目录1、为什么要生成目录？方便有个对文章的大局观，一眼就知道这篇文章到底写了什么，便于定位。 2、生成目录的方法？ 非常简单，直接在第一行加上 [toc]即可！ 当然，前提是你在正文中正确使用了标题格式。 如果在第一行设置了字体大小，那么把 [toc]写在第二行就行了。 三、设置锚点-页内链接1、锚点的作用？ 用于文章快速定位，点击目录便可直接跳转到指定位置。 锚点是是网页制作中超级链接的一种，又叫命名锚记。 使用命名锚记可以在文档中设置标记，这些标记通常放在文档的特定主题处或顶部。然后可以创建到这些命名锚记的链接，这些链接可快速将访问者带到指定位置。 2、如何创建锚点？锚点的添加：使用a标签，href里面填写对应的标题名字 分为两步： 创建命名锚记 格式为 [指引到目标位置的说明文字](#目标位置的id名称) 创建到该命名锚记的链接 格式为 &lt;span id = &quot;目标位置的id名称&quot;&gt;跳转到的目标位置&lt;/span&gt; 举例：123&lt;a href="#jump" target="_self"&gt;说明文字&lt;/a&gt;&lt;span id ="jump"&gt;&lt;font color="red"&gt;跳转到这里：&lt;/font&gt;&lt;/span&gt; 效果： 说明文字 跳转到这里： 四、输入空格有两种方法： 1、中文模式下，Shift+空格切换为全角模式后，按空格键即可。 2、\&nbsp; 或 \&#160; 需要几个空格就输入几次。 五、csdn markdown中添加黄色高亮在有道云笔记的markdown编辑器中，工具栏有Mark按钮可以直接对文字进行黄色高亮显示，非常方便。 实际在源码中是通过一对 == 包围文字即可。 在csdn markdown中也可以用这种方法，实现黄色高亮！ 如： ==xxxxxxx==xxxxx 效果：==xxxxxxx==xxxxx 六、表格内换行使用html代码\实现单元格换行，变相实现合并单元格的效果。 1、markdown语法：1234|姓名|爱好|--|--|张三|足球&lt;br&gt;篮球李四|羽毛球&lt;br&gt;乒乓球 2、实现效果： 姓名 爱好 张三 足球篮球 李四 羽毛球乒乓球]]></content>
+      <categories>
+        <category>办公利器</category>
+      </categories>
+      <tags>
+        <tag>markdown</tag>
       </tags>
   </entry>
   <entry>
@@ -495,14 +506,15 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[有道云和csdn中使用markdown]]></title>
-    <url>%2F2019%2F02%2F26%2F%E6%9C%89%E9%81%93%E4%BA%91%E5%92%8Ccsdn%E4%B8%ADmarkdown%E4%BD%BF%E7%94%A8%2F</url>
-    <content type="text"><![CDATA[此文中的方法适用于有道云和csdn的markdown编辑器，其它平台尚未验证。 一、字体增大1、为什么要字体增大？有道云的普通笔记可以设置默认字体大小，但是不支持markdown默认字体。当写完预览markdown，发会现，正文字太小了。 2、字体增大的方法？ 用一组 &lt;font size=4&gt; &lt;/font&gt;将全部正文内容包含进去就可以了。 可以直接修改正文中的所有普通文本大小，同时不会影响标题字号。 可以修改size自由调整大小 二、生成目录1、为什么要生成目录？方便有个对文章的大局观，一眼就知道这篇文章到底写了什么，便于定位。 2、生成目录的方法？ 非常简单，直接在第一行加上 [toc]即可！ 当然，前提是你在正文中正确使用了标题格式。 如果在第一行设置了字体大小，那么把 [toc]写在第二行就行了。 三、设置锚点-页内链接1、锚点的作用？ 用于文章快速定位，点击目录便可直接跳转到指定位置。 锚点是是网页制作中超级链接的一种，又叫命名锚记。 使用命名锚记可以在文档中设置标记，这些标记通常放在文档的特定主题处或顶部。然后可以创建到这些命名锚记的链接，这些链接可快速将访问者带到指定位置。 2、如何创建锚点？锚点的添加：使用a标签，href里面填写对应的标题名字 分为两步： 创建命名锚记 格式为 [指引到目标位置的说明文字](#目标位置的id名称) 创建到该命名锚记的链接 格式为 &lt;span id = &quot;目标位置的id名称&quot;&gt;跳转到的目标位置&lt;/span&gt; 举例：123&lt;a href="#jump" target="_self"&gt;说明文字&lt;/a&gt;&lt;span id ="jump"&gt;&lt;font color="red"&gt;跳转到这里：&lt;/font&gt;&lt;/span&gt; 效果： 说明文字 跳转到这里： 四、输入空格有两种方法： 1、中文模式下，Shift+空格切换为全角模式后，按空格键即可。 2、\&nbsp; 或 \&#160; 需要几个空格就输入几次。 五、csdn markdown中添加黄色高亮在有道云笔记的markdown编辑器中，工具栏有Mark按钮可以直接对文字进行黄色高亮显示，非常方便。 实际在源码中是通过一对 == 包围文字即可。 在csdn markdown中也可以用这种方法，实现黄色高亮！ 如： ==xxxxxxx==xxxxx 效果：==xxxxxxx==xxxxx 六、表格内换行使用html代码\实现单元格换行，变相实现合并单元格的效果。 1、markdown语法：1234|姓名|爱好|--|--|张三|足球&lt;br&gt;篮球李四|羽毛球&lt;br&gt;乒乓球 2、实现效果： 姓名 爱好 张三 足球篮球 李四 羽毛球乒乓球]]></content>
+    <title><![CDATA[性能测试脚本参数化的思考]]></title>
+    <url>%2F2019%2F02%2F26%2F%E8%84%9A%E6%9C%AC%E5%8F%82%E6%95%B0%E5%8C%96%E7%9A%84%E6%80%9D%E8%80%83%2F</url>
+    <content type="text"><![CDATA[一、脚本参数化简单的说，脚本参数化实际就是用参数来替换脚本中的一些常量，把常量替换成变量，把脚本与数据进行分离。 二、为什么要进行参数化？对测试脚本参数化，主要有两种目的。 1、为了保证请求被正常处理如注册场景必须要求用户名不重复等 2、为了模拟真实的生产场景如在登录场景中使用多用户，而不是单用户，防止出现因频率限制导致的报错，防止因命中缓存导致的TPS过高的假象。 通常很多系统出于性能优化考量，针对各业务场景都会大量使用到缓存，导致压测数据相同时，每次命中缓存后快速响应请求，造成站点压测性能极佳的假象（但线上真实请求参数各异）。 所以在做压测时，为了满足模拟真实压测环境要求，就需要让每个压测请求都携带不同的线上请求参数。 三、如何模拟真实稳定的压测环境？具体在开发脚本时，怎么做到模拟真实的生产环境呢？ 需要做如下准备： 准备压测数据 让每个压测线程，每次访问目标服务器时，分别携带不同的请求参数 控制单个压测线程的单次执行时间，保证各线程能以稳定速率向目标服务器发送请求 脚本是否能通过传参灵活控制内部逻辑]]></content>
       <categories>
-        <category>办公利器</category>
+        <category>jmeter</category>
       </categories>
       <tags>
-        <tag>markdown</tag>
+        <tag>参数化</tag>
+        <tag>性能测试</tag>
       </tags>
   </entry>
   <entry>
@@ -514,18 +526,6 @@
       </categories>
       <tags>
         <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[性能测试脚本参数化的思考]]></title>
-    <url>%2F2019%2F02%2F26%2F%E8%84%9A%E6%9C%AC%E5%8F%82%E6%95%B0%E5%8C%96%E7%9A%84%E6%80%9D%E8%80%83%2F</url>
-    <content type="text"><![CDATA[一、脚本参数化简单的说，脚本参数化实际就是用参数来替换脚本中的一些常量，把常量替换成变量，把脚本与数据进行分离。 二、为什么要进行参数化？对测试脚本参数化，主要有两种目的。 1、为了保证请求被正常处理如注册场景必须要求用户名不重复等 2、为了模拟真实的生产场景如在登录场景中使用多用户，而不是单用户，防止出现因频率限制导致的报错，防止因命中缓存导致的TPS过高的假象。 通常很多系统出于性能优化考量，针对各业务场景都会大量使用到缓存，导致压测数据相同时，每次命中缓存后快速响应请求，造成站点压测性能极佳的假象（但线上真实请求参数各异）。 所以在做压测时，为了满足模拟真实压测环境要求，就需要让每个压测请求都携带不同的线上请求参数。 三、如何模拟真实稳定的压测环境？具体在开发脚本时，怎么做到模拟真实的生产环境呢？ 需要做如下准备： 准备压测数据 让每个压测线程，每次访问目标服务器时，分别携带不同的请求参数 控制单个压测线程的单次执行时间，保证各线程能以稳定速率向目标服务器发送请求 脚本是否能通过传参灵活控制内部逻辑]]></content>
-      <categories>
-        <category>jmeter</category>
-      </categories>
-      <tags>
-        <tag>参数化</tag>
-        <tag>性能测试</tag>
       </tags>
   </entry>
   <entry>
