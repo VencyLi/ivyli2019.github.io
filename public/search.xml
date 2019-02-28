@@ -4,6 +4,9 @@
     <title><![CDATA[2019 年 2 月份总结]]></title>
     <url>%2F2019%2F02%2F28%2F20190228%E6%9C%88%E6%80%BB%E7%BB%93%2F</url>
     <content type="text"><![CDATA[今天是 2 月最后一天了，春节返工也快三周了，相信大家都已经完全渡过「节后综合症」阶段，全身心投入工作中了，在此做个月总结。 整体来说，我对这个月的工作和学习还是比较满意的，先说一下已完成和未完成的事情吧。 一、已完成1、第一周（2.11-2.17） 学习 Redis 的基础知识，并输出 4 篇博客（参见https://blog.csdn.net/lijing742180/article/details/87455550）。 关于 JVM、OOM 相关的知识学习了一部分。 整理纸质笔记；整理衣柜；周六早上跑步； 2、第二周（2.18-2.24） 继续学习完 JVM 内存模型、OOM 和 GC 机制，并输出 3 篇博客（参见https://blog.csdn.net/lijing742180/article/details/87857509）。 周末两天看书：《冥想》《我不惧怕成为这样强硬的姑娘》《保险入门》（还没来得及输出读书笔记） 3、第三周（2.25-3.3） 完善个人博客，添加了几个小功能，并推送了 42 篇文章。 整理了一部分收藏的电子笔记资料（但是还有好多啊。。。） 输出几本书的读书笔记。（=还未完成，计划这周末完成=） 二、未完成这个月初我定的计划里最重要的事情是「整理」（包括衣柜、书架、收藏夹等资料），但是并没有完成多少。 1、整理书架 这里的整理并不是仅仅摆放整齐，而是要对书籍「更新换代」，把之前买了很久的书赶紧看完，然后再去买新书，给书架来个大换血。 俗话说「买书如山倒，读书如抽丝」，如果不定时审视自己的书架，很容易陷入只买不读的情况，结果书架都被塞满了，但是真正读过的没几本。 2、整理收藏夹等资料 我们看到各种觉得好的文章，习惯性的随手收藏，过后却很少记得去看。长此以往，各种电子收藏夹里堆的东西越来越多，自己拥有一个庞大的知识宝库，但是自己真正会的知识却少得可怜。 你不妨去翻翻自己的微信或QQ等收藏夹里，去年甚至前年的资料有多少？你看了多少？今天还要继续塞多少？ 清空旧知，才能接受新知。 这也是为什么我会把整理收藏夹作为今年初的一件很重要的事情来对对待。 一篇篇认真看一下自己曾认为好的文章，然后取之精华，弃之糟粕，整理到已有的知识体系中，然后删除它。 这个过程比较花时间，而且以前随手屯的资料又太多，所以比预想的进行的慢，继续吧！ 3、英语 之前定的计划是每天坚持学英语，但是这个月只是隔三岔五的学了一下，下个月这方面要加强。]]></content>
+      <categories>
+        <category>总结</category>
+      </categories>
       <tags>
         <tag>总结</tag>
         <tag>月总结</tag>
@@ -23,19 +26,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Hexo Next 主题中添加本地搜索功能]]></title>
-    <url>%2F2019%2F02%2F27%2FHexo%20Next%20%E4%B8%BB%E9%A2%98%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%9C%AC%E5%9C%B0%E6%90%9C%E7%B4%A2%E5%8A%9F%E8%83%BD%2F</url>
-    <content type="text"><![CDATA[在 next 主题侧边列表有一个 搜索 菜单，但是点击之后页面会处于卡死状态，后台显示是 404，需要添加搜索插件才可以。 1、安装本地搜索插件 hexo-generator-search12# 安装插件，用于生成博客索引数据（在博客根目录下执行下列命令）：npm install hexo-generator-search --save 安装之后，会在站点目录的 public 文件夹下创建一个 search.xml 文件。 2、修改站点配置文件在站点配置文件 _config.yml 中添加如下内容：123456# Search search: path: ./public/search.xml field: post format: html limit: 10000 path：索引文件的路径，相对于站点根目录 field：搜索范围，默认是 post，还可以选择 page、all，设置成 all 表示搜索所有页面 limit：限制搜索的条目数 3、主题配置文件在主题配置文件 _config.yml 中找到如下内容：1234local_search: enable: true trigger: auto top_n_per_article: 1 确保 enable 设成 true。 top_n_per_article 字段表示在每篇文章中显示的搜索结果数量，设成 -1 会显示每篇文章的所有搜索结果数量。 然后，重新部署网站即可愉快的使用本地搜索功能了，效果参见本网站右侧的 搜索 菜单。]]></content>
-      <categories>
-        <category>个人博客</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-        <tag>next主题搜索</tag>
-        <tag>next本地搜索</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[Git操作本地仓库和远程仓库的常用命令]]></title>
     <url>%2F2019%2F02%2F27%2FGit%E6%93%8D%E4%BD%9C%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E5%92%8C%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%2F</url>
     <content type="text"><![CDATA[总结使用 Git 过程中的一些基本的、常用的命令。 一、操作本地仓库 命令示例 解释 git config –list 查看已有的全部配置信息 git config user.name 查看某个指定的环境变量的信息 git config –global user.name “ivyli” 绑定用户名为 ivyli git config –global user.email “ivyli2019@126.com“ 绑定邮箱为 ivyli2019@126.com git init 在空目录下执行该命令，从而初始化当前目录为可管理的git仓库，生成隐藏的 .git 文件(不能乱动，否则仓库就不能用了) git add 1.txt 把本地编辑好的 1.txt 文件添加到暂存区 git add . 把当前目录下的所有文件都添加到暂存区 git status 随时查看仓库状态 git commit –m “add 1.txt” 提交文件到本地仓库，–m 添加注释信息.commit 文件之后再修改，需要重新 add、commit git rm 1.txt 删除版本库中的文件 1.txt（删除文件时最好用该命令，不要手动删除） git commit -m “del 1.txt” git rm 1.txt 之后还要 commit，才能真正删除 git diff 1.txt 查看 1.txt 文件修改了那些内容 git log 查看历史记录 对本地仓库的操作，主要就是 git add/rm/commit/status。 当文件 commit 到本地版本库之后，若再次修改文件，需要重新 add、commit，若是删除文件，需要重新 commit。 二、操作远程仓库我们可以 clone 远程仓库到本地，也可以把本地文件 push 到远程仓库。 但是在第一次操作远程仓库时，会报错 Permission denied(publickey)，这是因为没有添加 SSH 公钥。 1ssh-keygen -t rsa -C "ivyli2019@126.com" 执行上述命令，可以在本地生成 .ssh 文件，复制文件中的 id_rsa.pub 公钥内容到 git 或其它源码平台，即可添加 SSH 公钥。 命令示例 解释 git clone git://gitee.com:ivyli2019/test.git 从远程库中克隆项目到本地，是一个包含整个项目的版本库文件夹。该命令通常用于新用户 clone 项目，后面基本都是用 git pull。 git remote 查看远程库的别名（进入 clone 下来的文件夹中执行该命令，别名默认是 origin） git remote –v 查看远程库的别名和仓库地址。如返回：origin git@gitee.com:ivyli2019/test.git git push origin master 把本地 master 分支推送到别名为 origin 的远程库 git remote add mytest git://gitee.com:ivyli2019/mytest.git 添加/关联一个远程仓库，并起别名为 mytest，可自定义别名。 git remote remove mytest 删除远程库的 mytest 别名 git branch 查看当前所有的分支，默认只有 master 分支 git branch test 创建 test 分支 git branch –d test 删除 test 分支 git checkout test 从当前分支切换到 test 分支 git checkout –b dev 创建 dev 分支，并切换到 dev 分支上 git merge dev 在当前分支上合并 dev 分支]]></content>
@@ -47,6 +37,19 @@
         <tag>本地仓库</tag>
         <tag>远程仓库</tag>
         <tag>git命令</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Hexo Next 主题中添加本地搜索功能]]></title>
+    <url>%2F2019%2F02%2F27%2FHexo%20Next%20%E4%B8%BB%E9%A2%98%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%9C%AC%E5%9C%B0%E6%90%9C%E7%B4%A2%E5%8A%9F%E8%83%BD%2F</url>
+    <content type="text"><![CDATA[在 next 主题侧边列表有一个 搜索 菜单，但是点击之后页面会处于卡死状态，后台显示是 404，需要添加搜索插件才可以。 1、安装本地搜索插件 hexo-generator-search12# 安装插件，用于生成博客索引数据（在博客根目录下执行下列命令）：npm install hexo-generator-search --save 安装之后，会在站点目录的 public 文件夹下创建一个 search.xml 文件。 2、修改站点配置文件在站点配置文件 _config.yml 中添加如下内容：123456# Search search: path: ./public/search.xml field: post format: html limit: 10000 path：索引文件的路径，相对于站点根目录 field：搜索范围，默认是 post，还可以选择 page、all，设置成 all 表示搜索所有页面 limit：限制搜索的条目数 3、主题配置文件在主题配置文件 _config.yml 中找到如下内容：1234local_search: enable: true trigger: auto top_n_per_article: 1 确保 enable 设成 true。 top_n_per_article 字段表示在每篇文章中显示的搜索结果数量，设成 -1 会显示每篇文章的所有搜索结果数量。 然后，重新部署网站即可愉快的使用本地搜索功能了，效果参见本网站右侧的 搜索 菜单。]]></content>
+      <categories>
+        <category>个人博客</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>next主题搜索</tag>
+        <tag>next本地搜索</tag>
       </tags>
   </entry>
   <entry>
@@ -64,15 +67,15 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[git pull 指定某一个文件或文件夹]]></title>
-    <url>%2F2019%2F02%2F26%2Fgit%20pull%20%E6%8C%87%E5%AE%9A%E6%9F%90%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E6%88%96%E6%96%87%E4%BB%B6%E5%A4%B9%2F</url>
-    <content type="text"><![CDATA[1、要解决的问题默认情况下，git pull 操作会把远程仓库的所有最新数据更新到本地。 但是，如果你只想更新指定的某一个文件或文件夹，该怎么操作呢？ 2、git 只 pull 某一个文件/夹 设置 core.sparsecheckout为 true $ git config core.sparsecheckout true core.sparsecheckout用于控制是否允许设置pull指定文件/夹，true为允许。 此方法适用于 Git1.7.0 以后版本，之前的版本没有这个功能。 在.git/info/sparse-checkout文件中（如果没有则创建）添加指定的文件/夹 最后，拉取想要的分支即可实现checkout指定文件/夹。 $ git pull origin master]]></content>
+    <title><![CDATA[git一次性add多个文件或提交多次修改]]></title>
+    <url>%2F2019%2F02%2F26%2Fgit%E4%B8%80%E6%AC%A1%E6%80%A7%20add%E5%A4%9A%E4%B8%AA%E6%96%87%E4%BB%B6%E6%88%96%E6%8F%90%E4%BA%A4%E5%A4%9A%E6%AC%A1%E4%BF%AE%E6%94%B9%2F</url>
+    <content type="text"><![CDATA[有时我们需要对 git 的修改操作进行批量提交，此时该怎么操作呢？ 按下面的步骤操作即可实现一次性add多个文件或提交多次修改： git add --all git commit -m &apos;add more files&apos; git push origin master]]></content>
       <categories>
         <category>git</category>
       </categories>
       <tags>
         <tag>git</tag>
-        <tag>git pull</tag>
+        <tag>git add</tag>
       </tags>
   </entry>
   <entry>
@@ -85,6 +88,18 @@
       <tags>
         <tag>nGrinder</tag>
         <tag>性能测试工具</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[nGrinder解析最基本的GET请求脚本]]></title>
+    <url>%2F2019%2F02%2F26%2F04_%E8%A7%A3%E6%9E%90%E6%9C%80%E5%9F%BA%E6%9C%AC%E7%9A%84GET%E8%AF%B7%E6%B1%82%E8%84%9A%E6%9C%AC-groovy%2F</url>
+    <content type="text"><![CDATA[一、自动生成GET请求脚本1、配置 Create a script在ngrinder管理台主页，点击script–&gt;Create a script，并填写脚本名称和请求的url； 点击 Create 按钮，nGrinder会自动生成对应的脚本结构，如果没有参数需要设置的话，可以直接运行了。 二、详细解析GET请求脚本脚本说明ngrinder自动生成的脚本如下所示（groovy版本）： 解析见代码中的注释123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990import static net.grinder.script.Grinder.grinderimport static org.junit.Assert.*import static org.hamcrest.Matchers.*import net.grinder.plugin.http.HTTPRequestimport net.grinder.plugin.http.HTTPPluginControlimport net.grinder.script.GTestimport net.grinder.script.Grinderimport net.grinder.scriptengine.groovy.junit.GrinderRunnerimport net.grinder.scriptengine.groovy.junit.annotation.BeforeProcessimport net.grinder.scriptengine.groovy.junit.annotation.BeforeThread// import static net.grinder.util.GrinderUtils.* // You can use this if you're using nGrinder after 3.2.3import org.junit.Beforeimport org.junit.BeforeClassimport org.junit.Testimport org.junit.runner.RunWithimport org.junit.FixMethodOrderimport org.junit.runners.MethodSortersimport java.util.Dateimport java.util.Listimport java.util.ArrayListimport HTTPClient.Cookieimport HTTPClient.CookieModuleimport HTTPClient.HTTPResponseimport HTTPClient.NVPair/** * A simple example using the HTTP plugin that shows the retrieval of a * single page via HTTP. * * This script is automatically generated by ngrinder. * * @author admin */@RunWith(GrinderRunner)@FixMethodOrder(MethodSorters.NAME_ASCENDING)class TestRunner &#123;truepublic static GTest testtrue// 定义 HTTPRequest 静态变量 request，用于发送 HTTP 请求truepublic static HTTPRequest request true// 定义 NVPair 数组 headers ，用于存放通用的请求头数据truepublic static NVPair[] headers = []true// 定义 NVPair 数组 params ，用于存放请求参数数据truepublic static NVPair[] params = []true// 定义 Cookie 数组 cookies ，用于存放通用的 cookie 数据truepublic static Cookie[] cookies = []true@BeforeProcesstruepublic static void beforeProcess() &#123;truetrue// 设置请求响应超时时间（ms），超过则抛出异常truetrueHTTPPluginControl.getConnectionDefaults().timeout = 6000truetruetruetrue// 创建GTest对象，第一个参数1代表有多个请求/事务时的执行顺序IDtruetrue// 第二个参数是请求/事务的名称，会显示在summary结果中truetrue// 有多个请求/事务时，要创建多个GTest对象truetruetest = new GTest(1, "www.baidu.com") truetrue// 创建 HTTPRequest 对象，用于发起 HTTP 请求truetruerequest = new HTTPRequest() truetruegrinder.logger.info("before process.");true&#125;true@BeforeThreadtruepublic void beforeThread() &#123;truetrue// 注册事件，启动test，第二个参数要与@Test注解的方法名保持一致truetrue// 有多个请求/事务时，要注册多个事件truetruetest.record(this, "test")truetrue// 配置延迟报告统计结果truetruegrinder.statistics.delayReports=true;truetruegrinder.logger.info("before thread.");true&#125;true@Beforetruepublic void before() &#123;truetrue// 在这里可以添加headers属性和cookiestruetruerequest.setHeaders(headers)truetrue// 设置本次请求的 cookiestruetruecookies.each &#123; CookieModule.addCookie(it, HTTPPluginControl.getThreadHTTPClientContext()) &#125;truetruegrinder.logger.info("before thread. init headers and cookies");true&#125;true@Testtruepublic void test()&#123;truetrue// 发送GET请求truetrueHTTPResponse result = request.GET("https://www.baidu.com", params)truetrue// 断言HTTP请求状态码truetrueassertThat(result.statusCode, is(200))true&#125;&#125; GTest GTest是对测试记录进行统计的单元; 使用 GTest 的构造方法 GTest(int number, String description) 创建，在脚本内每个GTest对象都使用唯一的编号定义。 如果创建了多个编号一样的对象，最后只会选用第一个。 test.record()在@BeforeThread注解下会执行 test.record(this, &quot;test&quot;) record(Object target, String methodName) 这里使用 GTest的record方法给 GTest 配置需要进行统计的方法； target 指脚本对象，这里是this； methodName 是需要统计的方法名，通常都是被 @Test 注释的方法。如果未配置，方法会正常执行，但是没有统计结果数据； 每一个被 @Test 注释的方法都是一个整体事务，在运行测试时，即便里面有 多次 HTTP 请求也只做一次统计！！ Cookies可以通过 Cookie(String name, String value, String domain, String path, Date expires, boolean secure) 构造 cookie 对象，然后存放到相应的数组中，传递到请求中。]]></content>
+      <categories>
+        <category>nGrinder</category>
+      </categories>
+      <tags>
+        <tag>nGrinder</tag>
+        <tag>ngrinder脚本解析</tag>
       </tags>
   </entry>
   <entry>
@@ -101,39 +116,16 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[搭建nGrinder性能测试平台并快速使用]]></title>
-    <url>%2F2019%2F02%2F26%2F02_%E6%90%AD%E5%BB%BA%20nGrinder%20%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%20%E5%B9%B6%E5%BF%AB%E9%80%9F%E4%BD%BF%E7%94%A8%2F</url>
-    <content type="text"><![CDATA[接上一篇的nGrinder介绍篇 一、nGrinder 组件介绍ngrinder包含Controller、agent 和 monitor 三部分 1、Controller 提供性能测试的web接口 协调测试进程 调整和显示测试的统计结果 让用户创建和修改脚本 2、Agent 在代理服务器上加载运行测试进程和线程 可以部署多台，提升压测能力 最好是能部署在单独的服务器上，如果没有条件的话，也可以跟Controller在一台服务器 但是不能部署在被测服务器上 3、Monitor 用于监控被测服务器的系统性能（例如：CPU/MEMORY） 必须部署在被测服务器上 二、nGrinder 环境搭建 $ java -XX:MaxPermSize=512m -jar ngrinder-controller-3.4.war –port 80可在下载ngrinder后，直接通过上面的命令运行也可以通过下面的方式，把war包放在tomcat容器中运行 1、安装JDK，配置环境变量2、安装Tomcat3、下载nGrinder：https://github.com/naver/ngrinder/releases4、把下载好的包放到Tomcat的webApps文件夹中5、启动Tomcat，并访问nGrinder nGrinder主页：http://localhost:8080/ngrinder-controller-3.4/ 看到下图表示搭建成功。 如果想直接通过http://localhost:8080/访问，把文件名改为ROOT.war即可 6、安装Agent 登录 nGrinder 管理台，默认账号和密码都是admin，点击右上角，选择 Download Private Agent (不同版本可能会稍有区别) ，如下图所示 把 ngrinder-agent 压缩包解压到用作Agent的服务器上，运行 run_agent.sh 即可 7、安装Monitor（需要安装在被测服务器上） 下载Monitor安装包，方法类似Agent 把 ngrinder-monitor 压缩包解压到被测服务器上，运行 run_monitor.sh 即可 补充说明： ngrinder支持开箱即用，不需要额外配置，第一次启动时，系统配置自动生成 默认使用H2数据库，且schema自动创建 版本更新时，数据库schema自动更新 agent 、monitor模块从controller下载，无需配置 版本更新时，只需更新controller，agent和monitor会自动更新 在线修改系统配置，多数据修改无需重启 即使用cluster模式，配置也很简单 三、快速使用1、输入测试URL，选择脚本语言，然后点击开始测试，会自动生成测试脚本并进入配置页面或者通过点击管理后上方的 script 或 脚本 按钮，进入脚本管理页面，创建脚本，效果相同。 在创建脚本时，可以选择使用的语言为Groovy或Jython，但是由于这两种语言执行性能上的差别，建议优先使用性能更好的Groovy来编写压测脚本（官方验证相同情况下groovy比jython支持2倍左右的并发数） 2、基本的压测配置 代理：是指压测所需要的server的数量 虚拟用户有两个指标： 进程数：每个server起多少进程去跑 线程数：每个进程新建的线程数量 并发量=代理数x进程数x线程数 Ramp-Up：设置增量测试，逐渐向最大的的并发量增长，只有勾选该框时，初始数、增量、初始等待时间、进程增长间隔的值才有效 测试时间：表示压测需要持续运行的时间测试次数：脚本执行的次数，同测试时间二选一 3、运行测试在配置页面右上角点击保存并运行，启动测试。 4、监控测试，查看结果当启动测试后，会在页面显示当前的TPS、虚拟用户、测试成功与否的数量等信息。测试完成后，会显示测试结果。 可以点击详细测试结果查看更详细的信息，比如TPS、平均时间、首次接受数据平均时间，以及被测服务器的CPU，MEM等信息。]]></content>
+    <title><![CDATA[nGrinder脚本结构-groovy]]></title>
+    <url>%2F2019%2F02%2F26%2F03_%E8%84%9A%E6%9C%AC%E7%BB%93%E6%9E%84-groovy%2F</url>
+    <content type="text"><![CDATA[在前面的文章中，我们已经知道，nGrinder支持groovy和Jython脚本，今天学习一下ngrinder中的groovy脚本结构。 ngrinder中的groovy脚本结构类似 junit，同时在junit的基础之上封装了自己的注解，用来控制脚本的运行。 一、运行逻辑图如下： 此处只列出了groovy脚本的逻辑，jython脚本是类似的，在此不再单独介绍. 二、各注解的使用比较 注解 描述 应用范围 用例 @BeforeProcess 定义在进程被调用之前应执行的行为 static method 加载被线程共享的资源文件，定义 GTest 等 @AfterProcess 定义在进程被终止之前应执行的行为 static method 关闭资源文件 @BeforeThread 定义在每个线程被调用之前应执行的行为 member method 登录目标系统，建立线程内的一些值，例如，Cookie 处理 @AfterThread 定义在每个线程被终止之前应执行的行为 member method 退出系统 @Before 定义每个被 @Test 注解的方法被执行前应执行的行为 member method 对个被 @Test 注解的方法的共享逻辑、变量设置 @After 定义每个被 @Test 注解的方法被执行后应执行的行为 member method 很少使用 @Test 定义测试行为，被执行多次 member method 测试体 三、关注点在ngrinder中，通常使用单进程多线程就足够大部分测试了，所以： 我们最需要关注的就是 @Test ，这个是循环体； 其次是 @Before ，这里设置多个循环体的共享变量； 再其次是 @BeforeThread 和 @AfterThread ，用于设置每个线程执行前后的行为。 四、具体代码结构123456789101112131415161718192021222324252627282930313233343536373839@RunWith(GrinderRunner) // 每个测试类都要加这个注解class TestRunner &#123; @BeforeProcess // 在每个进程启动前执行 public static void beforeProcess() &#123; // 加载资源文件、初始化 GTest 等 &#125; @BeforeThread // 在每个线程执行前执行 public void beforeThread() &#123; // 登录、设置 cookie 之类 &#125; @Before // 在每个 @Test 注解的方法执行前执行 public void before() &#123; // 设置变量、多个 @Test 方法共用的逻辑等 &#125; @Test // 在测试结束前不断运行。各个 @Test 注解的方法异步执行。 public void foo() &#123; // ... &#125; @Test public void bar() &#123; // ... &#125; @After // 在每个 @Test 注解的方法执行后执行 public void after() &#123; // 很少用到 &#125; @AfterThread public void afterThread() &#123; // 登出之类 &#125; @AfterProcess // 在每个进程结束后执行 public static void afterProcess() &#123; // 关闭资源 &#125;]]></content>
       <categories>
         <category>nGrinder</category>
       </categories>
       <tags>
         <tag>nGrinder</tag>
-        <tag>nGrinder性能测试平台</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[nGrinder解析最基本的GET请求脚本]]></title>
-    <url>%2F2019%2F02%2F26%2F04_%E8%A7%A3%E6%9E%90%E6%9C%80%E5%9F%BA%E6%9C%AC%E7%9A%84GET%E8%AF%B7%E6%B1%82%E8%84%9A%E6%9C%AC-groovy%2F</url>
-    <content type="text"><![CDATA[一、自动生成GET请求脚本1、配置 Create a script在ngrinder管理台主页，点击script–&gt;Create a script，并填写脚本名称和请求的url； 点击 Create 按钮，nGrinder会自动生成对应的脚本结构，如果没有参数需要设置的话，可以直接运行了。 二、详细解析GET请求脚本脚本说明ngrinder自动生成的脚本如下所示（groovy版本）： 解析见代码中的注释123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990import static net.grinder.script.Grinder.grinderimport static org.junit.Assert.*import static org.hamcrest.Matchers.*import net.grinder.plugin.http.HTTPRequestimport net.grinder.plugin.http.HTTPPluginControlimport net.grinder.script.GTestimport net.grinder.script.Grinderimport net.grinder.scriptengine.groovy.junit.GrinderRunnerimport net.grinder.scriptengine.groovy.junit.annotation.BeforeProcessimport net.grinder.scriptengine.groovy.junit.annotation.BeforeThread// import static net.grinder.util.GrinderUtils.* // You can use this if you're using nGrinder after 3.2.3import org.junit.Beforeimport org.junit.BeforeClassimport org.junit.Testimport org.junit.runner.RunWithimport org.junit.FixMethodOrderimport org.junit.runners.MethodSortersimport java.util.Dateimport java.util.Listimport java.util.ArrayListimport HTTPClient.Cookieimport HTTPClient.CookieModuleimport HTTPClient.HTTPResponseimport HTTPClient.NVPair/** * A simple example using the HTTP plugin that shows the retrieval of a * single page via HTTP. * * This script is automatically generated by ngrinder. * * @author admin */@RunWith(GrinderRunner)@FixMethodOrder(MethodSorters.NAME_ASCENDING)class TestRunner &#123;truepublic static GTest testtrue// 定义 HTTPRequest 静态变量 request，用于发送 HTTP 请求truepublic static HTTPRequest request true// 定义 NVPair 数组 headers ，用于存放通用的请求头数据truepublic static NVPair[] headers = []true// 定义 NVPair 数组 params ，用于存放请求参数数据truepublic static NVPair[] params = []true// 定义 Cookie 数组 cookies ，用于存放通用的 cookie 数据truepublic static Cookie[] cookies = []true@BeforeProcesstruepublic static void beforeProcess() &#123;truetrue// 设置请求响应超时时间（ms），超过则抛出异常truetrueHTTPPluginControl.getConnectionDefaults().timeout = 6000truetruetruetrue// 创建GTest对象，第一个参数1代表有多个请求/事务时的执行顺序IDtruetrue// 第二个参数是请求/事务的名称，会显示在summary结果中truetrue// 有多个请求/事务时，要创建多个GTest对象truetruetest = new GTest(1, "www.baidu.com") truetrue// 创建 HTTPRequest 对象，用于发起 HTTP 请求truetruerequest = new HTTPRequest() truetruegrinder.logger.info("before process.");true&#125;true@BeforeThreadtruepublic void beforeThread() &#123;truetrue// 注册事件，启动test，第二个参数要与@Test注解的方法名保持一致truetrue// 有多个请求/事务时，要注册多个事件truetruetest.record(this, "test")truetrue// 配置延迟报告统计结果truetruegrinder.statistics.delayReports=true;truetruegrinder.logger.info("before thread.");true&#125;true@Beforetruepublic void before() &#123;truetrue// 在这里可以添加headers属性和cookiestruetruerequest.setHeaders(headers)truetrue// 设置本次请求的 cookiestruetruecookies.each &#123; CookieModule.addCookie(it, HTTPPluginControl.getThreadHTTPClientContext()) &#125;truetruegrinder.logger.info("before thread. init headers and cookies");true&#125;true@Testtruepublic void test()&#123;truetrue// 发送GET请求truetrueHTTPResponse result = request.GET("https://www.baidu.com", params)truetrue// 断言HTTP请求状态码truetrueassertThat(result.statusCode, is(200))true&#125;&#125; GTest GTest是对测试记录进行统计的单元; 使用 GTest 的构造方法 GTest(int number, String description) 创建，在脚本内每个GTest对象都使用唯一的编号定义。 如果创建了多个编号一样的对象，最后只会选用第一个。 test.record()在@BeforeThread注解下会执行 test.record(this, &quot;test&quot;) record(Object target, String methodName) 这里使用 GTest的record方法给 GTest 配置需要进行统计的方法； target 指脚本对象，这里是this； methodName 是需要统计的方法名，通常都是被 @Test 注释的方法。如果未配置，方法会正常执行，但是没有统计结果数据； 每一个被 @Test 注释的方法都是一个整体事务，在运行测试时，即便里面有 多次 HTTP 请求也只做一次统计！！ Cookies可以通过 Cookie(String name, String value, String domain, String path, Date expires, boolean secure) 构造 cookie 对象，然后存放到相应的数组中，传递到请求中。]]></content>
-      <categories>
-        <category>nGrinder</category>
-      </categories>
-      <tags>
-        <tag>nGrinder</tag>
-        <tag>ngrinder脚本解析</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[IDEA 中的版本控制机制]]></title>
-    <url>%2F2019%2F02%2F26%2FIDEA%20%E4%B8%AD%E7%9A%84%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E6%9C%BA%E5%88%B6%2F</url>
-    <content type="text"><![CDATA[一、版本控制的分类1、版本控制 版本控制是指对软件开发过程中各种程序代码、配置文件及说明文档等文件变更的管理。 版本控制的内容主要包括：检入检出控制、分支和合并、历史记录。 2、集中式版本控制系统（CVCS）典型代表是 SVN，有如下特点： 管理方便，逻辑明确，操作简单，上手快 使用集中式服务器，安全易管理 对服务器性能要求高，数据库容量经常暴增，体量大 必须联网！如果不能连接到服务器上，就不能提交，还原，对比等等 分支管控不灵活 还有一个风险，就是如果源码库出现问题，导致项目代码丢失，那么大家手里的都是部分代码，就算勉强合并到一起，也不能保证项目源码的准确性。 3、分布式版本控制系统（DVCS）分布式相比于集中式的最大区别在于开发者可以提交到本地，每个开发者通过克隆（git clone），在本地机器上拷贝一个完整的Git仓库。 典型代表是 Git，有如下特点： 适合分布式开发，每一个个体都可以作为服务器。每一次Clone就是从服务器上pull到了所有的内容，包括版本信息 公共服务器压力和数据量都不会太大 速度快、灵活，分支之间可以任意切换 任意两个开发者之间可以很容易的解决冲突，并且单机上就可以进行分支合并 可以离线工作，不影响本地代码编写，等有网络连接以后可以再上传代码，并且可以在本地根据不同的需要新建自己的分支。 二、IDEA 中的版本控制机制1、Version Control File -&gt; Settings -&gt; Version Control ，这里是 IDEA 自带的用于支持主流版本控制软件的插件，如 git 、gitHub 、svn 、cvs等。 仅有插件并不能在 IDEA 中直接使用版本控制，还需要下载相应的版本控制软件才行。 2、Plugins File -&gt; Settings -&gt; Plugins ，这里是 IDEA 下载和管理插件的地方，在 Version Control 中展示的插件就是默认在这里已经下载了的。 三、IDEA 中配置版本控制软件1、SVN 先安装 SVN 客户端，或者是图形化工具，windows 推荐用 TortoiseSVN。 File -&gt; Settings -&gt; Version Control -&gt; Subverion，选择自己的 SVN 安装路径，否则 IDEA 可能无法正常识别SVN。 Clear Auth Cache，当使用过程中出现无法正常 checkout 等问题时，可以尝试点击这里清除缓存。 2、Git 先安装 Git 客户端，windows 下推荐用 TortoiseGit。 File -&gt; Settings -&gt; Version Control -&gt; Git，选择自己的 Git 安装路径，否则 IDEA 可能无法正常识别 Git。 3、GitHub 先注册 GitHub 账号 File -&gt; Settings -&gt; Version Control -&gt; GitHub -&gt; Add account，输入用户名和密码登录 GitHub，并点击 Test 测试连接是否成功。 四、代码检出和上传1、检出代码VCS -&gt; Checkout from Version Control 选择对应的版本控制系统，如 GitHub、SVN、Git 等，进一步从中检出项目。 以 SVN 为例： 先在本地创建一个空文件夹，右键 svn -&gt; checkout 所有代码； 在 IDEA 中 Import Module 导入； VCS -&gt; Checkout from Version Control -&gt; Subversion，输入 svn 地址，checkout 到工作空间目录。 2、上传代码VCS -&gt; Import into Version Control ，选择对应的版本控制系统，并进一步上传代码到版本控制系统中。 3、配置忽略文件File -&gt; Settings -&gt; Version Control -&gt; Ignored Files 在这里通过 + -设置是否把文件或目录加入到版本控制中。]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-      <tags>
-        <tag>IDEA</tag>
-        <tag>版本控制</tag>
+        <tag>groovy</tag>
+        <tag>ngrinder脚本</tag>
       </tags>
   </entry>
   <entry>
@@ -159,6 +151,18 @@
         <tag>nGrinder</tag>
         <tag>ngrinder解析json</tag>
         <tag>ngrinder断言</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[IDEA 中的版本控制机制]]></title>
+    <url>%2F2019%2F02%2F26%2FIDEA%20%E4%B8%AD%E7%9A%84%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E6%9C%BA%E5%88%B6%2F</url>
+    <content type="text"><![CDATA[一、版本控制的分类1、版本控制 版本控制是指对软件开发过程中各种程序代码、配置文件及说明文档等文件变更的管理。 版本控制的内容主要包括：检入检出控制、分支和合并、历史记录。 2、集中式版本控制系统（CVCS）典型代表是 SVN，有如下特点： 管理方便，逻辑明确，操作简单，上手快 使用集中式服务器，安全易管理 对服务器性能要求高，数据库容量经常暴增，体量大 必须联网！如果不能连接到服务器上，就不能提交，还原，对比等等 分支管控不灵活 还有一个风险，就是如果源码库出现问题，导致项目代码丢失，那么大家手里的都是部分代码，就算勉强合并到一起，也不能保证项目源码的准确性。 3、分布式版本控制系统（DVCS）分布式相比于集中式的最大区别在于开发者可以提交到本地，每个开发者通过克隆（git clone），在本地机器上拷贝一个完整的Git仓库。 典型代表是 Git，有如下特点： 适合分布式开发，每一个个体都可以作为服务器。每一次Clone就是从服务器上pull到了所有的内容，包括版本信息 公共服务器压力和数据量都不会太大 速度快、灵活，分支之间可以任意切换 任意两个开发者之间可以很容易的解决冲突，并且单机上就可以进行分支合并 可以离线工作，不影响本地代码编写，等有网络连接以后可以再上传代码，并且可以在本地根据不同的需要新建自己的分支。 二、IDEA 中的版本控制机制1、Version Control File -&gt; Settings -&gt; Version Control ，这里是 IDEA 自带的用于支持主流版本控制软件的插件，如 git 、gitHub 、svn 、cvs等。 仅有插件并不能在 IDEA 中直接使用版本控制，还需要下载相应的版本控制软件才行。 2、Plugins File -&gt; Settings -&gt; Plugins ，这里是 IDEA 下载和管理插件的地方，在 Version Control 中展示的插件就是默认在这里已经下载了的。 三、IDEA 中配置版本控制软件1、SVN 先安装 SVN 客户端，或者是图形化工具，windows 推荐用 TortoiseSVN。 File -&gt; Settings -&gt; Version Control -&gt; Subverion，选择自己的 SVN 安装路径，否则 IDEA 可能无法正常识别SVN。 Clear Auth Cache，当使用过程中出现无法正常 checkout 等问题时，可以尝试点击这里清除缓存。 2、Git 先安装 Git 客户端，windows 下推荐用 TortoiseGit。 File -&gt; Settings -&gt; Version Control -&gt; Git，选择自己的 Git 安装路径，否则 IDEA 可能无法正常识别 Git。 3、GitHub 先注册 GitHub 账号 File -&gt; Settings -&gt; Version Control -&gt; GitHub -&gt; Add account，输入用户名和密码登录 GitHub，并点击 Test 测试连接是否成功。 四、代码检出和上传1、检出代码VCS -&gt; Checkout from Version Control 选择对应的版本控制系统，如 GitHub、SVN、Git 等，进一步从中检出项目。 以 SVN 为例： 先在本地创建一个空文件夹，右键 svn -&gt; checkout 所有代码； 在 IDEA 中 Import Module 导入； VCS -&gt; Checkout from Version Control -&gt; Subversion，输入 svn 地址，checkout 到工作空间目录。 2、上传代码VCS -&gt; Import into Version Control ，选择对应的版本控制系统，并进一步上传代码到版本控制系统中。 3、配置忽略文件File -&gt; Settings -&gt; Version Control -&gt; Ignored Files 在这里通过 + -设置是否把文件或目录加入到版本控制中。]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>IDEA</tag>
+        <tag>版本控制</tag>
       </tags>
   </entry>
   <entry>
@@ -214,6 +218,18 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[Notepad++中查找替换「换行符」]]></title>
+    <url>%2F2019%2F02%2F26%2FNotepad%2B%2B%E4%B8%AD%E6%9F%A5%E6%89%BE%E6%9B%BF%E6%8D%A2%E3%80%8C%E6%8D%A2%E8%A1%8C%E7%AC%A6%E3%80%8D%2F</url>
+    <content type="text"><![CDATA[Notepad++ 是 Windows 中一款优秀的文本编辑软件，功能非常强大。 重要说明： 1、为更好的理解本文，建议先阅读相关文章 – 不同操作系统中的换行符。 2、本文内容基于 Notepad++ 7.5.1 版本，为方便书写，若无特殊说明，下文中内容均指在该软件版本下的操作。 一、查找替换「换行符」1、设置「显示行尾符」为了更清楚的看到换行符的变化，首先进行下面设置：视图 -&gt; 显示符号 -&gt; 显示行尾符 然后新建一个文本，在其中随意输入内容，会看到显示「换行符」为 CRLF，即 \r\n。 2、查找并替换「换行符」 Ctrl + H，打开替换对话框，查找模式 选中 扩展 或者 正则表达式，使查找目标 和 替换为 中同时支持字符串和特殊字符的匹配； 然后在 查找目标 中输入 \r\n ，即可匹配到文本中的回车换行符； 在 替换为 中输入要替换成的字符即可； 二、扩展：查找替换「空行」、空白符下面列举常用的几种查找替换情况：（前提是要选中 正则表达式模式） 查找目标 替换为 说明 \r\n ,\r\n 在行尾加上逗号 \r\n 替换为空，即合并多行内容为一行 \r\n \n 把 windows 下的换行符替换为 linux 下的换行符 \n 把 \n 替换为空，即把 windows 下的换行符替换为 Mac 下的换行符 , \r\n 把逗号全部替换成换行 \r\n\r\n \r\n 去掉空行 1\s\s 1 去掉 1 后的两个空格，其中一个 \s 表示一个空格 1两个半角空格 1 可以直接在 1 后跟两个半角空格来匹配，跟上面 \s 是一样的效果 \r\n \r\n\t 在每行行首添加制表符，即四个半角空格的效果]]></content>
+      <categories>
+        <category>办公利器</category>
+      </categories>
+      <tags>
+        <tag>Notepad++</tag>
+        <tag>换行符</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Maven学习05-目录结构和依赖]]></title>
     <url>%2F2019%2F02%2F26%2FMaven%E5%AD%A6%E4%B9%A005-%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E5%92%8C%E4%BE%9D%E8%B5%96%2F</url>
     <content type="text"><![CDATA[一、Maven目录结构Maven有一个标准的目录结构。如果在项目中遵循Maven的目录结构，就无需在pom文件中指定源代码、测试代码等目录。 1、常用的重要目录 src main java resources webapp test java resources target 2、各目录说明 目录 存放内容 src 源代码和测试代码的根目录 main 应用的源代码目录 test 测试代码的目录 java目录 main和test下的java目录，分别表示应用的java源代码和测试代码 resources 包含项目的资源文件，比如应用的国际化配置的属性文件等 webapp 如果是一个web项目，则webapp目录为web项目的根目录，其中包含如WEB-INF等子目录 target 是由Maven创建的目录，其中包含编译后的类文件、jar文件等。==当执行maven的clean目标后，target目录会被清空。== 二、依赖管理Maven内嵌有依赖管理的功能，可以非常方便的下载和管理项目依赖的外部jar包。 只需要在pom文件里指定依赖jar包的名称、版本号，Maven就会自动下载并放到本地仓库中（包括这些jar包依赖的其它库）。 1、如何设置项目依赖？在pom文件的&lt;dependencies&gt;属性中指定项目依赖。 一个&lt;dependency&gt;节点对应一个依赖，可以指定多个。 具体示例如下：1234567891011121314151617181920212223242526272829&lt;project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt; &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt; &lt;groupId&gt;com.jenkov.crawler&lt;/groupId&gt; &lt;artifactId&gt;java-web-crawler&lt;/artifactId&gt; &lt;version&gt;1.0.0&lt;/version&gt; &lt;dependencies&gt; &lt;dependency&gt; &lt;groupId&gt;org.jsoup&lt;/groupId&gt; &lt;artifactId&gt;jsoup&lt;/artifactId&gt; &lt;version&gt;1.7.1&lt;/version&gt; &lt;/dependency&gt; &lt;dependency&gt; &lt;groupId&gt;junit&lt;/groupId&gt; &lt;artifactId&gt;junit&lt;/artifactId&gt; &lt;version&gt;4.8.1&lt;/version&gt; &lt;scope&gt;test&lt;/scope&gt; &lt;/dependency&gt; &lt;/dependencies&gt; &lt;build&gt; &lt;/build&gt;&lt;/project&gt; 在上面的示例中，dependencies属性下有两个dependency子属性，每一个dependency属性描述了一个外部依赖。 每一个依赖由groupId, artifactId和version来描述。 上面的示例表明，项目的依赖为 org.jsoup组织下的1.7.1版本的jsoup，以及junit组织下的4.8.1版本的junit。 当Maven执行该pom文件时，将从Maven的中央仓库里下载这两个jar包并放到Maven的本地仓库。如果本地仓库中已经有了这两个依赖，Maven就不会去下载了。只有本地仓库中没有的依赖才会被下载。 若指定的依赖在Maven的中央仓库里没找到，可以手动下载，然后放到Maven的本地仓库。 下载的依赖必须放到与groupId、 artifactId和version匹配的子目录中。 上面示例中的两个依赖将会被放到以下子目录中： MAVEN_REPOSITORY_ROOT/junit/junit/4.8.1MAVEN_REPOSITORY_ROOT/org/jsoup/jsoup/1.7.1 三、快照依赖快照依赖指的是那些还在开发中的依赖（jar包）。 与其经常地更新版本号来获取最新版本，不如直接依赖项目的快照版本。 快照版本的每一个build版本都会被下载到本地仓库，即使该快照版本已经在本地仓库了。 总是下载快照依赖可以确保本地仓库中的每一个build版本都是最新的。 1、如何设置快照依赖？在pom文件的最开头（设置groupId和artifactId的地方），在版本号后追加-SNAPSHOT，则告诉Maven你的项目是一个快照版本。 如： &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt; 在配置依赖时，在版本号后追加-SNAPSHOT表明依赖的是一个快照版本。 如：12345&lt;dependency&gt; &lt;groupId&gt;com.jenkov&lt;/groupId&gt; &lt;artifactId&gt;java-web-crawler&lt;/artifactId&gt; &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;&lt;/dependency&gt;]]></content>
@@ -224,18 +240,6 @@
         <tag>maven</tag>
         <tag>maven目录结构</tag>
         <tag>maven依赖</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Notepad++中查找替换「换行符」]]></title>
-    <url>%2F2019%2F02%2F26%2FNotepad%2B%2B%E4%B8%AD%E6%9F%A5%E6%89%BE%E6%9B%BF%E6%8D%A2%E3%80%8C%E6%8D%A2%E8%A1%8C%E7%AC%A6%E3%80%8D%2F</url>
-    <content type="text"><![CDATA[Notepad++ 是 Windows 中一款优秀的文本编辑软件，功能非常强大。 重要说明： 1、为更好的理解本文，建议先阅读相关文章 – 不同操作系统中的换行符。 2、本文内容基于 Notepad++ 7.5.1 版本，为方便书写，若无特殊说明，下文中内容均指在该软件版本下的操作。 一、查找替换「换行符」1、设置「显示行尾符」为了更清楚的看到换行符的变化，首先进行下面设置：视图 -&gt; 显示符号 -&gt; 显示行尾符 然后新建一个文本，在其中随意输入内容，会看到显示「换行符」为 CRLF，即 \r\n。 2、查找并替换「换行符」 Ctrl + H，打开替换对话框，查找模式 选中 扩展 或者 正则表达式，使查找目标 和 替换为 中同时支持字符串和特殊字符的匹配； 然后在 查找目标 中输入 \r\n ，即可匹配到文本中的回车换行符； 在 替换为 中输入要替换成的字符即可； 二、扩展：查找替换「空行」、空白符下面列举常用的几种查找替换情况：（前提是要选中 正则表达式模式） 查找目标 替换为 说明 \r\n ,\r\n 在行尾加上逗号 \r\n 替换为空，即合并多行内容为一行 \r\n \n 把 windows 下的换行符替换为 linux 下的换行符 \n 把 \n 替换为空，即把 windows 下的换行符替换为 Mac 下的换行符 , \r\n 把逗号全部替换成换行 \r\n\r\n \r\n 去掉空行 1\s\s 1 去掉 1 后的两个空格，其中一个 \s 表示一个空格 1两个半角空格 1 可以直接在 1 后跟两个半角空格来匹配，跟上面 \s 是一样的效果 \r\n \r\n\t 在每行行首添加制表符，即四个半角空格的效果]]></content>
-      <categories>
-        <category>办公利器</category>
-      </categories>
-      <tags>
-        <tag>Notepad++</tag>
-        <tag>换行符</tag>
       </tags>
   </entry>
   <entry>
@@ -265,28 +269,27 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[nGrinder脚本结构-groovy]]></title>
-    <url>%2F2019%2F02%2F26%2F03_%E8%84%9A%E6%9C%AC%E7%BB%93%E6%9E%84-groovy%2F</url>
-    <content type="text"><![CDATA[在前面的文章中，我们已经知道，nGrinder支持groovy和Jython脚本，今天学习一下ngrinder中的groovy脚本结构。 ngrinder中的groovy脚本结构类似 junit，同时在junit的基础之上封装了自己的注解，用来控制脚本的运行。 一、运行逻辑图如下： 此处只列出了groovy脚本的逻辑，jython脚本是类似的，在此不再单独介绍. 二、各注解的使用比较 注解 描述 应用范围 用例 @BeforeProcess 定义在进程被调用之前应执行的行为 static method 加载被线程共享的资源文件，定义 GTest 等 @AfterProcess 定义在进程被终止之前应执行的行为 static method 关闭资源文件 @BeforeThread 定义在每个线程被调用之前应执行的行为 member method 登录目标系统，建立线程内的一些值，例如，Cookie 处理 @AfterThread 定义在每个线程被终止之前应执行的行为 member method 退出系统 @Before 定义每个被 @Test 注解的方法被执行前应执行的行为 member method 对个被 @Test 注解的方法的共享逻辑、变量设置 @After 定义每个被 @Test 注解的方法被执行后应执行的行为 member method 很少使用 @Test 定义测试行为，被执行多次 member method 测试体 三、关注点在ngrinder中，通常使用单进程多线程就足够大部分测试了，所以： 我们最需要关注的就是 @Test ，这个是循环体； 其次是 @Before ，这里设置多个循环体的共享变量； 再其次是 @BeforeThread 和 @AfterThread ，用于设置每个线程执行前后的行为。 四、具体代码结构123456789101112131415161718192021222324252627282930313233343536373839@RunWith(GrinderRunner) // 每个测试类都要加这个注解class TestRunner &#123; @BeforeProcess // 在每个进程启动前执行 public static void beforeProcess() &#123; // 加载资源文件、初始化 GTest 等 &#125; @BeforeThread // 在每个线程执行前执行 public void beforeThread() &#123; // 登录、设置 cookie 之类 &#125; @Before // 在每个 @Test 注解的方法执行前执行 public void before() &#123; // 设置变量、多个 @Test 方法共用的逻辑等 &#125; @Test // 在测试结束前不断运行。各个 @Test 注解的方法异步执行。 public void foo() &#123; // ... &#125; @Test public void bar() &#123; // ... &#125; @After // 在每个 @Test 注解的方法执行后执行 public void after() &#123; // 很少用到 &#125; @AfterThread public void afterThread() &#123; // 登出之类 &#125; @AfterProcess // 在每个进程结束后执行 public static void afterProcess() &#123; // 关闭资源 &#125;]]></content>
+    <title><![CDATA[搭建nGrinder性能测试平台并快速使用]]></title>
+    <url>%2F2019%2F02%2F26%2F02_%E6%90%AD%E5%BB%BA%20nGrinder%20%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%E5%B9%B3%E5%8F%B0%20%E5%B9%B6%E5%BF%AB%E9%80%9F%E4%BD%BF%E7%94%A8%2F</url>
+    <content type="text"><![CDATA[接上一篇的nGrinder介绍篇 一、nGrinder 组件介绍ngrinder包含Controller、agent 和 monitor 三部分 1、Controller 提供性能测试的web接口 协调测试进程 调整和显示测试的统计结果 让用户创建和修改脚本 2、Agent 在代理服务器上加载运行测试进程和线程 可以部署多台，提升压测能力 最好是能部署在单独的服务器上，如果没有条件的话，也可以跟Controller在一台服务器 但是不能部署在被测服务器上 3、Monitor 用于监控被测服务器的系统性能（例如：CPU/MEMORY） 必须部署在被测服务器上 二、nGrinder 环境搭建 $ java -XX:MaxPermSize=512m -jar ngrinder-controller-3.4.war –port 80可在下载ngrinder后，直接通过上面的命令运行也可以通过下面的方式，把war包放在tomcat容器中运行 1、安装JDK，配置环境变量2、安装Tomcat3、下载nGrinder：https://github.com/naver/ngrinder/releases4、把下载好的包放到Tomcat的webApps文件夹中5、启动Tomcat，并访问nGrinder nGrinder主页：http://localhost:8080/ngrinder-controller-3.4/ 看到下图表示搭建成功。 如果想直接通过http://localhost:8080/访问，把文件名改为ROOT.war即可 6、安装Agent 登录 nGrinder 管理台，默认账号和密码都是admin，点击右上角，选择 Download Private Agent (不同版本可能会稍有区别) ，如下图所示 把 ngrinder-agent 压缩包解压到用作Agent的服务器上，运行 run_agent.sh 即可 7、安装Monitor（需要安装在被测服务器上） 下载Monitor安装包，方法类似Agent 把 ngrinder-monitor 压缩包解压到被测服务器上，运行 run_monitor.sh 即可 补充说明： ngrinder支持开箱即用，不需要额外配置，第一次启动时，系统配置自动生成 默认使用H2数据库，且schema自动创建 版本更新时，数据库schema自动更新 agent 、monitor模块从controller下载，无需配置 版本更新时，只需更新controller，agent和monitor会自动更新 在线修改系统配置，多数据修改无需重启 即使用cluster模式，配置也很简单 三、快速使用1、输入测试URL，选择脚本语言，然后点击开始测试，会自动生成测试脚本并进入配置页面或者通过点击管理后上方的 script 或 脚本 按钮，进入脚本管理页面，创建脚本，效果相同。 在创建脚本时，可以选择使用的语言为Groovy或Jython，但是由于这两种语言执行性能上的差别，建议优先使用性能更好的Groovy来编写压测脚本（官方验证相同情况下groovy比jython支持2倍左右的并发数） 2、基本的压测配置 代理：是指压测所需要的server的数量 虚拟用户有两个指标： 进程数：每个server起多少进程去跑 线程数：每个进程新建的线程数量 并发量=代理数x进程数x线程数 Ramp-Up：设置增量测试，逐渐向最大的的并发量增长，只有勾选该框时，初始数、增量、初始等待时间、进程增长间隔的值才有效 测试时间：表示压测需要持续运行的时间测试次数：脚本执行的次数，同测试时间二选一 3、运行测试在配置页面右上角点击保存并运行，启动测试。 4、监控测试，查看结果当启动测试后，会在页面显示当前的TPS、虚拟用户、测试成功与否的数量等信息。测试完成后，会显示测试结果。 可以点击详细测试结果查看更详细的信息，比如TPS、平均时间、首次接受数据平均时间，以及被测服务器的CPU，MEM等信息。]]></content>
       <categories>
         <category>nGrinder</category>
       </categories>
       <tags>
         <tag>nGrinder</tag>
-        <tag>groovy</tag>
-        <tag>ngrinder脚本</tag>
+        <tag>nGrinder性能测试平台</tag>
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[git一次性add多个文件或提交多次修改]]></title>
-    <url>%2F2019%2F02%2F26%2Fgit%E4%B8%80%E6%AC%A1%E6%80%A7%20add%E5%A4%9A%E4%B8%AA%E6%96%87%E4%BB%B6%E6%88%96%E6%8F%90%E4%BA%A4%E5%A4%9A%E6%AC%A1%E4%BF%AE%E6%94%B9%2F</url>
-    <content type="text"><![CDATA[有时我们需要对 git 的修改操作进行批量提交，此时该怎么操作呢？ 按下面的步骤操作即可实现一次性add多个文件或提交多次修改： git add --all git commit -m &apos;add more files&apos; git push origin master]]></content>
+    <title><![CDATA[git pull 指定某一个文件或文件夹]]></title>
+    <url>%2F2019%2F02%2F26%2Fgit%20pull%20%E6%8C%87%E5%AE%9A%E6%9F%90%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6%E6%88%96%E6%96%87%E4%BB%B6%E5%A4%B9%2F</url>
+    <content type="text"><![CDATA[1、要解决的问题默认情况下，git pull 操作会把远程仓库的所有最新数据更新到本地。 但是，如果你只想更新指定的某一个文件或文件夹，该怎么操作呢？ 2、git 只 pull 某一个文件/夹 设置 core.sparsecheckout为 true $ git config core.sparsecheckout true core.sparsecheckout用于控制是否允许设置pull指定文件/夹，true为允许。 此方法适用于 Git1.7.0 以后版本，之前的版本没有这个功能。 在.git/info/sparse-checkout文件中（如果没有则创建）添加指定的文件/夹 最后，拉取想要的分支即可实现checkout指定文件/夹。 $ git pull origin master]]></content>
       <categories>
         <category>git</category>
       </categories>
       <tags>
         <tag>git</tag>
-        <tag>git add</tag>
+        <tag>git pull</tag>
       </tags>
   </entry>
   <entry>
@@ -352,18 +355,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[maven学习02-pom文件]]></title>
-    <url>%2F2019%2F02%2F26%2Fmaven%E5%AD%A6%E4%B9%A002-pom%E6%96%87%E4%BB%B6%2F</url>
-    <content type="text"><![CDATA[一、POM 文件是什么？Maven的中心思想即POM文件（(Project Object Model)项目对象模型）。 POM文件是以XML文件的形式，描述项目用到的资源，如源码目录、测试代码目录、依赖（用到的外部Jar包）等。 pom.xml 是整个系统的基础组件，位于项目根目录下。 二、Maven 如何使用POM文件？ 上图说明了Maven是如何使用POM文件的，当执行一条Maven命令的时候，会依次进行以下步骤： 1、读取项目根目录下的pom.xml，并根据pom.xml中的描述来执行下一步操作。 2、根据pom.xml中的&lt;dependencies&gt;，下载依赖到本地仓库中。 3、构建生命周期、阶段和目标。 4、构建插件。 三、POM文件的主要组成部分POM文件描述的是构建“什么”，而不是“如何”构建。 如何构建是取决于Maven的构建阶段和目标。 每一个项目都有一个POM文件，即pom.xml，位于项目的根目录下。 pom.xml 主要包括以下几部分： 3.1 构建生命周期、阶段和目标Maven的构建过程被分解为构建生命周期、阶段和目标。 &lt;build&gt; -&gt; &lt;phase&gt; -&gt; &lt;goals&gt; 一个构建周期由一系列的构建阶段组成。 每一个构建阶段由一系列的目标组成。 当我们使用一条命令来运行Maven的时候，这条命令就是构建生命周期、阶段或目标的名字。 如果执行的是一个生命周期，该生命周期内的所有构建阶段都会被执行。 如果执行的是一个构建阶段，在预定义的构建阶段中，所有处于当前构建阶段之前的阶段也都会被执行。 3.2 依赖和仓库&lt;repository&gt; 仓库节点，&lt;dependencies&gt; 依赖节点 Maven执行时，其中一个首要目标就是检查项目的依赖（需要的jar 包）。 如果在本地仓库中不存在该依赖，则Maven会从中央仓库和远程仓库下载并放到本地仓库。（后面会单独讲解怎么修改本地仓库路径、怎么添加远程仓库） 3.3 构建插件&lt;plugins&gt; 节点 构建插件可以向构建阶段中增加额外的构建目标。 如果Maven标准的构建阶段和目标无法满足项目构建的需求，可以在POM文件里增加插件。 Maven有一些标准的插件供选用，如果需要也可以自己实现插件。 3.4 配置文件&lt;profiles&gt; 节点 配置文件用于以不同的方式构建项目。 比如，你可能需要在本地环境构建，用于开发和测试，你也可能需要构建后用于开发环境。这两个构建过程是不同的。 在POM文件中增加不同的构建配置，可以启用不同的构建过程。当运行Maven时，可以指定要使用的配置。 四、Maven 项目继承1、父子工程中的POM（以下内容中子项目 与 模块的概念是类似的，所以也可以对应的理解为模块） 一个项目如果分为多个子项目/模块，一般来讲，父项目有一个POM文件，每一个子项目也有一个POM文件。在这种结构下，既可以一步构建整个项目，也可以各个子项目分开构建。 2、 POM 继承的原理POM 继承的原理类似于Java中的类继承关系，可以结合理解。 当有多个子项目时，使用 POM 继承可以大大减少配置的工作量。 把多个子项目之间一些共性的东西（比如说类似的配置、相同的jar包等等），定义在父项目的pom.xml文件中。 子项目继承父项目后，在自己的pom.xml中只放自己个性的东西，大大减少了工作量。 默认情况下，所有的Maven pom文件都继承自一个根pom。如果没有显式指定父pom，则该pom文件继承自根pom。 子pom文件的设置可以覆盖父pom文件的设置，只需要在子pom文件里指定新的设置即可。 3、POM继承关系图 如果要继承根pom以外的pom，需要在子pom中显示地指定父pom。 4、如何显示指定父pom呢？ 在子项目的pom.xml起始处设置 &lt;parent&gt; 节点来指定父项目。如：12345678910111213141516&lt;project xmlns="http://maven.apache.org/POM/4.0.0"xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"xsi:schemaLocation="http://maven.apache.org/POM/4.0.0http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;&lt;parent&gt; 指定父pom&lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;&lt;artifactId&gt;my-parent&lt;/artifactId&gt;&lt;version&gt;2.0&lt;/version&gt;&lt;relativePath&gt;../my-parent&lt;/relativePath&gt;&lt;/parent&gt;&lt;artifactId&gt;my-project&lt;/artifactId&gt;…&lt;/project&gt; 五、POM文件字段解析如下为一个最小化的POM文件示例：12345678910&lt;project xmlns="http://maven.apache.org/POM/4.0.0"xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"xsi:schemaLocation="http://maven.apache.org/POM/4.0.0http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;&lt;groupId&gt;com.jenkov&lt;/groupId&gt;&lt;artifactId&gt;java-web-crawler&lt;/artifactId&gt;&lt;version&gt;1.0.0&lt;/version&gt;&lt;/project&gt; 1、各字段解析 modelVersion：使用的POM模型的版本。 一般选择正在使用的Maven版本一致的版本即可。 版本4.0.0适用于Maven 2和3。 groupId：一个组织或者项目（比如开源项目）的唯一ID。一般使用项目的java包的根名称作为group ID。类似com.xxx.xxxx 。 使用带.分隔符的java包名作为groupId，这一点并不是必须的。 但是，如果按照这样的规范来定义groupId，项目将会位于Maven仓库的结构化目录中，该结构化目录与group ID匹配。每一个.是一个目录分隔符，每一个词都表示一个目录。 比如：group ID为com.jenkov的项目将位于目录MAVEN_REPO/com/jenkov中。目录路径中的MAVEN_REPO表示Maven仓库的路径。 artifactId：正在构建的项目的名称。 它也是构建完项目后生成的jar包的文件名的一部分。构建过程的输出，即构建结果，在Maven中称为构件（artifact）。通常它就是一个jar包、war包或者EAR包等等。 version：项目的版本号。 可以用来识别项目不同的发行版。 它是artifact ID目录下的子目录名。 它也用作构建结果即jar包名称的一部分。 上文中的groupId，artifactId和version属性，在项目构建后会生成一个jar文件，位于Maven仓库的如下路径中（目录和文件名）：MAVEN_REPO/com/jenkov/java-web-crawler/1.0.0/java-web-crawler-1.0.0.jar 上面只是构建maven项目最基本的一些配置，实际开发中，还会增加更多的配置来辅助构建。]]></content>
-      <categories>
-        <category>maven</category>
-      </categories>
-      <tags>
-        <tag>maven</tag>
-        <tag>pom文件</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[Maven入门学习01-关键特性]]></title>
     <url>%2F2019%2F02%2F26%2Fmaven%E5%AD%A6%E4%B9%A001%20-%20%E5%85%B3%E9%94%AE%E7%89%B9%E6%80%A7%2F</url>
     <content type="text"><![CDATA[一、认识 Maven1、Maven 最重要的功能Apache Maven 是一个强大的项目管理工具，可以用于项目构建、依赖管理、项目信息管理。 Maven 更多的被用作项目构建工具，它使项目的构建过程简单化、标准化、可复用，极大的方便了整个项目的开发和管理。 它基于工程对象模型（POM）的概念，使用 pom.xml进行核心功能配置，进而管理项目的构建、报告和文档等。 2、什么是构建工具？构建工具是将软件项目构建相关的过程自动化的工具。 构建一个软件项目通常包含以下一个或多个过程： 生成源码（如果项目使用自动生成源码）； 从源码生成项目文档； 编译源码； 将编译后的代码打包成JAR文件或者ZIP文件； 将打包好的代码安装到服务器、仓库或者其它的地方； 当然，有些项目可能需要更多的过程才能完成构建，同样也可以实现自动化。 自动化构建过程的好处： 将手动构建过程中犯错的风险降到最低。 自动构建工具通常要比手动执行同样的构建过程要快。 二、Maven 关键特性1、简化并标准化项目构建过程 Maven 为开发者提供了一套完整的构建生命周期框架，开发人员只需要按照框架操作。 Maven 使用一个标准的目录结构和一个默认的构建生命周期，开发人员只需要把代码放入相应的目录中并使用默认配置。 2、自动管理依赖2.1 以前项目开发中的问题jar 包依赖和冲突问题： 在构建一个大型项目时，经常需要用到很多第三方的类库，需要引入大量的jar包，需要一个个去查找。 一个大型项目中 jar 包的数量之多往往让我们瞠目结舌，并且jar包之间的关系错综复杂，多个jar包之间又可能会引起冲突问题，都可能导致项目编译失败。 以往开发项目时，程序员往往需要花较多的精力在引用jar包搭建项目环境上，而这一项工作尤为艰难，少一个Jar包、多一个jar包往往会报一些让人摸不着头脑的异常。 2.2 Maven 如何解决依赖问题？我们只需要告诉Maven需要哪些 jar 包，它会帮助我们自动下载、并统一管理，极大提升开发效率。 自动下载依赖jar包 通过在pom.xml文件中的&lt;dependency&gt;节点添加相应配置，就会自动下载相应jar包。123456&lt;dependency&gt; &lt;groupId&gt;junit&lt;/groupId&gt; 项目名 &lt;artifactId&gt;junit&lt;/artifactId&gt; 项目模块 &lt;version&gt;4.1.1&lt;/version&gt; 项目版本 &lt;scope&gt;test&lt;/scope&gt; 作用范围 &lt;/dependency&gt; 自动管理依赖 每一个jar包也有自己的 pom.xml文件，里面也会有&lt;dependency&gt;配置，在这里配置的是这个jar包所依赖的其他jar包，也会被maven自动下载下来 统一管理jar包 通过仓库来实现统一管理，后面会详细讲解Maven仓库的概念。 3、约定优于配置Maven 使用约定而不是配置。 也就是说开发者不需要关心每一个配置细节，Maven 会为工程提供合理的默认行为。 当创建 Maven 工程时，Maven 会创建默认的工程结构。开发者只需要合理的放置文件，不再需要定义任何配置。 下表是工程源码文件、资源文件的默认配置，和其他一些配置： （假定 ${basedir} 表示工程目录） 配置项 默认值 source code ${basedir}/src/main/java resources ${basedir}/src/main/resources Tests ${basedir}/src/test Complied byte code ${basedir}/target distributable JAR ${basedir}/target/classes 4、热部署，热编译在web项目已经运行的时候，修改代码能直接被web服务器所接受，不需要重启服务器或者重新部署代码，而且可以直接通过maven 打包war或者jar项目。]]></content>
@@ -376,16 +367,15 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[shell通配符和输入输出重定向]]></title>
-    <url>%2F2019%2F02%2F26%2Fshell%20%E9%80%9A%E9%85%8D%E7%AC%A6%26%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%87%8D%E5%AE%9A%E5%90%91%2F</url>
-    <content type="text"><![CDATA[一、shell 常用通配符1、* 匹配一个或多个任意的字符12345*.txt*txt*txt* 2、? 匹配一个任意的字符?.txt 3、[] 匹配一个范围中的一个字符1234567ls [123].txtls [1-3].txtls [0-9a-z].txtls [0-9a-zA-Z].txt 4、{} 匹配其中的一个字符，类似于[] {}和[]类似，都是匹配里面的其中一个字符 区别是：[]支持范围，{}不支持范围12345678910ls &#123;1,2,3,a,b&#125;.txtls &#123;1,2&#125;.txt## &#123;&#125; 和 [] 的区别：[app@centos tmp]$ ls &#123;1-3&#125;.txtls: cannot access &#123;1-3&#125;.txt: No such file or directory[app@centos tmp]$ ls [1-3].txt1.txt 2.txt 二、输入输出重定向1、&gt; (正确)输出重定向（重写）cat 1.txt &gt; 2.txt # 把1.txt中的内容写入2.txt； # 若2.txt在写入前非空，会先清除原有内容后再写入。 2、&gt;&gt; (正确)输出重定向（追加）cat 1.txt &gt;&gt; 2.txt # 把1.txt中的内容追加在2.txt原有内容之后 3、2&gt; 错误输出重定向（重写）lsaaa 2&gt; err.log # 把左边命令执行后的错误信息输出到err.log中； # 如果err.log在输出前非空，会先清除原有内容后再输出。 4、2&gt;&gt;错误输出重定向（追加）lsaaa 2&gt;&gt; err.log # 把左边命令执行后的错误信息追加到err.log原有内容后面，不会清除原有内容。 5、&amp;&gt;（重写）重定向正确和错误的信息 把&amp;&gt;左边命令执行后产生的正确和错误的所有信息，输出到 &amp;&gt;右边的文件中（先清除文件内容）。 等价于 &gt; 和 2&gt; 结合使用123456[app@centos tmp]$ ls1.txt[app@centos tmp]$ ls 1.txt 2.txt &amp;&gt; log[app@centos tmp]$ cat logls: cannot access 2.txt: No such file or directory1.txt 6、&amp;&gt;&gt;（追加）重定向正确和错误的信息 把&amp;&gt;&gt;左边命令执行后产生的正确和错误的所有信息，追加输出到 &amp;&gt;&gt;右边的文件中。 等价于 &gt;&gt; 和 2&gt;&gt; 结合使用 12345678[app@centos tmp]$ ls1.txt log[app@centos tmp]$ ls 1.txt 2.txt &amp;&gt;&gt; log[app@centos tmp]$ cat logls: cannot access 2.txt: No such file or directory1.txtls: cannot access 2.txt: No such file or directory1.txt 7、&gt; 和 2&gt; 结合，分别输出正确和错误的信息12345678910[app@centos tmp]$ ls1.txt 2.txt log[app@centos tmp]$ ls [12].txt a.txt &gt; 1.txt 2&gt; err.log# 把命令执行后生成的正确信息重写输出到1.txt，错误信息重写输出到err.log[app@centos tmp]$ cat 1.txt1.txt2.txt[app@centos tmp]$ cat err.log ls: cannot access a.txt: No such file or directory 8、&lt; 输入重定向 把&lt; 右边的文件内容输入给左边的命令后，执行左边的命令 左边必须是一个命令，不能是文件123456789[app@centos tmp]$ cat 1.txt 12[app@centos tmp]$ wc -l &lt; 1.txt2[app@centos tmp]$ 2.txt &lt; 1.txt-bash: 2.txt: command not found## 左边必须是命令！]]></content>
+    <title><![CDATA[maven学习02-pom文件]]></title>
+    <url>%2F2019%2F02%2F26%2Fmaven%E5%AD%A6%E4%B9%A002-pom%E6%96%87%E4%BB%B6%2F</url>
+    <content type="text"><![CDATA[一、POM 文件是什么？Maven的中心思想即POM文件（(Project Object Model)项目对象模型）。 POM文件是以XML文件的形式，描述项目用到的资源，如源码目录、测试代码目录、依赖（用到的外部Jar包）等。 pom.xml 是整个系统的基础组件，位于项目根目录下。 二、Maven 如何使用POM文件？ 上图说明了Maven是如何使用POM文件的，当执行一条Maven命令的时候，会依次进行以下步骤： 1、读取项目根目录下的pom.xml，并根据pom.xml中的描述来执行下一步操作。 2、根据pom.xml中的&lt;dependencies&gt;，下载依赖到本地仓库中。 3、构建生命周期、阶段和目标。 4、构建插件。 三、POM文件的主要组成部分POM文件描述的是构建“什么”，而不是“如何”构建。 如何构建是取决于Maven的构建阶段和目标。 每一个项目都有一个POM文件，即pom.xml，位于项目的根目录下。 pom.xml 主要包括以下几部分： 3.1 构建生命周期、阶段和目标Maven的构建过程被分解为构建生命周期、阶段和目标。 &lt;build&gt; -&gt; &lt;phase&gt; -&gt; &lt;goals&gt; 一个构建周期由一系列的构建阶段组成。 每一个构建阶段由一系列的目标组成。 当我们使用一条命令来运行Maven的时候，这条命令就是构建生命周期、阶段或目标的名字。 如果执行的是一个生命周期，该生命周期内的所有构建阶段都会被执行。 如果执行的是一个构建阶段，在预定义的构建阶段中，所有处于当前构建阶段之前的阶段也都会被执行。 3.2 依赖和仓库&lt;repository&gt; 仓库节点，&lt;dependencies&gt; 依赖节点 Maven执行时，其中一个首要目标就是检查项目的依赖（需要的jar 包）。 如果在本地仓库中不存在该依赖，则Maven会从中央仓库和远程仓库下载并放到本地仓库。（后面会单独讲解怎么修改本地仓库路径、怎么添加远程仓库） 3.3 构建插件&lt;plugins&gt; 节点 构建插件可以向构建阶段中增加额外的构建目标。 如果Maven标准的构建阶段和目标无法满足项目构建的需求，可以在POM文件里增加插件。 Maven有一些标准的插件供选用，如果需要也可以自己实现插件。 3.4 配置文件&lt;profiles&gt; 节点 配置文件用于以不同的方式构建项目。 比如，你可能需要在本地环境构建，用于开发和测试，你也可能需要构建后用于开发环境。这两个构建过程是不同的。 在POM文件中增加不同的构建配置，可以启用不同的构建过程。当运行Maven时，可以指定要使用的配置。 四、Maven 项目继承1、父子工程中的POM（以下内容中子项目 与 模块的概念是类似的，所以也可以对应的理解为模块） 一个项目如果分为多个子项目/模块，一般来讲，父项目有一个POM文件，每一个子项目也有一个POM文件。在这种结构下，既可以一步构建整个项目，也可以各个子项目分开构建。 2、 POM 继承的原理POM 继承的原理类似于Java中的类继承关系，可以结合理解。 当有多个子项目时，使用 POM 继承可以大大减少配置的工作量。 把多个子项目之间一些共性的东西（比如说类似的配置、相同的jar包等等），定义在父项目的pom.xml文件中。 子项目继承父项目后，在自己的pom.xml中只放自己个性的东西，大大减少了工作量。 默认情况下，所有的Maven pom文件都继承自一个根pom。如果没有显式指定父pom，则该pom文件继承自根pom。 子pom文件的设置可以覆盖父pom文件的设置，只需要在子pom文件里指定新的设置即可。 3、POM继承关系图 如果要继承根pom以外的pom，需要在子pom中显示地指定父pom。 4、如何显示指定父pom呢？ 在子项目的pom.xml起始处设置 &lt;parent&gt; 节点来指定父项目。如：12345678910111213141516&lt;project xmlns="http://maven.apache.org/POM/4.0.0"xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"xsi:schemaLocation="http://maven.apache.org/POM/4.0.0http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;&lt;parent&gt; 指定父pom&lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;&lt;artifactId&gt;my-parent&lt;/artifactId&gt;&lt;version&gt;2.0&lt;/version&gt;&lt;relativePath&gt;../my-parent&lt;/relativePath&gt;&lt;/parent&gt;&lt;artifactId&gt;my-project&lt;/artifactId&gt;…&lt;/project&gt; 五、POM文件字段解析如下为一个最小化的POM文件示例：12345678910&lt;project xmlns="http://maven.apache.org/POM/4.0.0"xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"xsi:schemaLocation="http://maven.apache.org/POM/4.0.0http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;&lt;groupId&gt;com.jenkov&lt;/groupId&gt;&lt;artifactId&gt;java-web-crawler&lt;/artifactId&gt;&lt;version&gt;1.0.0&lt;/version&gt;&lt;/project&gt; 1、各字段解析 modelVersion：使用的POM模型的版本。 一般选择正在使用的Maven版本一致的版本即可。 版本4.0.0适用于Maven 2和3。 groupId：一个组织或者项目（比如开源项目）的唯一ID。一般使用项目的java包的根名称作为group ID。类似com.xxx.xxxx 。 使用带.分隔符的java包名作为groupId，这一点并不是必须的。 但是，如果按照这样的规范来定义groupId，项目将会位于Maven仓库的结构化目录中，该结构化目录与group ID匹配。每一个.是一个目录分隔符，每一个词都表示一个目录。 比如：group ID为com.jenkov的项目将位于目录MAVEN_REPO/com/jenkov中。目录路径中的MAVEN_REPO表示Maven仓库的路径。 artifactId：正在构建的项目的名称。 它也是构建完项目后生成的jar包的文件名的一部分。构建过程的输出，即构建结果，在Maven中称为构件（artifact）。通常它就是一个jar包、war包或者EAR包等等。 version：项目的版本号。 可以用来识别项目不同的发行版。 它是artifact ID目录下的子目录名。 它也用作构建结果即jar包名称的一部分。 上文中的groupId，artifactId和version属性，在项目构建后会生成一个jar文件，位于Maven仓库的如下路径中（目录和文件名）：MAVEN_REPO/com/jenkov/java-web-crawler/1.0.0/java-web-crawler-1.0.0.jar 上面只是构建maven项目最基本的一些配置，实际开发中，还会增加更多的配置来辅助构建。]]></content>
       <categories>
-        <category>shell</category>
+        <category>maven</category>
       </categories>
       <tags>
-        <tag>shell</tag>
-        <tag>通配符</tag>
-        <tag>输入输出重定向</tag>
+        <tag>maven</tag>
+        <tag>pom文件</tag>
       </tags>
   </entry>
   <entry>
@@ -402,6 +392,19 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[shell通配符和输入输出重定向]]></title>
+    <url>%2F2019%2F02%2F26%2Fshell%20%E9%80%9A%E9%85%8D%E7%AC%A6%26%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E9%87%8D%E5%AE%9A%E5%90%91%2F</url>
+    <content type="text"><![CDATA[一、shell 常用通配符1、* 匹配一个或多个任意的字符12345*.txt*txt*txt* 2、? 匹配一个任意的字符?.txt 3、[] 匹配一个范围中的一个字符1234567ls [123].txtls [1-3].txtls [0-9a-z].txtls [0-9a-zA-Z].txt 4、{} 匹配其中的一个字符，类似于[] {}和[]类似，都是匹配里面的其中一个字符 区别是：[]支持范围，{}不支持范围12345678910ls &#123;1,2,3,a,b&#125;.txtls &#123;1,2&#125;.txt## &#123;&#125; 和 [] 的区别：[app@centos tmp]$ ls &#123;1-3&#125;.txtls: cannot access &#123;1-3&#125;.txt: No such file or directory[app@centos tmp]$ ls [1-3].txt1.txt 2.txt 二、输入输出重定向1、&gt; (正确)输出重定向（重写）cat 1.txt &gt; 2.txt # 把1.txt中的内容写入2.txt； # 若2.txt在写入前非空，会先清除原有内容后再写入。 2、&gt;&gt; (正确)输出重定向（追加）cat 1.txt &gt;&gt; 2.txt # 把1.txt中的内容追加在2.txt原有内容之后 3、2&gt; 错误输出重定向（重写）lsaaa 2&gt; err.log # 把左边命令执行后的错误信息输出到err.log中； # 如果err.log在输出前非空，会先清除原有内容后再输出。 4、2&gt;&gt;错误输出重定向（追加）lsaaa 2&gt;&gt; err.log # 把左边命令执行后的错误信息追加到err.log原有内容后面，不会清除原有内容。 5、&amp;&gt;（重写）重定向正确和错误的信息 把&amp;&gt;左边命令执行后产生的正确和错误的所有信息，输出到 &amp;&gt;右边的文件中（先清除文件内容）。 等价于 &gt; 和 2&gt; 结合使用123456[app@centos tmp]$ ls1.txt[app@centos tmp]$ ls 1.txt 2.txt &amp;&gt; log[app@centos tmp]$ cat logls: cannot access 2.txt: No such file or directory1.txt 6、&amp;&gt;&gt;（追加）重定向正确和错误的信息 把&amp;&gt;&gt;左边命令执行后产生的正确和错误的所有信息，追加输出到 &amp;&gt;&gt;右边的文件中。 等价于 &gt;&gt; 和 2&gt;&gt; 结合使用 12345678[app@centos tmp]$ ls1.txt log[app@centos tmp]$ ls 1.txt 2.txt &amp;&gt;&gt; log[app@centos tmp]$ cat logls: cannot access 2.txt: No such file or directory1.txtls: cannot access 2.txt: No such file or directory1.txt 7、&gt; 和 2&gt; 结合，分别输出正确和错误的信息12345678910[app@centos tmp]$ ls1.txt 2.txt log[app@centos tmp]$ ls [12].txt a.txt &gt; 1.txt 2&gt; err.log# 把命令执行后生成的正确信息重写输出到1.txt，错误信息重写输出到err.log[app@centos tmp]$ cat 1.txt1.txt2.txt[app@centos tmp]$ cat err.log ls: cannot access a.txt: No such file or directory 8、&lt; 输入重定向 把&lt; 右边的文件内容输入给左边的命令后，执行左边的命令 左边必须是一个命令，不能是文件123456789[app@centos tmp]$ cat 1.txt 12[app@centos tmp]$ wc -l &lt; 1.txt2[app@centos tmp]$ 2.txt &lt; 1.txt-bash: 2.txt: command not found## 左边必须是命令！]]></content>
+      <categories>
+        <category>shell</category>
+      </categories>
+      <tags>
+        <tag>shell</tag>
+        <tag>通配符</tag>
+        <tag>输入输出重定向</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[shell标准输入read和输出echo]]></title>
     <url>%2F2019%2F02%2F26%2Fshell%E6%A0%87%E5%87%86%E8%BE%93%E5%85%A5read%E5%92%8C%E8%BE%93%E5%87%BAecho%2F</url>
     <content type="text"><![CDATA[一、标准输入 readshell 中通过 read 语句从键盘或文件的某一行文本中读入信息，并将内容赋给变量，多个变量之间用空格分隔。 read 变量1 变量2 ... ==read 每次只能读取一行数据。== 把一行内容全部赋值给一个变量，并直接通过 echo 输出。 123456789$ read name jjing$ echo $name jjing $ read name jjing jj$ echo $name jjing jj 一次赋值多个变量，多个值用空格分隔。 123456$ read name1 name2 jjing tao$ echo $name1 jjing$ echo $name2 tao 赋值多个变量时，当值多于变量名时，最后多余的内容全部赋值给最后一个变量。 123456$ read name1 name2 jjing tao yayaa$ echo $name1 jjing$ echo $name2 tao yayaa 二、标准输出 echo使用 echo 命令可以输出文本字符串、变量、表达式、命令等。 直接在 echo 后面加上要输出的内容即可。 命令 输出内容 说明 echo “abcd1234” abcd1234 输出一个普通字符串，默认在结尾包含换行符，光标定位在下一行开头。 echo -e “my name is :\c” my name is : \c表示不换行，输出字符串后光标定位在字符串末尾。(在 Linux 中要加上 -e 参数才能生效) echo -e “1\n2\n3\n4\n” 输出多行，每个数字为一行 \n表示换行，实现一次性输出多行内容。(在 Linux 中要加上 -e 参数才能生效) a=1 echo “$a” 输出变量，使用 $ 引用变量名即可 引用变量时，可以不加双引号，但是不能用单引号。 echo “\“13242\“”echo ‘“13242”‘ “13242” 输出特殊字符时要转义，也可以在最外层使用单引号则不用转义。 echo “`date`“ 2018年 12月 20日 星期四 09:08:25 CST 输出命令 date的返回值。 说明： 输出内容可以带引号，也可以不带，但是为了书写规范及减少错误，最好统一带双引号。 \c–不换行，\n–换行，使用时前面要加上 -e参数。 输出变量时，直接用 $ 加上变量名即可。 输出特殊字符时，要使用 \转义，或者在最外层加上单引号，可以原文输出为字符串。 输出命令时，注意命令外面的特殊引号。]]></content>
@@ -411,6 +414,20 @@
       <tags>
         <tag>shell</tag>
         <tag>输入输出</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[sort排序、uniq去重、wc统计]]></title>
+    <url>%2F2019%2F02%2F26%2Fsort%E6%8E%92%E5%BA%8F%E3%80%81uniq%E5%8E%BB%E9%87%8D%E3%80%81wc%E7%BB%9F%E8%AE%A1%2F</url>
+    <content type="text"><![CDATA[一、sort 排序 sort命令用于 对文本文件内容，以行为单位来排序。 sort命令以空格作为字段分隔符，将一行分割为多个关键字对文件进行排序。 需要注意的是除非你将输出重定向到文件中，否则sort命令并不对文件内容进行实际的排序(即文件内容没有修改)，只是将文件内容按有序输出。 1、语法sort [-bcdfimMnr][-o&lt;输出文件&gt;][-t&lt;分隔字符&gt;][+&lt;起始栏位&gt;-&lt;结束栏位&gt;][--help][--verison][文件] 2、参数说明 参数 说明 -m 将几个排序好的文件进行合并。 -u 内容去重 -n 依照数值的大小排序，升序排列。 -o&lt;输出文件&gt; 将排序后的结果存入指定的文件。 -r 以相反的顺序来排序。 -t&lt;分隔字符&gt; 指定排序时所用的栏位分隔字符。 -k&lt;指定排序的列数&gt; 指定要排序的列数，默认是从第一列开始比较，-k可指定某一列，也可与-t 结合使用时，代表某一栏 +&lt;起始栏位&gt;-&lt;结束栏位&gt; 以指定的栏位来排序，范围由起始栏位到结束栏位的前一栏位。 3、实例（1）对文件进行升序排序 sort testfile 以行为单位，相互比较，从首字符向后，依次按ASCII码值进行比较，最后将他们按升序输出。 注意：原文件内容并未被修改！ （2）对文件进行升序排序，并去除重复行 sort -u sort -u 1.txt 可以看出： sort -u是先对内容进行排序，然后再去重（实际也是去除了相邻的重复行）。 而uniq不能实现排序，只能去除相邻的重复行，所以要跟sort合并使用，先用sort排序，再用uniq去重 sort 1.txt | uniq （3）按数值大小降序排列后，把结果再输出到原文件中 -o （直接用重定向做不到）1234sort -nr num.txt -o num.txt如果用重定向 &gt; 的方式，只会把num.txt清空！sort -nr num.txt &gt; num.txt（4）使用sort的-t选项和-k选项，设置间隔符后再指定排序的列如上图所示，对年月日的日期进行排序，直接使用sort dat.txt时，会按列从左到右来排序； sort -t’-‘ -k2 dat.txt 其中-t’-‘ 是以 ‘-’ 为分隔符对每行内容分栏，然后-k 2 表示对分栏后的第二栏内容进行默认的升序排列。（5）使用sort -k指定以某一列排序 sort -k9 a.txt （基于a.txt的第九列来排序）（6）sort命令并非仅能对文件进行排序，我们还可以通过管道将命令的输出内容重定向到sort命令中 ls -l /home/$USER | sort -nk5（7）对/etc/passwd以‘：’分隔，再以第六个域的第2个字符到第4个字符进行正向排序，再基于第一个域进行反向排序。12345cat /etc/passwd | sort -t&apos;:&apos; -k 6.2,6.4 -k 1r sync:x:4:65534:sync:/bin:/bin/syncproxy:x:13:13:proxy:/bin:/bin/shbin:x:2:2:bin:/bin:/bin/shsys:x:3:3:sys:/dev:/bin/sh# 二、uniq 去重## 1、uniq使用- uniq命令用于去重文件内容中的连续重复行，通常要跟sort一起使用，先利用sort排序，然后用uniq去重。- uniq命令与sort命令类似，并不对文件内容进行实际的排序(即文件内容没有修改)，只是在输出内容中去重。- uniq -c ：在输出行前面加上每一行重复的次数- uniq -d ：仅显示重复行- uniq -u ：仅显示不重复的行- uniq -n ：前n个字段与每个字段前的空白一起被忽略。一个字段是一个非空格、非制表符的字符串，彼此由制表符和空格隔开（字段从0开始编号）。- uniq +n ：前n个字符被忽略，之前的字符被跳过（字符从0开始编号）。## 2、sort和uniq去重结果对比1、sort -u使用sort对文件去重 sort -u 1.txt可以看出，sort -u是先对内容进行排序，然后再去重（实际也是去除了相邻的重复行）。2、使用uniq对文件去重可以看出，当内容中的重复行不相邻时，直接使用uniq 1.txt 并不能达到去重。 因为uniq只能去除相邻的重复行，所以要跟sort合并使用，先用sort排序，再用uniq去重sort 1.txt | uniq。 3、最常用的方式实际工作中，最常用的方式是sort和uniq结合： sort -n 1.txt | uniq -c 4、只显示文件中不重复的行uniq -u 1.txt 5、uniq -u -n 结合使用显示文件 1.txt 中不重复的行，从第2个字段的第2个字符开始做比较。 uniq -u -1 +1 1.txt 三、wc 统计wc命令用于统计文件里面有多少行，多少单词，多少字符。 常与sort、grep等其它命令结合使用。 参数 说明 -l line，统计行数； -w word，统计单词数(英文单词)，以空格或换行为单位； -m 统计字符数； wc 1.txt 默认显示所有的行数、单词数、字符数。 如下图所示：]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>sort</tag>
+        <tag>uniq</tag>
+        <tag>wc</tag>
       </tags>
   </entry>
   <entry>
@@ -445,24 +462,10 @@
       </categories>
       <tags>
         <tag>linux</tag>
+        <tag>sort</tag>
         <tag>du</tag>
         <tag>df</tag>
-        <tag>sort</tag>
         <tag>linux大文件</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[sort排序、uniq去重、wc统计]]></title>
-    <url>%2F2019%2F02%2F26%2Fsort%E6%8E%92%E5%BA%8F%E3%80%81uniq%E5%8E%BB%E9%87%8D%E3%80%81wc%E7%BB%9F%E8%AE%A1%2F</url>
-    <content type="text"><![CDATA[一、sort 排序 sort命令用于 对文本文件内容，以行为单位来排序。 sort命令以空格作为字段分隔符，将一行分割为多个关键字对文件进行排序。 需要注意的是除非你将输出重定向到文件中，否则sort命令并不对文件内容进行实际的排序(即文件内容没有修改)，只是将文件内容按有序输出。 1、语法sort [-bcdfimMnr][-o&lt;输出文件&gt;][-t&lt;分隔字符&gt;][+&lt;起始栏位&gt;-&lt;结束栏位&gt;][--help][--verison][文件] 2、参数说明 参数 说明 -m 将几个排序好的文件进行合并。 -u 内容去重 -n 依照数值的大小排序，升序排列。 -o&lt;输出文件&gt; 将排序后的结果存入指定的文件。 -r 以相反的顺序来排序。 -t&lt;分隔字符&gt; 指定排序时所用的栏位分隔字符。 -k&lt;指定排序的列数&gt; 指定要排序的列数，默认是从第一列开始比较，-k可指定某一列，也可与-t 结合使用时，代表某一栏 +&lt;起始栏位&gt;-&lt;结束栏位&gt; 以指定的栏位来排序，范围由起始栏位到结束栏位的前一栏位。 3、实例（1）对文件进行升序排序 sort testfile 以行为单位，相互比较，从首字符向后，依次按ASCII码值进行比较，最后将他们按升序输出。 注意：原文件内容并未被修改！ （2）对文件进行升序排序，并去除重复行 sort -u sort -u 1.txt 可以看出： sort -u是先对内容进行排序，然后再去重（实际也是去除了相邻的重复行）。 而uniq不能实现排序，只能去除相邻的重复行，所以要跟sort合并使用，先用sort排序，再用uniq去重 sort 1.txt | uniq （3）按数值大小降序排列后，把结果再输出到原文件中 -o （直接用重定向做不到）1234sort -nr num.txt -o num.txt如果用重定向 &gt; 的方式，只会把num.txt清空！sort -nr num.txt &gt; num.txt（4）使用sort的-t选项和-k选项，设置间隔符后再指定排序的列如上图所示，对年月日的日期进行排序，直接使用sort dat.txt时，会按列从左到右来排序； sort -t’-‘ -k2 dat.txt 其中-t’-‘ 是以 ‘-’ 为分隔符对每行内容分栏，然后-k 2 表示对分栏后的第二栏内容进行默认的升序排列。（5）使用sort -k指定以某一列排序 sort -k9 a.txt （基于a.txt的第九列来排序）（6）sort命令并非仅能对文件进行排序，我们还可以通过管道将命令的输出内容重定向到sort命令中 ls -l /home/$USER | sort -nk5（7）对/etc/passwd以‘：’分隔，再以第六个域的第2个字符到第4个字符进行正向排序，再基于第一个域进行反向排序。12345cat /etc/passwd | sort -t&apos;:&apos; -k 6.2,6.4 -k 1r sync:x:4:65534:sync:/bin:/bin/syncproxy:x:13:13:proxy:/bin:/bin/shbin:x:2:2:bin:/bin:/bin/shsys:x:3:3:sys:/dev:/bin/sh# 二、uniq 去重## 1、uniq使用- uniq命令用于去重文件内容中的连续重复行，通常要跟sort一起使用，先利用sort排序，然后用uniq去重。- uniq命令与sort命令类似，并不对文件内容进行实际的排序(即文件内容没有修改)，只是在输出内容中去重。- uniq -c ：在输出行前面加上每一行重复的次数- uniq -d ：仅显示重复行- uniq -u ：仅显示不重复的行- uniq -n ：前n个字段与每个字段前的空白一起被忽略。一个字段是一个非空格、非制表符的字符串，彼此由制表符和空格隔开（字段从0开始编号）。- uniq +n ：前n个字符被忽略，之前的字符被跳过（字符从0开始编号）。## 2、sort和uniq去重结果对比1、sort -u使用sort对文件去重 sort -u 1.txt可以看出，sort -u是先对内容进行排序，然后再去重（实际也是去除了相邻的重复行）。2、使用uniq对文件去重可以看出，当内容中的重复行不相邻时，直接使用uniq 1.txt 并不能达到去重。 因为uniq只能去除相邻的重复行，所以要跟sort合并使用，先用sort排序，再用uniq去重sort 1.txt | uniq。 3、最常用的方式实际工作中，最常用的方式是sort和uniq结合： sort -n 1.txt | uniq -c 4、只显示文件中不重复的行uniq -u 1.txt 5、uniq -u -n 结合使用显示文件 1.txt 中不重复的行，从第2个字段的第2个字符开始做比较。 uniq -u -1 +1 1.txt 三、wc 统计wc命令用于统计文件里面有多少行，多少单词，多少字符。 常与sort、grep等其它命令结合使用。 参数 说明 -l line，统计行数； -w word，统计单词数(英文单词)，以空格或换行为单位； -m 统计字符数； wc 1.txt 默认显示所有的行数、单词数、字符数。 如下图所示：]]></content>
-      <categories>
-        <category>linux</category>
-      </categories>
-      <tags>
-        <tag>linux</tag>
-        <tag>sort</tag>
-        <tag>uniq</tag>
-        <tag>wc</tag>
       </tags>
   </entry>
   <entry>
@@ -476,17 +479,6 @@
         <tag>linux</tag>
         <tag>定时任务</tag>
         <tag>crontab</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[有道云和csdn中使用markdown]]></title>
-    <url>%2F2019%2F02%2F26%2F%E6%9C%89%E9%81%93%E4%BA%91%E5%92%8Ccsdn%E4%B8%ADmarkdown%E4%BD%BF%E7%94%A8%2F</url>
-    <content type="text"><![CDATA[此文中的方法适用于有道云和csdn的markdown编辑器，其它平台尚未验证。 一、字体增大1、为什么要字体增大？有道云的普通笔记可以设置默认字体大小，但是不支持markdown默认字体。当写完预览markdown，发会现，正文字太小了。 2、字体增大的方法？ 用一组 &lt;font size=4&gt; &lt;/font&gt;将全部正文内容包含进去就可以了。 可以直接修改正文中的所有普通文本大小，同时不会影响标题字号。 可以修改size自由调整大小 二、生成目录1、为什么要生成目录？方便有个对文章的大局观，一眼就知道这篇文章到底写了什么，便于定位。 2、生成目录的方法？ 非常简单，直接在第一行加上 [toc]即可！ 当然，前提是你在正文中正确使用了标题格式。 如果在第一行设置了字体大小，那么把 [toc]写在第二行就行了。 三、设置锚点-页内链接1、锚点的作用？ 用于文章快速定位，点击目录便可直接跳转到指定位置。 锚点是是网页制作中超级链接的一种，又叫命名锚记。 使用命名锚记可以在文档中设置标记，这些标记通常放在文档的特定主题处或顶部。然后可以创建到这些命名锚记的链接，这些链接可快速将访问者带到指定位置。 2、如何创建锚点？锚点的添加：使用a标签，href里面填写对应的标题名字 分为两步： 创建命名锚记 格式为 [指引到目标位置的说明文字](#目标位置的id名称) 创建到该命名锚记的链接 格式为 &lt;span id = &quot;目标位置的id名称&quot;&gt;跳转到的目标位置&lt;/span&gt; 举例：123&lt;a href="#jump" target="_self"&gt;说明文字&lt;/a&gt;&lt;span id ="jump"&gt;&lt;font color="red"&gt;跳转到这里：&lt;/font&gt;&lt;/span&gt; 效果： 说明文字 跳转到这里： 四、输入空格有两种方法： 1、中文模式下，Shift+空格切换为全角模式后，按空格键即可。 2、\&nbsp; 或 \&#160; 需要几个空格就输入几次。 五、csdn markdown中添加黄色高亮在有道云笔记的markdown编辑器中，工具栏有Mark按钮可以直接对文字进行黄色高亮显示，非常方便。 实际在源码中是通过一对 == 包围文字即可。 在csdn markdown中也可以用这种方法，实现黄色高亮！ 如： ==xxxxxxx==xxxxx 效果：==xxxxxxx==xxxxx 六、表格内换行使用html代码\实现单元格换行，变相实现合并单元格的效果。 1、markdown语法：1234|姓名|爱好|--|--|张三|足球&lt;br&gt;篮球李四|羽毛球&lt;br&gt;乒乓球 2、实现效果： 姓名 爱好 张三 足球篮球 李四 羽毛球乒乓球]]></content>
-      <categories>
-        <category>办公利器</category>
-      </categories>
-      <tags>
-        <tag>markdown</tag>
       </tags>
   </entry>
   <entry>
@@ -506,6 +498,17 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[看图学Git！]]></title>
+    <url>%2F2019%2F02%2F26%2F%E7%9C%8B%E5%9B%BE%E5%AD%A6Git%20!%2F</url>
+    <content type="text"><![CDATA[之前在学习 git 的过程中，经常被各种命令和概念搞晕，所以我总结了一个个图表，方便记忆，希望对正在学习git 的朋友有帮助。 能发图就不打字，哈哈哈哈哈…… 一、常用命令图解单纯用文字表达不容易理解，所以我把关键内容转化成图表，方便理解。 1、add - commit - push 2、暂存区-本地仓库-远程仓库可以结合上面的图一起理解。(这张图是借鉴其它网友的，不记得在哪里看的了) 二、主要功能图解我把 git 的主要功能全部体现在这张图里了，一图在手，git 无忧~ 如果还觉得不够详细，再放出我之前总结的思维导图吧：]]></content>
+      <categories>
+        <category>git</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[性能测试脚本参数化的思考]]></title>
     <url>%2F2019%2F02%2F26%2F%E8%84%9A%E6%9C%AC%E5%8F%82%E6%95%B0%E5%8C%96%E7%9A%84%E6%80%9D%E8%80%83%2F</url>
     <content type="text"><![CDATA[一、脚本参数化简单的说，脚本参数化实际就是用参数来替换脚本中的一些常量，把常量替换成变量，把脚本与数据进行分离。 二、为什么要进行参数化？对测试脚本参数化，主要有两种目的。 1、为了保证请求被正常处理如注册场景必须要求用户名不重复等 2、为了模拟真实的生产场景如在登录场景中使用多用户，而不是单用户，防止出现因频率限制导致的报错，防止因命中缓存导致的TPS过高的假象。 通常很多系统出于性能优化考量，针对各业务场景都会大量使用到缓存，导致压测数据相同时，每次命中缓存后快速响应请求，造成站点压测性能极佳的假象（但线上真实请求参数各异）。 所以在做压测时，为了满足模拟真实压测环境要求，就需要让每个压测请求都携带不同的线上请求参数。 三、如何模拟真实稳定的压测环境？具体在开发脚本时，怎么做到模拟真实的生产环境呢？ 需要做如下准备： 准备压测数据 让每个压测线程，每次访问目标服务器时，分别携带不同的请求参数 控制单个压测线程的单次执行时间，保证各线程能以稳定速率向目标服务器发送请求 脚本是否能通过传参灵活控制内部逻辑]]></content>
@@ -518,14 +521,14 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[看图学Git！]]></title>
-    <url>%2F2019%2F02%2F26%2F%E7%9C%8B%E5%9B%BE%E5%AD%A6Git%20!%2F</url>
-    <content type="text"><![CDATA[之前在学习 git 的过程中，经常被各种命令和概念搞晕，所以我总结了一个个图表，方便记忆，希望对正在学习git 的朋友有帮助。 能发图就不打字，哈哈哈哈哈…… 一、常用命令图解单纯用文字表达不容易理解，所以我把关键内容转化成图表，方便理解。 1、add - commit - push 2、暂存区-本地仓库-远程仓库可以结合上面的图一起理解。(这张图是借鉴其它网友的，不记得在哪里看的了) 二、主要功能图解我把 git 的主要功能全部体现在这张图里了，一图在手，git 无忧~ 如果还觉得不够详细，再放出我之前总结的思维导图吧：]]></content>
+    <title><![CDATA[有道云和csdn中使用markdown]]></title>
+    <url>%2F2019%2F02%2F26%2F%E6%9C%89%E9%81%93%E4%BA%91%E5%92%8Ccsdn%E4%B8%ADmarkdown%E4%BD%BF%E7%94%A8%2F</url>
+    <content type="text"><![CDATA[此文中的方法适用于有道云和csdn的markdown编辑器，其它平台尚未验证。 一、字体增大1、为什么要字体增大？有道云的普通笔记可以设置默认字体大小，但是不支持markdown默认字体。当写完预览markdown，发会现，正文字太小了。 2、字体增大的方法？ 用一组 &lt;font size=4&gt; &lt;/font&gt;将全部正文内容包含进去就可以了。 可以直接修改正文中的所有普通文本大小，同时不会影响标题字号。 可以修改size自由调整大小 二、生成目录1、为什么要生成目录？方便有个对文章的大局观，一眼就知道这篇文章到底写了什么，便于定位。 2、生成目录的方法？ 非常简单，直接在第一行加上 [toc]即可！ 当然，前提是你在正文中正确使用了标题格式。 如果在第一行设置了字体大小，那么把 [toc]写在第二行就行了。 三、设置锚点-页内链接1、锚点的作用？ 用于文章快速定位，点击目录便可直接跳转到指定位置。 锚点是是网页制作中超级链接的一种，又叫命名锚记。 使用命名锚记可以在文档中设置标记，这些标记通常放在文档的特定主题处或顶部。然后可以创建到这些命名锚记的链接，这些链接可快速将访问者带到指定位置。 2、如何创建锚点？锚点的添加：使用a标签，href里面填写对应的标题名字 分为两步： 创建命名锚记 格式为 [指引到目标位置的说明文字](#目标位置的id名称) 创建到该命名锚记的链接 格式为 &lt;span id = &quot;目标位置的id名称&quot;&gt;跳转到的目标位置&lt;/span&gt; 举例：123&lt;a href="#jump" target="_self"&gt;说明文字&lt;/a&gt;&lt;span id ="jump"&gt;&lt;font color="red"&gt;跳转到这里：&lt;/font&gt;&lt;/span&gt; 效果： 说明文字 跳转到这里： 四、输入空格有两种方法： 1、中文模式下，Shift+空格切换为全角模式后，按空格键即可。 2、\&nbsp; 或 \&#160; 需要几个空格就输入几次。 五、csdn markdown中添加黄色高亮在有道云笔记的markdown编辑器中，工具栏有Mark按钮可以直接对文字进行黄色高亮显示，非常方便。 实际在源码中是通过一对 == 包围文字即可。 在csdn markdown中也可以用这种方法，实现黄色高亮！ 如： ==xxxxxxx==xxxxx 效果：==xxxxxxx==xxxxx 六、表格内换行使用html代码\实现单元格换行，变相实现合并单元格的效果。 1、markdown语法：1234|姓名|爱好|--|--|张三|足球&lt;br&gt;篮球李四|羽毛球&lt;br&gt;乒乓球 2、实现效果： 姓名 爱好 张三 足球篮球 李四 羽毛球乒乓球]]></content>
       <categories>
-        <category>git</category>
+        <category>办公利器</category>
       </categories>
       <tags>
-        <tag>git</tag>
+        <tag>markdown</tag>
       </tags>
   </entry>
   <entry>
