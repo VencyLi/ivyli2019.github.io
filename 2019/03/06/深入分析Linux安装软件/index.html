@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Linux安装软件,Linux,Linux发展,apt-get,rpm,yum,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Linux 发展史：https://upload.wikimedia.org/wikipedia/commons/1/1b/Linux_Distribution_Timeline.svg  一、Unix 分支在 windows 系统下安装软件很简单，下载软件包后双击 .exe 文件，点击下一步即可。 然而，在 Uinux 平台安装软件就有点复杂了，从 Unix 诞生开始，逐步发展出了几十几百的大">
+<meta name="keywords" content="Linux安装软件,Linux,Linux发展,apt-get,rpm,yum">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入分析Linux安装软件">
+<meta property="og:url" content="http://ivyli.top/2019/03/06/深入分析Linux安装软件/index.html">
+<meta property="og:site_name" content="ivyli&#39;s blog">
+<meta property="og:description" content="Linux 发展史：https://upload.wikimedia.org/wikipedia/commons/1/1b/Linux_Distribution_Timeline.svg  一、Unix 分支在 windows 系统下安装软件很简单，下载软件包后双击 .exe 文件，点击下一步即可。 然而，在 Uinux 平台安装软件就有点复杂了，从 Unix 诞生开始，逐步发展出了几十几百的大">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://res.cloudinary.com/ivyli/image/upload/v1551856100/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/%E5%B7%A5%E4%BD%9C/Unix.jpg">
+<meta property="og:image" content="https://res.cloudinary.com/ivyli/image/upload/v1551865305/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/%E5%B7%A5%E4%BD%9C/rpm.png">
+<meta property="og:image" content="https://res.cloudinary.com/ivyli/image/upload/v1551871771/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/%E5%B7%A5%E4%BD%9C/rpm-yum.png">
+<meta property="og:updated_time" content="2019-03-06T13:38:38.901Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深入分析Linux安装软件">
+<meta name="twitter:description" content="Linux 发展史：https://upload.wikimedia.org/wikipedia/commons/1/1b/Linux_Distribution_Timeline.svg  一、Unix 分支在 windows 系统下安装软件很简单，下载软件包后双击 .exe 文件，点击下一步即可。 然而，在 Uinux 平台安装软件就有点复杂了，从 Unix 诞生开始，逐步发展出了几十几百的大">
+<meta name="twitter:image" content="https://res.cloudinary.com/ivyli/image/upload/v1551856100/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/%E5%B7%A5%E4%BD%9C/Unix.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://ivyli.top/2019/03/06/深入分析Linux安装软件/">
+
+
+
+
+
+  <title>深入分析Linux安装软件 | ivyli's blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?eac78fd95b7d5b2b82d83bb27ef107c2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ivyli's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">Welcome !</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://ivyli.top/2019/03/06/深入分析Linux安装软件/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ivyli">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://res.cloudinary.com/ivyli/image/upload/v1551182515/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/%E5%B7%A5%E4%BD%9C/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20180703130424.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ivyli's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">深入分析Linux安装软件</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-06T00:00:00+08:00">
+                2019-03-06
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-03-06T21:38:38+08:00">
+                2019-03-06
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/06/深入分析Linux安装软件/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/03/06/深入分析Linux安装软件/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/03/06/深入分析Linux安装软件/" class="leancloud_visitors" data-flag-title="深入分析Linux安装软件">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2.8k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  11
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>Linux 发展史：<a href="https://upload.wikimedia.org/wikipedia/commons/1/1b/Linux_Distribution_Timeline.svg" target="_blank" rel="noopener">https://upload.wikimedia.org/wikipedia/commons/1/1b/Linux_Distribution_Timeline.svg</a></p>
+</blockquote>
+<h1 id="一、Unix-分支"><a href="#一、Unix-分支" class="headerlink" title="一、Unix 分支"></a>一、Unix 分支</h1><p>在 windows 系统下安装软件很简单，下载软件包后双击 .exe 文件，点击下一步即可。</p>
+<p>然而，在 Uinux 平台安装软件就有点复杂了，从 Unix 诞生开始，逐步发展出了几十几百的大大小小的分支，不同的 Uinux 发行版系列都有所差异。</p>
+<p>这里我总结了一下 Unix 平台下比较有名的几个分支：</p>
+<p><img src="https://res.cloudinary.com/ivyli/image/upload/v1551856100/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/%E5%B7%A5%E4%BD%9C/Unix.jpg" alt=""></p>
+<h2 id="不同分支的包管理工具"><a href="#不同分支的包管理工具" class="headerlink" title="不同分支的包管理工具"></a>不同分支的包管理工具</h2><h3 id="1、Debian-分支"><a href="#1、Debian-分支" class="headerlink" title="1、Debian 分支"></a>1、Debian 分支</h3><p><strong>Debian Linux 发行版系列中的软件包管理工具是 APT（Advanced Package Tool），通过 apt-get 或 apt 命令来操作。</strong></p>
+<p><strong>所有基于 Debian 的发行版系统都使用这个包管理工具。比如，我们常用的 Ubuntu 系统就是使用 APT 来管理软件包。</strong></p>
+<h3 id="2、Red-Hat-分支"><a href="#2、Red-Hat-分支" class="headerlink" title="2、Red Hat 分支"></a>2、Red Hat 分支</h3><p><strong>Red Hat 发行版系列中的软件包管理工具是 RPM，通过 rpm 命令来操作。</strong></p>
+<p>RPM 是 Red Hat PackageManager 的缩写，原本是 Red Hat 开发的软件包管理程序，在 Fedora 、Redhat、Mandriva、SuSE、YellowDog 等主流发行版本及在这些版本基础上二次开发出来的发行版使用。</p>
+<p>由于 RPM 遵循 GPL 规则，且功能强大方便，因而广受欢迎，逐渐受到其他发行版的采用，应用很广泛。</p>
+<h3 id="3、CentOS"><a href="#3、CentOS" class="headerlink" title="3、CentOS"></a>3、CentOS</h3><p><strong>CentOS 系统中使用的软件包管理工具是 YUM（Yellow dog Updater Modified），同时还适用于 Fedora、RedHat 中。</strong></p>
+<p>YUM 在 RPM 的基础上增加了自动更新和包管理，包括依赖关系管理。能够从指定的服务器自动下载安装 RPM 包，并且自动处理依赖性关系，一次安装所有依赖的软件包，无须繁琐地一次次下载、安装。</p>
+<h1 id="二、APT-管理工具"><a href="#二、APT-管理工具" class="headerlink" title="二、APT 管理工具"></a>二、APT 管理工具</h1><p>APT（Advanced Package Tool） 应用管理工具使用 apt-get 命令操作软件包。</p>
+<ul>
+<li>最初于 1998 年发布，用于检索应用程序并将其加载到 Debian Linux 系统。</li>
+<li>成名的原因之一在于其出色的 <strong>解决软件依赖关系</strong> 的能力。</li>
+<li>其通常使用 <code>.deb-formatted</code> 文件，但经过修改后可以使用 apt-rpm 处理红帽的 Package Manager（RPM）文件。</li>
+</ul>
+<h2 id="1、更新软件库"><a href="#1、更新软件库" class="headerlink" title="1、更新软件库"></a>1、更新软件库</h2><blockquote>
+<p>参考文档：<a href="https://linux.die.net/man/8/apt-get" target="_blank" rel="noopener">https://linux.die.net/man/8/apt-get</a></p>
+</blockquote>
+<p>使用 <code>apt-get</code> 命令的第一步就是引入必需的软件库。</p>
+<p>Debian 的软件库也就是所有 Debian 软件包的集合，它们存在互联网上的一些公共站点上，在 <code>/etc/apt/sources.list</code> 配置文件中添加地址列表，apt-get 就能搜索到我们想要的软件。</p>
+<p>sources.list 格式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deb [web或ftp地址] [发行版名字] [main/contrib/non-free]</span><br></pre></td></tr></table></figure></p>
+<p>其中，deb 包可以把一个应用的文件包在一起，大体就如同Windows上的安装文件。</p>
+<p>在修改 <code>/etc/apt/sources.list</code> 或 <code>/etc/apt/preferences</code> 之后要更新软件库：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get update</span><br></pre></td></tr></table></figure></p>
+<p>此外，最好定期运行这个命令，以确保你的软件包列表是最新的。</p>
+<h2 id="2、常用命令"><a href="#2、常用命令" class="headerlink" title="2、常用命令"></a>2、常用命令</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">常用命令</th>
+<th>命令格式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">安装软件包</td>
+<td><code>apt-get install packagename</code></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">卸载软件包</td>
+<td><code>apt-get remove packagename</code></td>
+<td>卸载一个已安装的软件包（保留配置文件）</td>
+</tr>
+<tr>
+<td style="text-align:center">-</td>
+<td><code>apt-get –purge remove packagename</code></td>
+<td>卸载一个已安装的软件包（删除配置文件）</td>
+</tr>
+<tr>
+<td style="text-align:center">删除备份软件</td>
+<td><code>apt-get autoclean apt</code></td>
+<td>apt-get 默认会把已装或已卸的软件都备份在硬盘上，<br>使用 autoclean 命令来删除备份文件</td>
+</tr>
+<tr>
+<td style="text-align:center">更新所有已安装的软件包</td>
+<td><code>apt-get upgrade</code></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:center">将系统升级到新版本</td>
+<td><code>apt-get dist-upgrade</code></td>
+</tr>
+</tbody>
+</table>
+<h1 id="三、RPM-管理工具"><a href="#三、RPM-管理工具" class="headerlink" title="三、RPM 管理工具"></a>三、RPM 管理工具</h1><p>RPM（Red Hat PackageManager）包管理工具。</p>
+<p>rpm 包里面包含可执行的二进制程序（经过 GCC 编译），及程序运行时所需要的文件，和 Windows 软件包中的 <code>.exe</code> 文件类似。</p>
+<p>（有时除了自身所带的附加文件保证其正常以外，还需要其它特定版本文件，这就是软件包的依赖关系）</p>
+<h2 id="1、rpm-包格式"><a href="#1、rpm-包格式" class="headerlink" title="1、rpm 包格式"></a>1、rpm 包格式</h2><p><img src="https://res.cloudinary.com/ivyli/image/upload/v1551865305/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/%E5%B7%A5%E4%BD%9C/rpm.png" alt="rpm包名格式"></p>
+<p>上图所示：</p>
+<ul>
+<li>abrt：包名</li>
+<li>2.1.11：版本信息</li>
+<li>48.el7.centos：发布版本号</li>
+<li>x86_64：运行平台</li>
+<li>有些 rpm 包没有写具体平台而是 noarch：说明没有平台限制。</li>
+</ul>
+<h2 id="2、rpm-常用命令"><a href="#2、rpm-常用命令" class="headerlink" title="2、rpm 常用命令"></a>2、rpm 常用命令</h2><p>常用选项：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">rpm 常用选项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">-a</td>
+<td>查询所有已安装rpm包</td>
+</tr>
+<tr>
+<td style="text-align:center">-e</td>
+<td>删除指定rpm包</td>
+</tr>
+<tr>
+<td style="text-align:center">-f</td>
+<td>查询指定rpm包</td>
+</tr>
+<tr>
+<td style="text-align:center">-i</td>
+<td>显示指定rpm包的详细信息</td>
+</tr>
+<tr>
+<td style="text-align:center">-h</td>
+<td>显示安装rpm包列出标记</td>
+</tr>
+<tr>
+<td style="text-align:center">-v</td>
+<td>显示指令的执行过程，即可视化过程</td>
+</tr>
+<tr>
+<td style="text-align:center">-U</td>
+<td>升级指定rpm包</td>
+</tr>
+<tr>
+<td style="text-align:center">-q</td>
+<td>使用询问模式</td>
+</tr>
+<tr>
+<td style="text-align:center">-l</td>
+<td>显示指定rpm包的文件列表</td>
+</tr>
+</tbody>
+</table>
+<p>常用命令：</p>
+<table>
+<thead>
+<tr>
+<th>rpm 常用功能</th>
+<th>命令</th>
+<th>示例</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>安装 rpm 包</strong></td>
+<td><code>rpm -ivh [rpm包名]</code></td>
+<td></td>
+<td><font color="red"> 注意包名一定要写全到 <code>.rpm</code>，不能简写。 </font></td>
+</tr>
+<tr>
+<td>查看指定软件的 rpm 包名</td>
+<td><code>rpm -q [软件名]</code></td>
+<td><code>$ rpm -q jenkins</code><br>  <code>jenkins-2.121.1-1.1.noarch</code></td>
+<td></td>
+</tr>
+<tr>
+<td>查看所有软件包名</td>
+<td><code>rpm -qa</code></td>
+<td></td>
+<td>列出所有已安装的 rpm 包名</td>
+</tr>
+<tr>
+<td>查看 rpm 包的具体信息</td>
+<td><code>rpm -qi [软件名]</code></td>
+<td><code>rpm -qi jenkins</code></td>
+<td>列出 jenkins rpm 包的具体信息</td>
+</tr>
+<tr>
+<td><strong>查看软件的安装文件</strong></td>
+<td><code>rpm -ql [软件名]</code></td>
+<td><code>rpm -ql jenkins</code></td>
+<td>列出 jenkins 所有的安装目录文件</td>
+</tr>
+<tr>
+<td>升级 rpm 包</td>
+<td><code>rpm -Uvh [rpm包名]</code></td>
+<td></td>
+<td><font color="red"> 注意包名一定要写全到 <code>.rpm</code>，不能简写。 </font></td>
+</tr>
+<tr>
+<td>卸载 rpm 包</td>
+<td><code>rpm -e [软件名]</code></td>
+<td><code>rpm -e jenkins</code></td>
+</tr>
+</tbody>
+</table>
+<p>其中，是常用的就是安装 <code>rpm -ivh</code> 和查看安装列表 <code>rpm -ql</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">查看某个命令属于哪个rpm包安装的：</span><br><span class="line"></span><br><span class="line">    rpm -qf [命令绝对路径]</span><br><span class="line"></span><br><span class="line">$ rpm -qf /usr/bin/vim</span><br><span class="line">vim-enhanced-7.4.160-5.el7.x86_64</span><br><span class="line"></span><br><span class="line">当某个命令忘记了绝对路径，又不想分 2 步来查询。</span><br><span class="line">那么可以后面跟 `which`：</span><br><span class="line"></span><br><span class="line">$ rpm -qf `which cd`  --这里写入的命令不能是带有alias的</span><br><span class="line">bash-4.2.46-31.el7.x86_64</span><br></pre></td></tr></table></figure>
+<p><strong>依赖问题：</strong></p>
+<p>当执行 <code>rpm -ivh</code> 安装 rpm 包时，会发现有些软件需要很多依赖包，必须手动安装依赖包后才能正常安装。</p>
+<p>包括 <code>rpm -e</code> 也是一样的，所以很多时候并不用 <code>rpm</code> 来安装软件，更多的是使用 <code>yum</code>。</p>
+<h1 id="四、YUM-管理工具"><a href="#四、YUM-管理工具" class="headerlink" title="四、YUM 管理工具"></a>四、YUM 管理工具</h1><p>YUM 最常用于 CentOS 系统中，它在 rpm 的基础上解决了包依赖的问题，能够自动处理依赖关系，一次性安装所有依赖的软件包，无须繁琐地一次次下载、安装。</p>
+<p>另外，使用 yum 安装软件时，只用写入软件名即可，而 rpm 安装时，是需要写入包全名的。</p>
+<h2 id="1、rpm-和-yum-对比"><a href="#1、rpm-和-yum-对比" class="headerlink" title="1、rpm 和 yum 对比"></a>1、rpm 和 yum 对比</h2><p><img src="https://res.cloudinary.com/ivyli/image/upload/v1551871771/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/%E5%B7%A5%E4%BD%9C/rpm-yum.png" alt=""></p>
+<h2 id="2、yum-常用命令"><a href="#2、yum-常用命令" class="headerlink" title="2、yum 常用命令"></a>2、yum 常用命令</h2><p><strong>查看仓库中所有可用的 rpm 包：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">yum list</span><br><span class="line"></span><br><span class="line"># 一般配合 grep 使用</span><br><span class="line">yum list |grep python|less</span><br></pre></td></tr></table></figure></p>
+<p>如下所示：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ yum list|grep python|less</span><br><span class="line">    abrt-addon-python.x86_64                 <span class="number">2.1</span><span class="number">.11</span><span class="number">-52.</span>el7.centos            @centos7<span class="number">.6</span><span class="number">-181101</span>-update</span><br><span class="line">    abrt-python.x86_64                       <span class="number">2.1</span><span class="number">.11</span><span class="number">-52.</span>el7.centos            @centos7<span class="number">.6</span><span class="number">-181101</span>-update</span><br><span class="line">    python.x86_64                            <span class="number">2.7</span><span class="number">.5</span><span class="number">-76.</span>el7                    @centos7<span class="number">.6</span><span class="number">-181101</span>-update</span><br><span class="line">    python-IPy.noarch                        <span class="number">0.75</span><span class="number">-6.</span>el7                      @os    </span><br><span class="line">    python-backports.x86_64                  <span class="number">1.0</span><span class="number">-8.</span>el7                       installed</span><br></pre></td></tr></table></figure></p>
+<p>第一列是包名，第二列是版本号，第三列是配置文件 <code>/etc/yum.repos.d/</code> 中配置的仓库名。</p>
+<table>
+<thead>
+<tr>
+<th>常用命令</th>
+<th>命令格式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>查看仓库中指定的 rpm 包</td>
+<td>`yum list</td>
+<td>grep python`</td>
+<td>在仓库中查找出包名中包含 python 的 rpm 包</td>
+</tr>
+<tr>
+<td>yum 安装 rpm 包</td>
+<td><code>yum  -y install 「包名简称」</code></td>
+<td>-y 表示安装时不再询问是否安装</td>
+</tr>
+<tr>
+<td>yum 卸载 rpm 包</td>
+<td><code>yum remove「包名简称」</code></td>
+<td>卸载时不要加 -y 选项，<br>可以看到将要卸载哪些依赖包，<br>避免卸载掉有用的软件</td>
+</tr>
+<tr>
+<td>yum 更新 rpm 包</td>
+<td><code>yum update 「包名简称」</code></td>
+<td>在刚安装完软件时进行更新</td>
+</tr>
+<tr>
+<td>yum 更新所有 rpm 包</td>
+<td><code>yum update</code></td>
+<td>不加包名，直接升级所有包和升级系统</td>
+</tr>
+<tr>
+<td>查询软件的安装包</td>
+<td><code>yum provides jenkins</code></td>
+<td>查看 jenkins 是由哪个 rpm 包安装的</td>
+</tr>
+<tr>
+<td>清理缓存</td>
+<td><code>yum clean all</code></td>
+<td></td>
+</tr>
+<tr>
+<td>下载rpm包不安装</td>
+<td><code>yum install [包名] -y --downloadonly</code></td>
+<td>仅下载不安装，<br>默认存放在 <code>/var/cache/yum/x86_64/7/xxx/packets</code>，<br>xxx为仓库源，如base、epel等</td>
+</tr>
+<tr>
+<td>下载rpm包不安装，<br>并指定存放路径</td>
+<td><code>yum install [包名] -y --downloadonly --downloaddir=/usr/local/src</code></td>
+<td></td>
+</tr>
+<tr>
+<td>如果是已安装的rpm包</td>
+<td><code>yum  reinstall -y [包名] --downloadonly</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="3、配置文件"><a href="#3、配置文件" class="headerlink" title="3、配置文件"></a>3、配置文件</h2><p>yum 仓库的配置文件路径：<code>/etc/yum.repos.d/CentOS-Base.repo</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$ less CentOS-Base.repo</span><br><span class="line">    [os]  # 仓库名，可配置多个不同的名称</span><br><span class="line">    name=Qcloud centos os - $basearch</span><br><span class="line">    baseurl=http://mirrors.tencentyun.com/centos1/$releasever/os/$basearch/  # 仓库地址</span><br><span class="line">    enabled=1  # 是否可用，1可用，0不可用； </span><br><span class="line">    gpgcheck=1  # 是否检测，0不检测，1检测</span><br><span class="line">    gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7</span><br><span class="line">    </span><br><span class="line">    [updates]</span><br><span class="line">    name=Qcloud centos updates - $basearch</span><br><span class="line">    baseurl=http://mirrors.tencentyun.com/centos1/$releasever/updates/$basearch/</span><br><span class="line">    enabled=1</span><br><span class="line">    gpgcheck=1</span><br><span class="line">    gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+<p>yum 下载的文件默认保存路径是： <code>/var/cache/yum</code></p>
+<p>修改 yum 配置文件 <code>/etc/yum.conf</code> 可自定义保存路径：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/yum.conf</span><br><span class="line">-----------------</span><br><span class="line">cachedir=/var/cache/yum  # 存放目录，可以自定义</span><br><span class="line">keepcache=1  # 1为保存已经下载的rpm包，0为不保存，默认不保存</span><br><span class="line">metadata_expire=1800  # 过期时间</span><br></pre></td></tr></table></figure></p>
+<h2 id="4、修改-yum-源"><a href="#4、修改-yum-源" class="headerlink" title="4、修改 yum 源"></a>4、修改 yum 源</h2><p>有时候我们使用 yum 安装时网速非常慢，甚至有些软件找不到，那是因为默认的 yum 源是使用国外的仓库的，一般我们都要更换成国内的 yum 源仓库。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 在操作之前，一定要先备份之前的 yum 源：</span><br><span class="line"> mv CentOS-Base.repo CentOS-Base.repo_bak</span><br><span class="line"> </span><br><span class="line"># 下载一份新的国内的 CentOS-Base.repo 文件代替：</span><br><span class="line">wget http:<span class="comment">//mirrors.163.com/.help/CentOS7-Base-163.repo</span></span><br><span class="line">或者</span><br><span class="line">curl -O http:<span class="comment">//mirrors.163.com/.help/CentOS7-Base-163.repo </span></span><br><span class="line"></span><br><span class="line"># 替换成功后，安装一个 rpm 包测试一下：</span><br><span class="line">yum install -y zsh</span><br><span class="line"></span><br><span class="line"># 除了 CentOS-Base.repo 这个标准的 rpm 源外，我们还可以安装 yum 扩展源 epel：</span><br><span class="line">yum install -y epel-release</span><br></pre></td></tr></table></figure>
+<h1 id="五、源码安装"><a href="#五、源码安装" class="headerlink" title="五、源码安装"></a>五、源码安装</h1><p>前面介绍的都是使用包管理工具来安装，如果以上工具都不能使用的情况下，可以选择源码安装方式。</p>
+<p>源码包指的一般是 tar 包格式的，需要通过编译器把源码编译成可执行的文件，安装比较复杂。</p>
+<h2 id="1、Binaries和Source包"><a href="#1、Binaries和Source包" class="headerlink" title="1、Binaries和Source包"></a>1、Binaries和Source包</h2><p>一般开放原代码软件都会有两个版本发布：</p>
+<p>Source Distribution 和 Binary Distribution ，二者有啥区别？</p>
+<ul>
+<li>Source 是源代码版，用于查看源码，若用来安装的话，需要自己编译成可执行软件。 </li>
+<li>Binaries 是可执行版，是已经编译好的版本，通过包管理器或直接下载解压就可以使用。</li>
+</ul>
+<h2 id="2、源码包安装步骤"><a href="#2、源码包安装步骤" class="headerlink" title="2、源码包安装步骤"></a>2、源码包安装步骤</h2><p><code>./configure----&gt;make----&gt;make install</code></p>
+<p><strong>2.1 获取源码</strong></p>
+<ul>
+<li>下载软件源码包，一般存放在 /usr/local/src</li>
+<li>解压源码包。</li>
+</ul>
+<p><strong>2.2 查看INSTALL与README文件</strong></p>
+<ul>
+<li>解压后查看INSTALL与README文件，这两个文件中详细介绍了本软件的安装方法和注意事项。</li>
+</ul>
+<p><strong>2.3 执行configure，生成Makefile文件</strong></p>
+<ul>
+<li>执行 <code>./configure</code> 命令，生成 Makefile 文件。</li>
+<li><code>./configure --prefix=/usr/local/xxx</code>，常用 prefix 参数指定软件安装目录，当执行 <code>make install</code> 命令时，会将软件安装在此路径中。</li>
+</ul>
+<p><strong>2.4 执行make，从 Makefile 中读取指令，编译源码成二进制文件</strong></p>
+<ul>
+<li><code>make clean &amp; make</code></li>
+<li><code>make clean</code> 命令用来清除上一次编译生成的目标文件。这个步骤可有可无，但为了确保编译的成功，还是加上为好。防止由于软件中含有残留的目标文件导致编译失败。</li>
+</ul>
+<p><strong>2.5 执行 make install，将软件安装到指定目录</strong></p>
+<ul>
+<li><code>make install</code></li>
+<li>此时二进制文件会被安装到先前 configure prefix 参数设置的路径中去。 </li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    ivyli
+  </li>
+  <!--
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://ivyli.top/2019/03/06/深入分析Linux安装软件/" title="深入分析Linux安装软件">http://ivyli.top/2019/03/06/深入分析Linux安装软件/</a>
+  </li> -->
+  <li class="post-copyright-link">
+  <strong>本文链接：</strong>
+  <a href="https://ivyli.top/2019/03/06/深入分析Linux安装软件/" title="深入分析Linux安装软件">https://ivyli.top/2019/03/06/深入分析Linux安装软件/</a>
+</li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux安装软件/" rel="tag"># Linux安装软件</a>
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+            <a href="/tags/Linux发展/" rel="tag"># Linux发展</a>
+          
+            <a href="/tags/apt-get/" rel="tag"># apt-get</a>
+          
+            <a href="/tags/rpm/" rel="tag"># rpm</a>
+          
+            <a href="/tags/yum/" rel="tag"># yum</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/28/20190228月总结/" rel="next" title="2019 年 2 月份总结">
+                <i class="fa fa-chevron-left"></i> 2019 年 2 月份总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://res.cloudinary.com/ivyli/image/upload/v1551182515/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/%E5%B7%A5%E4%BD%9C/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20180703130424.jpg" alt="ivyli">
+            
+              <p class="site-author-name" itemprop="name">ivyli</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、Unix-分支"><span class="nav-text">一、Unix 分支</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#不同分支的包管理工具"><span class="nav-text">不同分支的包管理工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、Debian-分支"><span class="nav-text">1、Debian 分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、Red-Hat-分支"><span class="nav-text">2、Red Hat 分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、CentOS"><span class="nav-text">3、CentOS</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、APT-管理工具"><span class="nav-text">二、APT 管理工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、更新软件库"><span class="nav-text">1、更新软件库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、常用命令"><span class="nav-text">2、常用命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、RPM-管理工具"><span class="nav-text">三、RPM 管理工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、rpm-包格式"><span class="nav-text">1、rpm 包格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、rpm-常用命令"><span class="nav-text">2、rpm 常用命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、YUM-管理工具"><span class="nav-text">四、YUM 管理工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、rpm-和-yum-对比"><span class="nav-text">1、rpm 和 yum 对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、yum-常用命令"><span class="nav-text">2、yum 常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、配置文件"><span class="nav-text">3、配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、修改-yum-源"><span class="nav-text">4、修改 yum 源</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#五、源码安装"><span class="nav-text">五、源码安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、Binaries和Source包"><span class="nav-text">1、Binaries和Source包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、源码包安装步骤"><span class="nav-text">2、源码包安装步骤</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ivyli</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">38.7k</span>
+  
+</div>
+
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'RoyVKtH5YXKLcMv6gk1Qzil4-gzGzoHsz',
+        appKey: 'FsP3JHhzOztcHwCaa7m86rtd',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "./public/search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("RoyVKtH5YXKLcMv6gk1Qzil4-gzGzoHsz", "FsP3JHhzOztcHwCaa7m86rtd");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<script type="text/javascript" src="/js/src/love.js"></script> 
